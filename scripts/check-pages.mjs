@@ -4,7 +4,7 @@ import {join,resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 let errors=[];
-const files=['index.html','dashboard.html','home.css','home.js','styles.css','waves.css','app.js','manifest.webmanifest','.nojekyll','assets/escena-comercio.svg','assets/icons/nexo-club.svg'];
+const files=['index.html','dashboard.html','home.css','experience.css','home.js','styles.css','dashboard-effects.css','waves.css','app.js','manifest.webmanifest','.nojekyll','assets/escena-comercio.svg','assets/icons/nexo-club.svg'];
 for(const f of files)if(!existsSync(join(root,f)))errors.push('Falta archivo '+f);
 for(const page of ['index.html','dashboard.html']){
  const html=readFileSync(join(root,page),'utf8');
@@ -15,9 +15,9 @@ for(const page of ['index.html','dashboard.html']){
  }
 }
 const landing=readFileSync(join(root,'index.html'),'utf8');
-if(!landing.includes('href="home.css"')||!landing.includes('src="home.js"')||!landing.includes('href="dashboard.html"'))errors.push('Portada no enlaza diseño o aplicación');
+if(!landing.includes('href="home.css"')||!landing.includes('href="experience.css"')||!landing.includes('src="home.js"')||!landing.includes('href="dashboard.html"'))errors.push('Portada no enlaza diseño o aplicación');
 const dashboard=readFileSync(join(root,'dashboard.html'),'utf8');
-if(!dashboard.includes('src="app.js"')||!dashboard.includes('href="styles.css"')||!dashboard.includes('href="waves.css"'))errors.push('La app no conserva CSS, JS y ondas originales');
+if(!dashboard.includes('src="app.js"')||!dashboard.includes('href="styles.css"')||!dashboard.includes('href="dashboard-effects.css"')||!dashboard.includes('href="waves.css"'))errors.push('La app no conserva CSS, JS y ondas originales');
 const css=readFileSync(join(root,'home.css'),'utf8');
 if(!css.includes('assets/escena-comercio.svg'))errors.push('La portada no tiene ilustración original');
 const js=readFileSync(join(root,'app.js'),'utf8');
