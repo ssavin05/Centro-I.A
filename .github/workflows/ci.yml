@@ -1,0 +1,23 @@
+name: Pruebas de Centro I.A.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Comprobar código y seguridad del repositorio
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ejecutar comprobaciones y pruebas
+        run: npm run verify

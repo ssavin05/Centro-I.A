@@ -1,0 +1,37 @@
+/* Centro I.A. — Restauración del fondo animado de ondas doradas.
+   Fondo real en el DOM, no una imagen estática que tape las animaciones. */
+html{background:#fff}
+body{background:#fff!important;isolation:auto!important;position:relative;min-height:100vh}
+body::before,body::after{content:none!important;display:none!important}
+.nexo-preview-fondo{
+ position:fixed!important;inset:0!important;z-index:0!important;
+ overflow:hidden;pointer-events:none;background:#fff!important;
+}
+.nexo-preview-ondas{position:absolute;width:140%;height:140%;left:-20%;top:-20%;pointer-events:none}
+.nexo-onda{will-change:transform}
+.nexo-brillo{will-change:transform,opacity}
+#app{position:relative!important;z-index:1!important;min-height:100dvh;background:transparent!important}
+.app-shell,.auth-shell{position:relative!important;z-index:1!important;background:transparent!important}
+.main{background:transparent!important}
+/* Permite apreciar las ondas también durante el acceso y configuración.
+   Los formularios y tarjetas conservan sus fondos de lectura. */
+.onb-shell{background:transparent!important}
+/* Sin una capa sólida encima del fondo; las superficies siguen siendo legibles. */
+.topbar{background:rgba(255,255,255,.78)!important}
+.sidebar{background:rgba(245,251,255,.93)!important}
+@media(max-width:900px){.nexo-preview-ondas{width:155%;height:145%;left:-27.5%;top:-22%}}
+@media(prefers-reduced-motion:reduce){
+ .nexo-onda,.nexo-brillo,.nexo-particulas span{animation:none!important;will-change:auto}
+}
+
+/* Corrección definitiva: la hoja cia-microdetalles-animaciones.css
+   ocultaba esta capa con display:none!important. Restablecemos su
+   visualización desde la última hoja de estilos cargada. */
+.nexo-preview-fondo{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  background:#fff!important;
+}
+.nexo-preview-ondas,.nexo-particulas{display:block!important;visibility:visible!important}
+.nexo-onda{display:block!important}

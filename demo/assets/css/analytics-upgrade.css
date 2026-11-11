@@ -1,0 +1,29 @@
+/* Centro I.A. — pulido de interfaz y estadísticas v2 */
+:root{--analytics-gold:#c9a24a;--analytics-blue:#8fc1e8}
+.analytics-disclaimer{display:flex;align-items:flex-start;gap:11px;padding:15px 18px;margin:0 0 18px;border:1px solid #e4e9f0;border-radius:15px;background:linear-gradient(120deg,#f9fbfe,#fffaf0);color:#566477;font-size:12px;line-height:1.6}
+.analytics-disclaimer svg{flex:0 0 19px;width:19px;height:19px;color:#a98427;margin-top:1px}
+.analytics-disclaimer strong{color:#252d3b}
+.analytics-kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px}
+.analytics-kpi{min-width:0;position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease;border:1px solid #e9edf3}
+.analytics-kpi:hover{transform:translateY(-3px);box-shadow:0 18px 35px rgba(19,35,59,.09)}
+.analytics-kpi .kpi-value{font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.analytics-stack{display:flex;gap:3px;width:100%;height:16px;border-radius:20px;overflow:hidden;background:#edf1f5;margin:20px 0 21px}
+.analytics-stack-part{min-width:0;transition:width .25s ease}
+.analytics-stack-part.green{background:#72bca5}.analytics-stack-part.gold{background:#d2ae5c}.analytics-stack-part.blue{background:#91b9dd}
+.analytics-insight{padding:13px 15px;border-radius:12px;background:#f5f8fb;color:#586678;font-size:12px;line-height:1.6;margin-top:16px}
+.analytics-insight strong{color:#252d3b}
+.analytics-summary-list{display:grid;gap:0}
+.analytics-summary-list>div{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f4;padding:12px 1px;font-size:12px;color:#647183}
+.analytics-summary-list>div:last-child{border-bottom:0}
+.analytics-summary-list strong{font-size:15px;font-variant-numeric:tabular-nums;color:#263143}
+.analytics-filters{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.analytics-score{font-variant-numeric:tabular-nums;background:#f0f6fc;color:#35678c;border-radius:8px;padding:5px 9px;font-weight:700;white-space:nowrap}
+.analytics-kpi-grid .kpi-foot{line-height:1.5}
+.nav-button:focus-visible,.btn:focus-visible,.chip-btn:focus-visible,.icon-button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #6faee2;outline-offset:3px}
+.nav-button,.btn,.chip-btn{transition:background-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease}
+.list-table tbody tr:hover{background:#f7f9fc}
+.panel,.kpi-card{box-shadow:0 5px 22px rgba(19,35,59,.035)}
+@media(max-width:1100px){.analytics-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:640px){.analytics-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px}.analytics-kpi{padding:14px}.analytics-kpi .kpi-value{font-size:26px}.analytics-disclaimer{padding:12px}.analytics-filters .chip-btn{font-size:11px}}
+@media(max-width:360px){.analytics-kpi-grid{grid-template-columns:1fr!important}}
+@media(prefers-reduced-motion:reduce){.analytics-kpi,.analytics-stack-part,.nav-button,.btn,.chip-btn{transition:none!important}.analytics-kpi:hover{transform:none}}

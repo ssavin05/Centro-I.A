@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+ <defs>
+  <linearGradient id="wall" x1="0" x2="1" y1="0" y2=".5"><stop stop-color="#243a40"/><stop offset=".47" stop-color="#455359"/><stop offset="1" stop-color="#b5a28b"/></linearGradient>
+  <linearGradient id="light" x1="0" x2="1"><stop stop-color="#b0d0c2" stop-opacity=".16"/><stop offset=".6" stop-color="#d6c6a9" stop-opacity=".43"/><stop offset="1" stop-color="#dccfac" stop-opacity=".6"/></linearGradient>
+  <linearGradient id="counter" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#a18b6c"/><stop offset="1" stop-color="#3c4146"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#eadac3" stop-opacity=".7"/><stop offset="1" stop-color="#b49e7b" stop-opacity="0"/></radialGradient>
+  <linearGradient id="jacket" x1="0" x2="1"><stop stop-color="#19292d"/><stop offset="1" stop-color="#596162"/></linearGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="16"/></filter>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".49" numOctaves="3" seed="13" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".065"/></feComponentTransfer></filter>
+ </defs>
+ <rect width="1600" height="900" fill="url(#wall)"/>
+ <g opacity=".39" filter="url(#blur)">
+  <rect x="700" y="90" width="720" height="630" fill="#d2cbac"/>
+  <rect x="755" y="150" width="105" height="490" fill="#384b48"/>
+  <rect x="910" y="135" width="90" height="510" fill="#54625b"/>
+  <rect x="1030" y="175" width="300" height="150" rx="8" fill="#a8b5a2"/>
+  <rect x="1050" y="355" width="330" height="170" rx="8" fill="#9d8b73"/>
+ </g>
+ <g opacity=".8">
+  <rect x="720" y="185" width="730" height="24" rx="4" fill="#302f2c"/><rect x="720" y="343" width="730" height="25" rx="4" fill="#333935"/>
+  <rect x="720" y="507" width="730" height="25" rx="4" fill="#33332e"/>
+  <g fill="#b2ac92"><rect x="770" y="210" width="73" height="127" rx="6"/><rect x="864" y="229" width="63" height="108" rx="4"/><rect x="945" y="223" width="78" height="114" rx="7"/><rect x="1050" y="225" width="80" height="110" rx="6"/><rect x="1193" y="224" width="70" height="112" rx="6"/></g>
+  <g fill="#6e8e80"><rect x="745" y="377" width="85" height="122" rx="6"/><rect x="853" y="387" width="77" height="112" rx="6"/><rect x="971" y="389" width="86" height="110" rx="6"/><rect x="1091" y="377" width="76" height="120" rx="6"/><rect x="1206" y="395" width="98" height="103" rx="6"/></g>
+ </g>
+ <ellipse cx="1260" cy="270" rx="380" ry="355" fill="url(#glow)"/>
+ <!-- Character, modern retail associate. Stylized original geometric portrait -->
+ <g transform="translate(1075 190)">
+  <path d="M-135 690Q-140 450 -68 366Q2 318 82 357Q160 425 178 690Z" fill="url(#jacket)"/>
+  <path d="M-48 352L-16 487L46 485L92 354Q40 330 -48 352Z" fill="#e0c6a8"/>
+  <path d="M-68 371Q-29 408 -5 423L28 485L71 405L96 364L135 419L183 690H-136Z" fill="#405255"/>
+  <path d="M-83 100Q-97 -18 7 -26Q119 -20 120 117L92 214H-66Z" fill="#3b3734"/>
+  <ellipse cx="14" cy="165" rx="94" ry="126" fill="#d6b399"/>
+  <path d="M-77 145Q-91 -38 41 -17Q128 7 99 119Q75 86 48 66Q-1 141 -77 145Z" fill="#413832"/>
+  <path d="M-80 177Q-89 142 -91 96Q-106 165 -86 237Z" fill="#413832"/>
+  <path d="M-45 161Q-13 149 7 159M35 157Q59 146 80 157" stroke="#5c4438" stroke-width="7" stroke-linecap="round" fill="none" opacity=".55"/>
+  <path d="M-11 217Q15 233 46 211" stroke="#986b63" stroke-width="6" fill="none" stroke-linecap="round" opacity=".75"/>
+ </g>
+ <path d="M620 682Q938 616 1600 700V900H540Z" fill="url(#counter)"/>
+ <path d="M520 679Q1015 613 1600 687" stroke="#d0c9b8" stroke-width="18" fill="none" opacity=".62"/>
+ <g transform="translate(785 560) rotate(-7)"><rect width="210" height="140" rx="10" fill="#202b32"/><rect x="15" y="17" width="178" height="98" rx="6" fill="#a7b5a7"/><rect x="44" y="38" width="117" height="18" rx="3" fill="#7f968b"/><rect x="44" y="69" width="76" height="9" rx="3" fill="#7f968b"/></g>
+ <path d="M830 685Q780 663 727 671L605 745Q572 771 610 783L757 760Q820 745 876 714Z" fill="#c9a489"/>
+ <rect width="1600" height="900" fill="url(#light)" opacity=".24"/>
+ <rect width="1600" height="900" filter="url(#grain)" opacity=".38"/>
+</svg>

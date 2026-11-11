@@ -1,0 +1,131 @@
+.nexo-preview-fondo{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  background:#ffffff;
+}
+.nexo-preview-ondas{
+  position:absolute;
+  width:140%;
+  height:140%;
+  left:-20%;
+  top:-20%;
+}
+.nexo-onda{
+  position:absolute;
+  width:120%;
+  height:260px;
+  left:-10%;
+  border-radius:50%;
+  transform-origin:center;
+}
+.nexo-onda1{
+  top:2%;
+  transform:rotate(-7deg);
+  border-top:10px solid rgba(204,158,52,.55);
+  border-bottom:3px solid rgba(221,183,94,.5);
+  animation:nexoMover1 12s ease-in-out infinite alternate;
+}
+.nexo-onda2{
+  top:14%;
+  transform:rotate(5deg);
+  border-top:25px solid rgba(238,209,140,.48);
+  border-bottom:2px solid rgba(187,140,31,.45);
+  animation:nexoMover2 16s ease-in-out infinite alternate;
+}
+.nexo-onda3{
+  top:29%;
+  transform:rotate(-8deg);
+  border-top:7px solid rgba(194,148,40,.65);
+  border-bottom:18px solid rgba(241,215,154,.38);
+  animation:nexoMover3 14s ease-in-out infinite alternate;
+}
+.nexo-onda4{
+  top:42%;
+  transform:rotate(7deg);
+  border-top:35px solid rgba(238,209,140,.32);
+  border-bottom:3px solid rgba(191,145,39,.58);
+  animation:nexoMover4 18s ease-in-out infinite alternate;
+}
+.nexo-onda5{
+  top:58%;
+  transform:rotate(-6deg);
+  border-top:8px solid rgba(198,152,44,.62);
+  border-bottom:24px solid rgba(238,207,136,.3);
+  animation:nexoMover5 15s ease-in-out infinite alternate;
+}
+.nexo-onda6{
+  top:73%;
+  transform:rotate(8deg);
+  border-top:27px solid rgba(238,209,140,.38);
+  border-bottom:2px solid rgba(185,139,30,.5);
+  animation:nexoMover6 17s ease-in-out infinite alternate;
+}
+@keyframes nexoMover1{
+  0%{transform:translateX(-8%) rotate(-7deg) scaleY(1)}
+  50%{transform:translateX(5%) rotate(-3deg) scaleY(1.15)}
+  100%{transform:translateX(14%) rotate(-9deg) scaleY(.9)}
+}
+@keyframes nexoMover2{
+  0%{transform:translateX(12%) rotate(5deg) scaleY(.9)}
+  50%{transform:translateX(-8%) rotate(9deg) scaleY(1.15)}
+  100%{transform:translateX(-20%) rotate(2deg) scaleY(1)}
+}
+@keyframes nexoMover3{
+  0%{transform:translateX(-12%) rotate(-8deg) scaleY(1)}
+  50%{transform:translateX(10%) rotate(-2deg) scaleY(1.2)}
+  100%{transform:translateX(22%) rotate(-11deg) scaleY(.85)}
+}
+@keyframes nexoMover4{
+  0%{transform:translateX(15%) rotate(7deg) scaleY(.9)}
+  50%{transform:translateX(-10%) rotate(2deg) scaleY(1.2)}
+  100%{transform:translateX(-25%) rotate(10deg) scaleY(1)}
+}
+@keyframes nexoMover5{
+  0%{transform:translateX(-15%) rotate(-6deg) scaleY(1)}
+  50%{transform:translateX(8%) rotate(-11deg) scaleY(1.18)}
+  100%{transform:translateX(20%) rotate(-3deg) scaleY(.9)}
+}
+@keyframes nexoMover6{
+  0%{transform:translateX(10%) rotate(8deg) scaleY(.9)}
+  50%{transform:translateX(-12%) rotate(3deg) scaleY(1.2)}
+  100%{transform:translateX(-22%) rotate(11deg) scaleY(1)}
+}
+.nexo-brillo{
+  position:absolute;
+  width:150%;
+  height:4px;
+  left:-25%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),rgba(244,226,181,.95),rgba(255,255,255,.9),transparent);
+  filter:blur(1px);
+  animation:nexoBrillo 7s linear infinite;
+}
+.nexo-brillo1{top:20%}
+.nexo-brillo2{top:52%;animation-delay:-3s}
+.nexo-brillo3{top:82%;animation-delay:-5s}
+@keyframes nexoBrillo{
+  0%{transform:translateX(-40%) rotate(-5deg);opacity:0}
+  20%{opacity:.8}
+  50%{opacity:1}
+  80%{opacity:.7}
+  100%{transform:translateX(40%) rotate(5deg);opacity:0}
+}
+.nexo-particulas{position:absolute;inset:0;pointer-events:none}
+.nexo-particulas span{
+  position:absolute;
+  width:3px;height:3px;border-radius:50%;
+  background:#d8b25a;
+  opacity:.45;
+  animation:nexoFlotar 8s ease-in-out infinite alternate;
+}
+.nexo-p1{left:15%;top:28%}.nexo-p2{left:21%;top:31%;animation-delay:-2s}.nexo-p3{left:26%;top:34%;animation-delay:-4s}.nexo-p4{left:31%;top:30%;animation-delay:-1s}
+.nexo-p5{left:70%;top:48%;animation-delay:-3s}.nexo-p6{left:74%;top:52%;animation-delay:-5s}.nexo-p7{left:78%;top:47%;animation-delay:-2s}.nexo-p8{left:82%;top:51%;animation-delay:-6s}
+@keyframes nexoFlotar{
+  from{transform:translateY(8px) scale(.7);opacity:.25}
+  to{transform:translateY(-15px) scale(1.4);opacity:.8}
+}
+.nexo-preview-fondo{display:block!important;visibility:visible!important;z-index:0!important;background:transparent!important}
+@media(max-width:800px){.nexo-preview-ondas{width:160%;height:145%;left:-30%;top:-22%}}
+@media(prefers-reduced-motion:reduce){.nexo-onda,.nexo-brillo,.nexo-particulas span{animation:none!important}}

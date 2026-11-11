@@ -1,0 +1,42 @@
+# Dependencias y resultados de pruebas
+node_modules/
+coverage/
+.nyc_output/
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Credenciales y entornos privados
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.secrets/
+
+# Bases de datos privadas, WAL y respaldos
+/data/*
+!/data/.gitkeep
+/backups/*
+!/backups/.gitkeep
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.db
+*.db-*
+*.db3
+
+# Editores y artefactos compilados
+.vscode/
+.idea/
+dist/
+build/
+*.zip
+
+# Compilacion local GitHub Pages
+/dist/

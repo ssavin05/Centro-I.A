@@ -1,0 +1,162 @@
+/* Centro I.A. · microdetalles de movimiento, profundidad y feedback visual */
+:root{--cia-blue:#8fc5ef;--cia-blue-strong:#438fce;--cia-gold:#e3bb58;--cia-gold-deep:#b78b25;--cia-shadow-soft:0 10px 28px rgba(35,76,116,.07);--cia-shadow-hover:0 18px 42px rgba(35,76,116,.13)}
+html{scroll-behavior:smooth}
+body{animation:ciaPageIn .55s ease both}
+@keyframes ciaPageIn{from{opacity:.65}to{opacity:1}}
+/* Entradas discretas: nada rebota ni distrae */
+.main,.content,.inspired-section,.inspired-final{animation:ciaRiseIn .65s cubic-bezier(.2,.7,.2,1) both}
+@keyframes ciaRiseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* Tarjetas con profundidad y un borde luminoso sutil al pasar */
+.side-card,.event-card,.stat-card,.metric-card,.panel,.card,.inspired-steps article,.stage-node,.stage-dashboard,.stage-network{transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s ease,border-color .28s ease,background-color .28s ease}
+.side-card:hover,.event-card:hover,.stat-card:hover,.metric-card:hover,.inspired-steps article:hover{transform:translateY(-4px);box-shadow:var(--cia-shadow-hover);border-color:rgba(143,197,239,.72)}
+.btn,.btn-primary,.mode-switch,.icon-button,.nav-button,.inline-link,.text-action,.inspired-arrow{transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.btn-primary{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(110deg,#f0cf78,#d9ad43 55%,#edcf7a);color:#20334a;box-shadow:0 8px 20px rgba(198,155,49,.2)}
+.btn-primary:before{content:"";position:absolute;z-index:-1;top:-40%;left:-70%;width:45%;height:180%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.48),transparent);transition:left .65s ease}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 13px 28px rgba(198,155,49,.3)}
+.btn-primary:hover:before{left:130%}
+.btn-light:hover,.btn-soft:hover,.mode-switch:hover,.icon-button:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(50,91,132,.1);border-color:#b9daf4}
+.nav-button{position:relative;overflow:hidden}
+.nav-button:after{content:"";position:absolute;left:13px;right:13px;bottom:5px;height:2px;border-radius:4px;background:linear-gradient(90deg,var(--cia-blue),var(--cia-gold));transform:scaleX(0);transform-origin:left;transition:transform .24s ease}
+.nav-button:hover:after,.nav-button.active:after{transform:scaleX(1)}
+.brand-mark,.stage-core,.stage-icon{animation:ciaGentleFloat 5s ease-in-out infinite;box-shadow:0 10px 26px rgba(205,164,63,.2)}
+@keyframes ciaGentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.stage-orbit{animation:ciaOrbitPulse 8s ease-in-out infinite alternate;transform-origin:center}
+.stage-orbit.o2{animation-delay:-3s}
+@keyframes ciaOrbitPulse{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1.015)}}
+.stage-core{box-shadow:0 0 0 8px rgba(226,187,88,.08),0 14px 38px rgba(202,161,60,.25)!important}
+.stage-node:hover{transform:translateY(-3px) scale(1.025);box-shadow:0 14px 30px rgba(47,111,170,.15)!important}
+.eyebrow .tiny-dot,.notification-dot{animation:ciaStatusPulse 2.4s ease-in-out infinite}
+@keyframes ciaStatusPulse{0%,100%{box-shadow:0 0 0 0 rgba(227,187,88,.25)}50%{box-shadow:0 0 0 5px rgba(227,187,88,0)}}
+/* Aparición escalonada de bloques al entrar en pantalla */
+.cia-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.cia-reveal.cia-visible{opacity:1;transform:translateY(0)}
+/* Estados de teclado accesibles */
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid rgba(80,157,219,.7);outline-offset:3px}
+/* Mantener la interfaz fina en pantallas pequeñas y respetar preferencias */
+@media(max-width:700px){.side-card:hover,.event-card:hover,.stat-card:hover,.metric-card:hover,.inspired-steps article:hover{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.cia-reveal{opacity:1;transform:none}}
+
+/* ================================================================
+   AJUSTE FINO · landing 15% más compacta + movimiento ambiental sutil
+   Se limita a la página de presentación; no cambia las pantallas del panel.
+   ================================================================ */
+.intro-inspired .inspired-nav{height:75px;min-height:75px}
+.intro-inspired .inspired-nav .brand{gap:11px}
+.intro-inspired .inspired-nav .brand-mark{width:41px;height:41px;border-radius:12px}
+.intro-inspired .inspired-nav .brand-mark svg{width:21px;height:21px}
+.intro-inspired .inspired-nav .brand-name{font-size:19.5px;letter-spacing:-.6px}
+.intro-inspired .inspired-nav .brand-sub{font-size:8px}
+.intro-inspired .inspired-menu{gap:23px;margin-right:28px}
+.intro-inspired .inspired-menu button{font-size:10.5px}
+.intro-inspired .intro-nav-link{font-size:12px;padding:9px 14px}
+.intro-inspired .inspired-hero{
+  width:min(1225px,100%);
+  grid-template-columns:minmax(360px,.86fr) minmax(510px,1.14fr);
+  gap:3.4vw;padding:25px 0 14px
+}
+.intro-inspired .inspired-copy{max-width:595px}
+.intro-inspired .inspired-copy .intro-eyebrow{font-size:9.5px;letter-spacing:.17em}
+.intro-inspired .inspired-copy h1{font-size:clamp(46px,5.25vw,78px);line-height:.96;letter-spacing:-4px;margin:18px 0 20px}
+.intro-inspired .inspired-copy p{font-size:15.3px;line-height:1.65;max-width:525px}
+.intro-inspired .intro-hero-actions{gap:8px;margin-top:24px}
+.intro-inspired .intro-main-btn{min-height:44px;padding:0 20px;font-size:12px}
+.intro-inspired .inspired-secondary{font-size:11px;padding:10px 6px}
+.intro-inspired .inspired-proof{gap:18px;margin-top:20px;font-size:9.5px}
+.intro-inspired .inspired-visual{min-height:434px}
+.intro-inspired .inspired-glow{inset:8% 0 5% 7%;filter:blur(10px)}
+.intro-inspired .intro-stage-window{width:min(100%,612px);padding:14px;border-radius:24px}
+.intro-inspired .stage-top{height:26px;font-size:8px}
+.intro-inspired .stage-dashboard-head{padding:17px 17px 14px;border-radius:15px}
+.intro-inspired .stage-dashboard-head strong{font-size:32px}
+.intro-inspired .stage-dashboard-head small{font-size:7px}
+.intro-inspired .stage-dashboard-head em{font-size:8px}
+.intro-inspired .stage-score span{font-size:11px}
+.intro-inspired .stage-network{height:238px;margin-top:10px;border-radius:15px}
+.intro-inspired .stage-grid{background-size:30px 30px}
+.intro-inspired .stage-orbit.o1{width:357px;height:128px}
+.intro-inspired .stage-orbit.o2{width:255px;height:187px}
+.intro-inspired .stage-core{width:70px;height:70px;border-radius:20px}
+.intro-inspired .stage-core svg{width:29px;height:29px}
+.intro-inspired .stage-node{min-width:55px;padding:8px 9px;border-radius:10px}
+.intro-inspired .stage-node b{font-size:9.5px}
+.intro-inspired .stage-node small{font-size:7px}
+.intro-inspired .stage-signal{padding:6px 8px;font-size:7px}
+.intro-inspired .stage-metrics{gap:7px;margin-top:8px}
+.intro-inspired .stage-metrics div{padding:10px 12px;border-radius:12px}
+.intro-inspired .stage-metrics small{font-size:7px}
+.intro-inspired .stage-metrics strong{font-size:14.5px;margin-top:3px}
+.intro-inspired .inspired-section,.intro-inspired .inspired-section.reverse{gap:3.4vw;padding:62px 0}
+.intro-inspired .inspired-section-copy h2,.intro-inspired .inspired-final h2{font-size:clamp(28px,3.1vw,42px);letter-spacing:-1.3px}
+.intro-inspired .inspired-section-copy p,.intro-inspired .inspired-final p{font-size:13px;line-height:1.65}
+.intro-inspired .inspired-steps{gap:13px}
+.intro-inspired .inspired-steps article{padding:24px;border-radius:17px}
+.intro-inspired .inspired-steps strong{font-size:17px}
+.intro-inspired .inspired-steps p{font-size:12px}
+.intro-inspired .inspired-final{padding:46px 34px;border-radius:24px}
+.intro-inspired .inspired-footer{font-size:9px}
+
+/* Movimiento ambiental en los degradados: lento, suave y de baja amplitud. */
+.intro-inspired:before{animation:ciaAmbientDriftBlue 27s ease-in-out infinite alternate;will-change:transform}
+.intro-inspired:after{animation:ciaAmbientDriftGold 32s ease-in-out infinite alternate;will-change:transform}
+@keyframes ciaAmbientDriftBlue{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(-22px,16px,0) scale(1.035)}
+}
+@keyframes ciaAmbientDriftGold{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(18px,-14px,0) scale(1.025)}
+}
+.intro-inspired .inspired-glow{animation:ciaGlowBreathe 8s ease-in-out infinite alternate}
+@keyframes ciaGlowBreathe{from{opacity:.55;transform:scale(.98)}to{opacity:.88;transform:scale(1.025)}}
+.intro-inspired .stage-grid{animation:ciaGridDrift 36s linear infinite}
+@keyframes ciaGridDrift{from{background-position:0 0,0 0}to{background-position:30px 18px,30px 18px}}
+.intro-inspired .stage-orbit{animation:ciaOrbitShimmer 7.5s ease-in-out infinite alternate}
+.intro-inspired .stage-orbit.o2{animation-delay:-3.5s}
+@keyframes ciaOrbitShimmer{from{opacity:.68}to{opacity:1}}
+.intro-inspired .stage-core{animation:ciaCoreGlow 5.5s ease-in-out infinite}
+@keyframes ciaCoreGlow{0%,100%{box-shadow:0 12px 35px rgba(201,162,74,.18)}50%{box-shadow:0 16px 40px rgba(201,162,74,.27)}}
+.intro-inspired .stage-node{transition:transform .22s ease,box-shadow .22s ease}
+.intro-inspired .stage-node:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(44,93,145,.13)!important}
+.intro-inspired .inspired-steps article{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.intro-inspired .inspired-steps article:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(55,99,145,.10);border-color:#cfe3f5}
+
+@media(max-width:1100px){
+  .intro-inspired .inspired-hero{width:min(760px,100%);grid-template-columns:minmax(0,1fr);gap:24px;padding:28px 0 34px}
+  .intro-inspired .inspired-copy{max-width:660px}
+  .intro-inspired .inspired-visual{min-height:0}
+  .intro-inspired .intro-stage-window{width:min(100%,612px)}
+  .intro-inspired .inspired-section,.intro-inspired .inspired-section.reverse{padding:58px 0;gap:28px}
+}
+@media(max-width:640px){
+  .intro-inspired{padding-left:20px;padding-right:20px}
+  .intro-inspired .inspired-nav{min-height:68px;padding-top:7px;padding-bottom:7px}
+  .intro-inspired .inspired-nav .brand-mark{width:37px;height:37px}
+  .intro-inspired .inspired-nav .brand-name{font-size:18px}
+  .intro-inspired .inspired-hero{padding:30px 0 28px;gap:20px}
+  .intro-inspired .inspired-copy h1{font-size:clamp(39px,10vw,54px);letter-spacing:-2.5px;margin:15px 0 17px}
+  .intro-inspired .inspired-copy p{font-size:14px}
+  .intro-inspired .inspired-proof{gap:10px 14px;font-size:9px}
+  .intro-inspired .intro-stage-window{padding:10px;border-radius:18px}
+  .intro-inspired .stage-network{height:205px}
+  .intro-inspired .stage-orbit.o1{width:78%;height:112px}
+  .intro-inspired .stage-orbit.o2{width:58%;height:150px}
+  .intro-inspired .stage-core{width:58px;height:58px;border-radius:17px}
+  .intro-inspired .stage-node{min-width:48px;padding:7px 8px}
+  .intro-inspired .stage-dashboard-head{padding:13px 12px 11px}
+  .intro-inspired .stage-dashboard-head strong{font-size:27px}
+  .intro-inspired .stage-metrics div{padding:8px 7px}
+  .intro-inspired .stage-metrics small{font-size:6.5px}
+  .intro-inspired .inspired-section,.intro-inspired .inspired-section.reverse{padding:42px 0}
+  .intro-inspired .inspired-steps article{padding:20px}
+  .intro-inspired .inspired-final{padding:32px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .intro-inspired:before,.intro-inspired:after,.intro-inspired .inspired-glow,.intro-inspired .stage-grid,.intro-inspired .stage-orbit,.intro-inspired .stage-core{animation:none!important;will-change:auto}
+  .intro-inspired .stage-node,.intro-inspired .inspired-steps article{transition:none!important}
+}
+
+
+/* Corrección: retirar el fondo ornamental global que dejaba ondas sobre una zona vacía al final.
+   El movimiento sutil se mantiene únicamente en los degradados propios de la landing. */
+.nexo-preview-fondo{display:none!important}
+body{background:#f7faff}
