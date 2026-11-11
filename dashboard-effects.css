@@ -1,0 +1,63 @@
+/* Centro I.A. | Product feedback and interactive polish.
+   UI should feel responsive when an action succeeds, never theatrical on every render. */
+:root { --cia-motion-ease: cubic-bezier(.16,1,.3,1); }
+body { scrollbar-color: #aec5cd #f8faf8; }
+::selection { background: #d6ebf1; color: #172f41; }
+/* The moving gold background belongs behind the product: don't cover it with a flat layer. */
+.nexo-preview-fondo { pointer-events: none; }
+.hero,.company-hero,.wallet-hero { isolation: isolate; position: relative; overflow: hidden; }
+.hero:before,.company-hero:before,.wallet-hero:before {
+  content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 88% 12%,rgba(144,205,222,.16),transparent 38%),radial-gradient(circle at 42% 110%,rgba(218,186,121,.17),transparent 45%);
+}
+.hero-art { transition: transform .35s var(--cia-motion-ease),opacity .35s; }
+.hero:hover .hero-art { transform: translateY(-4px); }
+.art-ticket.art-front { transition: transform .38s var(--cia-motion-ease),filter .38s; }
+.hero:hover .art-ticket.art-front { filter: drop-shadow(0 14px 22px rgba(7,20,28,.18)); }
+.hero .floating-coin { animation: cia-coin-drift 6.4s ease-in-out infinite; }
+.company-hero-art svg { animation: cia-symbol-glow 5s ease-in-out infinite; }
+.member-card .progress>span { transition: width .5s var(--cia-motion-ease),filter .2s; }
+.member-card:hover .progress>span { filter: saturate(1.3); }
+.reward-card:hover .reward-big-icon,.merchant-card:hover .shop-art-symbol { transform: scale(1.06) rotate(-4deg); }
+.reward-big-icon,.shop-art-symbol { transition: transform .25s var(--cia-motion-ease); }
+.nav-link .ico,.quick-actions .ico,.side-switch .ico { transition: transform .19s var(--cia-motion-ease); }
+.nav-link:hover .ico:first-child,.quick-actions button:hover .ico:first-child,.side-switch:hover .ico:first-child { transform: translateY(-2px); }
+.quick-actions button:hover .ico:last-child { transform: translateX(3px); }
+.modal-backdrop { animation: cia-backdrop-in .18s ease-out both; }
+.modal { animation: cia-modal-in .3s var(--cia-motion-ease) both; }
+.toast.show.reward-feedback { background: linear-gradient(115deg,#1b4657,#2c6476); border: 1px solid #639ba83d; }
+.toast.show.reward-feedback .ico { color: #f2d397; }
+.toast.show.reward-feedback:after { content: ''; position: absolute; inset: auto 12px 0; height: 2px; border-radius: 10px; background: linear-gradient(90deg,#8dc9d7,#e6c681); animation: cia-toast-timer 3.8s linear both; transform-origin: left; }
+.bar-fill { animation: cia-bars-arrive .46s var(--cia-motion-ease) both; transform-origin: bottom; }
+/* Discoverability is an interaction: this next benefit is computed from local demo data. */
+.next-reward { display: flex; gap: 18px; align-items: center; justify-content: space-between; padding: 18px 22px; margin-top: 18px; border-radius: 15px; background: linear-gradient(105deg,#f0f6f7,#f9f4e9); border: 1px solid #dce8e9; }
+.next-reward-copy { min-width: 0; display: grid; gap: 5px; }
+.next-reward-copy>span { font-size: 10px; font-weight: 800; color: #8b723f; text-transform: uppercase; letter-spacing: .09em; }
+.next-reward-copy strong { font-size: 16px; color: #193c50; }
+.next-reward-copy small { font-size: 11px; color: #587383; line-height: 1.45; }
+.next-reward .btn { flex: none; }
+.insight-ribbon { margin: 19px 0 0; padding: 18px 21px; border-radius: 15px; display: flex; align-items: center; gap: 16px; background: #eaf4f5; border: 1px solid #d3e5e7; }
+.insight-ribbon .insight-mark { display: grid; place-items: center; width: 41px; height: 41px; background: #d0e8ea; color: #32677e; border-radius: 12px; flex: none; }
+.insight-ribbon .insight-copy { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.insight-ribbon strong { font-size: 13px; color: #1c485e; }
+.insight-ribbon small { color: #527381; font-size: 11px; line-height: 1.45; }
+.insight-ribbon .text-link { flex: none; min-height: 44px; padding-inline: 7px; }
+.motion-paused .floating-coin,.motion-paused .company-hero-art svg,.motion-paused .nexo-preview-ondas,.motion-paused .nexo-particulas span { animation-play-state: paused !important; }
+@keyframes cia-coin-drift { 50% { translate: 0 -8px; } }
+@keyframes cia-symbol-glow { 50% { filter: drop-shadow(0 0 16px rgba(227,192,116,.5)); } }
+@keyframes cia-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cia-modal-in { from { opacity: .65; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes cia-toast-timer { to { transform: scaleX(0); } }
+@keyframes cia-bars-arrive { from { transform: scaleY(.5); opacity:.55; } to { transform: scaleY(1); opacity:1; } }
+@media(max-width:790px) { .hero:hover .hero-art { transform: none; } }
+@media(max-width:600px) {
+  .next-reward { padding: 16px; flex-wrap: wrap; }
+  .next-reward .btn { width: 100%; }
+  .insight-ribbon { flex-wrap: wrap; padding: 16px; }
+  .insight-ribbon .text-link { margin-left: auto; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hero .floating-coin,.company-hero-art svg,.modal-backdrop,.modal,.bar-fill,.toast.show.reward-feedback:after { animation: none !important; }
+  .hero-art,.art-ticket.art-front,.nav-link .ico,.quick-actions .ico,.side-switch .ico,.reward-big-icon,.shop-art-symbol { transition: none !important; }
+  .hero:hover .hero-art,.reward-card:hover .reward-big-icon,.merchant-card:hover .shop-art-symbol { transform: none; }
+}
