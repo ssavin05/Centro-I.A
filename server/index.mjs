@@ -277,18 +277,19 @@ function securityHeaders(res,path){
   if(!path.startsWith('/demo/'))res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'");
 }
 const mimetypes={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.ico':'image/x-icon'};
+// El arranque oficial solo expone la portada, acceso y espacio vacío.
+const officialAssets=new Set(['index.html','auth.html','workspace.html','site.css','start.js','auth.js','workspace.js','manifest.webmanifest','assets/icons/nexo-club.svg','assets/icons/nexo-club-192.png','assets/icons/nexo-club-512.png']);
 function staticFile(req,res,path){
-  if(path==='/demo'||path==='/preview') {res.writeHead(302,{Location:path+'/'});res.end();return;}
-  const preview=path.startsWith('/preview/');
-  const root=preview?ROOT:path.startsWith('/demo/')?resolve(ROOT,'demo'):resolve(ROOT,'app');
-  const sub=preview?path.slice('/preview/'.length):path.startsWith('/demo/')?path.slice('/demo/'.length):path.slice(1);
-  const file=resolve(root,decodeURIComponent(sub||'index.html'));
-  if(file!==root&&!file.startsWith(root+sep))throw new ApiError(403,'Acceso denegado.');
-  if(!Object.hasOwn(mimetypes,extname(file)))throw new ApiError(404,'Archivo no encontrado.');
+  let fileName;
+  try{fileName=decodeURIComponent(path.slice(1)||'index.html');}catch{throw new ApiError(400,'Ruta inválida.');}
+  guard(officialAssets.has(fileName),404,'Archivo no encontrado.');
+  const file=resolve(ROOT,fileName);
+  guard(file.startsWith(ROOT+sep),404,'Archivo no encontrado.');
   let data;try{const stat=statSync(file);guard(stat.isFile(),404,'Archivo no encontrado.');data=readFileSync(file);}catch(e){if(e instanceof ApiError)throw e;throw new ApiError(404,'Archivo no encontrado.');}
   res.writeHead(200,{'Content-Type':mimetypes[extname(file)],'Cache-Control':file.endsWith('.html')?'no-cache':'public, max-age=3600'});
   if(req.method==='HEAD')res.end();else res.end(data);
 }
+
 async function handler(req,res){
   let url;
   try{
