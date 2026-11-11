@@ -5,7 +5,7 @@ import {join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=resolve(fileURLToPath(new URL('../',import.meta.url))),dist=join(root,'dist');
 rmSync(dist,{recursive:true,force:true});mkdirSync(dist,{recursive:true});
-for(const file of ['index.html','dashboard.html','home.css','home.js','app.js','styles.css','waves.css','manifest.webmanifest'])copyFileSync(join(root,file),join(dist,file));
+for(const file of ['index.html','dashboard.html','home.css','experience.css','home.js','app.js','styles.css','dashboard-effects.css','waves.css','manifest.webmanifest'])copyFileSync(join(root,file),join(dist,file));
 mkdirSync(join(dist,'assets'),{recursive:true});
 cpSync(join(root,'assets/icons'),join(dist,'assets/icons'),{recursive:true});
 copyFileSync(join(root,'assets/escena-comercio.svg'),join(dist,'assets/escena-comercio.svg'));
