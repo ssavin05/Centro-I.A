@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f6f0"><meta name="description" content="Crea tu cuenta de Usuario o Empresa en Centro I.A., o inicia sesión.">
+  <title>Tu cuenta · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/nexo-club.svg">
+  <link rel="stylesheet" href="site.css"><script defer src="auth.js"></script>
+</head>
+<body class="auth-layout">
+  <a href="#auth-main" class="skip-link">Ir al formulario</a>
+  <div class="auth-decor" aria-hidden="true"><div class="auth-decor-orbit"></div><div class="auth-decor-star">✧</div></div>
+  <header class="auth-header container"><a href="./" class="brand" aria-label="Volver al inicio"><span class="brand-mark" aria-hidden="true">✧</span><span class="brand-text"><strong>Centro <span>I.A.</span></strong><small>UN MOTIVO PARA VOLVER</small></span></a><a href="./" class="return-link">← Volver al inicio</a></header>
+  <main id="auth-main" class="auth-main container">
+    <div class="auth-story"><div class="small-mark"><span class="small-mark-line"></span> Tu espacio comienza aquí</div><h1>Una conexión puede abrir <em>nuevas posibilidades.</em></h1><p>Elige cómo quieres ser parte de Centro I.A. y comienza con una cuenta que realmente te pertenezca.</p><div class="story-detail"><span aria-hidden="true">✦</span> UN MOTIVO PARA VOLVER</div></div>
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="auth-switch" role="group" aria-label="Acceso a cuenta"><a href="auth.html?mode=login" id="tab-login" class="switch-link">Iniciar sesión</a><a href="auth.html?mode=register" id="tab-register" class="switch-link">Crear cuenta</a></div>
+      <h2 id="auth-title">Crea tu cuenta</h2><p id="auth-description" class="auth-description">Un paso más cerca de formar parte de Centro I.A.</p>
+      <div id="availability" class="availability" role="status" aria-live="polite" hidden></div>
+      <form id="auth-form" novalidate>
+        <div class="field" id="field-name"><label for="name">Nombre completo</label><input id="name" name="name" autocomplete="name" placeholder="¿Cómo te llamas?" maxlength="90" required></div>
+        <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nombre@correo.com" maxlength="255" required></div>
+        <div class="field"><div class="field-row"><label for="password">Contraseña</label><span id="password-guidance">Mínimo 10 caracteres</span></div><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="new-password" minlength="10" maxlength="128" placeholder="Tu contraseña" required><button type="button" class="reveal-password" aria-label="Mostrar contraseña" aria-pressed="false" data-reveal="password">Mostrar</button></div></div>
+        <div class="field" id="field-confirm"><label for="password-confirm">Confirmar contraseña</label><input id="password-confirm" name="confirm" type="password" autocomplete="new-password" minlength="10" placeholder="Repite tu contraseña" required></div>
+        <fieldset id="account-type" class="account-types"><legend>¿Qué tipo de cuenta quieres crear?</legend><p>Elige una opción para comenzar:</p><div class="account-options"><label class="account-option"><input type="radio" name="accountType" value="user" checked><span class="option-icon" aria-hidden="true">✧</span><strong>Usuario</strong><small>Para descubrir y disfrutar experiencias.</small></label><label class="account-option"><input type="radio" name="accountType" value="company"><span class="option-icon" aria-hidden="true">✦</span><strong>Empresa</strong><small>Para crear el espacio de tu negocio.</small></label></div></fieldset>
+        <p id="form-error" role="alert" class="form-error" hidden></p>
+        <button type="submit" id="submit-auth" class="button button-primary auth-submit">Crear mi cuenta <span aria-hidden="true">↗</span></button>
+        <p id="auth-alternate" class="auth-alternate">¿Ya tienes una cuenta? <a href="auth.html?mode=login">Inicia sesión</a></p>
+      </form>
+    </section>
+  </main>
+  <footer class="auth-footer">Centro I.A. · Un motivo para volver</footer>
+</body>
+</html>
