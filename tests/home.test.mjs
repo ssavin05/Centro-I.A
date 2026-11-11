@@ -6,9 +6,9 @@ const html=readFileSync('index.html','utf8');
 const css=readFileSync('home.css','utf8');
 const dashboard=readFileSync('dashboard.html','utf8');
 test('la portada es una landing propia y enlaza a la aplicación',()=>{
- const hero=html.match(/<section class="hero-marketing">([\\s\\S]*?)<\\/section>/);
+ const hero=html.match(/<section class="hero-marketing">([\s\S]*?)<\/section>/);
  assert.ok(hero,'La portada debe contener la sección principal');
- const heading=hero[1].match(/<h1>([\\s\\S]*?)<\\/h1>/);
+ const heading=hero[1].match(/<h1>([\s\S]*?)<\/h1>/);
  assert.ok(heading,'La portada debe tener un título principal');
  assert.ok(heading[1].replace(/<[^>]*>/g,'').trim().length>=30,'El título principal debe describir la propuesta de valor');
  assert.match(html,/href="dashboard\.html"/);
