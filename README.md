@@ -1,35 +1,35 @@
 # Centro I.A. — Un motivo para volver
 
-Sitio oficial, registro de cuentas **Usuario / Empresa** y espacio inicial vacío. Los módulos anteriores siguen respaldados en la rama `archivo/version-fidelidad-2026-11-11`.
+Centro I.A. comienza con una página pública, registro de cuentas **Usuario / Empresa**, inicio de sesión y paneles vacíos. Se conservó el producto anterior en la rama `archivo/version-fidelidad-2026-11-11`.
 
-## Registro y acceso reales
+## Autenticación gratuita (Supabase)
 
-La pantalla de `auth.html` envía datos a `/api/auth/register` y `/api/auth/login`, provistos por el servidor Node.js de este repositorio. Ese servidor guarda los usuarios en SQLite y administra las sesiones con cookies HttpOnly. Los paneles sólo se abren después de verificar la sesión.
+- **Frontend:** GitHub Pages, `index.html`, `auth.html` y `workspace.html`.
+- **Cuentas:** Supabase Auth con correo y contraseña.
+- **Perfiles:** tabla `public.cia_profiles` con RLS; cada persona consulta únicamente su perfil.
+- **Tipo de cuenta:** `user` o `company`, fijado al crear la cuenta y no editable desde el navegador.
+- **Implementación:** `supabase-client.js` (clave publishable pública), `auth.js` y `workspace.js`.
+- **Esquema:** `supabase/migrations/20261112_cia_profiles.sql` aplicado al proyecto Supabase.
+- **Confirmación:** el registro puede pedir verificar el correo antes de permitir iniciar sesión.
 
-**GitHub Pages no ejecuta Node.js.** En `https://ssavin05.github.io/Centro-I.A/` podrás ver la portada y formularios, pero **no se crean cuentas allí**. Para aceptar cuentas reales es necesario desplegar la aplicación completa y usar su URL HTTPS oficial.
+## Ajuste necesario en Supabase
 
-### Publicar la aplicación completa en Render
+En [Authentication → URL Configuration](https://supabase.com/dashboard/project/huqspupbhhqilxeizklr/auth/url-configuration), establece:
 
-Incluimos `render.yaml` para desplegar el frontend, la API y una base SQLite **persistente** juntos, evitando cookies de terceros.
+- **Site URL:** `https://ssavin05.github.io/Centro-I.A/`
+- **Redirect URL adicional:** `https://ssavin05.github.io/Centro-I.A/**`
 
-1. Abre [Render Blueprints](https://dashboard.render.com/select-repo?type=blueprint) y conecta tu cuenta y el repositorio `ssavin05/Centro-I.A`.
-2. Elige el archivo `render.yaml` del repositorio.
-3. Revisa y aprueba el servicio **de pago** y su disco persistente. No despliegues cuentas reales en una instancia con disco efímero.
-4. Cuando termine la publicación, abre la URL HTTPS de ese **servicio**, no la de GitHub Pages.
-5. Comprueba `/api/health`, registra un Usuario y una Empresa e inicia sesión en ambos.
+Sin estas direcciones permitidas, el enlace de confirmación del correo podría llevar al destino incorrecto.
 
-Render proporciona `RENDER_EXTERNAL_URL` automáticamente. Si asignas un dominio propio, configura `PUBLIC_ORIGIN=https://tu-dominio` en las variables del servicio.
+El proyecto está en plan Free; respeta sus límites y ten presente que puede pausarse después de un período de inactividad. La confirmación de correo y entrega de mensajes dependen de la configuración y límites de Supabase Auth.
 
-No pegues claves ni contraseñas en GitHub. Una vez en producción, configura una política de privacidad, verificación de correo, recuperación de contraseña, monitoreo y copias de seguridad.
+## Desarrollo
 
-### Uso local
-
-```bash
-npm start
+```sh
+npm run verify
+npm run build:pages
 ```
 
-Visita `http://127.0.0.1:3000/`, entra a **Crear cuenta** y selecciona Usuario o Empresa. Los datos se almacenan en `./data/centro-ia.sqlite`.
+GitHub Pages publica solamente la web oficial. El backend histórico Node/SQLite todavía existe para preservar la funcionalidad anterior, pero **no autentica el nuevo panel público**. Sus tablas y sesiones no se migran automáticamente a Supabase.
 
-Pruebas: `npm run verify`. Sitio estático de presentación: `npm run build:pages`.
-
-Consulta `docs/CUENTAS-REALES.md` para detalles de despliegue, seguridad y limitaciones.
+No insertes claves secretas de servicio en código cliente ni cometas archivos `.env` con credenciales.
