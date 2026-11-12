@@ -56,6 +56,8 @@ form.addEventListener('submit',async event=>{
    location.assign('workspace.html');return;
   }
  }catch(e){
-  setError(e.message==='Email not confirmed'?'Debes confirmar tu correo para entrar.':e.message||'No se pudo completar la operación.');
+  const code=e.code||'';
+  const description=code==='email_address_not_authorized'?'Supabase aún no puede enviar correos a esa dirección. Para registrarse con cualquier correo hay que configurar un proveedor SMTP.':code==='over_email_send_rate_limit'?'Se alcanzó el límite temporal de correos. Inténtalo más tarde.':e.message==='Email not confirmed'?'Debes confirmar tu correo para entrar.':e.message||'No se pudo completar la operación.';
+  setError(description);
  }finally{submit.disabled=false;renderMode()}
 });
