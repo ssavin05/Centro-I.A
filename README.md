@@ -21,7 +21,7 @@ En [Authentication → URL Configuration](https://supabase.com/dashboard/project
 
 Sin estas direcciones permitidas, el enlace de confirmación del correo podría llevar al destino incorrecto.
 
-El proyecto está en plan Free; respeta sus límites y ten presente que puede pausarse después de un período de inactividad. La confirmación de correo y entrega de mensajes dependen de la configuración y límites de Supabase Auth.
+**Limitación del correo gratis:** el SMTP predeterminado de Supabase solo envía a correos de miembros del equipo y tiene límites muy reducidos. Para registrar a cualquier persona es necesario configurar un proveedor SMTP o un Email Hook. No desactives la confirmación de correo para ocultar esta limitación.\n\nEl proyecto está en plan Free; respeta sus límites y ten presente que puede pausarse después de un período de inactividad. La confirmación de correo y entrega de mensajes dependen de la configuración y límites de Supabase Auth.
 
 ## Desarrollo
 
