@@ -34,7 +34,7 @@
   }
   async function checkBackend(){
     try{const response=await fetch('./api/bootstrap',{headers:{Accept:'application/json'},credentials:'same-origin',cache:'no-store'});if(!response.ok||!response.headers.get('content-type')?.includes('application/json'))throw Error('API unavailable');const data=await response.json();backendAvailable=true;if(data.user){location.replace('workspace.html');return;}setAvailability('');submit.disabled=false;}
-    catch{backendAvailable=false;submit.disabled=true;setAvailability(pagesHosted?'La página ya está publicada. El registro y el inicio de sesión se habilitarán al conectar el servidor seguro de Centro I.A.':'El servidor de cuentas no está disponible. Abre Centro I.A. desde el servidor de la aplicación para registrarte o iniciar sesión.');}
+    catch{backendAvailable=false;submit.disabled=true;setAvailability(pagesHosted?'Las cuentas se habilitarán al conectar el servidor seguro de Centro I.A.':'El servidor de cuentas no está disponible. Abre Centro I.A. desde el servidor de la aplicación para registrarte o iniciar sesión.');}
   }
   submit.disabled=true;checkBackend();
   form.addEventListener('submit',async event=>{
