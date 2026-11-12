@@ -1,0 +1,23 @@
+# Deploy the entire app (HTML + account API + persistent SQLite) on one origin.
+# A paid web service + persistent disk are necessary for durable user accounts.
+services:
+  - type: web
+    name: centro-ia-oficial
+    runtime: node
+    plan: 0.5c-512mb
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: centro-ia-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: DB_PATH
+        value: /var/data/centro-ia.sqlite
+      - key: NODE_VERSION
+        value: 22.16.0

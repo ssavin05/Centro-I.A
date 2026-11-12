@@ -11,8 +11,9 @@ const require=createRequire(import.meta.url);
 const QRCode=require('./vendor/QRCode/index.js');
 const QRLevel=require('./vendor/QRCode/QRErrorCorrectLevel.js');
 const PORT=Number(process.env.PORT||3000);
-const HOST=process.env.HOST||'127.0.0.1';
-const ORIGIN=process.env.PUBLIC_ORIGIN||'';
+const HOST=process.env.HOST||(process.env.NODE_ENV==='production'?'0.0.0.0':'127.0.0.1');
+// Render exposes its HTTPS URL automatically; custom domains can override PUBLIC_ORIGIN.
+const ORIGIN=(process.env.PUBLIC_ORIGIN||process.env.RENDER_EXTERNAL_URL||'').replace(/\/+$/,'');
 const SECURE=ORIGIN.startsWith('https://');
 if(process.env.NODE_ENV==='production'&&!SECURE)throw new Error('PUBLIC_ORIGIN debe comenzar con https:// al ejecutar en producción.');
 const SESSION_DAYS=14;
