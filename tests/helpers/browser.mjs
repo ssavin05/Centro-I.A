@@ -1,5 +1,6 @@
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
+import * as accountRules from '../../account-rules.js';
 
 export const settle = () => new Promise(resolve => setImmediate(resolve));
 
@@ -46,14 +47,14 @@ export function pageHarness(file, {search = '', hash = '', client = {}} = {}) {
       ...client.auth,
     },
   };
-  const code = readFileSync(file, 'utf8').replace(/^import .*supabase-client\.js';\r?\n/m, '');
-  const window = {addEventListener() {}, removeEventListener() {}};
-  runInNewContext(code, {supabase, document, location, window, URL, URLSearchParams,
+  const code = readFileSync(file, 'utf8').replace(/^import .* from ['"].*['"];?\r?\n/gm, '');
+  const window = {addEventListener() {}, removeEventListener() {}, confirm: () => true};
+  runInNewContext(code, {...accountRules, supabase, document, location, window, URL, URLSearchParams,
     history: {replaceState() {}}, setTimeout, clearTimeout, console}, {filename: file});
   return {
     element, nodes, navigations, supabase,
     set(values) {for (const [id, value] of Object.entries(values)) element(id).value = value;},
-    async submit(id = 'auth-form') {return element(id).listeners.submit({preventDefault() {}});},
+    async submit(id = 'auth-form') {await settle();return element(id).listeners.submit({preventDefault() {}});},
     async click(id) {return element(id).listeners.click({preventDefault() {}});},
     authEvent(event, session) {return authCallback?.(event, session);},
   };

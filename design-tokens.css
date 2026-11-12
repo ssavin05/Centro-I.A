@@ -1,0 +1,37 @@
+/* Centro I.A. — shared primitives. Gold is an accent; navy carries readable text. */
+:root {
+  color-scheme: light;
+  --cia-gold: #c99b4c;
+  --cia-blue: #dcebf4;
+  --cia-deep: #173c50;
+  --cia-cream: #f8f5ed;
+  --cia-paper: #fffdfa;
+  --cia-muted: #446477;
+  --cia-error: #a02e38;
+  --cia-success: #226044;
+  --cia-focus: #347da0;
+  --cia-radius: 12px;
+  --cia-space-1: 4px;
+  --cia-space-2: 8px;
+  --cia-space-3: 12px;
+  --cia-space-4: 16px;
+  --cia-space-6: 24px;
+  --cia-space-8: 32px;
+  --cia-duration: 180ms;
+  --cia-ease: cubic-bezier(.16, 1, .3, 1);
+  --gold: var(--cia-gold);
+  --blue: var(--cia-blue);
+  --deep: var(--cia-deep);
+  --navy: var(--cia-deep);
+  --cream: var(--cia-cream);
+  --paper: var(--cia-paper);
+  --surface: var(--cia-paper);
+  --slate: var(--cia-muted);
+}
+::selection {background: var(--cia-blue); color: var(--cia-deep);}
+input {caret-color: var(--cia-deep);}
+:focus-visible {outline: 3px solid var(--cia-focus); outline-offset: 3px;}
+[aria-invalid="true"] {border-color: var(--cia-error);}
+@media (prefers-reduced-motion: reduce) {
+  :root {--cia-duration: 0s;}
+}
