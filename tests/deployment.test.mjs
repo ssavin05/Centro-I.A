@@ -1,17 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-
-test('el despliegue oficial usa Node y base persistente en una sola URL',()=>{
-  const blueprint=readFileSync('render.yaml','utf8');
-  const server=readFileSync('server/index.mjs','utf8');
-  const auth=readFileSync('auth.js','utf8');
-  assert.match(blueprint,/runtime: node/);
-  assert.match(blueprint,/healthCheckPath: \/api\/health/);
-  assert.match(blueprint,/mountPath: \/var\/data/);
-  assert.match(blueprint,/DB_PATH[\s\S]*\/var\/data\/centro-ia\.sqlite/);
-  assert.match(server,/RENDER_EXTERNAL_URL/);
-  assert.match(server,/0\.0\.0\.0/);
-  assert.match(auth,/\.\/api\/auth\/.*endpoint/);
-  assert.doesNotMatch(auth,/localStorage\.setItem\([^)]*password/i);
+test('el registro gratuito publica el frontend con Supabase Auth',()=>{
+ const builder=readFileSync('scripts/build-pages.mjs','utf8');
+ const auth=readFileSync('auth.js','utf8');
+ const workspace=readFileSync('workspace.js','utf8');
+ const client=readFileSync('supabase-client.js','utf8');
+ const schema=readFileSync('supabase/migrations/20261112_cia_profiles.sql','utf8');
+ assert.match(builder,/supabase-client\.js/);
+ assert.match(auth,/supabase\.auth\.signUp/);
+ assert.match(auth,/supabase\.auth\.signInWithPassword/);
+ assert.match(workspace,/supabase\.auth\.getUser/);
+ assert.match(workspace,/supabase\.auth\.signOut/);
+ assert.match(schema,/enable row level security/i);
+ assert.match(schema,/auth\.uid\(\)/);
+ assert.match(client,/sb_publishable_/);
+ assert.doesNotMatch(client,/sb_secret_|service_role/);
 });
