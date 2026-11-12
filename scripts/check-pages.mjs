@@ -3,7 +3,7 @@ import {join,resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const errors=[];
-const files=['index.html','auth.html','workspace.html','site.css','start.js','auth.js','workspace.js','manifest.webmanifest','assets/icons/nexo-club.svg'];
+const files=['index.html','auth.html','workspace.html','site.css','start.js','auth.js','workspace.js','supabase-client.js','manifest.webmanifest','assets/icons/nexo-club.svg'];
 for(const f of files)if(!existsSync(join(root,f)))errors.push('Falta archivo: '+f);
 for(const page of ['index.html','auth.html','workspace.html']){
  const html=readFileSync(join(root,page),'utf8');
