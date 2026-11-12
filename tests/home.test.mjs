@@ -6,6 +6,7 @@ const css=readFileSync('site.css','utf8');
 test('la portada oficial presenta registro y acceso, sin demo',()=>{
   assert.match(html,/auth\.html\?mode=login/);
   assert.match(html,/auth\.html\?mode=register/);
+  assert.match(html, /class="header-actions">[\s\S]*?class="button button-primary button-small" href="auth\.html\?mode=register"[\s\S]*?class="button button-outline button-small" href="auth\.html\?mode=login"/);
   assert.match(html,/Centro I\.A\./);
   assert.doesNotMatch(html,/dashboard\.html|ver demo|demo local/i);
   assert.match(html,/href="site\.css"/);
