@@ -87,7 +87,13 @@ test('flujo real: roles, empresas, reserva, visitas, puntos, canjes, seguridad y
   r=await owner.call('/api/auth/login','POST',{email:'dueno1@example.test',password:'ReplacementPass2026!'});assert.equal(r.status,200);
   r=await owner.call(`/api/businesses/${biz}/overview`);assert.equal(r.status,200,'Persistencia entre sesiones');
   r=await stranger.call('/api/auth/login','POST',{email:'dueno1@example.test',password:'incorrecta'});assert.equal(r.status,401);
-  assert.equal((await fetch(base+'/')).status,200);assert.equal((await fetch(base+'/demo/')).status,200);assert.equal((await fetch(base+'/waves.css')).status,200);
+  assert.equal((await fetch(base+'/')).status,200);
+  assert.equal((await fetch(base+'/auth.html')).status,200);
+  assert.equal((await fetch(base+'/workspace.html')).status,200);
+  assert.equal((await fetch(base+'/site.css')).status,200);
+  assert.equal((await fetch(base+'/auth.js')).status,200);
+  assert.equal((await fetch(base+'/demo/')).status,404,'La demo anterior debe permanecer fuera de la web oficial');
+  assert.equal((await fetch(base+'/waves.css')).status,404,'Los recursos antiguos no son públicos');
   assert.equal((await fetch(base+'/api/health')).status,200);
   assert.equal((await fetch(base+'/../server/index.mjs')).status,404);
 });
