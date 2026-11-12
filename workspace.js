@@ -1,39 +1,25 @@
-'use strict';
-(()=>{
-  const $=id=>document.getElementById(id);
-  let csrf='';
-  const showStatus=text=>{$('workspace-message').textContent=text;};
-  const logout=$('logout');
-  logout.disabled=true;
-  async function bootstrap(){
-    try{
-      const response=await fetch('./api/bootstrap',{headers:{Accept:'application/json'},credentials:'same-origin',cache:'no-store'});
-      if(!response.ok||!response.headers.get('content-type')?.includes('application/json'))throw new Error('El servidor de cuentas no está disponible.');
-      const session=await response.json();
-      if(!session.user){location.replace('auth.html?mode=login');return;}
-      csrf=session.csrf;
-      const business=session.user.accountType==='company';
-      $('account-pill').textContent=business?'Cuenta Empresa':'Cuenta Usuario';
-      $('welcome-title').textContent='Hola, '+session.user.name.split(/\s+/)[0]+'.';
-      $('workspace-description').textContent=business?'Tu espacio empresarial ya está creado. Vamos a configurarlo desde una base limpia.':'Tu espacio personal ya está creado. Aquí aparecerán tus experiencias y beneficios cuando estén disponibles.';
-      $('blank-description').textContent=business?'Aún no hay un negocio configurado ni estadísticas. Prepararemos las herramientas empresariales por etapas.':'Todavía no tienes puntos, movimientos ni reservas. Las funciones se incorporarán progresivamente.';
-      logout.disabled=false;
-    }catch{
-      showStatus('Para acceder a una cuenta real es necesario abrir Centro I.A. desde su servidor seguro.');
-      $('workspace-description').textContent='Esta página no admite acceso sin una sesión verificada.';
-      $('workspace-blank').hidden=true;
-      logout.textContent='Iniciar sesión';logout.disabled=false;
-      logout.onclick=()=>location.assign('auth.html?mode=login');
-    }
-  }
-  logout.addEventListener('click',async()=>{
-    if(!csrf)return;
-    logout.disabled=true;showStatus('Cerrando sesión…');
-    try{
-      const response=await fetch('./api/auth/logout',{method:'POST',credentials:'same-origin',headers:{'Accept':'application/json','Content-Type':'application/json','X-CSRF-Token':csrf},body:'{}'});
-      if(!response.ok)throw Error('No se pudo cerrar la sesión.');
-      location.replace('auth.html?mode=login');
-    }catch{showStatus('No pudimos cerrar tu sesión. Revisa la conexión e inténtalo nuevamente.');logout.disabled=false;}
-  });
-  bootstrap();
-})();
+import {supabase} from './supabase-client.js';
+const $=id=>document.getElementById(id),logout=$('logout');
+const message=text=>{$('workspace-message').textContent=text};
+logout.disabled=true;
+async function bootstrap(){
+ try{
+  const {data:{user},error}=await supabase.auth.getUser();
+  if(error||!user){location.replace('auth.html?mode=login');return}
+  const {data:profile,error:profileError}=await supabase.from('cia_profiles')
+    .select('name,account_type').eq('id',user.id).single();
+  if(profileError||!profile)throw Error('No se pudo recuperar tu perfil. Intenta iniciar sesión de nuevo.');
+  const isCompany=profile.account_type==='company';
+  $('account-pill').textContent=isCompany?'Cuenta Empresa':'Cuenta Usuario';
+  $('welcome-title').textContent='Hola, '+String(profile.name||'').trim().split(/\s+/)[0]+'.';
+  $('workspace-description').textContent=isCompany?'Tu espacio empresarial está listo para configurarlo.':'Tu espacio personal está listo. Aquí aparecerán tus beneficios y experiencias.';
+  $('blank-description').textContent=isCompany?'Aún no hay negocio ni estadísticas configurados.':'Todavía no tienes puntos, reservas ni movimientos.';
+  logout.disabled=false;
+ }catch(e){message(e.message||'No pudimos cargar tu perfil.');logout.disabled=false}
+}
+logout.addEventListener('click',async()=>{
+ logout.disabled=true;message('Cerrando sesión…');
+ try{const {error}=await supabase.auth.signOut();if(error)throw error;location.replace('auth.html?mode=login')}
+ catch{message('No se pudo cerrar la sesión. Revisa tu conexión.');logout.disabled=false}
+});
+bootstrap();
