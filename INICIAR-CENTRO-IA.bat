@@ -14,12 +14,12 @@ if errorlevel 1 (
 )
 echo.
 echo =======================================
-echo   CENTRO I.A. - PLATAFORMA FUNCIONAL
+echo   CENTRO I.A. - VISTA PREVIA OFICIAL
 echo =======================================
 echo.
-echo Abre http://localhost:3000 en el navegador.
+echo Abre http://127.0.0.1:4173 en el navegador.
 echo No cierres esta ventana mientras uses la aplicacion.
 echo.
-node server/index.mjs
+node scripts/preview.mjs
 if errorlevel 1 echo El servidor se cerro con un error.
 pause

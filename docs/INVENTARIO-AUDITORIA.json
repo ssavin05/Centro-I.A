@@ -1,0 +1,1371 @@
+{
+  "base_commit": "5fdf675c5c1fae826438f145e95a86f59da8d4aa",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "git_blob_sha": "ae06d2ed2f0be318ebc95ac743b7aace78e912a1",
+      "bytes": 137
+    },
+    {
+      "path": ".editorconfig",
+      "git_blob_sha": "a2a2a9e78a355beb5244bfc3bf561f8187055002",
+      "bytes": 226
+    },
+    {
+      "path": ".env.example",
+      "git_blob_sha": "a20102cf19f519b713df027b39f41f2b1a052b6a",
+      "bytes": 421
+    },
+    {
+      "path": ".gitattributes",
+      "git_blob_sha": "997a093ce2d6103852c5636ef3336957a4d2f74f",
+      "bytes": 187
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "git_blob_sha": "7ef7a5ee69fe76b3e065b86ddb909e84f592ac1a",
+      "bytes": 406
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "git_blob_sha": "99fa76a753e8f8fc46f957daab771beabb999c86",
+      "bytes": 245
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "git_blob_sha": "ef19ad46ca3d77dd528da04a1e772e260ac24b0f",
+      "bytes": 475
+    },
+    {
+      "path": ".github/workflows/pages.yml",
+      "git_blob_sha": "34e0d935c0ba44aaf79c3fa65c9ec390e8ca67a9",
+      "bytes": 943
+    },
+    {
+      "path": ".gitignore",
+      "git_blob_sha": "bfe5c1ab5a8cbf8f3960eb78c523c665027b42d6",
+      "bytes": 483
+    },
+    {
+      "path": ".nojekyll",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Dockerfile",
+      "git_blob_sha": "14458eca1bd233abd9e629e42e3e20e477b6ab58",
+      "bytes": 327
+    },
+    {
+      "path": "EJECUTAR-PRUEBAS.bat",
+      "git_blob_sha": "dd8795f123d5e22bf353de8ba5083b340a5b4dbf",
+      "bytes": 135
+    },
+    {
+      "path": "INICIAR-CENTRO-IA.bat",
+      "git_blob_sha": "74494fe0f46dce386f9cc9093481e85a292f9acf",
+      "bytes": 627
+    },
+    {
+      "path": "PENDIENTES-PARA-PRODUCCION.md",
+      "git_blob_sha": "98b011a8d4c91c093d9e579da00902a4bb6354f3",
+      "bytes": 5323
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha": "7d994c41c3fcff3c93a89b8fc49d1912c51351ff",
+      "bytes": 2303
+    },
+    {
+      "path": "SECURITY.md",
+      "git_blob_sha": "0d5dfae09123851a2686cdd4d61634005e32ed4b",
+      "bytes": 623
+    },
+    {
+      "path": "app.js",
+      "git_blob_sha": "73ae4b1dc3b3faa1c699cde0c10da12954c9dafb",
+      "bytes": 51835
+    },
+    {
+      "path": "app/app.js",
+      "git_blob_sha": "69b112fbdfeb562f7ff5a8456d5365b77ceffa37",
+      "bytes": 55933
+    },
+    {
+      "path": "app/assets/icons/nexo-club-192.png",
+      "git_blob_sha": "4d7b2ca5aed47d9cba41a44cb4b38b68385fdde9",
+      "bytes": 4398
+    },
+    {
+      "path": "app/assets/icons/nexo-club-512.png",
+      "git_blob_sha": "2a642746d0f48e911428c408f643d9ddb12bc180",
+      "bytes": 18432
+    },
+    {
+      "path": "app/assets/icons/nexo-club.svg",
+      "git_blob_sha": "6666bdc9d5d440777f3ac8070ee20a4ca77c7deb",
+      "bytes": 516
+    },
+    {
+      "path": "app/index.html",
+      "git_blob_sha": "87bfe30fcb7f98afa627a391eb8d483b22a849c7",
+      "bytes": 1639
+    },
+    {
+      "path": "app/manifest.webmanifest",
+      "git_blob_sha": "e9024d20ddda757066aba227561f0f1f4f2a83bb",
+      "bytes": 391
+    },
+    {
+      "path": "app/styles.css",
+      "git_blob_sha": "1c81467e2d697ca8b629407facd8aa138ae930ea",
+      "bytes": 15132
+    },
+    {
+      "path": "app/sw.js",
+      "git_blob_sha": "b75cd33d4979ae47af82bd41ff619960934dd674",
+      "bytes": 1170
+    },
+    {
+      "path": "app/waves.css",
+      "git_blob_sha": "95c62b72f56769c24edca9fcc2fa48813c481ee8",
+      "bytes": 4411
+    },
+    {
+      "path": "assets/escena-comercio.svg",
+      "git_blob_sha": "99be921a0457781323c819c9096fdccd83e01980",
+      "bytes": 4284
+    },
+    {
+      "path": "assets/icons/nexo-club-192.png",
+      "git_blob_sha": "4d7b2ca5aed47d9cba41a44cb4b38b68385fdde9",
+      "bytes": 4398
+    },
+    {
+      "path": "assets/icons/nexo-club-512.png",
+      "git_blob_sha": "2a642746d0f48e911428c408f643d9ddb12bc180",
+      "bytes": 18432
+    },
+    {
+      "path": "assets/icons/nexo-club.svg",
+      "git_blob_sha": "6666bdc9d5d440777f3ac8070ee20a4ca77c7deb",
+      "bytes": 516
+    },
+    {
+      "path": "assets/nexo-fondo-ondas.png",
+      "git_blob_sha": "f47da5755c4a891b5e24dcb72de494ca42743956",
+      "bytes": 214754
+    },
+    {
+      "path": "assets/nexo-rosas-fondo.jpg",
+      "git_blob_sha": "ddbce9b3941abec521e04dfbc024fcf887a955e7",
+      "bytes": 81196
+    },
+    {
+      "path": "auth.html",
+      "git_blob_sha": "91980d1aa2b8c838698d124a91a7ccf04d9793d0",
+      "bytes": 15529
+    },
+    {
+      "path": "auth.js",
+      "git_blob_sha": "a3c462989782dfdc13eafc28ff34e021c2c350c6",
+      "bytes": 4006
+    },
+    {
+      "path": "backups/.gitkeep",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "dashboard-effects.css",
+      "git_blob_sha": "d117c60c17d3b2bcee9deaee87a8aaac73b0c830",
+      "bytes": 5451
+    },
+    {
+      "path": "dashboard.html",
+      "git_blob_sha": "7d1e45aae1f1adf79a84b1b9cb706a20a1978ba9",
+      "bytes": 1763
+    },
+    {
+      "path": "data/.gitkeep",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "demo/README.md",
+      "git_blob_sha": "ac9a6cb72b362350be2f076f99557175381f1501",
+      "bytes": 3660
+    },
+    {
+      "path": "demo/assets/css/analytics-upgrade.css",
+      "git_blob_sha": "cb7763660a3854ee456a1660e59c11290456b727",
+      "bytes": 3099
+    },
+    {
+      "path": "demo/assets/css/cia-microdetalles-animaciones.css",
+      "git_blob_sha": "f7abd61810483c3c5a4fc135a61a4f4ae1d83630",
+      "bytes": 12164
+    },
+    {
+      "path": "demo/assets/css/fondo-animado-restaurado.css",
+      "git_blob_sha": "a5aa6dae7fe474e11ab1c62cf43038d1f0621ff1",
+      "bytes": 1971
+    },
+    {
+      "path": "demo/assets/css/nexo-club.css",
+      "git_blob_sha": "035b77d8b0bf1791e286f63871f38e40edda43ec",
+      "bytes": 96741
+    },
+    {
+      "path": "demo/assets/css/onboarding-polish.css",
+      "git_blob_sha": "86b73af0602a9215f3b415a882f4ef11a9bd8cbc",
+      "bytes": 17575
+    },
+    {
+      "path": "demo/assets/icons/nexo-club-192.png",
+      "git_blob_sha": "4d7b2ca5aed47d9cba41a44cb4b38b68385fdde9",
+      "bytes": 4398
+    },
+    {
+      "path": "demo/assets/icons/nexo-club-512.png",
+      "git_blob_sha": "2a642746d0f48e911428c408f643d9ddb12bc180",
+      "bytes": 18432
+    },
+    {
+      "path": "demo/assets/icons/nexo-club.svg",
+      "git_blob_sha": "6666bdc9d5d440777f3ac8070ee20a4ca77c7deb",
+      "bytes": 516
+    },
+    {
+      "path": "demo/assets/js/cia-microdetalles-animaciones.js",
+      "git_blob_sha": "7ca6f73ba807fd62753ae3cb91ec787a594dbfa9",
+      "bytes": 1421
+    },
+    {
+      "path": "demo/assets/js/nexo-club.js",
+      "git_blob_sha": "04cfd5049a68690b0cb68c44cacd85555181d08f",
+      "bytes": 199235
+    },
+    {
+      "path": "demo/assets/nexo-fondo-ondas.png",
+      "git_blob_sha": "f47da5755c4a891b5e24dcb72de494ca42743956",
+      "bytes": 214754
+    },
+    {
+      "path": "demo/assets/nexo-rosas-fondo.jpg",
+      "git_blob_sha": "ddbce9b3941abec521e04dfbc024fcf887a955e7",
+      "bytes": 81196
+    },
+    {
+      "path": "demo/index.html",
+      "git_blob_sha": "cd901bf4052cb396d384b811de01a5ea410058d4",
+      "bytes": 2342
+    },
+    {
+      "path": "demo/manifest.webmanifest",
+      "git_blob_sha": "644b342ed674aec0a852d62f7965bae6ddc1a38f",
+      "bytes": 435
+    },
+    {
+      "path": "docs/ANALISIS-INTEGRAL.md",
+      "git_blob_sha": "f5dca968f79fa5706d5999d3963458a2815aeed5",
+      "bytes": 4683
+    },
+    {
+      "path": "docs/CUENTAS-REALES.md",
+      "git_blob_sha": "986f10a8015bebf2e64c9c69122cfa7e2b48fe0e",
+      "bytes": 1979
+    },
+    {
+      "path": "docs/SUBIR-A-GITHUB.md",
+      "git_blob_sha": "51f6d24f63ead77d4bde3d2a1361cf459925165a",
+      "bytes": 1112
+    },
+    {
+      "path": "experience.css",
+      "git_blob_sha": "9d8f7ed966a24f8ba9713cc9952a9c5baa126102",
+      "bytes": 15758
+    },
+    {
+      "path": "home.css",
+      "git_blob_sha": "0cd970beb391b62ac400da7ee5f648702f009eb9",
+      "bytes": 34133
+    },
+    {
+      "path": "home.js",
+      "git_blob_sha": "004713a856271e3019120013d65ba21a33ccc3f9",
+      "bytes": 6614
+    },
+    {
+      "path": "index.html",
+      "git_blob_sha": "a930fb5ac5c2fd0af0a6cfffee4dc2249964a880",
+      "bytes": 5373
+    },
+    {
+      "path": "manifest.webmanifest",
+      "git_blob_sha": "6d586c99849b583bd94b77008e96e8ee24b610fc",
+      "bytes": 525
+    },
+    {
+      "path": "package.json",
+      "git_blob_sha": "cec764bd60f8fbbe19e24491b54ff402c3a4b569",
+      "bytes": 798
+    },
+    {
+      "path": "render.yaml",
+      "git_blob_sha": "025bcc94166c35b92060cadce1363b3fed9b3b2e",
+      "bytes": 647
+    },
+    {
+      "path": "scripts/backup.mjs",
+      "git_blob_sha": "426479528b9b080e34ba58fd3ac4a84bc27732e7",
+      "bytes": 670
+    },
+    {
+      "path": "scripts/build-pages.mjs",
+      "git_blob_sha": "b5c1228505d81fbbc79cbe3f4bb1a9503dc34419",
+      "bytes": 800
+    },
+    {
+      "path": "scripts/check-pages.mjs",
+      "git_blob_sha": "ea4d9562c17542638c4588a1eaedd56b50876134",
+      "bytes": 1517
+    },
+    {
+      "path": "scripts/check-repo.mjs",
+      "git_blob_sha": "531dd76eb748e6be6bc2c02aabbc5d4536978437",
+      "bytes": 1853
+    },
+    {
+      "path": "server/db.mjs",
+      "git_blob_sha": "c7dae02dcad1ac5dd4cf6c72e80742c1358d63cf",
+      "bytes": 1581
+    },
+    {
+      "path": "server/index.mjs",
+      "git_blob_sha": "cd7f8282f5662d03f5263e5b3ea44165b72df206",
+      "bytes": 39369
+    },
+    {
+      "path": "server/vendor/QRCode/APACHE-2.0-LICENSE.txt",
+      "git_blob_sha": "053fd57ee628ea09a5bf95819c426cf5069daeb8",
+      "bytes": 11961
+    },
+    {
+      "path": "server/vendor/QRCode/NOTICE.md",
+      "git_blob_sha": "71742ceb71a99378844f301ba40b20d9735a2c15",
+      "bytes": 1403
+    },
+    {
+      "path": "server/vendor/QRCode/QR8bitByte.js",
+      "git_blob_sha": "21f7f3b2871c9f22a74d034da4b931f78d3dd343",
+      "bytes": 381
+    },
+    {
+      "path": "server/vendor/QRCode/QRBitBuffer.js",
+      "git_blob_sha": "fbb7afb248344ed77b7f1762125665552b0a4467",
+      "bytes": 701
+    },
+    {
+      "path": "server/vendor/QRCode/QRErrorCorrectLevel.js",
+      "git_blob_sha": "14e08fbaa3f37f5841312fb61025b89975372e2d",
+      "bytes": 53
+    },
+    {
+      "path": "server/vendor/QRCode/QRMaskPattern.js",
+      "git_blob_sha": "5946455c0ca6a4e95cce44a2fefdd27a9fcdef38",
+      "bytes": 156
+    },
+    {
+      "path": "server/vendor/QRCode/QRMath.js",
+      "git_blob_sha": "fe72f4cb571fb5fe49957443b08e3a2fd0a75b53",
+      "bytes": 672
+    },
+    {
+      "path": "server/vendor/QRCode/QRMode.js",
+      "git_blob_sha": "52af5192047f05c905e5cbfd3672701e9d0b7c0a",
+      "bytes": 148
+    },
+    {
+      "path": "server/vendor/QRCode/QRPolynomial.js",
+      "git_blob_sha": "28b9dfd4acfac91dcde7218de30e6d4516f01b5f",
+      "bytes": 1331
+    },
+    {
+      "path": "server/vendor/QRCode/QRRSBlock.js",
+      "git_blob_sha": "f4476bd6bd7c91c9ecabac3bc3dfc042e006bdd1",
+      "bytes": 5555
+    },
+    {
+      "path": "server/vendor/QRCode/QRUtil.js",
+      "git_blob_sha": "87dd0389c375dc17b875b975d2afdc08d8f3653e",
+      "bytes": 8221
+    },
+    {
+      "path": "server/vendor/QRCode/index.js",
+      "git_blob_sha": "ff57b9b3a6c83c4b1771ea9cb4c644126ad30688",
+      "bytes": 10665
+    },
+    {
+      "path": "server/vendor/package.json",
+      "git_blob_sha": "0292b9956f2e40d6eb3d0f3998e710d973113aaa",
+      "bytes": 19
+    },
+    {
+      "path": "site.css",
+      "git_blob_sha": "d91cc4afa06bd65e8768115a87871c0f0c66afbd",
+      "bytes": 22845
+    },
+    {
+      "path": "sql/001_initial.sql",
+      "git_blob_sha": "0cd621f885d246cc716c0915f291b28dad739405",
+      "bytes": 7095
+    },
+    {
+      "path": "sql/002_checkin.sql",
+      "git_blob_sha": "1cf71974e8f8ec94b168f72a5ed7b5a0d5c513bb",
+      "bytes": 308
+    },
+    {
+      "path": "start.js",
+      "git_blob_sha": "993cea127ad40e5710b26061656c7d886b4524b7",
+      "bytes": 116
+    },
+    {
+      "path": "styles.css",
+      "git_blob_sha": "2a35f2f7eb0274714a5210e9560af4ea262e0f9e",
+      "bytes": 39800
+    },
+    {
+      "path": "supabase-client.js",
+      "git_blob_sha": "4e715dfc4f2e464e8851ebd5713027761b9755fc",
+      "bytes": 380
+    },
+    {
+      "path": "supabase/migrations/20261112_cia_profiles.sql",
+      "git_blob_sha": "44a2bb1e5c9be43a27d902c11f56cf2e3293c92c",
+      "bytes": 1906
+    },
+    {
+      "path": "tests/api.test.mjs",
+      "git_blob_sha": "de77e6905665df470c5bfb212e0f0decf98e87d6",
+      "bytes": 10346
+    },
+    {
+      "path": "tests/deployment.test.mjs",
+      "git_blob_sha": "8c82c1023ce4e939497fc93ebacf63d8d6483888",
+      "bytes": 929
+    },
+    {
+      "path": "tests/experience.test.mjs",
+      "git_blob_sha": "5bda6f42c741f0429c1119c93b74de694e324adc",
+      "bytes": 949
+    },
+    {
+      "path": "tests/home.test.mjs",
+      "git_blob_sha": "d7c9f54ef197f433ea1fb606f2dcf5d05908241c",
+      "bytes": 1064
+    },
+    {
+      "path": "tests/interaction-polish.test.mjs",
+      "git_blob_sha": "faa4a787bc66f20ac16abfc38a5687964e3c07f7",
+      "bytes": 793
+    },
+    {
+      "path": "tests/preview.test.mjs",
+      "git_blob_sha": "20dafb487bd04d952d148aff8d0f4c64e4cbadba",
+      "bytes": 805
+    },
+    {
+      "path": "waves.css",
+      "git_blob_sha": "95c62b72f56769c24edca9fcc2fa48813c481ee8",
+      "bytes": 4411
+    },
+    {
+      "path": "workspace.html",
+      "git_blob_sha": "a0d1c1de111e5192413ee5f1b396d7d060fdf96e",
+      "bytes": 1871
+    },
+    {
+      "path": "workspace.js",
+      "git_blob_sha": "a0cbd535c3b2c25ee22b321f1bef8b299d52d899",
+      "bytes": 1602
+    }
+  ],
+  "static_scan": [
+    {
+      "path": ".dockerignore",
+      "bytes": 137,
+      "lines": 18,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".editorconfig",
+      "bytes": 226,
+      "lines": 15,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".env.example",
+      "bytes": 421,
+      "lines": 15,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 187,
+      "lines": 12,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "bytes": 406,
+      "lines": 22,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "bytes": 245,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 475,
+      "lines": 23,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".github/workflows/pages.yml",
+      "bytes": 943,
+      "lines": 38,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 483,
+      "lines": 42,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "lines": 1,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 327,
+      "lines": 12,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "EJECUTAR-PRUEBAS.bat",
+      "bytes": 135,
+      "lines": 6,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "INICIAR-CENTRO-IA.bat",
+      "bytes": 627,
+      "lines": 25,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "PENDIENTES-PARA-PRODUCCION.md",
+      "bytes": 5323,
+      "lines": 54,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 2,
+      "fetch": 0
+    },
+    {
+      "path": "README.md",
+      "bytes": 2303,
+      "lines": 36,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 623,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app.js",
+      "bytes": 51835,
+      "lines": 178,
+      "important": 0,
+      "innerHTML": 3,
+      "localStorage": 2,
+      "fetch": 0
+    },
+    {
+      "path": "app/app.js",
+      "bytes": 55933,
+      "lines": 155,
+      "important": 0,
+      "innerHTML": 5,
+      "localStorage": 0,
+      "fetch": 1
+    },
+    {
+      "path": "app/assets/icons/nexo-club-192.png",
+      "bytes": 4398,
+      "lines": 9,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app/assets/icons/nexo-club-512.png",
+      "bytes": 18432,
+      "lines": 40,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app/assets/icons/nexo-club.svg",
+      "bytes": 516,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app/index.html",
+      "bytes": 1639,
+      "lines": 27,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app/manifest.webmanifest",
+      "bytes": 391,
+      "lines": 1,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app/styles.css",
+      "bytes": 15132,
+      "lines": 10,
+      "important": 4,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "app/sw.js",
+      "bytes": 1170,
+      "lines": 18,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 2
+    },
+    {
+      "path": "app/waves.css",
+      "bytes": 4411,
+      "lines": 131,
+      "important": 5,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "assets/escena-comercio.svg",
+      "bytes": 4284,
+      "lines": 44,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "assets/icons/nexo-club-192.png",
+      "bytes": 4398,
+      "lines": 9,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "assets/icons/nexo-club-512.png",
+      "bytes": 18432,
+      "lines": 40,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "assets/icons/nexo-club.svg",
+      "bytes": 516,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "assets/nexo-fondo-ondas.png",
+      "bytes": 214754,
+      "lines": 771,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "assets/nexo-rosas-fondo.jpg",
+      "bytes": 81196,
+      "lines": 350,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "auth.html",
+      "bytes": 15529,
+      "lines": 82,
+      "important": 2,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "auth.js",
+      "bytes": 4006,
+      "lines": 64,
+      "important": 0,
+      "innerHTML": 2,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "backups/.gitkeep",
+      "bytes": 0,
+      "lines": 1,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "dashboard-effects.css",
+      "bytes": 5451,
+      "lines": 63,
+      "important": 3,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "dashboard.html",
+      "bytes": 1763,
+      "lines": 26,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "data/.gitkeep",
+      "bytes": 0,
+      "lines": 1,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/README.md",
+      "bytes": 3660,
+      "lines": 75,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 1,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/css/analytics-upgrade.css",
+      "bytes": 3099,
+      "lines": 29,
+      "important": 5,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/css/cia-microdetalles-animaciones.css",
+      "bytes": 12164,
+      "lines": 162,
+      "important": 10,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/css/fondo-animado-restaurado.css",
+      "bytes": 1971,
+      "lines": 37,
+      "important": 27,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/css/nexo-club.css",
+      "bytes": 96741,
+      "lines": 1000,
+      "important": 220,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/css/onboarding-polish.css",
+      "bytes": 17575,
+      "lines": 218,
+      "important": 7,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/icons/nexo-club-192.png",
+      "bytes": 4398,
+      "lines": 9,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/icons/nexo-club-512.png",
+      "bytes": 18432,
+      "lines": 40,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/icons/nexo-club.svg",
+      "bytes": 516,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/js/cia-microdetalles-animaciones.js",
+      "bytes": 1421,
+      "lines": 32,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/js/nexo-club.js",
+      "bytes": 199235,
+      "lines": 706,
+      "important": 0,
+      "innerHTML": 13,
+      "localStorage": 3,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/nexo-fondo-ondas.png",
+      "bytes": 214754,
+      "lines": 771,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/assets/nexo-rosas-fondo.jpg",
+      "bytes": 81196,
+      "lines": 350,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/index.html",
+      "bytes": 2342,
+      "lines": 45,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "demo/manifest.webmanifest",
+      "bytes": 435,
+      "lines": 13,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "docs/ANALISIS-INTEGRAL.md",
+      "bytes": 4683,
+      "lines": 49,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "docs/CUENTAS-REALES.md",
+      "bytes": 1979,
+      "lines": 28,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "docs/SUBIR-A-GITHUB.md",
+      "bytes": 1112,
+      "lines": 11,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "experience.css",
+      "bytes": 15758,
+      "lines": 166,
+      "important": 2,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "home.css",
+      "bytes": 34133,
+      "lines": 100,
+      "important": 4,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "home.js",
+      "bytes": 6614,
+      "lines": 85,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "index.html",
+      "bytes": 5373,
+      "lines": 49,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "manifest.webmanifest",
+      "bytes": 525,
+      "lines": 22,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "package.json",
+      "bytes": 798,
+      "lines": 20,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "scripts/backup.mjs",
+      "bytes": 670,
+      "lines": 12,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "scripts/build-pages.mjs",
+      "bytes": 800,
+      "lines": 10,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "scripts/check-pages.mjs",
+      "bytes": 1517,
+      "lines": 21,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "scripts/check-repo.mjs",
+      "bytes": 1853,
+      "lines": 40,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/db.mjs",
+      "bytes": 1581,
+      "lines": 31,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/index.mjs",
+      "bytes": 39369,
+      "lines": 316,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 1
+    },
+    {
+      "path": "server/vendor/QRCode/APACHE-2.0-LICENSE.txt",
+      "bytes": 11961,
+      "lines": 222,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/NOTICE.md",
+      "bytes": 1403,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QR8bitByte.js",
+      "bytes": 381,
+      "lines": 22,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRBitBuffer.js",
+      "bytes": 701,
+      "lines": 38,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRErrorCorrectLevel.js",
+      "bytes": 53,
+      "lines": 7,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRMaskPattern.js",
+      "bytes": 156,
+      "lines": 10,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRMath.js",
+      "bytes": 672,
+      "lines": 44,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRMode.js",
+      "bytes": 148,
+      "lines": 6,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRPolynomial.js",
+      "bytes": 1331,
+      "lines": 66,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRRSBlock.js",
+      "bytes": 5555,
+      "lines": 298,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/QRUtil.js",
+      "bytes": 8221,
+      "lines": 272,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/QRCode/index.js",
+      "bytes": 10665,
+      "lines": 462,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "server/vendor/package.json",
+      "bytes": 19,
+      "lines": 1,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "site.css",
+      "bytes": 22845,
+      "lines": 113,
+      "important": 2,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "sql/001_initial.sql",
+      "bytes": 7095,
+      "lines": 129,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "sql/002_checkin.sql",
+      "bytes": 308,
+      "lines": 8,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "start.js",
+      "bytes": 116,
+      "lines": 3,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "styles.css",
+      "bytes": 39800,
+      "lines": 114,
+      "important": 8,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "supabase-client.js",
+      "bytes": 380,
+      "lines": 4,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "supabase/migrations/20261112_cia_profiles.sql",
+      "bytes": 1906,
+      "lines": 35,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "tests/api.test.mjs",
+      "bytes": 10596,
+      "lines": 101,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 11
+    },
+    {
+      "path": "tests/deployment.test.mjs",
+      "bytes": 929,
+      "lines": 20,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "tests/experience.test.mjs",
+      "bytes": 949,
+      "lines": 22,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "tests/home.test.mjs",
+      "bytes": 1064,
+      "lines": 21,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "tests/interaction-polish.test.mjs",
+      "bytes": 793,
+      "lines": 19,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "tests/preview.test.mjs",
+      "bytes": 805,
+      "lines": 15,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "waves.css",
+      "bytes": 4411,
+      "lines": 131,
+      "important": 5,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "workspace.html",
+      "bytes": 1871,
+      "lines": 14,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    },
+    {
+      "path": "workspace.js",
+      "bytes": 1602,
+      "lines": 26,
+      "important": 0,
+      "innerHTML": 0,
+      "localStorage": 0,
+      "fetch": 0
+    }
+  ],
+  "note": "Todos los archivos inventariados; revisión manual centrada en rutas oficiales, permisos, despliegue y puntos de cambio. render.yaml leído por conector y excluido de la copia editable local por configuración de pago histórica."
+}

@@ -6,11 +6,27 @@
   <meta name="theme-color" content="#f8f6f0">
   <meta name="description" content="Centro I.A. conecta personas y negocios. Crea tu cuenta personal o de empresa para comenzar.">
   <title>Centro I.A. — Un motivo para volver</title>
-  <link rel="icon" type="image/svg+xml" href="assets/icons/nexo-club.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg">
   <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="design-tokens.css">
+  <link rel="stylesheet" href="mobile-welcome.css">
   <script defer src="start.js"></script>
 </head>
 <body class="site-home">
+  <main class="mobile-welcome" aria-labelledby="mobile-welcome-title">
+    <a class="mobile-welcome-brand" href="./" aria-label="Centro I.A., inicio"><img src="assets/icons/centro-ia.svg" width="44" height="44" alt=""><span>Centro <b>I.A.</b></span></a>
+    <div class="mobile-welcome-copy">
+      <h1 id="mobile-welcome-title">Siempre hay<br>un motivo<br>para <em>volver.</em></h1>
+      <p>Personas, lugares y conexiones<br>que vale la pena encontrar.</p>
+    </div>
+    <div class="welcome-waves" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="mobile-welcome-actions">
+      <a class="welcome-create" href="auth.html?mode=register">Crear cuenta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a class="welcome-login" href="auth.html?mode=login">Iniciar sesión</a>
+      <span class="welcome-signature">Centro I.A. · Un motivo para volver.</span>
+    </div>
+  </main>
+  <div class="desktop-site">
   <a href="#principal" class="skip-link">Saltar al contenido</a>
   <header class="header">
     <div class="container header-inner">
@@ -45,5 +61,6 @@
     <section class="section closing"><div class="container closing-inner"><div class="closing-flare" aria-hidden="true">✶</div><h2>Todo empieza con <em>un primer paso.</em></h2><p>Elige cómo formarás parte de Centro I.A.</p><a class="button button-primary button-large" href="auth.html?mode=register">Crear mi cuenta <span aria-hidden="true">↗</span></a></div></section>
   </main>
   <footer class="footer"><div class="container footer-inner"><span>© <span id="year">2026</span> Centro I.A.</span><span>Un motivo para volver.</span><a href="auth.html?mode=login">Iniciar sesión</a></div></footer>
+  </div>
 </body>
 </html>
