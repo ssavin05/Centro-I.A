@@ -23,7 +23,7 @@ button {cursor:pointer}
 .entry-main {flex:1;display:grid;align-content:center;padding:12px 0 24px}
 .entry-shell {display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1fr);overflow:hidden;border-radius:16px;background:var(--cia-paper);box-shadow:0 20px 60px rgba(23,60,80,.09)}
 .entry-story {position:relative;isolation:isolate;min-width:0;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center;gap:40px;overflow:hidden;background:var(--cia-deep);color:var(--cia-paper)}
-.entry-story::after {position:absolute;content:"";pointer-events:none;border:1px solid rgba(233,199,136,.3);border-radius:50%;width:780px;height:450px;left:-150px;bottom:-290px;rotate:-28deg;z-index:-1}
+.entry-story::after {position:absolute;content:"";pointer-events:none;border:1px solid rgba(233,199,136,.3);border-radius:50%;width:780px;height:450px;left:-150px;bottom:-290px;rotate:-28deg;z-index:-1;animation:cia-connection 1100ms var(--cia-ease) both}
 .entry-story h1 {font-size:clamp(2.4rem,3.5vw,3.65rem);letter-spacing:-.035em;line-height:1.08;max-width:12ch;font-weight:760}
 .entry-story h1 em {color:#e9c788;font-style:normal}
 .entry-story-content>p {color:#d2e3eb;font-size:16px;line-height:1.7;max-width:38ch;margin-top:24px}
@@ -94,3 +94,6 @@ button {cursor:pointer}
   .account-option {gap:8px;padding:10px 8px}
 }
 @media (prefers-reduced-motion:reduce) {.switch-link,.account-option,.field input,.auth-submit {transition:none}}
+
+@keyframes cia-connection {from{translate:30px 15px;opacity:.35}to{translate:0 0;opacity:1}}
+@media(prefers-reduced-motion:reduce){.entry-story::after{animation:none}}

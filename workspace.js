@@ -1,5 +1,6 @@
 import {supabase} from './supabase-client.js';
 import {validateName, authErrorMessage} from './account-rules.js';
+import {profileExport,downloadProfile} from './profile-export.js';
 const $ = id => document.getElementById(id);
 let currentUser, currentProfile, busy = false;
 let loadVersion = 0;
@@ -8,6 +9,7 @@ function clearPrivateView() {
   loadVersion++;
   busy = false;
   $('profile-section').hidden = true;
+  $('profile-form').setAttribute('aria-busy','false');
   $('welcome-title').textContent = 'Mi espacio';
   $('account-pill').textContent = 'Mi cuenta';
   $('profile-name').value = '';
@@ -17,6 +19,7 @@ function clearPrivateView() {
   $('profile-status').textContent = '';
   $('profile-name').disabled = false;
   $('save-profile').disabled = true;
+  $('export-profile').disabled = true;
   $('save-profile').textContent = 'Guardar cambios';
   $('workspace-content').setAttribute('aria-busy','false');
   currentUser = null;currentProfile = null;
@@ -53,6 +56,7 @@ async function bootstrap() {
     $('profile-email').value = user.email || '';
     $('profile-section').hidden = false;
     $('save-profile').disabled = false;
+    $('export-profile').disabled = false;
     message('');
   } catch (error) {
     if (version !== loadVersion) return;
@@ -69,6 +73,16 @@ async function bootstrap() {
   }
 }
 $('retry-profile').addEventListener('click', bootstrap);
+$('export-profile').addEventListener('click',()=>{
+  if (!currentUser || !currentProfile || busy) return;
+  try {
+    downloadProfile(profileExport(currentUser,currentProfile));
+    $('profile-status').textContent='Archivo preparado con tu perfil guardado y correo. Contiene información personal; guárdalo en un lugar seguro.';
+  } catch {
+    $('profile-error').textContent='No pudimos preparar el archivo. Vuelve a intentar desde tu navegador.';
+    $('profile-error').hidden=false;
+  }
+});
 $('profile-form').addEventListener('submit', async event => {
   event.preventDefault();
   if (busy || !currentUser || !currentProfile) return;
@@ -79,6 +93,7 @@ $('profile-form').addEventListener('submit', async event => {
     $('profile-name').setAttribute('aria-invalid','true');$('profile-name').focus();return;
   }
   busy = true;$('save-profile').disabled = true;$('save-profile').textContent = 'Guardando…';
+  $('profile-form').setAttribute('aria-busy','true');
   $('profile-name').disabled = true;
   const version = loadVersion;
   try {
@@ -96,6 +111,7 @@ $('profile-form').addEventListener('submit', async event => {
     $('profile-error').hidden = false;
   } finally {
     if (version === loadVersion) {
+      $('profile-form').setAttribute('aria-busy','false');
       busy=false;$('profile-name').disabled=false;$('save-profile').disabled=false;$('save-profile').textContent='Guardar cambios';
     }
   }

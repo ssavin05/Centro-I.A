@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f5ed"><title>Mi espacio · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="workspace.css"><script type="module" src="workspace.js"></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f5ed"><title>Mi espacio · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="workspace.css"><script type="module" src="workspace.js"></script><script type="module" src="ui-feedback.js"></script></head>
 <body class="workspace-layout">
   <a href="#workspace-content" class="skip-link">Ir a mi espacio</a>
   <header class="workspace-header"><a href="./" class="brand"><span class="brand-mark" aria-hidden="true">✧</span><span class="brand-text"><strong>Centro <span>I.A.</span></strong><small>UN MOTIVO PARA VOLVER</small></span></a><div class="workspace-user"><span id="account-pill" class="workspace-pill">Mi cuenta</span><button class="button button-outline button-small" type="button" id="logout">Cerrar sesión</button></div></header>
@@ -13,7 +13,7 @@
         <div class="profile-field"><label for="profile-name">Nombre completo</label><input id="profile-name" name="name" autocomplete="name" maxlength="90" aria-describedby="profile-error" required></div>
         <div class="profile-field"><label for="profile-email">Correo de tu cuenta</label><input id="profile-email" type="email" readonly aria-describedby="email-note"><small id="email-note">El correo se muestra como referencia de tu cuenta.</small></div>
         <p id="profile-error" role="alert" class="profile-error" hidden></p>
-        <div class="profile-actions"><button id="save-profile" class="button button-primary" type="submit" disabled>Guardar cambios</button><a class="profile-security-link" href="auth.html?mode=recover">Recuperar o cambiar contraseña</a></div>
+        <div class="profile-actions"><button id="save-profile" class="button button-primary" type="submit" disabled>Guardar cambios</button><button id="export-profile" class="button button-outline" type="button" disabled>Descargar mis datos</button><a class="profile-security-link" href="auth.html?mode=recover">Recuperar o cambiar contraseña</a></div>
         <p id="profile-status" role="status" aria-live="polite"></p>
       </form>
     </section>

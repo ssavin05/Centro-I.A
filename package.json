@@ -17,5 +17,9 @@
     "check:pages": "node scripts/check-pages.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },
-  "description": "Centro I.A.: cuentas Usuario y Empresa con Supabase Auth y frontend estático en GitHub Pages."
+  "description": "Centro I.A.: cuentas Usuario y Empresa con Supabase Auth y frontend estático en GitHub Pages.",
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.16"
+  },
+  "packageManager": "pnpm@11.25.0"
 }

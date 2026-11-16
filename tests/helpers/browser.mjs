@@ -1,6 +1,7 @@
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 import * as accountRules from '../../account-rules.js';
+import {profileExport} from '../../profile-export.js';
 
 export const settle = () => new Promise(resolve => setImmediate(resolve));
 
@@ -49,10 +50,11 @@ export function pageHarness(file, {search = '', hash = '', client = {}} = {}) {
   };
   const code = readFileSync(file, 'utf8').replace(/^import .* from ['"].*['"];?\r?\n/gm, '');
   const window = {addEventListener() {}, removeEventListener() {}, confirm: () => true};
-  runInNewContext(code, {...accountRules, supabase, document, location, window, URL, URLSearchParams,
+  const downloads=[];
+  runInNewContext(code, {...accountRules,profileExport,downloadProfile:data=>downloads.push(data), supabase, document, location, window, URL, URLSearchParams,
     history: {replaceState() {}}, setTimeout, clearTimeout, console}, {filename: file});
   return {
-    element, nodes, navigations, supabase,
+    element, nodes, navigations, supabase, downloads,
     set(values) {for (const [id, value] of Object.entries(values)) element(id).value = value;},
     async submit(id = 'auth-form') {await settle();return element(id).listeners.submit({preventDefault() {}});},
     async click(id) {return element(id).listeners.click({preventDefault() {}});},

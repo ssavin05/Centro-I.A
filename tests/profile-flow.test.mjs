@@ -130,3 +130,9 @@ test('un fallo temporal del proveedor ofrece reintento sin bucle de redireccione
   assert.equal(page.element('retry-profile').hidden,false);
   assert.equal(page.element('profile-section').hidden,true);
 });
+test('descarga usa datos guardados, no cambios sin guardar ni otras cuentas',async()=>{
+  const page=pageHarness('workspace.js',{client:profileAdapter()});await settle();
+  page.set({'profile-name':'Cambio sin guardar'});await page.click('export-profile');
+  assert.equal(page.downloads.length,1);assert.equal(page.downloads[0].profile.name,'Ana Rivera');
+  page.authEvent('SIGNED_OUT');await page.click('export-profile');assert.equal(page.downloads.length,1);
+});

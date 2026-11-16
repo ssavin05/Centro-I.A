@@ -6,6 +6,10 @@
   --cia-deep: #173c50;
   --cia-cream: #f8f5ed;
   --cia-paper: #fffdfa;
+  --cia-black: #0d151b;
+  --cia-white: #ffffff;
+  --cia-gold-bright: #edc77d;
+  --cia-blue-mid: #8cbed8;
   --cia-muted: #446477;
   --cia-error: #a02e38;
   --cia-success: #226044;
@@ -32,6 +36,23 @@
 input {caret-color: var(--cia-deep);}
 :focus-visible {outline: 3px solid var(--cia-focus); outline-offset: 3px;}
 [aria-invalid="true"] {border-color: var(--cia-error);}
+/* Motion acknowledges state; no action waits for an animation. */
+button,a,input {transition-timing-function:var(--cia-ease)}
+button:active:not(:disabled),.button:active {translate:0 1px}
+form[aria-busy="true"] button[type="submit"]::after {
+  content:'';display:inline-block;width:14px;height:14px;margin-left:10px;
+  border:2px solid currentColor;border-right-color:transparent;border-radius:50%;
+  animation:cia-working 700ms linear infinite;
+}
+.form-error:not([hidden]),.profile-error:not([hidden]) {animation:cia-feedback 220ms ease-out}
+#profile-status:not(:empty) {animation:cia-confirm 350ms ease-out}
+[data-motion="paused"] *,[data-out-of-view="true"],[data-out-of-view="true"] * {animation-play-state:paused!important}
+@keyframes cia-working {to{rotate:360deg}}
+@keyframes cia-feedback {from{background-color:#ffe0d7}to{background-color:#fff0ec}}
+@keyframes cia-confirm {from{background-color:#dceee2}to{background-color:transparent}}
 @media (prefers-reduced-motion: reduce) {
   :root {--cia-duration: 0s;}
+  button:active:not(:disabled),.button:active {translate:none}
+  form[aria-busy="true"] button[type="submit"]::after {animation:none;border-right-color:currentColor;opacity:.65}
+  .form-error:not([hidden]),.profile-error:not([hidden]),#profile-status:not(:empty) {animation:none}
 }
