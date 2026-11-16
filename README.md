@@ -4,7 +4,7 @@ Este repositorio permite desarrollar la aplicación oficial que conecta personas
 
 ## Inicia el desarrollo
 
-Necesitas Node.js 22.13 o posterior. No se requieren dependencias npm adicionales.
+Necesitas Node.js 22.13 o posterior. Para ejecutar las pruebas PostgreSQL aisladas, instala las dependencias de desarrollo fijadas con `pnpm install --frozen-lockfile --ignore-scripts` (pnpm 11.25.0). El frontend publicado no incluye esas dependencias.
 
 1. Ejecuta las comprobaciones:
 

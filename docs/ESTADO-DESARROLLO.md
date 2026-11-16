@@ -2,6 +2,18 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte: 16 de noviembre de 2026.
 
+## Sesión autónoma del 16 de noviembre: diseño y base de negocios
+
+- Paleta ampliada: dorado luminoso, azul claro y profundo, negro y blanco. Hero con contraste y superficies coherentes; bienvenida exclusiva de móvil/tablet conservada.
+- Animaciones de carga, error y confirmación; arco de acceso breve. Decoraciones pausadas fuera de pantalla o con pestaña oculta; reducción de movimiento respetada.
+- Descarga local del perfil guardado en JSON con lista explícita de campos. No contiene sesión, tokens ni metadatos internos.
+- FAQ nativa de cuatro preguntas con enlaces reales y límites de disponibilidad.
+- Propuesta SQL de cinco tablas y dos RPC para borradores y finalización de negocio. RLS, tipo Empresa protegido, revisión optimista, idempotencia y transacción atómica probados en PostgreSQL aislado. **No aplicada a Supabase ni conectada al formulario de onboarding**.
+- Verificación: **53/53 pruebas**, sintaxis, recursos y build. Las diez pruebas nuevas cubren PostgreSQL, exportación y movimiento/contraste.
+- PGlite 0.5.16 es desarrollo exclusivo. Usa PostgreSQL 18.6; producción usa 17. Los conflictos probados en una conexión no certifican concurrencia entre conexiones independientes.
+- Revisión independiente de interfaz y FAQ sin bloqueos materiales en su alcance. Motor Impeccable no disponible; se usaron referencias y revisión manual.
+- CI del commit 46f5bd0 aprobado. Sin cambios a producción, main o respaldo.
+
 ## Continuación del 16 de noviembre: consistencia de sesión
 
 - Estado remoto confirmado antes de editar: PR #1 abierto en borrador, head `246f8ff77be7a5d9992f4e625de6936328fa166f`; main conserva `5fdf675`.
@@ -20,7 +32,7 @@ Este seguimiento permite continuar el trabajo sin confundir pantallas implementa
 - Base inspeccionada: `5fdf675c5c1fae826438f145e95a86f59da8d4aa`.
 - Respaldo remoto comprobado: `archivo/version-fidelidad-2026-11-11`, commit `af73a8240f8225e00ee7d25943215728e83f15a6`. Intacto.
 - Rama de trabajo: `codex/fundamentos-acceso-seguro-2026-11-12`.
-- La copia local se obtuvo mediante el conector GitHub porque Git no está instalado en el PATH. Los commits se registran mediante Git Data API con comprobación del SHA previo.
+- La copia local se obtuvo mediante el conector GitHub durante la recuperación inicial. Los commits se registran mediante Git Data API con comprobación del SHA previo.
 
 ## Fases
 
@@ -29,8 +41,8 @@ Este seguimiento permite continuar el trabajo sin confundir pantallas implementa
 | 1. Diagnóstico | Completada para planificar la primera etapa | Inventario de 98 archivos, rutas publicadas, backend histórico, pruebas, esquema/permisos reales; véase auditoría. No es una certificación de seguridad completa. |
 | 2. Fundamentos | Parcial | Tokens compartidos, CSS de acceso separado, recursos publicables, vista previa estática, bienvenida móvil/tablet. Limpieza visual histórica y rediseño integral pendientes. |
 | 3. Autenticación | Implementación y pruebas aisladas; validación externa pendiente | Registro/login preservados, recuperación/restablecimiento, doble envío, edición de nombre y sesión. Correo y cuentas reales de prueba pendientes. |
-| 4. Empresa | Pendiente | No existen todavía tablas de negocios ni onboarding persistente. |
-| 5. Usuario | Parcial | Perfil propio y espacio sin información ficticia; descubrimiento y relaciones con negocios pendientes. |
+| 4. Empresa | Propuesta probada, activación pendiente | Cinco tablas y RPC aisladas; faltan migración revisada en PostgreSQL 17, formulario y validación real. |
+| 5. Usuario | Parcial | Perfil propio y exportación local; descubrimiento y relaciones con negocios pendientes. |
 | 6. Fidelización | Pendiente | El backend histórico no equivale a implementación Supabase. |
 | 7. Reservaciones | Pendiente | Faltan esquema, RPC atómicas, disponibilidad y flujos conectados. |
 | 8. Gestión empresarial | Pendiente | Clientes, equipos, invitaciones y campañas. |
@@ -52,7 +64,7 @@ Este seguimiento permite continuar el trabajo sin confundir pantallas implementa
 
 ## Pruebas y comprobaciones
 
-- `node scripts/verify.mjs`: **43 pruebas aprobadas**, ninguna fallida; comprobaciones del repositorio, imports, sintaxis y construcción de Pages aprobadas. La entrega del 12 de noviembre contenía 33 pruebas.
+- `node scripts/verify.mjs`: **53 pruebas aprobadas**, ninguna fallida; comprobaciones del repositorio, imports, sintaxis y construcción de Pages aprobadas. La entrega del 12 de noviembre contenía 33 pruebas.
 - Base original: 9 de 10 pruebas aprobadas en sandbox; la prueba histórica falló por ruta Windows y después por sockets bloqueados. Se corrigió la ruta y se ejecutó con acceso a localhost; pasó sin eliminar assertions.
 - SQL de solo lectura `supabase/tests/profiles_permissions.sql`: aprobado en el proyecto real.
 - Supabase: proyecto `ACTIVE_HEALTHY`, PostgreSQL 17; `cia_profiles` tiene RLS. A la hora de la auditoría había 0 usuarios Auth y 0 perfiles; no se crearon usuarios para probar en producción.
@@ -92,6 +104,6 @@ Las preguntas de confirmación rutinarias de las skills se resuelven mediante la
 
 ## Siguiente tarea concreta
 
-Validar esta etapa con dos cuentas de prueba en entorno aislado y comprobar configuración de correo/redirects. Después, diseñar y probar una migración no destructiva para `businesses`, membresías de negocio, sucursales y borrador de onboarding de cuatro pasos, con RLS y pruebas de aislamiento antes de exponer el formulario.
+Validar esta etapa con dos cuentas de prueba en entorno aislado y comprobar configuración de correo/redirects. Después, revisar la propuesta de negocios en PostgreSQL 17/Supabase aislado y comprobar concurrencia real. Convertirla mediante CLI en una migración antes de conectar el formulario. Véase docs/NEGOCIOS-PROPUESTA.md.
 
 Los cambios que necesitan autorización específica son servicios con costo, operaciones destructivas y cambios de infraestructura o publicación de alto riesgo. No son necesarios para revisar este PR.

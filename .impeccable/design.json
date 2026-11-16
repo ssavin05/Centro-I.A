@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-12T20:03:57.792Z",
+  "generatedAt": "2026-11-16T21:35:06.080Z",
   "title": "Design System: Centro I.A.",
   "extensions": {
     "colorMeta": {
@@ -143,6 +143,62 @@
           "oklch(80% 0.0892 82.36)",
           "oklch(95% 0.0892 82.36)"
         ]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Negro azulado",
+        "tonalRamp": [
+          "oklch(15% 0.0172 241.18)",
+          "oklch(25% 0.0172 241.18)",
+          "oklch(35% 0.0172 241.18)",
+          "oklch(45% 0.0172 241.18)",
+          "oklch(55.00000000000001% 0.0172 241.18)",
+          "oklch(65% 0.0172 241.18)",
+          "oklch(80% 0.0172 241.18)",
+          "oklch(95% 0.0172 241.18)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Blanco",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(25% 0.0000 89.88)",
+          "oklch(35% 0.0000 89.88)",
+          "oklch(45% 0.0000 89.88)",
+          "oklch(55.00000000000001% 0.0000 89.88)",
+          "oklch(65% 0.0000 89.88)",
+          "oklch(80% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "gold-bright": {
+        "role": "primary",
+        "displayName": "Dorado luminoso",
+        "tonalRamp": [
+          "oklch(15% 0.1021 83.18)",
+          "oklch(25% 0.1021 83.18)",
+          "oklch(35% 0.1021 83.18)",
+          "oklch(45% 0.1021 83.18)",
+          "oklch(55.00000000000001% 0.1021 83.18)",
+          "oklch(65% 0.1021 83.18)",
+          "oklch(80% 0.1021 83.18)",
+          "oklch(95% 0.1021 83.18)"
+        ]
+      },
+      "blue-mid": {
+        "role": "secondary",
+        "displayName": "Azul medio",
+        "tonalRamp": [
+          "oklch(15% 0.0643 231.26)",
+          "oklch(25% 0.0643 231.26)",
+          "oklch(35% 0.0643 231.26)",
+          "oklch(45% 0.0643 231.26)",
+          "oklch(55.00000000000001% 0.0643 231.26)",
+          "oklch(65% 0.0643 231.26)",
+          "oklch(80% 0.0643 231.26)",
+          "oklch(95% 0.0643 231.26)"
+        ]
       }
     },
     "typographyMeta": {
@@ -177,12 +233,12 @@
       {
         "name": "button-site",
         "value": "0 11px 26px rgba(23,60,80,.17)",
-        "purpose": "Acción principal de portada."
+        "purpose": "Acción principal base del sitio; el hero cambia sus colores."
       },
       {
         "name": "button-site-hover",
         "value": "0 14px 30px rgba(23,60,80,.23)",
-        "purpose": "Hover de la acción principal de portada."
+        "purpose": "Hover de la acción principal base y su variante del hero."
       },
       {
         "name": "art-card",
@@ -220,6 +276,36 @@
         "name": "welcome-color-reduced",
         "value": "100ms",
         "purpose": "Único cambio de color que conserva la bienvenida con movimiento reducido."
+      },
+      {
+        "name": "press-feedback",
+        "value": "translate: 0 1px",
+        "purpose": "Respuesta de pulsación de botones; sin desplazamiento con reducción de movimiento."
+      },
+      {
+        "name": "busy-feedback",
+        "value": "700ms linear infinite",
+        "purpose": "Indicador circular de envío; queda estático con reducción de movimiento y nunca retrasa la acción."
+      },
+      {
+        "name": "error-feedback",
+        "value": "220ms ease-out",
+        "purpose": "Cambio breve de fondo de error; se omite con reducción de movimiento."
+      },
+      {
+        "name": "success-feedback",
+        "value": "350ms ease-out",
+        "purpose": "Cambio breve de fondo de confirmación del perfil; se omite con reducción de movimiento."
+      },
+      {
+        "name": "connection-entry",
+        "value": "1100ms var(--cia-ease) both",
+        "purpose": "Entrada única del arco narrativo de auth.css; se omite con reducción de movimiento."
+      },
+      {
+        "name": "visibility-pause",
+        "value": "animation-play-state: paused",
+        "purpose": "ui-feedback.js pausa al ocultar la pestaña y las regiones decorativas fuera de vista, con margen de observación de 60px."
       }
     ],
     "breakpoints": [
@@ -255,20 +341,20 @@
   },
   "components": [
     {
-      "name": "Botón principal de portada",
+      "name": "Acción principal del hero",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Acción principal del sitio; el formulario de acceso usa su propia variante.",
-      "html": "<button class=\"ds-control ds-primary\" type=\"button\">Crear cuenta</button>",
-      "css": ".ds-primary{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:14px 24px;border:1px solid transparent;border-radius:13px;background:var(--cia-deep,#173c50);color:#fff;font-size:16px;font-weight:710;letter-spacing:-.01em;cursor:pointer;box-shadow:0 11px 26px rgba(23,60,80,.17);transition:background .2s,color .2s,transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s cubic-bezier(.16,1,.3,1)}.ds-primary:hover:not(:disabled){background:#275972;transform:translateY(-2px);box-shadow:0 14px 30px rgba(23,60,80,.23)}.ds-primary:disabled{opacity:.56;cursor:not-allowed;box-shadow:none}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+      "refersTo": "button-hero-primary",
+      "description": "Variante dorada de la acción principal sobre el hero oscuro; el encabezado conserva el botón base azul.",
+      "html": "<a class=\"ds-hero-primary\" href=\"auth.html?mode=register\">Comenzar ahora</a>",
+      "css": ".ds-hero-primary{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:14px 24px;border:1px solid transparent;border-radius:13px;background:var(--cia-gold-bright,#edc77d);color:var(--cia-black,#0d151b);font-size:16px;font-weight:710;letter-spacing:-.01em;text-decoration:none;box-shadow:0 11px 26px rgba(23,60,80,.17);transition:background .2s,color .2s,transform .22s var(--cia-ease,cubic-bezier(.16,1,.3,1)),box-shadow .22s var(--cia-ease,cubic-bezier(.16,1,.3,1))}.ds-hero-primary:hover{background:#f4d99f;transform:translateY(-2px);box-shadow:0 14px 30px rgba(23,60,80,.23)}.ds-hero-primary:active{translate:0 1px}.ds-hero-primary:focus-visible{outline:3px solid var(--cia-gold-bright,#edc77d);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-hero-primary{transition:none;translate:none}}"
     },
     {
-      "name": "Botón secundario de portada",
+      "name": "Acción secundaria del hero",
       "kind": "button",
-      "refersTo": "button-outline",
-      "description": "Acción secundaria clara con borde suave.",
-      "html": "<button class=\"ds-control ds-outline\" type=\"button\">Iniciar sesión</button>",
-      "css": ".ds-outline{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:14px 24px;border:1px solid #cedee7;border-radius:13px;background:rgba(255,255,255,.65);color:var(--cia-deep,#173c50);font-size:16px;font-weight:710;letter-spacing:-.01em;cursor:pointer;transition:background .2s,transform .22s cubic-bezier(.16,1,.3,1)}.ds-outline:hover:not(:disabled){background:#e6f2f8;transform:translateY(-2px)}.ds-outline:disabled{opacity:.56;cursor:not-allowed}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-outline{transition:none}}"
+      "refersTo": "button-hero-outline",
+      "description": "Enlace transparente con texto y borde claros sobre la superficie profunda del hero.",
+      "html": "<div class=\"ds-hero-surface\"><a class=\"ds-hero-outline\" href=\"auth.html?mode=login\">Ya tengo una cuenta</a></div>",
+      "css": ".ds-hero-surface{padding:24px;background:linear-gradient(120deg,var(--cia-black,#0d151b) 0%,var(--cia-deep,#173c50) 64%,#24566e 100%)}.ds-hero-outline{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:14px 24px;border:1px solid #9bbdce;border-radius:13px;background:transparent;color:var(--cia-paper,#fffdfa);font-size:16px;font-weight:710;letter-spacing:-.01em;text-decoration:none;transition:background .2s,transform .22s var(--cia-ease,cubic-bezier(.16,1,.3,1))}.ds-hero-outline:hover{background:#24566e;transform:translateY(-2px)}.ds-hero-outline:active{translate:0 1px}.ds-hero-outline:focus-visible{outline:3px solid var(--cia-gold-bright,#edc77d);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-hero-outline{transition:none;translate:none}}"
     },
     {
       "name": "Botón de autenticación",
@@ -276,7 +362,7 @@
       "refersTo": "button-auth",
       "description": "Envío del formulario, con estado deshabilitado mientras se procesa.",
       "html": "<button class=\"ds-control ds-auth\" type=\"button\">Crear mi cuenta</button>",
-      "css": ".ds-auth{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border:0;border-radius:var(--cia-radius,12px);background:var(--cia-deep,#173c50);color:var(--cia-paper,#fffdfa);font-size:15px;font-weight:700;cursor:pointer;transition:background var(--cia-duration,180ms)}.ds-auth:hover:not(:disabled){background:#295b73}.ds-auth:disabled{opacity:.6;cursor:wait}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-auth{transition:none}}"
+      "css": ".ds-auth{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border:0;border-radius:var(--cia-radius,12px);background:var(--cia-deep,#173c50);color:var(--cia-paper,#fffdfa);font-size:15px;font-weight:700;cursor:pointer;transition:background var(--cia-duration,180ms)}.ds-auth:hover:not(:disabled){background:#295b73}.ds-auth:disabled{opacity:.6;cursor:wait}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-auth{transition:none}}.ds-auth:active:not(:disabled){translate:0 1px}.ds-auth-form[aria-busy=\"true\"] .ds-auth::after{content:\"\";display:inline-block;width:14px;height:14px;margin-left:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:ds-working 700ms linear infinite}@keyframes ds-working{to{rotate:360deg}}@media(prefers-reduced-motion:reduce){.ds-auth:active:not(:disabled){translate:none}.ds-auth-form[aria-busy=\"true\"] .ds-auth::after{animation:none;border-right-color:currentColor;opacity:.65}}"
     },
     {
       "name": "Crear cuenta en bienvenida",
@@ -337,10 +423,10 @@
   ],
   "narrative": {
     "northStar": "Un motivo para volver",
-    "overview": "La identidad existente combina fondos crema y blanco cálido, texto azul profundo y acentos dorados. Las ondas y órbitas trazan conexiones sin ocupar el lugar de las acciones. La portada tiene amplitud e ilustraciones de tarjetas; las pantallas de acceso y perfil concentran la atención en una tarea.\n\nEste documento registra el código de las rutas oficiales. La autoridad visual es `design-tokens.css`, con `site.css` como base del inicio y el espacio personal, y `mobile-welcome.css`, `auth.css` y `workspace.css` para cada superficie. Las capturas de revisión confirman esa composición. Las hojas históricas no añaden reglas a este sistema. Los valores del frontmatter son normativos para los patrones registrados; los fragmentos del sidecar muestran sus estados y variantes.",
+    "overview": "La identidad combina negro azulado, azul profundo, azul claro, blancos y dorados. La portada abre con un degradado oscuro, título blanco cálido y énfasis dorado; después alterna superficies claras con una tarjeta de Empresa profunda. Las ondas y órbitas trazan conexiones sin ocupar el lugar de las acciones. El acceso y el perfil concentran la atención en una tarea.\n\nEste documento registra el código de las rutas oficiales. La autoridad visual es `design-tokens.css`, con `site.css` como base del inicio y el espacio personal, y `mobile-welcome.css`, `auth.css` y `workspace.css` para cada superficie. El acceso carga `auth.css`: las reglas antiguas de autenticación en `site.css` no definen ese formulario. Las capturas de `.impeccable/review/hour/` confirman esta iteración. Las hojas históricas no añaden reglas al sistema. Los valores del frontmatter son normativos para los patrones registrados; los fragmentos del sidecar muestran sus estados y variantes.",
     "keyCharacteristics": [
-      "Azul profundo para lectura y acciones; dorado para énfasis.",
-      "Superficies claras, curvas suaves y profundidad difusa.",
+      "Superficies oscuras con texto claro y dorado; azul profundo para lectura sobre superficies claras.",
+      "Alternancia de azul claro, blancos y crema, con curvas suaves y profundidad difusa.",
       "Ondas decorativas detrás del contenido.",
       "Controles explícitos, foco visible y estados legibles.",
       "Movimiento sutil que respeta la reducción de movimiento."
@@ -348,17 +434,17 @@
     "rules": [
       {
         "name": "The Acento legible Rule",
-        "body": "El dorado conserva su función de énfasis; el texto y las acciones mantienen combinaciones de contraste comprobables en su contexto.",
+        "body": "El dorado conserva su función de énfasis y acción sobre fondos profundos; el texto y las acciones mantienen combinaciones de contraste comprobables en su contexto.",
         "section": "colors"
       },
       {
         "name": "The Movimiento prescindible Rule",
-        "body": "Las ondas no bloquean acciones ni comunican información necesaria. Con `prefers-reduced-motion: reduce`, se detienen las animaciones decorativas y se suprimen las transiciones de movimiento; la bienvenida conserva solo un cambio de color de 100ms.",
+        "body": "Las ondas y los efectos no bloquean acciones ni comunican información necesaria. Con `prefers-reduced-motion: reduce`, se detienen las animaciones decorativas, de error y de confirmación; el indicador de envío queda estático y se elimina el desplazamiento de pulsación. La bienvenida conserva solo un cambio de color de 100ms.",
         "section": "components"
       }
     ],
     "dos": [
-      "**Do** conservar la paleta y usar azul profundo para lectura y acciones sobre superficies claras.",
+      "**Do** conservar la paleta y ajustar texto, acción y foco a la superficie clara u oscura donde aparecen.",
       "**Do** mantener ondas detrás del contenido y respetar la reducción de movimiento.",
       "**Do** mantener foco visible, controles táctiles y mensajes de carga, error, vacío y resultado.",
       "**Do** conservar la bienvenida del inicio en celulares/tablets y la portada completa en escritorio."

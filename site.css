@@ -110,3 +110,6 @@
   .auth-main{align-items:start;padding-top:8px}
   .auth-story{align-self:center}
 }
+
+/* Native disclosure: keyboard accessible, usable without JavaScript. */
+.faq{background:var(--paper)}.faq-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px}.faq-layout>div>p{max-width:40ch;margin-top:20px;color:var(--slate)}.faq-answers details{border-bottom:1px solid #cadce5;padding:0 0 20px;margin-bottom:20px}.faq-answers summary{cursor:pointer;min-height:44px;padding:8px 4px;color:var(--deep);font-weight:700;list-style-position:outside;margin-left:20px}.faq-answers summary::marker{color:#936a27}.faq-answers details[open] summary{color:#79581f}.faq-answers p{color:var(--slate);margin:12px 0 0 24px;max-width:65ch}.faq-answers a{display:inline-flex;align-items:center;min-height:44px;margin:8px 0 0 24px;color:var(--deep);text-decoration:underline;text-underline-offset:4px}.faq-answers summary:focus-visible{outline:3px solid var(--cia-focus);outline-offset:3px;border-radius:4px}@media(max-width:940px){.faq-layout{grid-template-columns:1fr;gap:30px}}

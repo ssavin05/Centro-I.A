@@ -5,7 +5,7 @@ Estas reglas orientan el desarrollo de la aplicación oficial. Consulta `docs/ES
 ## Producto e identidad
 
 - Centro I.A., «Un motivo para volver», conecta negocios y personas mediante fidelización y experiencias. No convertirlo en un ERP.
-- Interfaz y mensajes en español natural. Paleta: `#C99B4C`, `#DCEBF4`, `#173C50`, `#F8F5ED`, `#FFFDFA`.
+- Interfaz y mensajes en español natural. Paleta: dorados `#C99B4C`/`#EDC77D`, azul claro `#DCEBF4`, profundo `#173C50`, negro `#0D151B`, blanco y bases cálidas. Sigue DESIGN.md.
 - Usa `design-tokens.css`, componentes compartidos, foco visible, controles táctiles y reducción de movimiento. Usa dorado como acento; comprueba el contraste del texto.
 - La bienvenida de `index.html` es exclusiva de móviles/tablets. El escritorio conserva la portada completa. No agregar una espera artificial ni bloquear el acceso.
 - Nunca presentar empresas, saldos, reservas, estadísticas, testimonios o notificaciones inventados como datos reales.
@@ -34,9 +34,11 @@ Estas reglas orientan el desarrollo de la aplicación oficial. Consulta `docs/ES
 
 - Reglas puras en `account-rules.js`; controladores de página separados de la configuración de Supabase. Mantener módulos pequeños sin multiplicar abstracciones.
 - Antes de una refactorización grande: rama de trabajo, respaldo recuperable y pruebas del comportamiento afectado.
-- Ejecutar `npm run verify`: comprobaciones de archivos, imports, sintaxis, pruebas y build de Pages. Las pruebas antiguas válidas se conservan.
+- Instalar con pnpm 11.25.0: `pnpm install --frozen-lockfile --ignore-scripts`. Ejecutar `npm run verify`: comprobaciones de archivos, imports, sintaxis, pruebas y build de Pages. Las pruebas antiguas válidas se conservan.
 - Probar móvil/tablet/escritorio, errores, carga, vacío, teclado y operaciones repetidas. Distinguir dobles de prueba de integración con Supabase real.
 - Migraciones versionadas y no destructivas; inspeccionar tablas/políticas y documentación actual de Supabase antes de cambiar el esquema.
 - Mantener intacta `archivo/version-fidelidad-2026-11-11`.
 - Usar commits rastreables y PR; revisar cambios ajenos antes de integrar. No publicar cambios de alto riesgo sin autorización.
 - Una rama o PR no equivale a publicación. Declarar límites y pendientes en `docs/ESTADO-DESARROLLO.md` después de cada etapa.
+
+La propuesta supabase/proposals/business_onboarding.sql solo está probada localmente; no activarla sin revisión en Supabase aislado/PostgreSQL 17 y prueba de concurrencia real.

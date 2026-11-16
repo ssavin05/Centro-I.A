@@ -22,7 +22,7 @@ Los controladores todavía conocen la API de Supabase. Esta frontera parcial es 
 
 `cia_profiles.id` referencia `auth.users.id`. RLS permite leer/actualizar solo la fila propia; los permisos de columna limitan UPDATE a `name`. El trigger privado crea el perfil en el registro y fija el tipo inicial. Cambiar `user_metadata` después no cambia esa fila.
 
-No se añadieron tablas, buckets ni funciones públicas. No se cachean datos privados mediante service worker.
+No se añadieron tablas, buckets ni funciones públicas en producción. Existe una propuesta aislada: [Negocios](NEGOCIOS-PROPUESTA.md). No se cachean datos privados mediante service worker.
 
 ## Decision Log
 
@@ -38,3 +38,9 @@ No se añadieron tablas, buckets ni funciones públicas. No se cachean datos pri
 ## Archivos históricos
 
 `app.js`, `app/`, `demo/`, `server/`, `sql/`, varias hojas antiguas y `render.yaml` pertenecen a versiones previas. Sus pruebas no demuestran que esos módulos existan en Supabase. La documentación anterior debe interpretarse con esa limitación; este documento y el estado de desarrollo describen la aplicación oficial.
+
+## Exportación, movimiento y pruebas
+
+profile-export.js limita la exportación local al perfil guardado; no transmite datos a otro servicio. ui-feedback.js observa visibilidad para pausar decoraciones, sin almacenamiento ni llamadas de red.
+
+PGlite es dependencia exclusiva de desarrollo y ejecuta PostgreSQL 18.6 en memoria. tests/helpers/postgres.mjs prepara roles e identidades fixture. Pages excluye SQL, pruebas, documentación y node_modules. Producción PostgreSQL 17 requiere comprobación adicional.
