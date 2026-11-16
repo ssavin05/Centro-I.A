@@ -52,7 +52,7 @@ La separación entre frontend oficial y código histórico se documenta en [Arqu
 
 El código de las rutas oficiales, las hojas de estilo activas y las capturas `.impeccable/review/mobile.jpg`, `tablet.jpg`, `desktop.jpg` y `auth-desktop.jpg` acreditan el sistema visual registrado. No son testimonios ni resultados de uso comercial.
 
-La verificación registrada aprueba 33 pruebas y el build de Pages. Las pruebas de controladores usan dobles de Supabase. No se ha completado un recorrido real por correo ni el aislamiento entre dos cuentas de prueba. La aceptación de una solicitud de recuperación no acredita entrega de correo. Esta documentación no declara integración en main ni publicación de la etapa.
+La verificación registrada aprueba 43 pruebas y el build de Pages. Las pruebas de controladores usan dobles de Supabase. No se ha completado un recorrido real por correo ni el aislamiento entre dos cuentas de prueba. La aceptación de una solicitud de recuperación no acredita entrega de correo. Esta documentación no declara integración en main ni publicación de la etapa.
 
 ## Product Principles
 

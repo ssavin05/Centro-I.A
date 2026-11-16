@@ -1,6 +1,18 @@
 # Estado del desarrollo de Centro I.A.
 
-Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte: 12 de noviembre de 2026.
+Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte: 16 de noviembre de 2026.
+
+## Continuación del 16 de noviembre: consistencia de sesión
+
+- Estado remoto confirmado antes de editar: PR #1 abierto en borrador, head `246f8ff77be7a5d9992f4e625de6936328fa166f`; main conserva `5fdf675`.
+- Corregidas carreras entre cargas de perfil: una respuesta o excepción antigua no limpia ni reemplaza una sesión nueva. Cerrar sesión durante getUser impide iniciar la consulta del perfil antiguo.
+- Cambio de identidad en otra pestaña: se ocultan y limpian inmediatamente los datos privados; la cuenta nueva se verifica fuera del callback síncrono de Auth.
+- Las escrituras antiguas no muestran errores/éxitos ni habilitan controles después de cambiar o cerrar sesión.
+- Recuperación ligada al identificador verificado: cerrar sesión o cambiar de identidad invalida el formulario, limpia contraseñas y descarta resultados pendientes. Se comprueba identidad y versión de sesión antes de enviar el cambio.
+- La sesión cacheada se verifica antes de redirigir al panel. Un fallo temporal del proveedor ofrece reintento y no genera un bucle login/panel.
+- Diez pruebas nuevas reprodujeron los fallos antes de corregirlos. Verificación final local: **43/43 pruebas aprobadas**, sintaxis, enlaces, imports y build correctos.
+- Archivos funcionales: `auth.js`, `workspace.js`; cobertura en `tests/auth-flow.test.mjs` y `tests/profile-flow.test.mjs`.
+- Sin migraciones, cambios visuales, cambios de permisos ni escrituras a producción. SMTP, correo real e integración de dos cuentas en Supabase siguen pendientes; esta suite usa dobles del SDK.
 
 ## Base recuperable y rama
 
@@ -40,7 +52,7 @@ Este seguimiento permite continuar el trabajo sin confundir pantallas implementa
 
 ## Pruebas y comprobaciones
 
-- `node scripts/verify.mjs`: **33 pruebas aprobadas**, ninguna fallida; comprobaciones del repositorio, imports, sintaxis y construcción de Pages aprobadas.
+- `node scripts/verify.mjs`: **43 pruebas aprobadas**, ninguna fallida; comprobaciones del repositorio, imports, sintaxis y construcción de Pages aprobadas. La entrega del 12 de noviembre contenía 33 pruebas.
 - Base original: 9 de 10 pruebas aprobadas en sandbox; la prueba histórica falló por ruta Windows y después por sockets bloqueados. Se corrigió la ruta y se ejecutó con acceso a localhost; pasó sin eliminar assertions.
 - SQL de solo lectura `supabase/tests/profiles_permissions.sql`: aprobado en el proyecto real.
 - Supabase: proyecto `ACTIVE_HEALTHY`, PostgreSQL 17; `cia_profiles` tiene RLS. A la hora de la auditoría había 0 usuarios Auth y 0 perfiles; no se crearon usuarios para probar en producción.

@@ -53,7 +53,7 @@ test('fallo del proveedor no presenta éxito y permite reintentar', async () => 
 });
 
 test('sesión persistente abre el espacio', async () => {
-  const page = pageHarness('auth.js', {client: {auth: {getSession: async () => ({data: {session: {user: {id: 'a'}}}})}}});
+  const page = pageHarness('auth.js', {client: {auth: {getSession: async () => ({data: {session: {user: {id: 'a'}}}}),getUser:async()=>({data:{user:{id:'a'}},error:null})}}});
   await settle();
   assert.deepEqual(page.navigations, ['workspace.html']);
 });
@@ -128,4 +128,60 @@ test('enlace vencido se explica y abre una nueva solicitud', async () => {
 test('una sesión normal no se acepta como recuperación por cambiar la query', async () => {
   const page=pageHarness('auth.js',{search:'?mode=reset',client:{auth:{getSession:async()=>({data:{session:{user:{id:'a'}}},error:null})}}});
   await settle();assert.equal(page.element('submit-auth').disabled,true);
+});
+
+test('cerrar sesión mientras se valida recuperación no rehabilita el enlace antiguo', async () => {
+  let finish;
+  const page=pageHarness('auth.js',{search:'?mode=reset',hash:'#type=recovery',client:{auth:{
+    getSession:()=>new Promise(resolve=>{finish=resolve;}),
+    getUser:async()=>({data:{user:{id:'a'}},error:null}),
+  }}});
+  page.authEvent('SIGNED_OUT');finish({data:{session:{user:{id:'a'}}},error:null});await settle();
+  assert.equal(page.element('submit-auth').disabled,true);
+});
+
+test('otra identidad no puede reutilizar un formulario de recuperación abierto', async () => {
+  let calls=0;
+  const page=pageHarness('auth.js',{search:'?mode=reset',hash:'#type=recovery',client:{auth:{
+    getSession:async()=>({data:{session:{user:{id:'a'}}},error:null}),
+    getUser:async()=>({data:{user:{id:'a'}},error:null}),
+    updateUser:async()=>{calls++;return {error:null};},
+  }}});
+  await settle();page.set(signupValues);
+  page.authEvent('SIGNED_IN',{user:{id:'b'}});await page.submit();
+  assert.equal(calls,0);assert.equal(page.element('password').value,'');
+  assert.equal(page.element('submit-auth').disabled,true);
+});
+
+test('la identidad verificada al guardar debe coincidir con la del enlace', async () => {
+  let calls=0,verifications=0;
+  const page=pageHarness('auth.js',{search:'?mode=reset',hash:'#type=recovery',client:{auth:{
+    getSession:async()=>({data:{session:{user:{id:'a'}}},error:null}),
+    getUser:async()=>({data:{user:{id:++verifications===1?'a':'b'}},error:null}),
+    updateUser:async()=>{calls++;return {error:null};},
+  }}});
+  await settle();page.set(signupValues);await page.submit();
+  assert.equal(calls,0);assert.equal(page.element('submit-auth').disabled,true);
+});
+
+test('cierre durante la comprobación previa evita enviar el cambio de contraseña', async () => {
+  let calls=0,verifications=0,finish;
+  const page=pageHarness('auth.js',{search:'?mode=reset',hash:'#type=recovery',client:{auth:{
+    getSession:async()=>({data:{session:{user:{id:'a'}}},error:null}),
+    getUser:()=>++verifications===1?Promise.resolve({data:{user:{id:'a'}},error:null}):new Promise(resolve=>{finish=resolve;}),
+    updateUser:async()=>{calls++;return {error:null};},
+  }}});
+  await settle();page.set(signupValues);const saving=page.submit();await settle();
+  page.authEvent('SIGNED_OUT');finish({data:{user:{id:'a'}},error:null});await saving;
+  assert.equal(calls,0);assert.equal(page.element('submit-auth').disabled,true);
+});
+
+test('una sesión cacheada rechazada no redirige repetidamente al espacio', async () => {
+  const page=pageHarness('auth.js',{search:'?mode=login',client:{auth:{
+    getSession:async()=>({data:{session:{user:{id:'a'}}},error:null}),
+    getUser:async()=>({data:{user:null},error:{status:401,code:'session_not_found'}}),
+  }}});
+  await settle();assert.deepEqual(page.navigations,[]);
+  assert.equal(page.element('submit-auth').disabled,false);
+  assert.match(page.element('form-error').textContent,/sesión/);
 });

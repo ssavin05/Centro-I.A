@@ -6,11 +6,19 @@ let loadVersion = 0;
 const message = text => {$('workspace-message').textContent = text;};
 function clearPrivateView() {
   loadVersion++;
+  busy = false;
   $('profile-section').hidden = true;
   $('welcome-title').textContent = 'Mi espacio';
   $('account-pill').textContent = 'Mi cuenta';
   $('profile-name').value = '';
   $('profile-email').value = '';
+  $('profile-error').textContent = '';
+  $('profile-error').hidden = true;
+  $('profile-status').textContent = '';
+  $('profile-name').disabled = false;
+  $('save-profile').disabled = true;
+  $('save-profile').textContent = 'Guardar cambios';
+  $('workspace-content').setAttribute('aria-busy','false');
   currentUser = null;currentProfile = null;
 }
 async function bootstrap() {
@@ -20,8 +28,9 @@ async function bootstrap() {
   $('workspace-content').setAttribute('aria-busy','true');
   try {
     const {data:{user},error} = await supabase.auth.getUser();
+    if (version !== loadVersion) return;
     if (error) {
-      if (['AuthRetryableFetchError','AbortError'].includes(error.name)) throw error;
+      if (![401,403].includes(error.status) && !['session_not_found','refresh_token_not_found','refresh_token_already_used','bad_jwt','user_not_found'].includes(error.code)) throw error;
       clearPrivateView();location.replace('auth.html?mode=login');return;
     }
     if (!user) {clearPrivateView();location.replace('auth.html?mode=login');return;}
@@ -46,12 +55,18 @@ async function bootstrap() {
     $('save-profile').disabled = false;
     message('');
   } catch (error) {
+    if (version !== loadVersion) return;
     clearPrivateView();
     message(error.message === 'PROFILE_UNAVAILABLE'
       ? 'No pudimos recuperar tu perfil. Vuelve a intentar; si continúa, inicia sesión de nuevo.'
       : authErrorMessage(error));
     $('retry-profile').hidden = false;
-  } finally {$('workspace-content').setAttribute('aria-busy','false');$('logout').disabled = !supabase;}
+  } finally {
+    if (version === loadVersion) {
+      $('workspace-content').setAttribute('aria-busy','false');
+      $('logout').disabled = !supabase;
+    }
+  }
 }
 $('retry-profile').addEventListener('click', bootstrap);
 $('profile-form').addEventListener('submit', async event => {
@@ -76,9 +91,14 @@ $('profile-form').addEventListener('submit', async event => {
     $('welcome-title').textContent = 'Hola, ' + data.name.trim().split(/\s+/)[0] + '.';
     $('profile-status').textContent = 'Nombre guardado.';
   } catch {
+    if (version !== loadVersion) return;
     $('profile-error').textContent = 'No pudimos guardar tu nombre. Tus cambios siguen aquí; revisa la conexión y vuelve a intentar.';
     $('profile-error').hidden = false;
-  } finally {busy=false;$('profile-name').disabled=false;$('save-profile').disabled=false;$('save-profile').textContent='Guardar cambios';}
+  } finally {
+    if (version === loadVersion) {
+      busy=false;$('profile-name').disabled=false;$('save-profile').disabled=false;$('save-profile').textContent='Guardar cambios';
+    }
+  }
 });
 $('profile-name').addEventListener('input', () => {$('profile-name').removeAttribute('aria-invalid');$('profile-status').textContent='';});
 window.addEventListener('beforeunload', event => {
@@ -96,7 +116,13 @@ $('logout').addEventListener('click', async () => {
   } catch {message('No se pudo cerrar la sesión. Revisa tu conexión.');}
   finally {busy=false;$('logout').disabled=false;}
 });
-if (supabase) supabase.auth.onAuthStateChange(event => {
+if (supabase) supabase.auth.onAuthStateChange((event, session) => {
   if (event === 'SIGNED_OUT') {clearPrivateView();location.replace('auth.html?mode=login');}
+  else if (event === 'SIGNED_IN' && session?.user?.id && session.user.id !== currentUser?.id) {
+    clearPrivateView();
+    const version = loadVersion;
+    // Auth calls must run outside the synchronous SDK event callback.
+    setTimeout(() => {if (version === loadVersion) bootstrap();}, 0);
+  }
 });
 bootstrap();

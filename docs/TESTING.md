@@ -27,6 +27,8 @@ La prueba histórica abre un servidor en localhost y crea una base SQLite tempor
 
 ## Characterization Backlog
 
+La continuación del 16 de noviembre añade diez regresiones: sesiones de recuperación invalidadas, cambio de identidad, respuestas y errores tardíos, verificación de identidad antes de guardar, caché de sesión inválida y fallos temporales del proveedor. Cada caso falló antes del arreglo y pasó después. La suite completa contiene 43 pruebas. No requiere cuentas reales ni mensajes de correo.
+
 - [ ] P1: registro/login/recuperación y cambios de nombre con cuentas de prueba aisladas.
 - [ ] P1: autorización entre dos negocios cuando exista su esquema.
 - [ ] P1: reservas y puntos concurrentes cuando existan sus RPC.

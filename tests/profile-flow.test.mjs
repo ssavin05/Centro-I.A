@@ -76,3 +76,57 @@ test('cierre en otra pestaña no permite renderizar una carga atrasada', async (
   assert.equal(page.element('profile-section').hidden,true);
   assert.equal(page.element('profile-name').value,'');
 });
+
+test('una verificación antigua rechazada no borra una carga nueva correcta', async () => {
+  let rejectOld, calls=0;
+  const client=profileAdapter();
+  client.auth.getUser=()=>++calls===1?new Promise((_,reject)=>{rejectOld=reject;}):Promise.resolve({data:{user:{id:'user-a'}},error:null});
+  const page=pageHarness('workspace.js',{client});await settle();
+  await page.click('retry-profile');
+  assert.equal(page.element('profile-name').value,'Ana Rivera');
+  rejectOld(Error('Late network failure'));await settle();
+  assert.equal(page.element('profile-section').hidden,false);
+  assert.equal(page.element('profile-name').value,'Ana Rivera');
+});
+
+test('cierre de sesión durante getUser evita incluso consultar el perfil antiguo', async () => {
+  let resolveUser, reads=0;
+  const client=profileAdapter();
+  client.auth.getUser=()=>new Promise(resolve=>{resolveUser=resolve;});
+  client.from=()=>{reads++;assert.fail('No debe consultar datos después de cerrar sesión');};
+  const page=pageHarness('workspace.js',{client});await settle();
+  page.authEvent('SIGNED_OUT');
+  resolveUser({data:{user:{id:'user-a'}},error:null});await settle();
+  assert.equal(reads,0);
+});
+
+test('un error de escritura tardío no aparece después de cerrar sesión', async () => {
+  let rejectSave;
+  const client=profileAdapter();const originalFrom=client.from;
+  client.from=function(table){const query=originalFrom(table);const update=query.update;query.update=function(value){update.call(this,value);this.single=()=>new Promise((_,reject)=>{rejectSave=reject;});return this;};return query;};
+  const page=pageHarness('workspace.js',{client});await settle();
+  page.set({'profile-name':'Editado'});const saving=page.submit('profile-form');await settle();
+  page.authEvent('SIGNED_OUT');rejectSave(Error('Late write failure'));await saving;
+  assert.equal(page.element('profile-error').hidden,true);
+  assert.equal(page.element('save-profile').disabled,true);
+});
+
+test('cambiar de identidad limpia el perfil de inmediato y verifica la cuenta nueva', async () => {
+  const client=profileAdapter();
+  const page=pageHarness('workspace.js',{client});await settle();
+  client.auth.getUser=async()=>({data:{user:{id:'user-b',email:'b@example.test'}},error:null});
+  // The harness keeps the supplied methods by value, just like the live SDK object.
+  page.supabase.auth.getUser=client.auth.getUser;
+  page.authEvent('SIGNED_IN',{user:{id:'user-b'}});
+  assert.equal(page.element('profile-section').hidden,true);
+  await new Promise(resolve=>setTimeout(resolve,10));
+  assert.equal(page.element('profile-email').value,'b@example.test');
+  assert.deepEqual(client.filters.at(-1),['id','user-b']);
+});
+
+test('un fallo temporal del proveedor ofrece reintento sin bucle de redirecciones', async () => {
+  const page=pageHarness('workspace.js',{client:{auth:{getUser:async()=>({data:{user:null},error:{status:503,code:'unexpected_failure'}})}}});
+  await settle();assert.deepEqual(page.navigations,[]);
+  assert.equal(page.element('retry-profile').hidden,false);
+  assert.equal(page.element('profile-section').hidden,true);
+});

@@ -8,6 +8,7 @@ const fragment = new URLSearchParams(location.hash.slice(1));
 const recoveryIntent = query.get('mode') === 'reset' || fragment.get('type') === 'recovery';
 let mode = recoveryIntent ? 'reset' : ['login', 'recover'].includes(query.get('mode')) ? query.get('mode') : 'register';
 let busy = false, ready = false, recoverySession = false;
+let sessionVersion = 0, recoveryUserId = null;
 const modes = {
   register: ['Crea tu cuenta', 'Elige cómo quieres comenzar en Centro I.A.', 'Crear mi cuenta'],
   login: ['Qué gusto verte de nuevo.', 'Entra a tu espacio de Centro I.A.', 'Iniciar sesión'],
@@ -23,6 +24,15 @@ function setError(message, field) {
 function setNotice(message) {
   $('availability').textContent = message;
   $('availability').hidden = !message;
+}
+function invalidateRecovery() {
+  sessionVersion++;
+  recoverySession = false;
+  recoveryUserId = null;
+  $('password').value = '';
+  $('password-confirm').value = '';
+  setError('La sesión de recuperación cambió o terminó. Solicita un nuevo enlace para continuar.');
+  renderMode();
 }
 function renderMode() {
   const [title, description, action] = modes[mode];
@@ -74,17 +84,21 @@ if (!supabase) {
 } else {
   // Keep synchronous: awaiting Auth in this callback can lock the SDK.
   supabase.auth.onAuthStateChange((event, session) => {
-    if (event === 'PASSWORD_RECOVERY' && session) {
-      mode = 'reset';recoverySession = true;setError('');renderMode();
+    if (event === 'PASSWORD_RECOVERY' && session?.user?.id) {
+      mode = 'reset';recoveryUserId = session.user.id;recoverySession = true;setError('');renderMode();
     } else if (event === 'SIGNED_OUT' && mode === 'reset') {
-      recoverySession = false;renderMode();
+      invalidateRecovery();
+    } else if (event === 'SIGNED_IN' && mode === 'reset' && recoveryUserId && session?.user?.id !== recoveryUserId) {
+      invalidateRecovery();
     }
   });
   initialize();
 }
 async function initialize() {
+  const version = sessionVersion;
   try {
     const {data, error} = await supabase.auth.getSession();
+    if (version !== sessionVersion) return;
     if (error) throw error;
     if (fragment.has('error') || fragment.has('error_code')) {
       setError(authErrorMessage({code: fragment.get('error_code') || fragment.get('error')}));
@@ -93,13 +107,22 @@ async function initialize() {
     } else if (mode === 'reset') {
       if (data.session && (recoverySession || fragment.get('type') === 'recovery')) {
         const {data: verified, error: verifyError} = await supabase.auth.getUser();
+        if (version !== sessionVersion) return;
         if (verifyError || !verified.user) throw verifyError || {code: 'session_not_found'};
+        if (verified.user.id !== data.session.user?.id) throw {code: 'session_not_found'};
+        recoveryUserId = verified.user.id;
         recoverySession = true;
       } else setError('Abre el enlace de recuperación de tu correo. Si venció, solicita uno nuevo.');
-    } else if (data.session && mode !== 'recover') location.replace('workspace.html');
+    } else if (data.session && mode !== 'recover') {
+      const {data: verified, error: verifyError} = await supabase.auth.getUser();
+      if (version !== sessionVersion) return;
+      if (verifyError || !verified.user) throw verifyError || {code:'session_not_found'};
+      location.replace('workspace.html');
+    }
     if (query.get('notice') === 'password-updated') setNotice('Contraseña actualizada. Inicia sesión con tu nueva contraseña.');
     ready = true;
   } catch (error) {
+    if (version !== sessionVersion) return;
     setError(authErrorMessage(error));
     ready = mode !== 'reset';
   }
@@ -120,6 +143,7 @@ form.addEventListener('submit', async event => {
     if (invalid) return setError(invalid, 'password-confirm');
   } else if (mode === 'login' && !password) return setError('Escribe tu contraseña.', 'password');
   busy = true;renderMode();
+  const version = sessionVersion;
   try {
     if (mode === 'register') {
       const {data, error} = await supabase.auth.signUp({email, password, options: {
@@ -142,14 +166,17 @@ form.addEventListener('submit', async event => {
       setNotice('Solicitud aceptada. Si existe una cuenta con este correo, podrás recibir un enlace de recuperación. Revisa también spam.');
     } else {
       const {data, error: verifyError} = await supabase.auth.getUser();
+      if (version !== sessionVersion) return;
       if (verifyError || !data.user) throw verifyError || {code: 'session_not_found'};
+      if (data.user.id !== recoveryUserId) {invalidateRecovery();return;}
       const {error} = await supabase.auth.updateUser({password});
+      if (version !== sessionVersion) return;
       if (error) throw error;
       recoverySession = false;$('password').value = '';$('password-confirm').value = '';
       const {error: signOutError} = await supabase.auth.signOut({scope: 'global'});
       if (signOutError) setNotice('Contraseña actualizada. No se pudo cerrar la sesión; entra a tu espacio para volver a comprobar el acceso.');
       else location.replace('auth.html?mode=login&notice=password-updated');
     }
-  } catch (error) {setError(authErrorMessage(error));}
+  } catch (error) {if (version === sessionVersion) setError(authErrorMessage(error));}
   finally {busy = false;renderMode();}
 });
