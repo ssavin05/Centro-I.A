@@ -115,6 +115,8 @@ Las preguntas de confirmación rutinarias de las skills se resuelven mediante la
 
 ## Siguiente tarea concreta
 
-Validar esta etapa con dos cuentas de prueba en entorno aislado y comprobar configuración de correo/redirects. Después, revisar la propuesta de negocios en PostgreSQL 17/Supabase aislado y comprobar concurrencia real. Convertirla mediante CLI en una migración antes de conectar el formulario. Véase docs/NEGOCIOS-PROPUESTA.md.
+Resolver la autorización explícita para la migración de fidelidad del PR #1. Antes de activarla, validar JWT reales de ambos roles en Supabase aislado y contención nativa; después comprobar permisos/advisors y el recorrido real. La prueba local está operativa y no comparte datos con producción.
 
-Los cambios que necesitan autorización específica son servicios con costo, operaciones destructivas y cambios de infraestructura o publicación de alto riesgo. No son necesarios para revisar este PR.
+Correo/redirects, edición posterior, cancelaciones, equipos, campañas, reservas y paginación siguen pendientes. La propuesta antigua de onboarding permanece separada; no aplicarla para activar cia_clubs.
+
+No crear infraestructura de pago, eliminar datos ni cambiar Auth como atajo. La revisión automática rechazó el DDL de producción; no reintentar sin la autorización explícita solicitada.

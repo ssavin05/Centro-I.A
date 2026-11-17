@@ -16,4 +16,4 @@ Calidad: controles de 44px, foco visible, texto contrastado, búsqueda/filtrado,
 
 Evidencia: .impeccable/review/interior. Capturas de viewport; fullPage no funcionó en el navegador de esta sesión. Recorrido completo y persistencia comprobados en navegador. No es auditoría WCAG completa ni certificación de concurrencia PostgreSQL entre conexiones independientes.
 
-Revisión pendiente conocida: los iconos de navegación tablet pierden nombre accesible al ocultar el span con display:none. Deben conservar aria-label, también marca y logout.
+Revisión final: se resolvieron los nombres accesibles de tablet (marca, navegación y logout) y el tono/anuncio de errores de mutación. El revisor puntuó ambos fixes resolved, con disposición ship limitada a ese alcance. No certifica auditoría integral.
