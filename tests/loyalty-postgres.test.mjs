@@ -10,7 +10,7 @@ async function setup(t){
  create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
  grant usage on schema auth to anon,authenticated;grant execute on function auth.uid() to anon,authenticated;`);
  await db.exec(await readFile(new URL('../supabase/migrations/20261112_cia_profiles.sql',import.meta.url),'utf8'));
- await db.exec(await readFile(new URL('../supabase/migrations/20261116220009_loyalty_core.sql',import.meta.url),'utf8'));
+ await db.exec(await readFile(new URL('../supabase/migrations/20261117013535_loyalty_core.sql',import.meta.url),'utf8'));
  for(const [name,id]of Object.entries(ids))await db.query('insert into auth.users values($1,$2)',[id,{name:'Fixture '+name,account_type:['owner','other'].includes(name)?'company':'user'}]);
  const as=(who,sql,args=[],role='authenticated')=>db.transaction(async tx=>{await tx.exec('set local role '+role);await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[ids[who]||'']);return tx.query(sql,args)});
  const rpc=async(who,name,args=[])=>{const result=await as(who,'select public.'+name+'('+args.map((_,i)=>'$'+(i+1)).join(',')+') as value',args);return result.rows[0].value};

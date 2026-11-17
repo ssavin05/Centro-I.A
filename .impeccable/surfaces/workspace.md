@@ -10,7 +10,7 @@ Interacción principal: llegada voluntaria → confirmación Empresa → puntos 
 
 Estados: carga, error recuperable, datos vacíos, módulo sin activar y datos reales del entorno. Sin números inventados. La prueba local siempre se identifica como PRUEBA LOCAL y no comparte cuentas ni datos con Supabase.
 
-Contrato técnico: HTML/CSS/ES Modules, RPC Supabase, RLS y transacciones. Base de prueba persistente PostgreSQL 17.5/PGlite, aislada fuera del repositorio. Presupuesto cero. Producción bloqueada por revisión automática; no se ha aplicado la migración.
+Contrato técnico: HTML/CSS/ES Modules, RPC Supabase, RLS y transacciones. Base de prueba persistente PostgreSQL 17.5/PGlite, aislada fuera del repositorio. Presupuesto cero. Migración aplicada tras autorización explícita posterior al bloqueo inicial de auto-review; permisos/RLS comprobados sin fixtures de producción.
 
 Calidad: controles de 44px, foco visible, texto contrastado, búsqueda/filtrado, escape de datos dinámicos y limpieza por cambio de identidad. Movimiento reservado para feedback y confirmaciones; reducción de movimiento.
 

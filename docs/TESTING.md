@@ -49,4 +49,4 @@ La exportación prueba campos permitidos, perfil guardado y cierre de identidad.
 
 ## Interior de fidelidad: segunda sesión
 
-La suite actual contiene 66 pruebas: las 53 anteriores y 13 nuevas. Cuatro grupos PostgreSQL 17 prueban el núcleo; seis casos del controlador prueban identidad, respuestas atrasadas, XSS, estado sin activar y doble clic; dos casos puros cubren llegada y disponibilidad; una integración HTTP comprueba API local, canje simultáneo idempotente y persistencia al reiniciar. Las pruebas comerciales usan la migración oficial como fuente única. No prueban Supabase Auth real ni concurrencia entre conexiones PostgreSQL nativas.
+La suite actual contiene 67 pruebas: las 53 anteriores y 14 nuevas. Cuatro grupos PostgreSQL 17 prueban el núcleo; seis casos del controlador prueban identidad, respuestas atrasadas, XSS, estado sin activar y doble clic; dos casos puros cubren llegada y disponibilidad; una integración HTTP comprueba API local, canje simultáneo idempotente y persistencia al reiniciar. Las pruebas comerciales usan la migración oficial como fuente única. No prueban Supabase Auth real ni concurrencia entre conexiones PostgreSQL nativas.

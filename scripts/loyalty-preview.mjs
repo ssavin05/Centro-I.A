@@ -24,7 +24,7 @@ export async function createLoyaltyPreview({dataDir=resolve(root,'../.local-cent
   await db.exec(await readFile(resolve(root,'supabase/migrations/20261112_cia_profiles.sql'),'utf8'));
  }
  if(!(await db.query("select to_regclass('public.cia_clubs') as present")).rows[0].present)
-  await db.exec(await readFile(resolve(root,'supabase/migrations/20261116220009_loyalty_core.sql'),'utf8'));
+  await db.exec(await readFile(resolve(root,'supabase/migrations/20261117013535_loyalty_core.sql'),'utf8'));
  for(const [role,id]of Object.entries(previewActors))await db.query('insert into auth.users(id,raw_user_meta_data) values($1,$2) on conflict(id) do nothing',[id,{name:role==='company'?'Empresa de prueba':'Usuario de prueba',account_type:role}]);
  async function asActor(actor,work){return db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query("select set_config('request.jwt.claim.sub',$1,true)",[previewActors[actor]]);return work(tx);});}
  const publicFiles=new Set(pagesFiles),mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webmanifest':'application/manifest+json'};

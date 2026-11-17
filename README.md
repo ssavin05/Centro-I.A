@@ -6,7 +6,7 @@ Este repositorio permite desarrollar la aplicación oficial que conecta personas
 
 Ejecuta `npm run preview:loyalty` o `INICIAR-FIDELIDAD-LOCAL.bat`. Abre Usuario en http://127.0.0.1:4174/workspace.html?as=user o Empresa en http://127.0.0.1:4174/workspace.html?as=company. Es una prueba local persistente, claramente identificada, sin conexión a Supabase. Permite crear programa/premios, registrar visitas, confirmar puntos, canjear y entregar.
 
-La migración de producción está preparada y probada, pero su aplicación fue rechazada por auto-review sin autorización explícita. [Alcance y activación](docs/FIDELIDAD.md).
+La migración de fidelidad ya se aplicó a Supabase después de autorización explícita. El interior conectado a tu cuenta está en http://127.0.0.1:4173/workspace.html; requiere iniciar sesión. La prueba del puerto 4174 sigue separada. [Alcance y activación](docs/FIDELIDAD.md).
 
 ## Inicia el desarrollo
 

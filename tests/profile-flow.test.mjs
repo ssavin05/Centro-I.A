@@ -136,3 +136,8 @@ test('descarga usa datos guardados, no cambios sin guardar ni otras cuentas',asy
   assert.equal(page.downloads.length,1);assert.equal(page.downloads[0].profile.name,'Ana Rivera');
   page.authEvent('SIGNED_OUT');await page.click('export-profile');assert.equal(page.downloads.length,1);
 });
+
+test('sesión ausente del SDK con status 400 dirige a login sin consultar datos privados',async()=>{
+ const page=pageHarness('workspace.js',{client:{auth:{getUser:async()=>({data:{user:null},error:{name:'AuthSessionMissingError',status:400,message:'Auth session missing!'}})},from(){assert.fail('Sin sesión no se consultan perfiles');}}});
+ await settle();assert.deepEqual(page.navigations,['auth.html?mode=login']);assert.equal(page.element('retry-profile').hidden,true);
+});

@@ -46,6 +46,6 @@ La propuesta supabase/proposals/business_onboarding.sql solo está probada local
 ## Interior de fidelidad
 
 - Lee docs/FIDELIDAD.md: el núcleo usa cia_clubs, separado de la propuesta de onboarding anterior.
-- La migración 20261116220009_loyalty_core.sql está probada localmente, pero auto-review rechazó aplicarla a producción; no reintentar ni usar otra vía sin autorización explícita del titular.
+- La migración 20261117013535_loyalty_core.sql fue aplicada después de autorización explícita del titular y coincide con el historial remoto. No reaplicarla ni usar la propuesta antigua para crear cia_clubs.
 - La prueba del puerto 4174 es aislada y debe conservar siempre su franja PRUEBA LOCAL. No publicar el adaptador de scripts/local-preview-client.mjs ni tratar su selector de rol como Auth.
 - Llegadas/salidas son voluntarias; no afirmar seguimiento automático. Puntos por negocio y solo tras confirmación del propietario. Canjes atómicos e idempotentes; ninguna escritura de saldo desde el cliente.

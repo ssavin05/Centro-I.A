@@ -2,7 +2,7 @@
 
 ## Estado de entrega
 
-El interior nuevo está implementado para Usuario y Empresa. El recorrido completo funciona en la prueba local persistente con PostgreSQL 17.5/PGlite. **La migración no está aplicada a Supabase**: la revisión automática rechazó modificar el esquema de producción sin autorización explícita. La interfaz oficial informa el módulo pendiente y mantiene la cuenta accesible.
+El interior nuevo está implementado para Usuario y Empresa. El recorrido completo funciona en la prueba local persistente con PostgreSQL 17.5/PGlite. La migración se aplicó a Supabase el 17 de noviembre de 2026 después de la autorización explícita del titular, que resolvió el bloqueo inicial de auto-review. El interior real se abre en http://127.0.0.1:4173/workspace.html con una sesión válida. No se crearon fixtures en producción.
 
 La propuesta antigua de onboarding de negocio permanece separada y sin activar. Este núcleo usa cia_clubs; no depende de las cinco tablas de aquella propuesta.
 
@@ -32,7 +32,7 @@ Una llegada cada 18 horas por usuario y negocio. Una visita abierta se recupera 
 
 ## Datos y frontera de seguridad
 
-La migración generada mediante CLI es `supabase/migrations/20261116220009_loyalty_core.sql`.
+La migración generada mediante CLI es `supabase/migrations/20261117013535_loyalty_core.sql`.
 
 | Tabla | Contenido |
 |---|---|
@@ -50,7 +50,7 @@ El bloqueo de membresía serializa saldo/visitas; el premio se bloquea para stoc
 
 ## Evidencia y límites
 
-La suite actual contiene 66 pruebas. Se ejecutan permisos, alteración de metadatos sin elevación, aislamiento, idempotencia, stock, entrega y rollback en PostgreSQL 17. La API local se prueba por HTTP, incluyendo solicitudes simultáneas y persistencia al reiniciar. PGlite serializa una conexión: esto no certifica contención en PostgreSQL nativo entre conexiones independientes.
+La suite actual contiene 67 pruebas. Se ejecutan permisos, alteración de metadatos sin elevación, aislamiento, idempotencia, stock, entrega y rollback en PostgreSQL 17. La API local se prueba por HTTP, incluyendo solicitudes simultáneas y persistencia al reiniciar. PGlite serializa una conexión: esto no certifica contención en PostgreSQL nativo entre conexiones independientes.
 
 Los controladores prueban respuestas tardías, cambio de identidad, XSS en datos, doble envío y módulo sin activar. El recorrido de los ocho pasos se realizó también con controles reales del navegador.
 
@@ -58,6 +58,10 @@ Capacidades deliberadamente pendientes: edición posterior de negocio/premio, su
 
 ## Activación de producción
 
-Requiere aprobación explícita del titular para aplicar la migración al proyecto huqspupbhhqilxeizklr. Antes de publicar: revisar la migración, probar JWT de Usuario y Empresa en entorno Supabase aislado y contención nativa, aplicar una sola vez con historial, comprobar RLS/grants/advisors sin crear fixtures en producción y validar el frontend. El PR queda en borrador; main y respaldo no cambian.
+El titular autorizó explícitamente y la migración quedó aplicada en el proyecto huqspupbhhqilxeizklr, versión 20261117013535. Se comprobaron RLS en cinco tablas, SELECT filtrado para authenticated, cero escrituras directas, diez RPC con search_path vacío y EXECUTE denegado a anon, y helper sin EXECUTE para authenticated. Las cinco tablas estaban vacías tras la aplicación. Falta completar el recorrido real con JWT de ambos roles y contención nativa antes de publicar. El PR queda en borrador; main y respaldo no cambian.
 
 El advisor del proyecto señaló protección de contraseñas filtradas deshabilitada, preexistente. No se modificó Auth ni se activó un plan de pago.
+
+El advisor señala las diez RPC SECURITY DEFINER accesibles para authenticated. Es la frontera de escritura deliberada: no hay EXECUTE anónimo, el helper es privado y cada función valida actor/tipo/propietario. Esta advertencia requiere conservar la revisión de autorización, no ampliar grants. [Referencia del advisor](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
+
+En la verificación del acceso sin sesión se detectó AuthSessionMissingError del SDK (status 400 sin code). Se añadió regresión que falló antes del arreglo y se comprobó en navegador la redirección a login; no se inició sesión ni se manipularon credenciales del titular.

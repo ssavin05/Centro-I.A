@@ -2,6 +2,16 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte: 16 de noviembre de 2026.
 
+## Activación autorizada — 17 de noviembre de 2026
+
+- El titular respondió explícitamente que autorizaba aplicar la migración a Supabase.
+- Aplicada loyalty_core, versión 20261117013535; archivo local alineado con el historial remoto.
+- Verificados RLS de cinco tablas, diez RPC exclusivas de authenticated con search_path vacío, helper privado y ausencia de escritura directa. Sin fixtures de producción.
+- Advisor: diez advertencias esperadas por RPC SECURITY DEFINER y protección de contraseñas filtradas preexistente. Las comprobaciones no son auditoría integral.
+- Corregido acceso sin sesión: AuthSessionMissingError status400 dirige a login. Regresión reproducida antes del arreglo y navegador verificado; no se usaron credenciales del titular.
+- Suite actual: 67 pruebas. El recorrido completo sigue probado en entorno aislado; el flujo autenticado real de ambos roles necesita validación adicional.
+- Interior conectado: http://127.0.0.1:4173/workspace.html. La prueba del puerto4174 continúa independiente.
+
 ## Segunda sesión autónoma: el interior de fidelidad
 
 - Rediseño del perfil vacío como aplicación con navegación Inicio, Premios, Visitas, Explorar/Mi negocio y Mi cuenta. Escritorio lateral, tablet compacta y celular inferior.
@@ -115,8 +125,8 @@ Las preguntas de confirmación rutinarias de las skills se resuelven mediante la
 
 ## Siguiente tarea concreta
 
-Resolver la autorización explícita para la migración de fidelidad del PR #1. Antes de activarla, validar JWT reales de ambos roles en Supabase aislado y contención nativa; después comprobar permisos/advisors y el recorrido real. La prueba local está operativa y no comparte datos con producción.
+Completar el recorrido autenticado con cuentas Usuario y Empresa, validación de correo/redirects y contención PostgreSQL nativa. La migración de fidelidad ya fue autorizada y aplicada: no reaplicarla. Después revisar e integrar el PR para publicar el frontend.
 
-Correo/redirects, edición posterior, cancelaciones, equipos, campañas, reservas y paginación siguen pendientes. La propuesta antigua de onboarding permanece separada; no aplicarla para activar cia_clubs.
+Edición posterior, bajas, cancelaciones, equipos, campañas, reservas y paginación siguen pendientes. La propuesta antigua de onboarding permanece separada.
 
-No crear infraestructura de pago, eliminar datos ni cambiar Auth como atajo. La revisión automática rechazó el DDL de producción; no reintentar sin la autorización explícita solicitada.
+No crear infraestructura de pago, eliminar datos ni cambiar Auth como atajo.

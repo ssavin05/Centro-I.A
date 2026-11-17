@@ -47,6 +47,6 @@ PGlite es dependencia exclusiva de desarrollo y ejecuta PostgreSQL 18.6 en memor
 
 ## Núcleo de fidelidad
 
-workspace.js mantiene identidad y perfil; loyalty-ui.js maneja navegación y estado comercial, limpiando datos al cambiar identidad. loyalty-rules.js prepara mensajes y estados puros. La escritura pertenece a las RPC de la migración 20261116220009_loyalty_core.sql. La base de producción no se modificó: el esquema espera autorización explícita.
+workspace.js mantiene identidad y perfil; loyalty-ui.js maneja navegación y estado comercial, limpiando datos al cambiar identidad. loyalty-rules.js prepara mensajes y estados puros. La escritura pertenece a las RPC de la migración 20261117013535_loyalty_core.sql. La migración fue aplicada a Supabase después de autorización explícita. RLS/grants se comprobaron por consultas de metadatos; no se crearon datos de prueba en producción.
 
 scripts/loyalty-preview.mjs sirve la aplicación con un adaptador local de Auth/RPC y PostgreSQL 17.5/PGlite. Este servidor es exclusivo de desarrollo, escucha localhost y mantiene fixtures fuera del repositorio. El builder excluye scripts, SQL, fixtures y dependencias de desarrollo. Véase [Fidelidad](FIDELIDAD.md).

@@ -36,7 +36,7 @@ async function bootstrap() {
     const {data:{user},error} = await supabase.auth.getUser();
     if (version !== loadVersion) return;
     if (error) {
-      if (![401,403].includes(error.status) && !['session_not_found','refresh_token_not_found','refresh_token_already_used','bad_jwt','user_not_found'].includes(error.code)) throw error;
+      if (error.name !== 'AuthSessionMissingError' && ![401,403].includes(error.status) && !['session_not_found','refresh_token_not_found','refresh_token_already_used','bad_jwt','user_not_found'].includes(error.code)) throw error;
       clearPrivateView();location.replace('auth.html?mode=login');return;
     }
     if (!user) {clearPrivateView();location.replace('auth.html?mode=login');return;}
