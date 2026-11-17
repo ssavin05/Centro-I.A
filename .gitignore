@@ -40,3 +40,6 @@ build/
 
 # Compilacion local GitHub Pages
 /dist/
+
+# Evidencia local de revision visual (no contiene codigo del producto)
+/.impeccable/review/

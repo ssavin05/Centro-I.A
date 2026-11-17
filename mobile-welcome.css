@@ -1,0 +1,61 @@
+/* A welcome screen, with immediate actions, exclusively for phones and tablets. */
+.mobile-welcome {display: none;}
+@media (max-width: 1024px), (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+  .desktop-site {display: none;}
+  .mobile-welcome {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    padding: max(28px, env(safe-area-inset-top)) clamp(24px, 7vw, 72px) max(20px, env(safe-area-inset-bottom));
+    color: var(--cia-paper);
+    background: #173c50;
+  }
+  .mobile-welcome::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(180deg, rgba(13, 43, 60, .72), #102f42 95%), url('assets/nexo-fondo-ondas.png') center / cover;
+    opacity: .48;
+  }
+  .mobile-welcome-brand {display: flex; align-items: center; gap: 12px; font-size: 21px; font-weight: 750; letter-spacing: -.035em;}
+  .mobile-welcome-brand img {flex: none;}
+  .mobile-welcome-brand b {color: #e9c788;}
+  .mobile-welcome-copy {position: relative; z-index: 1; margin-block: clamp(46px, 11svh, 110px) 48px;}
+  .mobile-welcome h1 {font-size: clamp(2.9rem, 10vw, 5.4rem); line-height: 1.06; letter-spacing: -.035em; font-weight: 760; margin: 0;}
+  .mobile-welcome h1 em {position: relative; display: inline-block; color: #e9c788; font-style: normal;}
+  .mobile-welcome h1 em::after {content: ''; position: absolute; left: -3%; right: -4%; bottom: -9px; height: 16px; border-top: 2px solid #e9c788; border-radius: 50%; transform: rotate(-4deg);}
+  .mobile-welcome-copy p {font-size: clamp(1rem, 2.5vw, 1.25rem); line-height: 1.65; color: #e0ecf2; margin-top: 30px;}
+  .welcome-waves {position: absolute; inset: 0; pointer-events: none; z-index: -1; overflow: hidden;}
+  .welcome-waves i {position: absolute; width: 180%; height: 62%; left: -35%; top: 31%; border: 1px solid rgba(220, 235, 244, .25); border-radius: 50%; transform: rotate(-24deg); animation: welcome-tide 12s ease-in-out 1 alternate;}
+  .welcome-waves i:nth-child(2) {top: 36%; border-color: rgba(233, 199, 136, .5); transform: rotate(-20deg);}
+  .welcome-waves i:nth-child(3) {top: 42%; transform: rotate(-16deg);}
+  .mobile-welcome-actions {position: relative; z-index: 1; width: 100%; max-width: 620px; margin-top: auto; display: grid; gap: 12px;}
+  .mobile-welcome-actions a {display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 15px 20px; border-radius: var(--cia-radius); font-size: 1rem; font-weight: 750; transition: background-color var(--cia-duration), transform var(--cia-duration);}
+  .welcome-create {position: relative; background: #e5bc74; color: #173c50;}
+  .welcome-create svg {position: absolute; right: 22px; width: 22px; height: 22px;}
+  .welcome-create:hover {background: #f1cf95;}
+  .welcome-login {border: 1px solid #aec4ce; color: #fffdfa; background: rgba(16, 47, 66, .7);}
+  .welcome-login:hover {background: #245269;}
+  .mobile-welcome-actions a:active {transform: translateY(1px);}
+  .mobile-welcome a:focus-visible {outline-color: #f0d39f;}
+  .welcome-signature {padding: 13px 0 0; text-align: center; color: #c4d7e0; font-size: .75rem;}
+  @keyframes welcome-tide {from {translate: -14px 16px;} to {translate: 0 0;}}
+}
+@media (min-width: 600px) and (max-width: 1024px) {
+  .mobile-welcome {padding-inline: clamp(48px, 10vw, 112px);}
+  .mobile-welcome-actions {align-self: center;}
+  .mobile-welcome-copy {margin-top: clamp(54px, 10svh, 140px);}
+}
+@media (max-height: 540px) {
+  .mobile-welcome-copy {margin-block: 25px;}
+  .mobile-welcome h1 {font-size: 2.6rem;}
+  .mobile-welcome-copy p {margin-top: 20px;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-waves i {animation: none;}
+  .mobile-welcome-actions a {transition: background-color 100ms;}
+}

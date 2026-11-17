@@ -5,6 +5,7 @@ import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createServer} from 'node:net';
+import {fileURLToPath} from 'node:url';
 import {setTimeout as delay} from 'node:timers/promises';
 
 async function freePort(){return new Promise((resolve,reject)=>{const s=createServer();s.on('error',reject);s.listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>resolve(p));});});}
@@ -23,10 +24,10 @@ class Client {
 
 test('flujo real: roles, empresas, reserva, visitas, puntos, canjes, seguridad y persistencia',async t=>{
   const dir=mkdtempSync(join(tmpdir(),'centro-ia-test-')),port=await freePort(),base=`http://127.0.0.1:${port}`;
-  const proc=spawn(process.execPath,['server/index.mjs'],{cwd:new URL('../',import.meta.url).pathname,env:{...process.env,PORT:String(port),HOST:'127.0.0.1',DB_PATH:join(dir,'test.sqlite')},stdio:['ignore','pipe','pipe']});
-  let err='';proc.stderr.on('data',x=>err+=x.toString());
-  t.after(()=>{proc.kill();rmSync(dir,{recursive:true,force:true});});
-  let ready=false;for(let i=0;i<50;i++){try{const r=await fetch(base+'/api/health');if(r.ok){ready=true;break;}}catch{}await delay(60);}
+  const proc=spawn(process.execPath,['server/index.mjs'],{cwd:fileURLToPath(new URL('../',import.meta.url)),env:{...process.env,PORT:String(port),HOST:'127.0.0.1',DB_PATH:join(dir,'test.sqlite')},stdio:['ignore','pipe','pipe']});
+  let err='';proc.stderr.on('data',x=>err+=x.toString());proc.on('error',e=>{err+=e.message;});
+  t.after(async()=>{if(proc.exitCode===null){const exited=new Promise(resolve=>proc.once('exit',resolve));proc.kill();await exited;}rmSync(dir,{recursive:true,force:true,maxRetries:5,retryDelay:100});});
+  let ready=false;for(let i=0;i<200;i++){try{const r=await fetch(base+'/api/health');if(r.ok){ready=true;break;}}catch{}if(proc.exitCode!==null)break;await delay(100);}
   assert.ok(ready,`Servidor no disponible. ${err}`);
   const owner=new Client(base),client=new Client(base),another=new Client(base),competitor=new Client(base),stranger=new Client(base);
   assert.equal((await client.call('/api/businesses')).status,200);

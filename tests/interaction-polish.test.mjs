@@ -4,8 +4,8 @@ import {readFileSync} from 'node:fs';
 const html=readFileSync('workspace.html','utf8');
 const js=readFileSync('workspace.js','utf8');
 test('los espacios interiores empiezan sin datos ficticios',()=>{
- assert.match(html,/workspace-blank/);
- assert.match(html,/Tu espacio está listo/);
+ assert.match(html,/id="loyalty-loading"/);
+ assert.match(html,/id="loyalty-content" hidden/);
  assert.doesNotMatch(html,/850 pts|Hola, Alex|panel negocio|simular visita/i);
 });
 test('el espacio verifica usuario y lee solo perfil mediante RLS',()=>{
