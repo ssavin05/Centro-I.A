@@ -42,3 +42,10 @@ Estas reglas orientan el desarrollo de la aplicación oficial. Consulta `docs/ES
 - Una rama o PR no equivale a publicación. Declarar límites y pendientes en `docs/ESTADO-DESARROLLO.md` después de cada etapa.
 
 La propuesta supabase/proposals/business_onboarding.sql solo está probada localmente; no activarla sin revisión en Supabase aislado/PostgreSQL 17 y prueba de concurrencia real.
+
+## Interior de fidelidad
+
+- Lee docs/FIDELIDAD.md: el núcleo usa cia_clubs, separado de la propuesta de onboarding anterior.
+- La migración 20261116220009_loyalty_core.sql está probada localmente, pero auto-review rechazó aplicarla a producción; no reintentar ni usar otra vía sin autorización explícita del titular.
+- La prueba del puerto 4174 es aislada y debe conservar siempre su franja PRUEBA LOCAL. No publicar el adaptador de scripts/local-preview-client.mjs ni tratar su selector de rol como Auth.
+- Llegadas/salidas son voluntarias; no afirmar seguimiento automático. Puntos por negocio y solo tras confirmación del propietario. Canjes atómicos e idempotentes; ninguna escritura de saldo desde el cliente.

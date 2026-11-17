@@ -15,11 +15,13 @@
     "check:repo": "node scripts/check-repo.mjs",
     "verify": "node scripts/verify.mjs",
     "check:pages": "node scripts/check-pages.mjs",
-    "build:pages": "node scripts/build-pages.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "preview:loyalty": "node scripts/loyalty-preview.mjs"
   },
   "description": "Centro I.A.: cuentas Usuario y Empresa con Supabase Auth y frontend estático en GitHub Pages.",
   "devDependencies": {
-    "@electric-sql/pglite": "0.5.16"
+    "@electric-sql/pglite": "0.5.16",
+    "pglite17": "npm:@electric-sql/pglite@0.3.14"
   },
   "packageManager": "pnpm@11.25.0"
 }

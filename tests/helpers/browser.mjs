@@ -51,7 +51,7 @@ export function pageHarness(file, {search = '', hash = '', client = {}} = {}) {
   const code = readFileSync(file, 'utf8').replace(/^import .* from ['"].*['"];?\r?\n/gm, '');
   const window = {addEventListener() {}, removeEventListener() {}, confirm: () => true};
   const downloads=[];
-  runInNewContext(code, {...accountRules,profileExport,downloadProfile:data=>downloads.push(data), supabase, document, location, window, URL, URLSearchParams,
+  runInNewContext(code, {...accountRules,profileExport,mountLoyalty:()=>({load(){},clear(){}}),downloadProfile:data=>downloads.push(data), supabase, document, location, window, URL, URLSearchParams,
     history: {replaceState() {}}, setTimeout, clearTimeout, console}, {filename: file});
   return {
     element, nodes, navigations, supabase, downloads,

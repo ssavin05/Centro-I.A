@@ -2,6 +2,17 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte: 16 de noviembre de 2026.
 
+## Segunda sesión autónoma: el interior de fidelidad
+
+- Rediseño del perfil vacío como aplicación con navegación Inicio, Premios, Visitas, Explorar/Mi negocio y Mi cuenta. Escritorio lateral, tablet compacta y celular inferior.
+- Usuario: unirse por código o programa publicado, saldo por negocio, llegada/salida voluntarias, premios, canje confirmado y comprobantes.
+- Empresa: crear programa privado, puntos por visita, crear/pausar premios, publicar explícitamente, consultar clientes/visitas, confirmar puntos y entregas.
+- Migración nueva de cinco tablas y diez RPC, probada en PostgreSQL 17.5 aislado. No depende de la propuesta de onboarding anterior.
+- La aplicación de la migración a Supabase fue rechazada automáticamente por requerir autorización explícita para DDL de producción. No se reintentó ni se ejecutó por otra vía.
+- Prueba local persistente disponible en puerto 4174, separada del sitio oficial 4173 y de Supabase. Datos y usuarios identificados como prueba; sin métricas inventadas.
+- Recorrido completo comprobado en navegador; API local y reinicio persistente probados por HTTP. Suite final: 66/66 aprobadas. Revisor independiente puntuó resueltos los dos fixes de accesibilidad tablet y tono de errores; sin auditoría integral ni activación de producción.
+- Véase docs/FIDELIDAD.md para alcance, contratos, límites y pasos de activación.
+
 ## Sesión autónoma del 16 de noviembre: diseño y base de negocios
 
 - Paleta ampliada: dorado luminoso, azul claro y profundo, negro y blanco. Hero con contraste y superficies coherentes; bienvenida exclusiva de móvil/tablet conservada.
@@ -42,8 +53,8 @@ Este seguimiento permite continuar el trabajo sin confundir pantallas implementa
 | 2. Fundamentos | Parcial | Tokens compartidos, CSS de acceso separado, recursos publicables, vista previa estática, bienvenida móvil/tablet. Limpieza visual histórica y rediseño integral pendientes. |
 | 3. Autenticación | Implementación y pruebas aisladas; validación externa pendiente | Registro/login preservados, recuperación/restablecimiento, doble envío, edición de nombre y sesión. Correo y cuentas reales de prueba pendientes. |
 | 4. Empresa | Propuesta probada, activación pendiente | Cinco tablas y RPC aisladas; faltan migración revisada en PostgreSQL 17, formulario y validación real. |
-| 5. Usuario | Parcial | Perfil propio y exportación local; descubrimiento y relaciones con negocios pendientes. |
-| 6. Fidelización | Pendiente | El backend histórico no equivale a implementación Supabase. |
+| 5. Usuario | Funcional en prueba local | Perfil, programas, visitas, premios, canjes y comprobantes. Activación real pendiente. |
+| 6. Fidelización | Implementada y probada en local; activación pendiente | Programas, puntos por visita, premios, canjes y entrega con RPC; migración de producción bloqueada por auto-review. |
 | 7. Reservaciones | Pendiente | Faltan esquema, RPC atómicas, disponibilidad y flujos conectados. |
 | 8. Gestión empresarial | Pendiente | Clientes, equipos, invitaciones y campañas. |
 | 9. Estadísticas | Pendiente | Requiere actividad real y definiciones de métricas. |

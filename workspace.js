@@ -1,12 +1,15 @@
+import {mountLoyalty} from './loyalty-ui.js';
 import {supabase} from './supabase-client.js';
 import {validateName, authErrorMessage} from './account-rules.js';
 import {profileExport,downloadProfile} from './profile-export.js';
 const $ = id => document.getElementById(id);
+const loyalty = mountLoyalty({supabase});
 let currentUser, currentProfile, busy = false;
 let loadVersion = 0;
 const message = text => {$('workspace-message').textContent = text;};
 function clearPrivateView() {
   loadVersion++;
+  loyalty.clear();
   busy = false;
   $('profile-section').hidden = true;
   $('profile-form').setAttribute('aria-busy','false');
@@ -48,16 +51,14 @@ async function bootstrap() {
     $('account-pill').textContent = isCompany ? 'Cuenta Empresa' : 'Cuenta Usuario';
     $('welcome-title').textContent = 'Hola, ' + profile.name.trim().split(/\s+/)[0] + '.';
     $('workspace-description').textContent = isCompany
-      ? 'Administra tu cuenta empresarial desde aquí.' : 'Este es tu espacio personal en Centro I.A.';
-    $('blank-description').textContent = isCompany
-      ? 'La configuración de negocios y sus herramientas todavía está en desarrollo. Puedes mantener tus datos de cuenta al día.'
-      : 'Los beneficios, puntos y reservaciones aparecerán cuando esas funciones estén disponibles.';
+      ? 'Haz que vuelvan, visita tras visita.' : 'Tus visitas tienen recompensa. Este es tu centro.';
     $('profile-name').value = profile.name;
     $('profile-email').value = user.email || '';
     $('profile-section').hidden = false;
     $('save-profile').disabled = false;
     $('export-profile').disabled = false;
     message('');
+    loyalty.load({user,profile});
   } catch (error) {
     if (version !== loadVersion) return;
     clearPrivateView();
@@ -73,6 +74,7 @@ async function bootstrap() {
   }
 }
 $('retry-profile').addEventListener('click', bootstrap);
+$('account-logout').addEventListener('click',()=> $('logout').click());
 $('export-profile').addEventListener('click',()=>{
   if (!currentUser || !currentProfile || busy) return;
   try {

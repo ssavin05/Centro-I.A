@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T21:35:06.080Z",
+  "generatedAt": "2026-11-16T22:39:45.759Z",
   "title": "Design System: Centro I.A.",
   "extensions": {
     "colorMeta": {
@@ -199,6 +199,26 @@
           "oklch(80% 0.0643 231.26)",
           "oklch(95% 0.0643 231.26)"
         ]
+      },
+      "workspace-bg": {
+        "role": "neutral",
+        "displayName": "Base operativa"
+      },
+      "workspace-border": {
+        "role": "neutral",
+        "displayName": "Borde operativo"
+      },
+      "error-surface": {
+        "role": "semantic",
+        "displayName": "Superficie de error"
+      },
+      "error-text": {
+        "role": "semantic",
+        "displayName": "Texto de error"
+      },
+      "confirmed-surface": {
+        "role": "semantic",
+        "displayName": "Superficie confirmada"
       }
     },
     "typographyMeta": {
@@ -217,6 +237,10 @@
       "action-auth": {
         "displayName": "Acción de acceso",
         "purpose": "Texto del envío de autenticación."
+      },
+      "body-workspace": {
+        "displayName": "Cuerpo del interior",
+        "purpose": "Base de 15px en Operate, 14px en celular; párrafos con interlineado 1.6."
       }
     },
     "shadows": [
@@ -244,6 +268,11 @@
         "name": "art-card",
         "value": "0 25px 65px rgba(24,52,65,.18)",
         "purpose": "Tarjetas ilustradas de portada; no es un patrón de datos del perfil."
+      },
+      {
+        "name": "redeem-dialog",
+        "value": "0 24px 70px #0d151b40",
+        "purpose": "Confirmación modal sobre velo #0d151b99; tarjetas y botones del interior sin sombra."
       }
     ],
     "motion": [
@@ -261,11 +290,6 @@
         "name": "welcome-tide",
         "value": "12s ease-in-out 1 alternate",
         "purpose": "Entrada decorativa de ondas; sin animación con reducción de movimiento."
-      },
-      {
-        "name": "workspace-wave",
-        "value": "19s ease-in-out infinite alternate",
-        "purpose": "Deriva decorativa de las ondas privadas; se detiene al reducir movimiento."
       },
       {
         "name": "ambient-home",
@@ -306,6 +330,21 @@
         "name": "visibility-pause",
         "value": "animation-play-state: paused",
         "purpose": "ui-feedback.js pausa al ocultar la pestaña y las regiones decorativas fuera de vista, con margen de observación de 60px."
+      },
+      {
+        "name": "workspace-notice",
+        "value": "220ms var(--cia-ease)",
+        "purpose": "Entrada de avisos; se omite con movimiento reducido."
+      },
+      {
+        "name": "workspace-dialog",
+        "value": "180ms var(--cia-ease)",
+        "purpose": "Entrada de confirmación; se omite con movimiento reducido."
+      },
+      {
+        "name": "workspace-ticket-art",
+        "value": "240ms var(--cia-ease)",
+        "purpose": "Giro de regalo en hover; sin transición con movimiento reducido."
       }
     ],
     "breakpoints": [
@@ -336,26 +375,26 @@
       {
         "name": "profile-fields-stacked",
         "value": "(max-width: 600px)"
+      },
+      {
+        "name": "workspace-compact",
+        "value": "1200px"
+      },
+      {
+        "name": "workspace-icons",
+        "value": "850px"
+      },
+      {
+        "name": "workspace-bottom-nav",
+        "value": "600px"
+      },
+      {
+        "name": "workspace-wide",
+        "value": "1700px"
       }
     ]
   },
   "components": [
-    {
-      "name": "Acción principal del hero",
-      "kind": "button",
-      "refersTo": "button-hero-primary",
-      "description": "Variante dorada de la acción principal sobre el hero oscuro; el encabezado conserva el botón base azul.",
-      "html": "<a class=\"ds-hero-primary\" href=\"auth.html?mode=register\">Comenzar ahora</a>",
-      "css": ".ds-hero-primary{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:14px 24px;border:1px solid transparent;border-radius:13px;background:var(--cia-gold-bright,#edc77d);color:var(--cia-black,#0d151b);font-size:16px;font-weight:710;letter-spacing:-.01em;text-decoration:none;box-shadow:0 11px 26px rgba(23,60,80,.17);transition:background .2s,color .2s,transform .22s var(--cia-ease,cubic-bezier(.16,1,.3,1)),box-shadow .22s var(--cia-ease,cubic-bezier(.16,1,.3,1))}.ds-hero-primary:hover{background:#f4d99f;transform:translateY(-2px);box-shadow:0 14px 30px rgba(23,60,80,.23)}.ds-hero-primary:active{translate:0 1px}.ds-hero-primary:focus-visible{outline:3px solid var(--cia-gold-bright,#edc77d);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-hero-primary{transition:none;translate:none}}"
-    },
-    {
-      "name": "Acción secundaria del hero",
-      "kind": "button",
-      "refersTo": "button-hero-outline",
-      "description": "Enlace transparente con texto y borde claros sobre la superficie profunda del hero.",
-      "html": "<div class=\"ds-hero-surface\"><a class=\"ds-hero-outline\" href=\"auth.html?mode=login\">Ya tengo una cuenta</a></div>",
-      "css": ".ds-hero-surface{padding:24px;background:linear-gradient(120deg,var(--cia-black,#0d151b) 0%,var(--cia-deep,#173c50) 64%,#24566e 100%)}.ds-hero-outline{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:14px 24px;border:1px solid #9bbdce;border-radius:13px;background:transparent;color:var(--cia-paper,#fffdfa);font-size:16px;font-weight:710;letter-spacing:-.01em;text-decoration:none;transition:background .2s,transform .22s var(--cia-ease,cubic-bezier(.16,1,.3,1))}.ds-hero-outline:hover{background:#24566e;transform:translateY(-2px)}.ds-hero-outline:active{translate:0 1px}.ds-hero-outline:focus-visible{outline:3px solid var(--cia-gold-bright,#edc77d);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-hero-outline{transition:none;translate:none}}"
-    },
     {
       "name": "Botón de autenticación",
       "kind": "button",
@@ -363,22 +402,6 @@
       "description": "Envío del formulario, con estado deshabilitado mientras se procesa.",
       "html": "<button class=\"ds-control ds-auth\" type=\"button\">Crear mi cuenta</button>",
       "css": ".ds-auth{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border:0;border-radius:var(--cia-radius,12px);background:var(--cia-deep,#173c50);color:var(--cia-paper,#fffdfa);font-size:15px;font-weight:700;cursor:pointer;transition:background var(--cia-duration,180ms)}.ds-auth:hover:not(:disabled){background:#295b73}.ds-auth:disabled{opacity:.6;cursor:wait}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-auth{transition:none}}.ds-auth:active:not(:disabled){translate:0 1px}.ds-auth-form[aria-busy=\"true\"] .ds-auth::after{content:\"\";display:inline-block;width:14px;height:14px;margin-left:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:ds-working 700ms linear infinite}@keyframes ds-working{to{rotate:360deg}}@media(prefers-reduced-motion:reduce){.ds-auth:active:not(:disabled){translate:none}.ds-auth-form[aria-busy=\"true\"] .ds-auth::after{animation:none;border-right-color:currentColor;opacity:.65}}"
-    },
-    {
-      "name": "Crear cuenta en bienvenida",
-      "kind": "button",
-      "refersTo": "button-welcome-create",
-      "description": "Variante dorada sobre el fondo profundo del inicio móvil/tablet.",
-      "html": "<a class=\"ds-control ds-welcome-create\" href=\"auth.html?mode=register\">Crear cuenta<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
-      "css": ".ds-welcome-create{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;position:relative;display:flex;align-items:center;justify-content:center;min-height:56px;padding:15px 20px;border-radius:var(--cia-radius,12px);background:#e5bc74;color:var(--cia-deep,#173c50);font-size:16px;font-weight:750;text-decoration:none;transition:background-color var(--cia-duration,180ms),transform var(--cia-duration,180ms)}.ds-welcome-create svg{position:absolute;right:22px;width:22px;height:22px}.ds-welcome-create:hover{background:#f1cf95}.ds-welcome-create:active{transform:translateY(1px)}.ds-welcome-create:focus-visible{outline:3px solid #f0d39f;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-welcome-create{transition:background-color 100ms}}"
-    },
-    {
-      "name": "Iniciar sesión en bienvenida",
-      "kind": "button",
-      "refersTo": "button-welcome-login",
-      "description": "Enlace secundario con borde claro en el inicio móvil/tablet.",
-      "html": "<a class=\"ds-control ds-welcome-login\" href=\"auth.html?mode=login\">Iniciar sesión</a>",
-      "css": ".ds-welcome-login{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;justify-content:center;min-height:56px;padding:15px 20px;border:1px solid #aec4ce;border-radius:var(--cia-radius,12px);background:rgba(16,47,66,.7);color:var(--cia-paper,#fffdfa);font-size:16px;font-weight:750;text-decoration:none;transition:background-color var(--cia-duration,180ms),transform var(--cia-duration,180ms)}.ds-welcome-login:hover{background:#245269}.ds-welcome-login:active{transform:translateY(1px)}.ds-welcome-login:focus-visible{outline:3px solid #f0d39f;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-welcome-login{transition:background-color 100ms}}"
     },
     {
       "name": "Campo de texto",
@@ -389,47 +412,64 @@
       "css": ".ds-field-label{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:block;margin-bottom:6px;font-size:14px;font-weight:650;color:var(--cia-deep,#173c50)}.ds-field{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:block;width:100%;min-width:0;height:46px;padding:10px 12px;border:1px solid #b7ccd6;border-radius:9px;background:var(--cia-paper,#fffdfa);color:var(--cia-deep,#173c50);font-size:16px;transition:border-color var(--cia-duration,180ms)}.ds-field::placeholder{color:#5d7583;font-size:14px}.ds-field:focus{border-color:var(--cia-focus,#347da0)}.ds-field[aria-invalid=\"true\"]{border-color:var(--cia-error,#a02e38)}.ds-field[readonly]{background:#eef3f5}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-field{transition:none}}"
     },
     {
-      "name": "Navegación de acceso",
+      "name": "Navegación del interior",
       "kind": "nav",
-      "refersTo": "navigation-auth",
-      "description": "Enlaces entre registro e inicio de sesión; no cambia el tipo de cuenta.",
-      "html": "<nav class=\"ds-access-nav\" aria-label=\"Acceso a tu cuenta\"><a class=\"ds-control ds-access-link ds-active\" href=\"auth.html?mode=register\" aria-current=\"page\">Crear cuenta</a><a class=\"ds-control ds-access-link\" href=\"auth.html?mode=login\">Iniciar sesión</a></nav>",
-      "css": ".ds-access-nav{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:var(--cia-radius,12px);background:#eaf2f5}.ds-access-link{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:grid;place-items:center;min-height:44px;border-radius:9px;color:var(--cia-muted,#446477);font-size:14px;font-weight:700;text-decoration:none;transition:background var(--cia-duration,180ms),color var(--cia-duration,180ms)}.ds-access-link:hover{color:var(--cia-deep,#173c50)}.ds-access-link.ds-active{background:var(--cia-paper,#fffdfa);color:var(--cia-deep,#173c50);box-shadow:0 3px 10px rgba(23,60,80,.08)}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-access-link{transition:none}}"
+      "refersTo": "navigation-workspace",
+      "description": "Destino activo dorado; conserva nombre accesible al ocultar el texto en tablet.",
+      "html": "<nav class=\"ds-work-nav\" aria-label=\"Mi centro\"><button class=\"ds-work-action ds-work-nav-item\" aria-label=\"Inicio\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m3 10 9-7 9 7v10H3ZM9 20v-7h6v7\"/></svg><span>Inicio</span></button><button class=\"ds-work-action ds-work-nav-item\" aria-label=\"Premios\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg><span>Premios</span></button></nav>",
+      "css": ".ds-work-nav{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;flex-direction:column;gap:8px;padding:20px;background:var(--cia-deep,#173c50);max-width:238px}.ds-work-nav-item{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;gap:14px;min-height:48px;border:0;border-radius:10px;background:transparent;color:var(--cia-blue,#dcebf4);text-align:left;padding:12px 16px;font-weight:600;cursor:pointer;transition:background 180ms}.ds-work-nav-item svg{width:21px;height:21px;flex-shrink:0}.ds-work-nav-item:hover{background:#254e63}.ds-work-nav-item[aria-current]{background:var(--cia-gold-bright,#edc77d);color:var(--cia-black,#0d151b)}@media(max-width:850px) and (min-width:601px){.ds-work-nav{width:82px;padding:12px}.ds-work-nav-item{padding:12px;justify-content:center}.ds-work-nav-item span{display:none}}@media(max-width:600px){.ds-work-nav{flex-direction:row;max-width:none}.ds-work-nav-item{flex-direction:column;font-size:12px}}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
     },
     {
-      "name": "Contenedor de perfil",
-      "kind": "card",
-      "refersTo": "profile-card",
-      "description": "Superficie de la cuenta propia; sin estadísticas ni información ficticia.",
-      "html": "<section class=\"ds-profile\" aria-labelledby=\"ds-profile-title\"><h2 id=\"ds-profile-title\">Tu cuenta</h2><p>Actualiza tu nombre. Tu tipo de cuenta se conserva desde el registro.</p></section>",
-      "css": ".ds-profile{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;max-width:960px;padding:28px;border-radius:var(--cia-radius,12px);background:var(--cia-paper,#fffdfa);color:var(--cia-deep,#173c50)}.ds-profile h2{margin:0;font-size:24px;line-height:1.13;letter-spacing:-.035em}.ds-profile p{margin:8px 0 0;max-width:65ch;font-size:16px;line-height:1.55;color:var(--cia-muted,#446477)}@media(max-width:600px){.ds-profile{padding:22px 18px}}"
-    },
-    {
-      "name": "Indicador de cuenta",
-      "kind": "chip",
-      "refersTo": "account-pill",
-      "description": "Etiqueta informativa del perfil; no permite cambiar el rol.",
-      "html": "<span class=\"ds-account-pill\">Mi cuenta</span>",
-      "css": ".ds-account-pill{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-block;padding:9px 14px;border-radius:30px;background:#ecf3f7;color:#315770;font-size:.8rem;font-weight:750;line-height:1.55}@media(max-width:680px){.ds-account-pill{font-size:.75rem;padding:7px 9px}}"
-    },
-    {
-      "name": "Opción de tipo de cuenta",
+      "name": "Ticket de regreso",
       "kind": "custom",
-      "refersTo": "account-option",
-      "description": "Radio para elegir Usuario o Empresa al registrarse.",
-      "html": "<label class=\"ds-account-option\"><input type=\"radio\" name=\"ds-account-type\" value=\"user\" checked><span class=\"ds-account-copy\"><strong>Usuario</strong><small>Descubre y disfruta beneficios</small></span></label>",
-      "css": ".ds-account-option{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;gap:10px;min-width:0;min-height:68px;padding:10px;border:1px solid #cfdde2;border-radius:var(--cia-radius,12px);background:var(--cia-paper,#fffdfa);color:var(--cia-deep,#173c50);cursor:pointer;transition:border-color var(--cia-duration,180ms),background var(--cia-duration,180ms)}.ds-account-option:hover{border-color:var(--cia-focus,#347da0)}.ds-account-option:has(input:checked){background:#fbf3e4;border-color:#aa7e34}.ds-account-option:focus-within{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-account-option input{flex:none;width:17px;height:17px;margin:0;accent-color:#906a2c}.ds-account-copy{display:grid;gap:3px;min-width:0}.ds-account-copy strong{font-size:14px}.ds-account-copy small{font-size:12px;line-height:1.4;color:var(--cia-muted,#446477)}@media(prefers-reduced-motion:reduce){.ds-account-option{transition:none}}"
+      "refersTo": "return-ticket",
+      "description": "Firma del interior: azul profundo, acción dorada, arte SVG y perforación.",
+      "html": "<section class=\"ds-return-ticket\"><div class=\"ds-ticket-copy\"><h2>Cada visita<br>cuenta.</h2><p>Encuentra tus lugares y elige tu próxima recompensa.</p><button class=\"ds-work-action ds-ticket-button\">Encontrar mi próximo lugar</button></div><div class=\"ds-ticket-art\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg><span>VOLVER<br>TIENE PREMIO</span></div></section>",
+      "css": ".ds-return-ticket{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 120px;min-height:245px;border-radius:14px;overflow:hidden;background:var(--cia-deep,#173c50);color:var(--cia-white,#fff)}.ds-ticket-copy{padding:24px}.ds-ticket-copy h2{margin:0;font-size:32px;line-height:1.08;letter-spacing:-.025em}.ds-ticket-copy p{font-size:14px;line-height:1.6;color:var(--cia-blue,#dcebf4);max-width:39ch;margin:15px 0 22px}.ds-ticket-button{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;min-height:44px;padding:11px 16px;border:0;border-radius:9px;background:var(--cia-gold-bright,#edc77d);color:var(--cia-black,#0d151b);cursor:pointer}.ds-ticket-button:hover{background:#f7dba8}.ds-ticket-art{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#234d63;color:var(--cia-gold-bright,#edc77d);border-left:1px dashed #7394a5}.ds-ticket-art svg{width:64px;height:64px;stroke-width:1;transform:rotate(-8deg);transition:transform 240ms var(--cia-ease,cubic-bezier(.16,1,.3,1))}.ds-return-ticket:hover .ds-ticket-art svg{transform:rotate(0)}.ds-ticket-art span{font-size:10px;line-height:1.7;letter-spacing:.14em;text-align:center;font-weight:700}@media(prefers-reduced-motion:reduce){.ds-ticket-art svg{transition:none}}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Pase del negocio",
+      "kind": "card",
+      "refersTo": "club-pass",
+      "description": "Datos del negocio y acciones de presencia; el ejemplo evita saldos ficticios.",
+      "html": "<article class=\"ds-club-pass\"><h3>Tu negocio</h3><p>Tu saldo y próximas recompensas aparecen al unirte.</p><button class=\"ds-work-action ds-club-button\" disabled>Únete para registrar visitas</button></article>",
+      "css": ".ds-club-pass{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;padding:24px;background:var(--cia-white,#fff);color:var(--cia-deep,#173c50);border:1px solid #dbe6ed;border-radius:12px}.ds-club-pass h3{margin:0;font-size:19px;letter-spacing:-.025em}.ds-club-pass p{font-size:13px;line-height:1.6;color:var(--cia-muted,#446477)}.ds-club-button{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;min-height:44px;padding:10px 14px;border:0;border-radius:9px;background:var(--cia-deep,#173c50);color:#fff;cursor:pointer}.ds-club-button:hover:not(:disabled){background:#28566f}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Ticket de premio",
+      "kind": "card",
+      "refersTo": "reward-ticket",
+      "description": "Franja SVG, coste/stock del entorno y acción deshabilitada según disponibilidad.",
+      "html": "<article class=\"ds-reward\"><div class=\"ds-reward-art\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg></div><div class=\"ds-reward-copy\"><h3>Tu próxima recompensa</h3><p>Los premios de tu negocio aparecerán cuando estén disponibles.</p><button class=\"ds-work-action ds-reward-button\" disabled>Sin premios disponibles</button></div></article>",
+      "css": ".ds-reward{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:grid;grid-template-columns:80px minmax(0,1fr);border:1px solid #dbe6ed;border-radius:12px;overflow:hidden;background:var(--cia-white,#fff);color:var(--cia-deep,#173c50)}.ds-reward-art{display:grid;place-items:center;background:var(--cia-blue,#dcebf4)}.ds-reward-art svg{width:46px;height:46px;stroke-width:1.2}.ds-reward-copy{padding:22px}.ds-reward-copy h3{margin:0;font-size:17px;letter-spacing:-.025em}.ds-reward-copy p{font-size:13px;line-height:1.6;color:var(--cia-muted,#446477)}.ds-reward-button{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;width:100%;min-height:44px;border:1px solid #b7ccd8;border-radius:9px;padding:11px 16px;background:#fff;color:var(--cia-deep,#173c50)}.ds-reward-button:hover:not(:disabled){background:#e8f1f6}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Confirmación de canje",
+      "kind": "custom",
+      "refersTo": "redeem-dialog",
+      "description": "Vista del contenido del diálogo; la aplicación usa dialog nativo y respuesta RPC confirmada.",
+      "html": "<section class=\"ds-redeem\" role=\"dialog\" aria-labelledby=\"ds-redeem-title\"><h2 id=\"ds-redeem-title\">¿Canjear este premio?</h2><p>Los puntos se descontarán y el premio quedará pendiente de entrega en el negocio.</p><button class=\"ds-work-action ds-redeem-primary\">Confirmar canje</button><button class=\"ds-work-action ds-redeem-cancel\">Ahora no</button></section>",
+      "css": ".ds-redeem{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;max-width:460px;padding:30px;border-radius:14px;background:#fff;color:var(--cia-deep,#173c50);box-shadow:0 24px 70px #0d151b40}.ds-redeem h2{font-size:22px;line-height:1.2;letter-spacing:-.025em;margin:0}.ds-redeem p{color:var(--cia-muted,#446477);font-size:14px;line-height:1.6}.ds-redeem-primary,.ds-redeem-cancel{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;min-height:44px;padding:11px 16px;border:0;border-radius:9px;cursor:pointer}.ds-redeem-primary{background:var(--cia-deep,#173c50);color:#fff}.ds-redeem-primary:hover{background:#28566f}.ds-redeem-cancel{background:transparent;color:var(--cia-deep,#173c50);text-decoration:underline}.ds-redeem-cancel:hover{color:#76551e}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Estado confirmado",
+      "kind": "chip",
+      "refersTo": "state-confirmed",
+      "description": "Etiqueta informativa para visita o entrega confirmada; mantiene significado textual.",
+      "html": "<span class=\"ds-state-confirmed\">Confirmada</span>",
+      "css": ".ds-state-confirmed{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-block;padding:5px 8px;border-radius:5px;background:#e3efe9;color:#286044;font-size:11px;font-weight:650;white-space:nowrap}"
     }
   ],
   "narrative": {
     "northStar": "Un motivo para volver",
-    "overview": "La identidad combina negro azulado, azul profundo, azul claro, blancos y dorados. La portada abre con un degradado oscuro, título blanco cálido y énfasis dorado; después alterna superficies claras con una tarjeta de Empresa profunda. Las ondas y órbitas trazan conexiones sin ocupar el lugar de las acciones. El acceso y el perfil concentran la atención en una tarea.\n\nEste documento registra el código de las rutas oficiales. La autoridad visual es `design-tokens.css`, con `site.css` como base del inicio y el espacio personal, y `mobile-welcome.css`, `auth.css` y `workspace.css` para cada superficie. El acceso carga `auth.css`: las reglas antiguas de autenticación en `site.css` no definen ese formulario. Las capturas de `.impeccable/review/hour/` confirman esta iteración. Las hojas históricas no añaden reglas al sistema. Los valores del frontmatter son normativos para los patrones registrados; los fragmentos del sidecar muestran sus estados y variantes.",
+    "overview": "La identidad combina negro azulado, azul profundo, azul claro, blancos y dorados. La portada abre con un degradado oscuro, título blanco cálido y énfasis dorado; después alterna superficies claras con una tarjeta de Empresa profunda. Las ondas y órbitas trazan conexiones sin ocupar el lugar de las acciones. El acceso concentra la atención en una tarea. El interior conserva esa identidad con navegación profunda, superficies claras de operación y un ticket de regreso como firma visual; los datos y sus acciones tienen prioridad sobre la decoración.\n\nEste documento registra el código de las rutas oficiales. La autoridad visual es `design-tokens.css`, con `site.css` como base del inicio y el espacio personal, y `mobile-welcome.css`, `auth.css` y `workspace.css` para cada superficie. El acceso carga `auth.css`: las reglas antiguas de autenticación en `site.css` no definen ese formulario. Las capturas de `.impeccable/review/hour/` registran inicio/acceso; `.impeccable/review/interior/` registra el nuevo workspace. El contrato del interior está en `.impeccable/surfaces/workspace.md`. Las hojas históricas no añaden reglas al sistema. Los valores del frontmatter son normativos para los patrones registrados; los fragmentos del sidecar muestran sus estados y variantes.",
     "keyCharacteristics": [
       "Superficies oscuras con texto claro y dorado; azul profundo para lectura sobre superficies claras.",
       "Alternancia de azul claro, blancos y crema, con curvas suaves y profundidad difusa.",
       "Ondas decorativas detrás del contenido.",
       "Controles explícitos, foco visible y estados legibles.",
-      "Movimiento sutil que respeta la reducción de movimiento."
+      "Movimiento sutil que respeta la reducción de movimiento.",
+      "Interior Operate con navegación estable, datos tabulares y SVG de la misma familia."
     ],
     "rules": [
       {
@@ -447,13 +487,15 @@
       "**Do** conservar la paleta y ajustar texto, acción y foco a la superficie clara u oscura donde aparecen.",
       "**Do** mantener ondas detrás del contenido y respetar la reducción de movimiento.",
       "**Do** mantener foco visible, controles táctiles y mensajes de carga, error, vacío y resultado.",
-      "**Do** conservar la bienvenida del inicio en celulares/tablets y la portada completa en escritorio."
+      "**Do** conservar la bienvenida del inicio en celulares/tablets y la portada completa en escritorio.",
+      "Do conservar nombres accesibles en navegación de iconos y usar rojo/alert para errores, verde/status para confirmaciones."
     ],
     "donts": [
       "**Don't** presentar negocios, saldos, reservas, estadísticas ni notificaciones ficticias como datos reales.",
       "**Don't** convertir el tipo de cuenta en un selector editable del perfil.",
       "**Don't** imponer una espera artificial antes de crear cuenta o iniciar sesión.",
-      "**Don't** importar componentes o estilos históricos como si formaran parte de estas rutas oficiales."
+      "**Don't** importar componentes o estilos históricos como si formaran parte de estas rutas oficiales.",
+      "Don't trasladar el selector de roles de PRUEBA LOCAL a la cuenta oficial ni presentar su actividad como producción."
     ]
   }
 }

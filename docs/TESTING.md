@@ -46,3 +46,7 @@ Capturas de revisión y medidas responsive se guardan en `.impeccable/review/` l
 La suite contiene 53 pruebas. Cinco grupos ejecutan permisos, aislamiento entre identidades fixture, inmutabilidad del tipo, borradores, idempotencia y rollback en PGlite/PostgreSQL 18.6. Auth es un esquema de prueba, no Supabase Auth real. La conexión es única: los casos de revisión obsoleta no certifican contención entre conexiones independientes. Producción PostgreSQL 17 requiere validación adicional.
 
 La exportación prueba campos permitidos, perfil guardado y cierre de identidad. Otras tres pruebas cubren pausas por visibilidad, fallback sin IntersectionObserver y contraste de combinaciones principales. No equivalen a una auditoría completa de accesibilidad.
+
+## Interior de fidelidad: segunda sesión
+
+La suite actual contiene 66 pruebas: las 53 anteriores y 13 nuevas. Cuatro grupos PostgreSQL 17 prueban el núcleo; seis casos del controlador prueban identidad, respuestas atrasadas, XSS, estado sin activar y doble clic; dos casos puros cubren llegada y disponibilidad; una integración HTTP comprueba API local, canje simultáneo idempotente y persistencia al reiniciar. Las pruebas comerciales usan la migración oficial como fuente única. No prueban Supabase Auth real ni concurrencia entre conexiones PostgreSQL nativas.

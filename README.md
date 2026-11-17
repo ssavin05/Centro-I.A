@@ -2,6 +2,12 @@
 
 Este repositorio permite desarrollar la aplicación oficial que conecta personas y negocios. La etapa implementada incluye una portada, bienvenida móvil/tablet, cuentas Usuario/Empresa, acceso con Supabase y edición del nombre. Los módulos de negocios, puntos, recompensas y reservaciones siguen pendientes en Supabase; el código histórico no constituye su implementación actual.
 
+## Prueba el interior de fidelidad
+
+Ejecuta `npm run preview:loyalty` o `INICIAR-FIDELIDAD-LOCAL.bat`. Abre Usuario en http://127.0.0.1:4174/workspace.html?as=user o Empresa en http://127.0.0.1:4174/workspace.html?as=company. Es una prueba local persistente, claramente identificada, sin conexión a Supabase. Permite crear programa/premios, registrar visitas, confirmar puntos, canjear y entregar.
+
+La migración de producción está preparada y probada, pero su aplicación fue rechazada por auto-review sin autorización explícita. [Alcance y activación](docs/FIDELIDAD.md).
+
 ## Inicia el desarrollo
 
 Necesitas Node.js 22.13 o posterior. Para ejecutar las pruebas PostgreSQL aisladas, instala las dependencias de desarrollo fijadas con `pnpm install --frozen-lockfile --ignore-scripts` (pnpm 11.25.0). El frontend publicado no incluye esas dependencias.
