@@ -27,3 +27,42 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Ejecutar comprobaciones y pruebas
         run: npm run verify
+      - name: Conservar construcción revisable
+        uses: actions/upload-artifact@v4
+        with:
+          name: centro-ia-sitio-${{ github.sha }}
+          path: dist
+          retention-days: 7
+  postgres:
+    name: Comprobar contención PostgreSQL 17
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17.11
+        env:
+          POSTGRES_PASSWORD: centro_ci_efimero
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar cliente PostgreSQL
+        run: psql --version
+      - name: Probar operaciones concurrentes en base efímera
+        run: node scripts/verify-postgres.mjs
+        env:
+          CIA_NATIVE_TEST: '1'
+          PGHOST: 127.0.0.1
+          PGPORT: '55432'
+          PGUSER: postgres
+          PGPASSWORD: centro_ci_efimero
