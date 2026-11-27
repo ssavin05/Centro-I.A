@@ -1,7 +1,9 @@
 // Local-only adapter served exclusively by scripts/loyalty-preview.mjs.
 // It never talks to Supabase and is excluded from the Pages artifact.
 const previewToken='__PREVIEW_TOKEN__';
-const actor=new URLSearchParams(location.search).get('as')==='company'?'company':'user';
+const requestedActor=new URLSearchParams(location.search).get('as');
+const actor=['company','user','manager','professional','reception'].includes(requestedActor)?requestedActor:'user';
+const picker=document.getElementById('local-preview-actor');if(picker){picker.value=actor;picker.addEventListener('change',()=>{location.href='workspace.html?as='+encodeURIComponent(picker.value);});}
 const listeners=[];
 async function local(path,body){
  try{

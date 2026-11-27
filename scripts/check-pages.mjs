@@ -14,6 +14,8 @@ for(const file of pagesFiles) {
     : file.endsWith('.js') ? [...source.matchAll(/(?:from\s+|import\()['"]([^'"]+)['"]/g)].map(m=>m[1]) : [];
   for(const ref of refs) {
     if(/^(https?:|data:|mailto:)/i.test(ref)) continue;
+    // PDF.js includes a literal import expression in a generated worker string.
+    if(file.startsWith('vendor/')&&ref.includes('${'))continue;
     if(ref.startsWith('/')) {errors.push(file+': ruta absoluta '+ref);continue;}
     const target=posix.normalize(posix.join(posix.dirname(file),ref.split(/[?#]/)[0]));
     if(target==='.'||target.endsWith('/'))continue;

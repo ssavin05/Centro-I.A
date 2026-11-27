@@ -1,6 +1,48 @@
 # Estado del desarrollo de Centro I.A.
 
-Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte: 16 de noviembre de 2026.
+Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 25 de noviembre de 2026; se conserva el historial anterior.
+
+## Entrega 3.4 — ampliación de operación
+
+Esta sección prevalece sobre los cortes históricos inferiores.
+
+- Operations 3.3 activado con hardening en una sola transacción, versión remota20261125201303; archivo local alineado.21tablas RLS y13RPCops solo authenticated con search_path vacío;2perfiles preservados,0programas.
+- Growth3.4 implementado y probado localmente: cursor/búsqueda/CSV, devolución pendiente con motivo/ledger, participación reversible, preferencias e indicadores30d. Migración20261125201344_growth_34.sql pendiente de activación remota.
+- ICSmanual, actualización periódica en lectura sin formularios y PWA preparada con offline sin cacheprivada ni cola de envíos.
+-98/98pruebas completas aprobadas; sintaxis, imports y build. Revisión independiente ship limitada a3vistas. Capturas reales1425×866,753×858,375×812 para objetivos1440/768/390.
+- Navegador: refund cancelado/motivo/foco, baja bloqueada con cita futura conservaformulario y alerta;CSV descargado.
+- Prueba3.4: puerto4177. scripts/review-34.mjs usa base/fixtures separados identificados como prueba.
+- Guardado en repositorio y publicación: en preparación; actualizar este punto solo con resultados comprobados.
+- Guía AMPLIACION-3.4.md; pendientes técnicos separados. Decisiones del titular en TAREAS-DEL-TITULAR-3.4.md. Presupuesto$0, sin fixturesproducción, sin mensajes ni servicios de pago.
+
+## Entrega 3.3 — corte del 25 de noviembre de 2026
+
+Esta sección prevalece sobre los estados históricos inferiores.
+
+- Sedes con zona horaria propia; propietario, gerente, recepción y profesional con permisos por sede. Invitaciones de uso único, caducidad de siete días y revocación.
+- Recursos asignados, jornadas semanales, descansos y ausencias; disponibilidad en tramos de 15 minutos, citas de 5 a 720 minutos y series de hasta ocho semanas. Reprogramación con revisión e historial.
+- Corrección verificada: ser cliente y profesional no permite confirmar/completar una cita atendida por otra persona. Un cambio como cliente vuelve a solicitar confirmación. Sedes pausadas no ofrecen recursos a clientes.
+- Supabase: aplicada studio_32, versión remota 20261125154520. Archivo local alineado. Catorce tablas cia_* con RLS y once RPC Studio solo para authenticated con search_path vacío. Dos perfiles preservados, cero negocios. Sin fixtures de producción.
+- Operations 3.3 y su corrección NO aplicadas: el conector devolvió confirmation expired. No se sustituyó el mecanismo de aprobación por SQL directo.
+- Código 3.3 disponible en prueba aislada http://127.0.0.1:4176/workspace.html?as=company y ?as=user. Adaptador local fuera del sitio publicable.
+- Verificación completa final: 89/89 pruebas aprobadas, sintaxis/imports y build. El primer intento restringido falló dos recorridos locales; ambos y después la suite completa pasaron con el acceso necesario.
+- Navegador: guardado de horarios confirmado, cierre y foco restaurado; profesional sin controles de propietario. Capturas nuevas válidas 1440/768/390. Revisor independiente: ship limitado a esas vistas; sin auditoría completa.
+- Paquete nuevo Cia.IA.3.3.zip; la entrega Cia.IA.3.2.zip se conserva. No hay publicación nueva en Pages ni integración en main.
+
+## Entrega local 3.2 — funciones y paquete
+
+Esta sección sustituye los pendientes históricos de producto que aparecen más abajo cuando ya están implementados en 3.2. Los cortes anteriores se conservan como historial.
+
+- Asistente por ocho giros, configuración editable, temas y logo posterior a creación.
+- Catálogo editable con importación revisada CSV/TSV/JSON/HTML/TXT/MD/DOCX/PDF con texto; extracción sin servicios externos, sin OCR.
+- Promociones, tipos/condiciones/vigencia de premios, retos con bono único y niveles por visitas.
+- Ajustes documentados, movimientos y avisos internos; no push/correo.
+- Agenda: solicitudes, confirmación/completar/cancelar, bloqueo interno, recurso y conflicto de citas confirmadas. Sin empleados/sucursales de verdad ni agenda laboral.
+- Migración 20261117023910_studio_32.sql versionada y probada SOLO localmente; no aplicada a producción. La autorización anterior corresponde al núcleo ya aplicado.
+- Puerto 4175 para esta revisión local; 4174 sigue siendo el puerto predeterminado del script genérico. El frontend conectado requiere despliegue y activación revisada para sus módulos nuevos.
+- Suite ampliada: 80 pruebas; recorrido de empresa/usuario y siete formatos de importación comprobados en navegador. Ver VERIFICACION-3.2.md para evidencia final y límites.
+- Revisión visual 344/390/768/1280/1440; calendario compacto a <=420; controles y foco corregidos; el revisor puntuó ambos fixes resolved y dio ship limitado a ese alcance. Motor Impeccable/detector no ejecutables por caché restringida.
+- Guía detallada: [GUIA-CENTRO-IA-3.2.md](GUIA-CENTRO-IA-3.2.md). Paquete Cia.IA.3.2.zip; no equivale a publicación remota.
 
 ## Activación autorizada — 17 de noviembre de 2026
 

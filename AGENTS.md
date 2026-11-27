@@ -49,3 +49,24 @@ La propuesta supabase/proposals/business_onboarding.sql solo está probada local
 - La migración 20261117013535_loyalty_core.sql fue aplicada después de autorización explícita del titular y coincide con el historial remoto. No reaplicarla ni usar la propuesta antigua para crear cia_clubs.
 - La prueba del puerto 4174 es aislada y debe conservar siempre su franja PRUEBA LOCAL. No publicar el adaptador de scripts/local-preview-client.mjs ni tratar su selector de rol como Auth.
 - Llegadas/salidas son voluntarias; no afirmar seguimiento automático. Puntos por negocio y solo tras confirmación del propietario. Canjes atómicos e idempotentes; ninguna escritura de saldo desde el cliente.
+
+## Extensión 3.2
+
+- Studio 3.2 fue aplicado a Supabase el 25 de noviembre con la autorización actual del titular; archivo alineado 20261125154520_studio_32.sql. No reaplicarlo. Operations 3.3 y hardening siguen SOLO locales por confirmación vencida del conector.
+- Lee docs/GUIA-CENTRO-IA-3.2.md y docs/VERIFICACION-3.2.md. Puerto de la entrega local:4175 con scripts/start-32.mjs.
+- studio-ui.js controla configuración por giro/logo/catálogo/promos/retos/agenda/avisos; conserva foco al redibujar y controles de44px. Los recursos de agenda no son empleados ni sucursales.
+- No publicar tests/browser, el adaptador local ni el selector de roles. enableChecks es solo para revisión aislada y está desactivado por defecto.
+- Seguridad/correo adicional permanece pendiente por prioridad del titular; no retirar las protecciones ya existentes.
+
+## Operación 3.3
+
+- Consulta docs/GUIA-CENTRO-IA-3.3.md y docs/VERIFICACION-3.3.md. Sedes, recursos y equipo tienen permisos por función; ser cliente de una cita no concede permisos de personal.
+- Las dos migraciones operations_33 y operations_33_hardening son una unidad lógica: no activar la primera sin la corrección. No sustituir una confirmación rechazada o vencida por SQL directo.
+- El inicio local actual usa scripts/start-33.mjs, puerto 4176, con la franja PRUEBA LOCAL. Cinco identidades de prueba; no usar el selector como autenticación real.
+
+## Ampliación 3.4
+
+- Operations ya está aplicado,20261125201303_operations_33_reviewed.sql. Los archivos por partes se conservan en supabase/history/33, no reaplicarlos. Growth20261125201344_growth_34.sql sigue local.
+-98pruebas aprobadas. Lee docs/AMPLIACION-3.4.md y docs/ESTADO-DESARROLLO.md. Mantener devolución de canjes solo pendientes, stock histórico desconocido sin reconstrucción inventada y participación reversible sin borrar saldos.
+- El worker solo cachea recursos públicos enumerados, nunca API, perfiles ni páginas privadas. No permitir colas automáticas de escrituras.
+- scripts/backup.mjs es SQLite histórico; no presentarlo como respaldo de Supabase.

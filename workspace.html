@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173c50"><title>Mi centro · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="workspace.css"><script type="module" src="workspace.js"></script><script type="module" src="ui-feedback.js"></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173c50"><title>Mi centro · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="studio.css">
+<link rel="stylesheet" href="operations.css"><script type="module" src="workspace.js"></script><script type="module" src="ui-feedback.js"></script><link rel="stylesheet" href="growth.css">
+</head>
 <body class="workspace-layout app-layout">
 <a href="#workspace-content" class="skip-link">Ir a mi centro</a>
 <aside class="app-sidebar">
@@ -91,4 +93,5 @@
  <footer class="app-footer"><span>Centro I.A. · Un motivo para volver.</span><span>Tus puntos, siempre en su negocio.</span></footer>
 </div>
 <dialog id="redeem-dialog" class="redeem-dialog" aria-labelledby="redeem-dialog-title"><form method="dialog"><button class="dialog-close" aria-label="Cerrar confirmación" value="cancel">Cerrar</button><div class="redeem-symbol"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#gift"></use></svg></div><h2 id="redeem-dialog-title">¿Canjear este premio?</h2><p id="redeem-dialog-description"></p><p>Los puntos se descontarán y el premio quedará pendiente de entrega en el negocio.</p><div class="form-actions"><button id="confirm-redeem" class="button button-primary" type="button">Confirmar canje</button><button class="text-button" value="cancel">Ahora no</button></div><p id="redeem-dialog-error" role="alert"></p></form></dialog>
+<script type="module" src="pwa.js"></script>
 </body></html>

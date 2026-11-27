@@ -1,4 +1,4 @@
-export const loyaltySections=['home','rewards','visits','explore','account'];
+export const loyaltySections=['home','rewards','visits','explore','catalog','promotions','calendar','inbox','people','operations','growth','account'];
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function loyaltyError(error){
  const messages={invalid_club_code:'No encontramos ese código. Pídeselo al negocio y revisa las 12 letras y números.',join_first:'Primero únete al programa de este negocio.',visit_cooldown:'Ya registraste una visita reciente. Puedes iniciar otra cuando hayan pasado 18 horas.',not_enough_points:'Todavía no tienes los puntos necesarios en este negocio.',reward_unavailable:'El premio ya no está disponible. Actualiza para ver otras opciones.',account_not_allowed:'Esta acción no está disponible para tu tipo de cuenta.',club_not_owned:'Solo el negocio propietario puede realizar esta acción.',request_conflict:'No pudimos confirmar esta solicitud. Actualiza antes de volver a intentarlo.',invalid_club:'Revisa el nombre, categoría, ciudad y puntos de tu negocio.',invalid_reward:'Revisa el nombre, puntos y existencias del premio.'};
@@ -8,7 +8,8 @@ export function loyaltyError(error){
 }
 export function rewardState(reward,club){
  const points=Number(club?.points||0),cost=Number(reward.points_cost);
- return {points,remaining:Math.max(0,cost-points),available:reward.active!==false && reward.stock!==0,canRedeem:!!club&&points>=cost&&reward.active!==false&&reward.stock!==0};
+ const expired=reward.valid_until&&Date.parse(reward.valid_until)<Date.now();
+ return {points,expired:!!expired,remaining:Math.max(0,cost-points),available:reward.active!==false && reward.stock!==0&&!expired,canRedeem:!!club&&points>=cost&&reward.active!==false&&reward.stock!==0&&!expired};
 }
 
 export function arrivalState(visits,clubId,serverTime){

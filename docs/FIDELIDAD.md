@@ -65,3 +65,8 @@ El advisor del proyecto señaló protección de contraseñas filtradas deshabili
 El advisor señala las diez RPC SECURITY DEFINER accesibles para authenticated. Es la frontera de escritura deliberada: no hay EXECUTE anónimo, el helper es privado y cada función valida actor/tipo/propietario. Esta advertencia requiere conservar la revisión de autorización, no ampliar grants. [Referencia del advisor](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
 
 En la verificación del acceso sin sesión se detectó AuthSessionMissingError del SDK (status 400 sin code). Se añadió regresión que falló antes del arreglo y se comprobó en navegador la redirección a login; no se inició sesión ni se manipularon credenciales del titular.
+
+
+## Extensión local 3.2
+
+Consulta GUIA-CENTRO-IA-3.2.md para creación por giro, logo, catálogos/importaciones, promociones, retos, movimientos, avisos y citas. La migración 20261117023910_studio_32.sql es nueva y NO está aplicada a Supabase. No reaplicar el núcleo ya autorizado ni confundir esta migración con la propuesta antigua de negocios.

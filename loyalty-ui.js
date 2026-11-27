@@ -1,3 +1,7 @@
+import {mountOperations} from './operations-ui.js';
+import {mountGrowth} from './growth-ui.js';
+import {mountStudio} from './studio-ui.js';
+import {rewardKinds} from './studio-rules.js';
 import {escapeHTML as e,loyaltyError,rewardState,loyaltySections,arrivalState} from './loyalty-rules.js';
 const icon=name=>'<svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#'+name+'"></use></svg>';
 const number=value=>new Intl.NumberFormat('es-MX').format(Number(value||0));
@@ -5,17 +9,21 @@ const date=value=>value?new Intl.DateTimeFormat('es-MX',{day:'numeric',month:'sh
 const empty=(title,text,action='',target='explore')=>'<div class="app-empty">'+icon('ticket')+'<div><h3>'+e(title)+'</h3><p>'+e(text)+'</p>'+(action?'<button type="button" class="text-button" data-go="'+target+'">'+e(action)+' '+icon('arrow')+'</button>':'')+'</div></div>';
 export function mountLoyalty({supabase}){
  const $=id=>document.getElementById(id);
+ const studio=mountStudio({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true})});
+ const operations=mountOperations({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true})});
+ const growth=mountGrowth({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true})});
  let identity=null,snapshot=null,epoch=0,view='home',filter='all',operating=false,pendingReward=null;
  const requests=new Map();
  const isCompany=()=>identity?.profile.account_type==='company';
  const owned=()=>snapshot?.clubs[0];
  function notice(text,tone='success'){const node=$('loyalty-notice');node.dataset.tone=tone;node.setAttribute('role',tone==='error'?'alert':'status');node.textContent=text;}
- function show(next,{focus=false}={}){
+ function show(next,{focus=false,immediate=false}={}){
+  if(focus&&next!==view&&!immediate){studio.animateNavigation(next,()=>show(next,{focus,immediate:true}));return;}
   if(!loyaltySections.includes(next))next='home';view=next;
   for(const panel of document.querySelectorAll('[data-panel]'))panel.hidden=panel.dataset.panel!==view;
   for(const button of document.querySelectorAll('[data-view]')){if(button.dataset.view===view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
-  const titles={home:'Mi centro',rewards:'Premios',visits:isCompany()?'Visitas y clientes':'Mis visitas',explore:isCompany()?'Mi negocio':'Explorar',account:'Mi cuenta'};
-  $('app-section-name').textContent=titles[view];
+  const titles={growth:'Actividad y datos',operations:'Operación y reservas',home:'Mi centro',rewards:'Premios',visits:isCompany()?'Visitas y clientes':'Mis visitas',explore:isCompany()?'Mi negocio':'Explorar',account:'Mi cuenta'};
+  $('app-section-name').textContent=titles[view]||studio.titleFor(view);
   if(focus){const heading=document.querySelector('[data-panel="'+view+'"] h2');heading?.setAttribute('tabindex','-1');heading?.focus();}
  }
  const clubName=id=>snapshot?.clubs.find(c=>c.id===id)?.name||'Negocio';
@@ -52,9 +60,9 @@ export function mountLoyalty({supabase}){
   const rewards=snapshot.rewards.filter(r=>(r.title+' '+r.description+' '+clubName(r.club_id)).toLocaleLowerCase('es').includes(query));
   $('reward-list').innerHTML=rewards.length?rewards.map(r=>{
    const club=snapshot.clubs.find(c=>c.id===r.club_id),state=rewardState(r,club);
-   return '<article class="reward-ticket"><div class="reward-art">'+icon('gift')+'<span>'+e(clubName(r.club_id))+'</span></div><div class="reward-body"><div class="reward-heading"><h3>'+e(r.title)+'</h3><span class="reward-price">'+number(r.points_cost)+' <small>pts</small></span></div><p>'+e(r.description||'Pregunta en el negocio por los detalles de entrega.')+'</p><p class="reward-stock">'+(r.stock===null?'Sin límite de unidades':number(r.stock)+' unidades disponibles')+'</p>'+(isCompany()?'<button type="button" class="text-button" data-action="reward-toggle" data-id="'+e(r.id)+'" data-active="'+String(!r.active)+'">'+(r.active?'Pausar premio':'Activar premio')+'</button>':'<button type="button" class="button '+(state.canRedeem?'button-primary':'button-outline')+'" data-action="redeem" data-id="'+e(r.id)+'" '+(!state.canRedeem?'disabled':'')+'>'+(!state.available?'Agotado':state.canRedeem?'Canjear premio':'Te faltan '+number(state.remaining)+' puntos')+'</button>')+'</div></article>';
+   return '<article class="reward-ticket"><div class="reward-art">'+icon('gift')+'<span>'+e(clubName(r.club_id))+'</span></div><div class="reward-body"><div class="reward-heading"><h3>'+e(r.title)+'</h3><span class="reward-price">'+number(r.points_cost)+' <small>pts</small></span></div><p>'+e(r.description||'Pregunta en el negocio por los detalles de entrega.')+'</p><p class="reward-stock">'+(r.stock===null?'Sin límite de unidades':number(r.stock)+' unidades disponibles')+'</p>'+(r.reward_kind?'<p class="studio-reward-details">'+e(rewardKinds[r.reward_kind]||r.reward_kind)+(r.valid_until?' · Hasta '+date(r.valid_until):'')+'</p>':'')+(r.terms?'<details class="studio-reward-terms"><summary>Condiciones del premio</summary><p>'+e(r.terms)+'</p></details>':'')+(isCompany()?'<button type="button" class="text-button" data-studio-action="edit-reward" data-id="'+e(r.id)+'">Editar recompensa</button><button type="button" class="text-button" data-action="reward-toggle" data-id="'+e(r.id)+'" data-active="'+String(!r.active)+'">'+(r.active?'Pausar premio':'Activar premio')+'</button>':'<button type="button" class="button '+(state.canRedeem?'button-primary':'button-outline')+'" data-action="redeem" data-id="'+e(r.id)+'" '+(!state.canRedeem?'disabled':'')+'>'+(!state.available?(state.expired?'Vencido':r.stock===0?'Agotado':'No disponible'):state.canRedeem?'Canjear premio':'Te faltan '+number(state.remaining)+' puntos')+'</button>')+'</div></article>';
   }).join(''):empty(query?'No encontramos ese premio.':isCompany()?'Crea algo que valga el regreso.':'Los buenos premios se están preparando.',query?'Prueba con otro nombre o negocio.':isCompany()?'Ofrece algo concreto y alcanzable: tú eliges los puntos y las unidades.':'Los premios de tus negocios aparecerán aquí en cuanto estén disponibles.');
-  $('redemption-list').innerHTML=snapshot.redemptions.length?'<div class="redemption-list">'+snapshot.redemptions.map(r=>'<article class="redemption-row">'+icon('ticket')+'<div><h3>'+e(r.reward_title)+'</h3><p>'+e(isCompany()?r.customer_name:r.club_name)+' · '+number(r.points_cost)+' puntos · '+date(r.created_at)+'</p><details><summary>Ver comprobante</summary><code>'+e(r.id)+'</code></details></div><span class="state-label '+(r.state==='delivered'?'state-confirmed':'')+'">'+(r.state==='delivered'?'Entregado':'Por recoger')+'</span>'+(isCompany()&&r.state==='requested'?'<button type="button" class="text-button" data-action="deliver" data-id="'+e(r.id)+'">Confirmar entrega</button>':'')+'</article>').join('')+'</div>':empty(isCompany()?'Aquí confirmarás cada entrega.':'Tu próximo premio te espera.','Los canjes confirmados aparecerán aquí con su comprobante.');
+  $('redemption-list').innerHTML=snapshot.redemptions.length?'<div class="redemption-list">'+snapshot.redemptions.map(r=>'<article class="redemption-row">'+icon('ticket')+'<div><h3>'+e(r.reward_title)+'</h3><p>'+e(isCompany()?r.customer_name:r.club_name)+' · '+number(r.points_cost)+' puntos · '+date(r.created_at)+'</p><details><summary>Ver comprobante</summary><code>'+e(r.id)+'</code></details></div><span class="state-label '+(r.state==='delivered'?'state-confirmed':'')+'">'+(r.state==='delivered'?'Entregado':r.state==='cancelled'?'Cancelado · puntos devueltos':'Por recoger')+'</span>'+(isCompany()&&r.state==='requested'?'<button type="button" class="text-button" data-action="deliver" data-id="'+e(r.id)+'">Confirmar entrega</button>':'')+'</article>').join('')+'</div>':empty(isCompany()?'Aquí confirmarás cada entrega.':'Tu próximo premio te espera.','Los canjes confirmados aparecerán aquí con su comprobante.');
  }
  function renderExplore(){
   const company=isCompany(),club=owned();$('join-form').hidden=company;$('explore-search-label').hidden=company;$('business-setup').hidden=!company;$('explore-list').hidden=company;
@@ -75,7 +83,7 @@ export function mountLoyalty({supabase}){
    $('next-step-body').innerHTML=pending?'<p>Tienes un premio por recoger.</p><h3>'+e(pending.reward_title)+'</h3><button type="button" class="text-button" data-go="rewards">Ver mi comprobante '+icon('arrow')+'</button>':'<p>¿Ya estás en uno de tus negocios? Registra tu llegada. La confirmación del negocio suma tus puntos.</p><button type="button" class="text-button" data-go="'+(snapshot.clubs.length?'home':'explore')+'">'+(snapshot.clubs.length?'Ver mis negocios':'Encontrar mi primer negocio')+' '+icon('arrow')+'</button>';
   }
  }
- function render(){$('show-reward-form').hidden=!isCompany();metrics();clubCards();renderVisits();renderRewards();renderExplore();renderNext();show(view);}
+ function render(){$('show-reward-form').hidden=!isCompany();metrics();clubCards();renderVisits();renderRewards();renderExplore();renderNext();show(view);studio.update({identity,snapshot});operations.update({identity,snapshot});growth.update({identity,snapshot});}
  async function refresh(){
   if(!identity||!supabase)return;const version=epoch;$('refresh-loyalty').disabled=true;$('loyalty-error').hidden=true;
   try{
@@ -94,12 +102,12 @@ export function mountLoyalty({supabase}){
   operating=true;const version=epoch;const oldText=button?.textContent;if(button){button.disabled=true;button.textContent='Guardando…';}notice('');
   try{
    const {error}=await supabase.rpc(name,args);if(version!==epoch)return false;if(error)throw error;
-   notice(success);await refresh();return version===epoch;
+   notice(success);studio.acknowledge(name);await refresh();return version===epoch;
   }catch(error){if(version===epoch)throw error;return false;}
   finally{if(version===epoch){operating=false;if(button){button.disabled=false;button.textContent=oldText;}}}
  }
  function clear(){
-  epoch++;identity=null;snapshot=null;operating=false;pendingReward=null;requests.clear();
+  epoch++;studio.clear();operations.clear();growth.clear();identity=null;snapshot=null;operating=false;pendingReward=null;requests.clear();
   $('loyalty-content').hidden=true;$('account-panel').hidden=true;$('loyalty-loading').hidden=true;$('loyalty-error').hidden=true;notice('');$('refresh-loyalty').disabled=true;
   for(const id of ['club-list','reward-list','visit-list','redemption-list','recent-list','explore-list','business-settings','next-step-body','app-metrics'])$(id).textContent='';
   for(const form of document.querySelectorAll('.app-form')){form.reset();delete form.dataset.request;const button=form.querySelector('[type="submit"]');if(button){button.disabled=false;button.textContent=form.id==='join-form'?'Unirme':form.id==='club-form'?'Crear mi programa':'Guardar premio';}}
@@ -109,7 +117,7 @@ export function mountLoyalty({supabase}){
  function load(context){
   clear();identity=context;const company=isCompany();
   $('app-date').textContent=new Intl.DateTimeFormat('es-MX',{weekday:'long',day:'numeric',month:'long'}).format(new Date());
-  for(const button of document.querySelectorAll('[data-view]')){const labels={home:'Inicio',rewards:'Premios',visits:company?'Visitas':'Mis visitas',explore:company?'Mi negocio':'Explorar',account:'Mi cuenta'};button.setAttribute('aria-label',labels[button.dataset.view]);}
+  for(const button of document.querySelectorAll('[data-view]')){const labels={home:'Inicio',rewards:'Premios',visits:company?'Visitas':'Mis visitas',explore:company?'Mi negocio':'Explorar',account:'Mi cuenta'};if(labels[button.dataset.view])button.setAttribute('aria-label',labels[button.dataset.view]);}
   $('nav-visits-label').textContent=company?'Visitas':'Mis visitas';$('nav-explore-label').textContent=company?'Mi negocio':'Explorar';
   $('ticket-title').innerHTML=company?'Dales un motivo<br>para volver.':'Cada visita<br>cuenta.';
   $('ticket-description').textContent=company?'Crea premios, reconoce cada visita y construye relaciones que duren.':'Encuentra tus lugares, suma puntos y elige tu próxima recompensa.';
@@ -124,7 +132,7 @@ export function mountLoyalty({supabase}){
   $('loyalty-loading').hidden=false;$('loyalty-content').hidden=true;show('home');refresh();
  }
  document.addEventListener('click',async event=>{
-  const nav=event.target.closest('[data-view],[data-go]');if(nav&&identity){show(nav.dataset.view||nav.dataset.go,{focus:!!nav.dataset.go});return;}
+  const nav=event.target.closest('[data-view],[data-go]');if(nav&&identity){show(nav.dataset.view||nav.dataset.go,{focus:true});return;}
   const filterButton=event.target.closest('[data-filter]');if(filterButton&&snapshot){filter=filterButton.dataset.filter;for(const b of document.querySelectorAll('[data-filter]'))b.setAttribute('aria-pressed',String(b===filterButton));renderVisits();return;}
   const button=event.target.closest('[data-action]');if(!button||!snapshot||operating)return;
   const {action,id,club,active}=button.dataset;

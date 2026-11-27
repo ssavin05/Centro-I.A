@@ -1,0 +1,102 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {operationsDatabase,actors,key} from './helpers/operations.mjs';
+test('3.3: sucursales reales, backfill conservador y permisos de propietario',async t=>{
+ const h=await operationsDatabase(t);assert.equal((await h.rpc('company','cia_ops_snapshot')).locations.length,1);
+ const loc=await h.rpc('company','cia_ops_save_location',[h.club,{name:'Sucursal norte',timezone:'America/Tijuana',active:true},key(10)]);
+ assert.equal(await h.rpc('company','cia_ops_save_location',[h.club,{name:'Sucursal norte',timezone:'UTC'},key(10)]),loc);
+ await assert.rejects(h.rpc('user','cia_ops_save_location',[h.club,{name:'Ajena'},key(11)]));
+ assert.equal((await h.rpc('other','cia_ops_snapshot')).locations.length,0);
+ await assert.rejects(h.rpc('company','cia_ops_save_location',[h.club,{id:h.location,name:'Principal',timezone:'UTC',active:false},key(12)]),/primary_location_required/);
+ await assert.rejects(h.rpc('company','cia_ops_save_location',[h.club,{name:'Mala zona',timezone:'Inventada/No'},key(13)]),/invalid_timezone/);
+});
+test('3.3: invitación de uso único, rol por sucursal y revocación inmediata',async t=>{
+ const h=await operationsDatabase(t),m=await h.staff('manager','manager');
+ assert.equal(await h.rpc('manager','cia_ops_accept_invite',[m.code]),m.membership);
+ await assert.rejects(h.rpc('second','cia_ops_accept_invite',[m.code]),/invitation_unavailable/);
+ await assert.rejects(h.rpc('manager','cia_ops_invite',[h.location,'manager','Escalada',key(3)]));
+ const loc2=await h.rpc('company','cia_ops_save_location',[h.club,{name:'Sede privada',timezone:'UTC'},key(11)]);
+ await assert.rejects(h.rpc('manager','cia_ops_save_resource',[loc2,{name:'Fuera de alcance',kind:'space'},key(12)]));
+ const r=await h.resource('Ana',actors.manager);
+ const snapshot=await h.rpc('manager','cia_ops_snapshot');assert.equal(snapshot.locations[0].access_role,'manager');assert.equal(snapshot.invites.length,0);
+ await h.rpc('company','cia_ops_set_team',[m.membership,false,'manager']);
+ assert.equal((await h.rpc('manager','cia_ops_snapshot')).locations.length,0);
+ assert.equal((await h.db.query('select active from cia_resources where id=$1',[r])).rows[0].active,false);
+ await assert.rejects(h.rpc('manager','cia_ops_save_hours',[r,[]]));
+ await assert.rejects(h.rpc('user','cia_studio_adjust_points',[h.club,actors.user,50,'No autorizado',key(4)]));
+});
+test('3.3: horarios, descansos y ausencias afectan horarios disponibles',async t=>{
+ const h=await operationsDatabase(t),r=await h.resource();
+ let slots=await h.rpc('user','cia_ops_slots',[r,h.day,30]);assert.ok(slots.slots.length>0);assert.match(slots.slots[0].starts_at,/T09:00:00/);
+ const weekday=new Date(h.day+'T12:00:00Z').getUTCDay();
+ await h.rpc('company','cia_ops_save_hours',[r,[{weekday,starts_at:'09:00',ends_at:'12:00'},{weekday,starts_at:'13:00',ends_at:'18:00'}]]);
+ slots=await h.rpc('user','cia_ops_slots',[r,h.day,30]);assert.equal(slots.slots.some(s=>s.starts_at.includes('T12:')),false);
+ await assert.rejects(h.rpc('company','cia_ops_save_hours',[r,[{weekday,starts_at:'09:00',ends_at:'12:00'},{weekday,starts_at:'11:00',ends_at:'14:00'}]]),/overlapping_hours/);
+ assert.equal((await h.db.query('select count(*)::int n from cia_resource_hours where resource_id=$1',[r])).rows[0].n,2);
+ const block=await h.rpc('company','cia_ops_timeoff',[r,{title:'Descanso',starts_at:h.day+'T09:00:00Z',ends_at:h.day+'T10:00:00Z'},key(30)]);
+ slots=await h.rpc('user','cia_ops_slots',[r,h.day,30]);assert.equal(slots.slots[0].starts_at.slice(11,16),'10:00');
+ await h.rpc('company','cia_ops_timeoff',[r,{id:block},key(31)]);
+ assert.equal((await h.rpc('user','cia_ops_slots',[r,h.day,30])).slots[0].starts_at.slice(11,16),'09:00');
+});
+test('3.3: agenda delegada, confirmación, conflicto y reprogramación con revisión',async t=>{
+ const h=await operationsDatabase(t);await h.staff('professional','professional');await h.staff('reception','reception',h.location,2);
+ const r=await h.resource('Ana',actors.professional),other=await h.resource('Otra silla',null,h.location,21);
+ const payload={title:'Cita de prueba',starts_at:h.day+'T10:00:00Z',duration_minutes:30};
+ const id=await h.rpc('user','cia_ops_book',[r,payload,key(40)]);assert.equal(await h.rpc('user','cia_ops_book',[r,payload,key(40)]),id);
+ await h.rpc('reception','cia_ops_update_appointment',[id,'confirmed']);
+ await assert.rejects(h.rpc('company','cia_ops_book',[r,{...payload,user_id:actors.user},key(41)]),/appointment_conflict/);
+ assert.equal((await h.rpc('professional','cia_ops_snapshot')).appointments.length,1);
+ await assert.rejects(h.rpc('professional','cia_ops_book',[other,payload,key(42)]));
+ await assert.rejects(h.rpc('second','cia_ops_update_appointment',[id,'cancelled']));
+ await h.rpc('user','cia_ops_reschedule',[id,h.day+'T11:00:00Z',1,key(43)]);
+ await h.rpc('user','cia_ops_reschedule',[id,h.day+'T11:00:00Z',1,key(43)]);
+ let a=(await h.rpc('user','cia_ops_snapshot')).appointments.find(a=>a.id===id);assert.equal(a.state,'requested');assert.equal(a.revision,2);
+ await assert.rejects(h.rpc('user','cia_ops_reschedule',[id,h.day+'T12:00:00Z',1,key(44)]),/appointment_changed/);
+ await h.rpc('professional','cia_ops_update_appointment',[id,'confirmed']);
+ await assert.rejects(h.rpc('company','cia_ops_timeoff',[r,{title:'Vacaciones',starts_at:h.day+'T10:00:00Z',ends_at:h.day+'T13:00:00Z'},key(45)]),/timeoff_has_appointments/);
+ await h.rpc('professional','cia_ops_update_appointment',[id,'completed']);
+ assert.equal((await h.rpc('company','cia_ops_snapshot')).events.length,5);
+});
+test('3.3: serie semanal atómica y API anterior no evita disponibilidad',async t=>{
+ const h=await operationsDatabase(t),r=await h.resource();const payload={title:'Serie',starts_at:h.day+'T09:00:00Z',duration_minutes:30,repeat_count:3,user_id:actors.user};
+ const first=await h.rpc('company','cia_ops_book',[r,payload,key(50)]);await h.rpc('company','cia_ops_book',[r,payload,key(50)]);
+ assert.equal((await h.rpc('company','cia_ops_snapshot')).appointments.length,3);
+ await assert.rejects(h.rpc('company','cia_ops_book',[r,{...payload,starts_at:h.day+'T17:45:00Z'},key(51)]),/outside_working_hours/);
+ const week2=new Date(Date.parse(h.day+'T14:00:00Z')+7*86400000).toISOString();
+ await h.rpc('company','cia_ops_book',[r,{...payload,repeat_count:1,starts_at:week2},key(53)]);
+ await assert.rejects(h.rpc('company','cia_ops_book',[r,{...payload,starts_at:h.day+'T14:00:00Z'},key(54)]),/appointment_conflict/);
+ assert.equal((await h.rpc('company','cia_ops_snapshot')).appointments.length,4);
+ await assert.rejects(h.rpc('user','cia_studio_save_appointment',[h.club,{title:'Eludir recursos',starts_at:h.day+'T10:00:00Z',ends_at:h.day+'T10:30:00Z',resource:'Libre'},key(52)]),/resource_required/);
+ await h.rpc('user','cia_studio_update_appointment',[first,'cancelled']);
+ assert.equal((await h.rpc('user','cia_ops_snapshot')).appointments.find(a=>a.id===first).state,'cancelled');
+});
+
+test('3.3: profesional cliente no opera citas de otro responsable',async t=>{
+ const h=await operationsDatabase(t);await h.staff('professional','professional');
+ await h.rpc('professional','cia_join_club',[h.code]);
+ const r=await h.resource('Otra profesional',null,h.location,71);
+ const id=await h.rpc('company','cia_ops_book',[r,{title:'Cita personal',user_id:actors.professional,starts_at:h.day+'T10:00:00Z',duration_minutes:30},key(72)]);
+ await assert.rejects(h.rpc('professional','cia_ops_update_appointment',[id,'completed']),/operation_not_allowed/);
+ await h.rpc('professional','cia_ops_reschedule',[id,h.day+'T11:00:00Z',0,key(73)]);
+ const a=(await h.rpc('professional','cia_ops_snapshot')).appointments.find(a=>a.id===id);
+ assert.equal(a.state,'requested');
+ await assert.rejects(h.rpc('professional','cia_ops_update_appointment',[id,'confirmed']),/operation_not_allowed/);
+ await h.rpc('company','cia_ops_update_appointment',[id,'confirmed']);
+ await h.rpc('professional','cia_ops_update_appointment',[id,'cancelled']);
+ assert.equal((await h.rpc('company','cia_ops_snapshot')).appointments.find(a=>a.id===id).state,'cancelled');
+});
+
+test('3.3: sedes pausadas no ofrecen recursos y el calendario anterior conserva sede',async t=>{
+ const h=await operationsDatabase(t);
+ const loc=await h.rpc('company','cia_ops_save_location',[h.club,{name:'Segunda sede',timezone:'UTC'},key(80)]);
+ const r=await h.resource('Sala secundaria',null,loc,81);
+ await h.rpc('company','cia_ops_save_location',[h.club,{id:loc,name:'Segunda sede',timezone:'UTC',active:false},key(82)]);
+ const snapshot=await h.rpc('user','cia_ops_snapshot');
+ assert.equal(snapshot.locations.some(l=>l.id===loc),false);assert.equal(snapshot.resources.some(x=>x.id===r),false);assert.equal(snapshot.hours.some(x=>x.resource_id===r),false);
+ await assert.rejects(h.rpc('user','cia_ops_slots',[r,h.day,30]),/resource_unavailable/);
+ const id=await h.rpc('company','cia_studio_save_appointment',[h.club,{title:'Cita anterior',starts_at:h.day+'T10:00:00Z',ends_at:h.day+'T10:30:00Z',resource:'Principal'},key(83)]);
+ assert.equal((await h.rpc('company','cia_ops_snapshot')).appointments.find(a=>a.id===id).location_id,h.location);
+ const own=await h.resource('Horario protegido',null,h.location,84);
+ await assert.rejects(h.rpc('company','cia_ops_save_hours',[own,null]),/invalid_hours/);
+ assert.equal((await h.db.query('select count(*)::int n from cia_resource_hours where resource_id=$1',[own])).rows[0].n,7);
+});

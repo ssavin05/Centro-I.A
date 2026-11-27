@@ -1,61 +1,53 @@
-# Centro I.A. — Un motivo para volver
+# Centro I.A. · entrega 3.4
 
-Este repositorio permite desarrollar la aplicación oficial que conecta personas y negocios. La etapa implementada incluye una portada, bienvenida móvil/tablet, cuentas Usuario/Empresa, acceso con Supabase y edición del nombre. Los módulos de negocios, puntos, recompensas y reservaciones siguen pendientes en Supabase; el código histórico no constituye su implementación actual.
+Inicio local: node scripts/start-34.mjs (puerto4177). Guía y cuadro: docs/AMPLIACION-3.4.md. Pendientes técnicos separados; tareas del titular al final en docs/TAREAS-DEL-TITULAR-3.4.md.98pruebas aprobadas. Operations activado en Supabase; Growth local. Publicación se registra en ESTADO-DESARROLLO.md. Los cortes inferiores son históricos.
 
-## Prueba el interior de fidelidad
+## Entrega actual 3.3 · 25 de noviembre
 
-Ejecuta `npm run preview:loyalty` o `INICIAR-FIDELIDAD-LOCAL.bat`. Abre Usuario en http://127.0.0.1:4174/workspace.html?as=user o Empresa en http://127.0.0.1:4174/workspace.html?as=company. Es una prueba local persistente, claramente identificada, sin conexión a Supabase. Permite crear programa/premios, registrar visitas, confirmar puntos, canjear y entregar.
+Guía: docs/GUIA-CENTRO-IA-3.3.md. Verificación: docs/VERIFICACION-3.3.md (89/89). Inicio local: node scripts/start-33.mjs, puerto4176. Studio está activado en Supabase; sedes/equipo/agenda avanzada siguen locales por confirmación vencida del conector. Nueva interfaz sin publicar. El historial inferior conserva estados anteriores.
 
-La migración de fidelidad ya se aplicó a Supabase después de autorización explícita. El interior conectado a tu cuenta está en http://127.0.0.1:4173/workspace.html; requiere iniciar sesión. La prueba del puerto 4174 sigue separada. [Alcance y activación](docs/FIDELIDAD.md).
+# Centro I.A. 3.2
 
-## Inicia el desarrollo
+Aplicación de fidelidad con cuentas Usuario y Empresa, negocios por giro, catálogo importable, premios, promociones, retos, puntos, citas y avisos internos. Esta entrega incluye una prueba local persistente y el frontend conectado a Supabase.
 
-Necesitas Node.js 22.13 o posterior. Para ejecutar las pruebas PostgreSQL aisladas, instala las dependencias de desarrollo fijadas con `pnpm install --frozen-lockfile --ignore-scripts` (pnpm 11.25.0). El frontend publicado no incluye esas dependencias.
+Los módulos 3.2 funcionan en la prueba local. Su migración nueva no está aplicada a producción. No se publicó ni se integró esta entrega automáticamente en el servicio público.
 
-1. Ejecuta las comprobaciones:
+## Abrir la prueba
 
-   ```sh
-   npm run verify
-   ```
+Requiere Node.js >=22.13. En esta revisión se usó Node 24.22.1 y pnpm 11.25.0.
 
-2. Abre la vista previa estática:
+1. Instala: `npx --yes pnpm@11.25.0 install --frozen-lockfile --ignore-scripts`.
+2. Inicia: `node scripts/start-32.mjs`.
+3. Abre [Empresa](http://127.0.0.1:4175/workspace.html?as=company) o [Usuario](http://127.0.0.1:4175/workspace.html?as=user).
+4. Comprueba la franja PRUEBA LOCAL. Crea el programa como Empresa y únete como Usuario usando su código.
 
-   ```sh
-   npm start
-   ```
+Las identidades de prueba y la base se quedan en este equipo. La prueba no usa correos reales ni Supabase. Un programa nuevo comienza en privado.
 
-3. Visita `http://127.0.0.1:4173/` y comprueba la bienvenida móvil o la portada de escritorio según el tamaño de pantalla.
+## Guía y estado
 
-También puedes ejecutar `node scripts/verify.mjs` y `node scripts/preview.mjs` directamente. En Windows, `INICIAR-CENTRO-IA.bat` abre esta misma vista previa. Para construir el paquete de GitHub Pages, ejecuta `npm run build:pages`.
+- [Guía de funciones, cuadro Usuario/Empresa y procedimientos](docs/GUIA-CENTRO-IA-3.2.md).
+- [Guía HTML legible e imprimible](docs/GUIA-CENTRO-IA-3.2.html).
+- [Validación y límites de la entrega](docs/VERIFICACION-3.2.md).
+- [Estado e historial](docs/ESTADO-DESARROLLO.md).
+- [Núcleo de fidelidad](docs/FIDELIDAD.md).
+- [Sistema de diseño](DESIGN.md).
 
-## Arquitectura y datos
+La personalización de Organización no implementa todavía empleados multirrol ni sucursales con permisos. Los avisos son internos; no hay push ni SMTP operativo validado. Los PDF escaneados necesitan captura manual. Catálogo y promociones no procesan cobros.
 
-GitHub Pages sirve HTML/CSS/JavaScript. Supabase Auth mantiene las cuentas; `public.cia_profiles` guarda nombre y tipo inicial. RLS limita cada perfil a su titular y los grants permiten actualizar únicamente el nombre. El tipo de cuenta se fija al registrarse y no se autoriza mediante `user_metadata`.
+## Comprobar y construir
 
-`supabase-client.js` contiene una clave **publishable** pública, no una clave secreta. No agregues `service_role` ni credenciales al frontend.
+`node scripts/verify.mjs` comprueba archivos, referencias, sintaxis, pruebas y construcción. La entrega pasó 80 pruebas.
 
-La bienvenida de teléfonos/tablets tiene enlaces reales a registro/login y no introduce una espera. La portada de escritorio se conserva. El SDK y las peticiones tienen límites de espera y muestran un error si el servicio no está disponible.
+`node scripts/build-pages.mjs` genera dist con la lista explícita scripts/pages-files.mjs. No publiques la carpeta completa del repositorio ni el adaptador de prueba local.
 
-## Configura y valida el correo
+`node scripts/render-guide.mjs` actualiza la versión HTML de la guía Markdown.
 
-Antes de ofrecer registro/recuperación a usuarios reales, verifica en [Supabase URL Configuration](https://supabase.com/dashboard/project/huqspupbhhqilxeizklr/auth/url-configuration):
+`npm start` conserva la vista estática oficial del puerto4173; requiere Auth real para usar el espacio privado. La bienvenida del inicio es exclusiva de móviles y tablets. El script histórico server/index.mjs permanece separado.
 
-- Site URL: `https://ssavin05.github.io/Centro-I.A/`.
-- Redirección de confirmación: `https://ssavin05.github.io/Centro-I.A/auth.html?mode=login`.
-- Redirección de recuperación: `https://ssavin05.github.io/Centro-I.A/auth.html?mode=reset`.
+## Base de datos
 
-Autoriza por separado las URLs locales o de prueba que vayas a usar. Revisa las plantillas si personalizaste sus destinos. El SMTP predeterminado de Supabase tiene restricciones y no garantiza correo para cualquier destinatario; consulta la [configuración SMTP oficial](https://supabase.com/docs/guides/auth/auth-smtp). No se configuró un proveedor en esta etapa ni se desactivó la confirmación de correo.
+Perfiles y loyalty_core ya constan aplicados después de la autorización anterior del titular. La migración **20261117023910_studio_32.sql** está probada localmente y pendiente de revisión/activación remota. No ejecutes todos los SQL indiscriminadamente ni uses la propuesta antigua de onboarding para crear el núcleo.
 
-Las pruebas automatizadas ejecutan controladores con dobles de Supabase. El registro, entrega de correo y restablecimiento completos necesitan verificación adicional en un entorno aislado.
+La prueba usa PostgreSQL17.5/PGlite. Las pruebas en una conexión no certifican concurrencia nativa entre conexiones independientes.
 
-## Continúa el proyecto
-
-- [Estado y siguiente tarea](docs/ESTADO-DESARROLLO.md).
-- [Auditoría priorizada](docs/AUDITORIA-2026-11-12.md).
-- [Arquitectura oficial](docs/ARCHITECTURE.md).
-- [Pruebas y brechas](docs/TESTING.md).
-- [Reglas permanentes](AGENTS.md).
-
-El respaldo `archivo/version-fidelidad-2026-11-11` se conserva intacto. `server/`, `sql/`, `app/` y `demo/` son históricos. Si necesitas revisar Node/SQLite, usa `npm run start:legacy`; no es el backend del panel oficial. La configuración histórica de Render requiere recursos de pago y no debe activarse con el presupuesto de $0 MXN.
-
-Un PR no equivale a una publicación. El workflow de Pages despliega main después de las verificaciones; esta etapa se entrega en una rama para revisión.
+El presupuesto autorizado permanece en $0MXN. No se activa Render ni se crea infraestructura de pago. La revisión adicional de correo y seguridad se reserva para la fase final solicitada; se mantienen las protecciones básicas existentes.

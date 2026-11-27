@@ -21,6 +21,19 @@ colors:
   error-surface: "#fff0ec"
   error-text: "#8f2b34"
   confirmed-surface: "#e3efe9"
+  studio-deep: "#102a43"
+  studio-accent: "#edc77d"
+  studio-soft: "#e1eef7"
+  studio-bg: "#eef4f9"
+  studio-border: "#cbdce9"
+  ocean-deep: "#123e5b"
+  ocean-accent: "#e9c788"
+  ocean-soft: "#dceefa"
+  sky-deep: "#244d6a"
+  sky-soft: "#edf6fc"
+  gold-deep: "#142f46"
+  gold-accent: "#d9af63"
+  gold-soft: "#f8f1e5"
 typography:
   body:
     fontFamily: 'system-ui, -apple-system, "Segoe UI", sans-serif'
@@ -179,6 +192,25 @@ components:
     textColor: "{colors.error-text}"
     rounded: "8px"
     padding: "16px 20px"
+  navigation-studio:
+    backgroundColor: "{colors.studio-deep}"
+    textColor: "{colors.blue}"
+    rounded: "{rounded.workspace-nav}"
+    padding: "10px 16px"
+  navigation-studio-active:
+    backgroundColor: "{colors.studio-accent}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.workspace-nav}"
+    padding: "10px 16px"
+  catalog-studio:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.deep}"
+    rounded: "{rounded.shared}"
+    padding: "24px"
+  import-field-studio:
+    textColor: "{colors.deep}"
+    rounded: "{rounded.workspace-state}"
+    padding: "8px"
   redeem-dialog:
     backgroundColor: "{colors.white}"
     textColor: "{colors.deep}"
@@ -196,6 +228,12 @@ La identidad combina negro azulado, azul profundo, azul claro, blancos y dorados
 
 Este documento registra el código de las rutas oficiales. La autoridad visual es `design-tokens.css`, con `site.css` como base del inicio y el espacio personal, y `mobile-welcome.css`, `auth.css` y `workspace.css` para cada superficie. El acceso carga `auth.css`: las reglas antiguas de autenticación en `site.css` no definen ese formulario. Las capturas de `.impeccable/review/hour/` registran inicio/acceso; `.impeccable/review/interior/` registra el nuevo workspace. El contrato del interior está en `.impeccable/surfaces/workspace.md`. Las hojas históricas no añaden reglas al sistema. Los valores del frontmatter son normativos para los patrones registrados; los fragmentos del sidecar muestran sus estados y variantes.
 
+La extensión 3.2 añade `studio.css`, `studio-ui.js` y `studio-rules.js` sobre el interior existente. Sus tokens de estudio y variantes de negocio se aplican a esta extensión; conservan la identidad y no reemplazan las rutas de inicio/acceso. Las capturas de `.impeccable/review/v32/` muestran Usuario, Empresa, catálogo y agenda en PRUEBA LOCAL. Studio 3.2 se aplicó a Supabase el 25 de noviembre de 2026 con la versión `20261125154520`; las capturas locales no acreditan publicación del frontend ni certificación integral de producción.
+
+Operations 3.3 extiende ese mismo mundo en modo Operate con `operations.css`, `operations-ui.js` y `operations-rules.js`: contexto de sede, función y zona horaria, agenda diaria, equipo y recursos. Conserva las tablas planas, el azul profundo y el dorado existentes. Operations 3.3 y su hardening quedaron activados en Supabase con la versión `20261125201303`. La evidencia visual y sus límites se registran en `.impeccable/surfaces/workspace.md`; no amplían la aprobación al conjunto de la aplicación.
+
+Growth 3.4 prolonga el interior con `growth.css`, `growth-ui.js` y `growth-rules.js`: Actividad y datos, historial completo por páginas, exportación, participación reversible y preferencias. `pwa.js`, `sw.js` y `offline.html` preparan instalación y una salida sin conexión sin copiar datos privados. Reutiliza la paleta y los patrones existentes, sin añadir tokens. Growth 3.4 permanece SOLO LOCAL, sin aplicar su migración al remoto. Las tres capturas revisadas y las verificaciones funcionales tienen alcance acotado, detallado en el contrato del workspace; no certifican instalación PWA ni accesibilidad integral.
+
 **Key Characteristics:**
 
 - Superficies oscuras con texto claro y dorado; azul profundo para lectura sobre superficies claras.
@@ -203,6 +241,7 @@ Este documento registra el código de las rutas oficiales. La autoridad visual e
 - Ondas decorativas detrás del contenido.
 - Controles explícitos, foco visible y estados legibles.
 - Movimiento sutil que respeta la reducción de movimiento.
+- Estudio 3.2 con azul noche, variantes acotadas de negocio y navegación móvil de cinco destinos con Más.
 
 ## Colors
 
@@ -219,6 +258,12 @@ La paleta alterna negro azulado y azules profundos con azul claro, blancos y dor
 
 - **Azul claro** (`blue`): fondo de la sección de audiencias y texto de apoyo sobre superficies profundas, además de selección y estados de controles. Las ondas lo usan con transparencia.
 - **Azul medio** (`blue-mid`): token compartido declarado; no se le asigna un componente adicional en este registro.
+
+### Variantes de estudio 3.2
+
+El tema `midnight` usa `studio-deep`, `studio-accent` y `studio-soft`; `ocean` usa su terna homónima; `sky` combina `sky-deep`, `studio-accent` y `sky-soft`; `gold` usa su terna homónima. El código mantiene las tres funciones `deep`, `accent` y `soft`: fondo profundo de barra lateral/ticket y títulos, selección/acción dorada y superficie del siguiente paso. La vista previa del negocio usa el profundo y el acento elegidos. Promociones, sellos y varios detalles conservan colores locales de estudio; el tema no recolorea toda la interfaz.
+
+La base y los bordes de la extensión usan `studio-bg` y `studio-border`; las tarjetas conservan blanco y texto azul profundo. Los colores previos mantienen su alcance en inicio, acceso y base del interior.
 
 ### Neutral
 
@@ -267,6 +312,12 @@ La base de espaciado compartida sigue los pasos del frontmatter. La implementaci
 - **Interior:** escenario de máximo 1420px y padding de 34px 40px 44px; barra superior de 76px. Barra lateral fija de 238px; hasta 1200px baja a 210px y el padding principal a 28px. Hasta 850px pasa a iconos en 82px. Hasta 600px usa navegación inferior de cinco destinos, 76px y área segura, escenario sin margen lateral y padding de 24px 18px 36px. Los nombres accesibles permanecen al ocultar textos.
 - **Datos y formularios:** ticket y siguiente paso en dos columnas; hasta 1200px solo permanece el ticket. Cuatro métricas pasan a dos columnas en celular. Pases en dos columnas pasan a una hasta 600px; premios pasan a una hasta 850px. Las tablas desplazan horizontalmente dentro de su contenedor. Cuenta de máximo 960px; formulario de dos columnas que pasa a una hasta 600px. Las acciones envuelven y se apilan en celular.
 - **Confirmación:** diálogo de máximo 460px y ancho calc(100% - 32px); padding de 30px y 22px en celular.
+- **Estudio 3.2:** catálogo y promociones en dos columnas con separaciones de 18px y 20px; a 850px pasan a una. El wizard de cuatro etapas usa cuatro columnas de indicadores y pasa a dos a 850px; los giros pasan de dos columnas a una a 600px. El formulario usa padding de 30px, reducido a 22px 16px en celular.
+- **Agenda 3.2:** calendario y detalle en columnas `minmax(320px,1fr) minmax(300px,.8fr)`, separados 24px; a 1200px se apilan. Hasta 420px la cuadrícula de siete días se sustituye por un campo nativo de fecha de altura mínima 48px. El detalle diario permanece accesible debajo.
+- **Navegación móvil 3.2:** hasta 600px hay cinco posiciones: Inicio, Premios, Calendario, Notificaciones y Más. Más abre un popover nativo con los destinos restantes y Cerrar sesión; no añade una sexta posición. Cada destino visible tiene altura mínima de 59px y conserva su nombre accesible.
+- **Operación 3.3:** selector de sede junto a función y zona horaria, seguido de botones de sección que envuelven según el espacio disponible. Hasta 600px, el contexto y la barra de fecha/acción pasan a una columna; las citas presentan hora, contenido y acciones en filas sucesivas. Las tablas conservan desplazamiento horizontal propio.
+- **Disponibilidad 3.3:** horas seleccionables en cuadrícula adaptable, con dos columnas hasta 600px. La edición semanal de horarios conserva una tabla de ancho mínimo de 710px dentro de su contenedor desplazable. No comprimir sus campos para hacerlos caber en celular.
+- **Actividad y datos 3.4:** búsqueda en cuatro columnas para registro, negocio, texto y acción; hasta 1000px pasa a dos, y hasta 600px a una. Las tablas desplazan dentro de su contenedor y permiten cortar textos largos. Paginación flexible y descarga apilada en celular. Las seis métricas de retorno usan tres columnas, reducidas a dos hasta 1000px. El editor ocupa como máximo 780px y las preferencias 700px; no imponen altura fija.
 - **Entorno local:** franja PRUEBA LOCAL siempre visible. El selector Usuario/Empresa pertenece exclusivamente a la prueba; no es navegación de producción.
 
 No fijar una altura de formulario para forzar una sola pantalla: contenido, errores y crecimiento del texto deben seguir siendo alcanzables.
@@ -276,6 +327,9 @@ No fijar una altura de formulario para forzar una sola pantalla: contenido, erro
 La profundidad combina separación tonal y sombras suaves. La bienvenida obtiene su atmósfera con fondo profundo, imagen de ondas atenuada y trazos; no con tarjetas flotantes añadidas. El acceso usa una sombra de conjunto. El interior agrupa datos en superficies blancas con borde fino, sin sombras de tarjetas ni botones. La profundidad fuerte se reserva para el diálogo de canje.
 
 ### Shadow Vocabulary
+
+- **Menú Más de estudio:** `0 14px 40px #102a4330`, con velo `#102a431f`; separación temporal de la navegación móvil.
+- **Celebración de estudio:** `0 12px 32px #102a4330`; énfasis finito de una confirmación, sin sombra en las tarjetas de datos.
 
 - **Confirmación de canje:** `0 24px 70px #0d151b40`, con velo `#0d151b99`; sitúa la decisión por encima del contexto.
 
@@ -343,6 +397,46 @@ Las visitas usan tabla de cabecera tonal, filas separadas, números tabulares y 
 
 El canje abre un diálogo nativo con título, coste contextual, consecuencia, Confirmar canje, Ahora no y cierre etiquetado. El fallo permanece en rojo dentro del diálogo. Avisos globales fallidos usan role=alert y tono rojo; resultados confirmados usan role=status y verde. Mostrar éxito exige respuesta confirmada.
 
+### Configuración y catálogo de estudio 3.2
+
+El wizard presenta Tu actividad, Tu negocio, Tu programa y Revisión. La etapa actual lleva `aria-current="step"`, indicador dorado y texto explícito; las etapas ocultas están deshabilitadas. Avanzar valida la etapa visible y lleva el foco a su leyenda. Ocho giros adaptan nombres del catálogo, agenda y sugerencias; son presets informativos, no permisos de equipos o sucursales.
+
+Las tarjetas del catálogo usan radio compartido, borde de estudio y padding de 24px, reducido a 22px 18px en celular. Título y precio comparten fila; moneda, duración y disponibilidad tienen texto. La importación ofrece revisión editable por fila antes de guardar, errores junto a la fila y opción para omitir duplicados; su tabla tiene ancho mínimo de 900px y desplazamiento propio, con altura máxima de 420px. Campos y selectores de revisión conservan altura mínima de 44px. El catálogo es informativo; no representa un POS. PDF extrae texto sin OCR.
+
+Los editores llevan el foco al primer campo. Cerrar o guardar devuelve el foco al disparador, a un control equivalente o al título del panel si el disparador fue reemplazado. El selector de día y los filtros conservan foco después de regenerar contenido.
+
+### Agenda, promociones y avisos de estudio 3.2
+
+La agenda combina el día seleccionado en dorado, resumen diario y estados textuales Por confirmar, Confirmada, Completada o Cancelada. El recurso es un nombre manual y no acredita empleado o sucursal con permisos; una cita no concede puntos automáticamente. La interfaz declara que muestra horas de este dispositivo.
+
+Las promociones son superficies azul noche con título blanco, explicación azul clara y valor dorado. Los retos muestran sellos circulares vacíos o dorados y visitas confirmadas; los niveles Explorador, Habitual y Preferente describen actividad, sin cambiar permisos. Los avisos internos usan filas blancas separadas, fondo azul pálido para no leídos y acción Marcar leída; el contador se incluye en el nombre accesible de Notificaciones. No equivalen a correo o push.
+
+### Sedes, equipo y disponibilidad de operación 3.3
+
+El contexto muestra Sede, función efectiva y zona horaria. La navegación se denomina Equipo y sedes para el propietario, Mi trabajo para personal y Reservar para clientes; en celular se alcanza desde Más. Los botones Agenda, Sedes, Equipo, Recursos y horarios y Cambios de citas aparecen según permisos y marcan selección con `aria-pressed`. Su estado activo usa azul noche y texto blanco; la navegación principal conserva su selección dorada.
+
+Recursos y equipo usan tablas blancas con cabecera tonal y separadores finos. El nombre del recurso ocupa su propia línea; debajo aparecen tipo y estado, con separación superior de 6px. Responsable, tramos semanales y acciones tienen columnas propias. Sedes y citas usan listas planas con bordes; no añaden sombras a los datos. Las funciones Propietario, Gerente de sede, Recepción y Profesional describen accesos distintos; una reserva de cliente no concede permisos de personal.
+
+La agenda muestra inicio y fin en la zona de la sede, recurso, estado textual y acciones disponibles. La reserva consulta disponibilidad antes de elegir una hora: los radios presentan selección dorada y foco visible; cambiar recurso, fecha o duración exige consultar otra vez. Los controles de sección y las horas mantienen un área mínima de 44px y 46px respectivamente. El formulario semanal permite descanso opcional; ausencias declara que sus fechas se introducen en la zona del dispositivo. Las citas no suman puntos automáticamente.
+
+Abrir un editor lleva el foco al primer campo. Cerrar o guardar con respuesta confirmada devuelve el foco al disparador, a su equivalente o al título de operación. El guardado de horarios considera válida una respuesta RPC sin contenido (`void`): cierra el formulario y restaura el foco. Un error conserva los datos y presenta texto recuperable. Operations hereda la reducción de movimiento de Studio; el cambio de panel se aplica directamente cuando está activada.
+
+### Actividad y datos 3.4
+
+Acceso desde la navegación del interior, Más en celular y Cuenta. Los botones de sección reutilizan el patrón de operación con selección `aria-pressed`: Historial, Mis programas para Usuario, Retorno de clientes para la Empresa propietaria y Avisos. La consulta muestra carga, error y vacío con texto; cuando falta la ampliación remota, explica que todavía no está activada en ese entorno. El cambio de identidad limpia consulta, datos privados y exportaciones en curso.
+
+Historial conserva tablas planas con encabezados, búsqueda por tipo de registro, negocio y texto, y cursor de Anterior/Siguiente. Muestra página y cantidad recibida; sus fechas usan la zona del dispositivo. Descargar búsqueda completa en CSV recorre las páginas, anuncia progreso y permite detener; si supera el límite seguro, no entrega un archivo incompleto. Las citas ofrecen descarga ICS individual para importación manual, sin sincronización automática.
+
+Devolver puntos aparece para canjes pendientes de la Empresa. El editor explica la cancelación, exige motivo y enfoca ese campo; Volver cierra sin mutar. Guardar con respuesta confirmada cierra y enfoca el título de actividad; los errores conservan el formulario y se anuncian. Mis programas distingue participación activa y pausada: salir conserva puntos e historial, requiere confirmación y puede rechazarse por llegadas abiertas, premios pendientes o citas futuras. Volver a participar revierte la pausa.
+
+Retorno de clientes presenta seis métricas de los últimos 30 días y una tabla diaria con agrupación UTC; el texto explica visitas confirmadas y canjes sin cancelar. Avisos ofrece una casilla de campañas promocionales internas y aclara que los avisos operativos permanecen. La preferencia no activa correo, WhatsApp ni push.
+
+### Preparación PWA y salida sin conexión 3.4
+
+Cuenta contiene instrucciones nativas para añadir la aplicación y muestra Instalar Centro I.A. solo cuando el navegador ofrece el evento correspondiente. La instalación depende del navegador. El aviso de desconexión usa estado textual y explica que visitas, puntos, canjes y citas necesitan Internet; no encola envíos. La pantalla offline reutiliza marca, azul profundo, superficie clara y acción dorada, explica que no contiene copia de la cuenta y pide revisar un envío sin confirmar al reconectar.
+
+El service worker se omite en PRUEBA LOCAL y limita la caché a una lista explícita de estilos, iconos y pantalla offline públicos. Autenticación, RPC y páginas privadas permanecen en red. La preparación del código y la revisión visual no equivalen a una instalación PWA comprobada.
+
 ### Preguntas frecuentes
 
 La portada incluye cuatro respuestas con `details` y `summary` nativos. Usa fondo blanco cálido, separadores finos y texto azul profundo; la respuesta abierta cambia el color del resumen sin ocultar el indicador nativo. Cada resumen y enlace mantiene un área mínima de 44px y foco visible. La composición pasa de dos columnas a una a 940px.
@@ -356,6 +450,8 @@ Dos opciones de radio: Usuario y Empresa, con etiquetas y explicación. Cada opc
 ### Ondas y movimiento
 
 La bienvenida usa `assets/nexo-fondo-ondas.png` bajo un velo profundo y tres trazos elípticos. La entrada de los trazos dura 12 segundos, una sola iteración. La portada conserva ambiente de 20 segundos. El interior reserva movimiento para aviso de 220ms, diálogo de 180ms y giro del regalo de 240ms en hover; no reutiliza la deriva antigua del perfil como patrón.
+
+En estudio 3.2 la salida de panel dura 90ms con `ease-out` y la entrada 190ms con `cubic-bezier(.16,1,.3,1)`; la preferencia de movimiento reducido aplica el cambio directamente. La celebración decorativa dura 1500ms, una sola vez, y solo aparece tras una respuesta confirmada de visita, canje, reto o cita; no intercepta punteros ni sustituye el mensaje de resultado. Con reducción de movimiento se omite por completo.
 
 El arco del panel narrativo de acceso entra una vez durante 1100ms con la curva compartida, sin retrasar el formulario. La pulsación desplaza los botones 1px. `ui-feedback.js` pausa las animaciones cuando la pestaña está oculta y, mediante IntersectionObserver con margen de 60px, las regiones decorativas fuera de vista.
 
