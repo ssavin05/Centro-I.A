@@ -236,6 +236,10 @@ Growth 3.4 prolonga el interior con `growth.css`, `growth-ui.js` y `growth-rules
 
 Experiencia personal 3.5 extiende el modo Usuario mediante `customer.css`, `customer-ui.js` y `customer-rules.js`, integrados en el interior y Studio existentes. Reutiliza azul noche, océano, cielo y dorado: el contraste tonal distingue una meta real, el siguiente paso y el reconocimiento de visitas. La composición personal y su evidencia pertenecen a `.impeccable/surfaces/customer.md`; no sustituyen el sistema general ni añaden tokens. Esta entrega de frontend permanece local y no acredita publicación.
 
+La extensión visual 3.7 intensifica esos roles dentro de Usuario con `customer.css` y `customer-motion.js`, integrados mediante `customer-ui.js` y `loyalty-ui.js`. Conserva el modo Operate: tinta y océano sostienen premio y saldo reales, el dorado destaca progreso y acción, y el cielo separa la próxima visita. Son variantes locales del mundo existente, sin nuevos tokens globales, fuentes, recursos ni dependencias. Su evidencia acotada se registra en el contrato de Usuario.
+
+La ampliación dinámica 3.8 conserva ese mundo y añade elección explícita de una meta disponible, reconocimiento de un incremento confirmado y continuidad breve entre secciones. Extiende los mismos roles de color a calendario, promociones, avisos y menú de Usuario; mantiene la tipografía y los tokens normativos existentes. La composición y la evidencia de cierre permanecen en el contrato de Usuario.
+
 **Key Characteristics:**
 
 - Superficies oscuras con texto claro y dorado; azul profundo para lectura sobre superficies claras.
@@ -446,7 +450,23 @@ El bloque focal conserva el azul noche y océano con texto blanco, avance dorado
 
 El negocio seleccionado determina saldo, premio, nivel, retos, promociones y cuatro movimientos recientes. El siguiente paso prioriza canje pendiente, cita próxima y llegada/salida voluntaria. Sin programas se ofrece una entrada a Explorar con explicación; sin premio disponible se conserva el saldo y se explica el estado. Premios añade filtros Todos, Puedo canjear y Por alcanzar, selector de negocio, progreso accesible y acceso a elegir una meta. El nivel reconoce visitas confirmadas y no concede beneficios por sí mismo.
 
-Elegir negocio o meta descubre el bloque mediante clip durante 280ms y su avance durante 440ms, con `cubic-bezier(.16,1,.3,1)`. No simula ganar puntos: el aviso de incremento requiere un saldo posterior mayor del mismo negocio y de la misma identidad. Se cancelan animaciones previas, se omiten al ocultarse la pestaña o con movimiento reducido y se restaura el foco del control al redibujar. Los controles conservan feedback breve de color y pulsación, sin bucles.
+En la entrega 3.5, elegir negocio o meta descubría el bloque mediante clip durante 280ms y su avance durante 440ms. El aviso de incremento requiere un saldo posterior mayor del mismo negocio y de la misma identidad; no simula ganar puntos. Se restaura el foco del control al redibujar. La extensión 3.7 sustituye esas duraciones por la secuencia finita descrita a continuación.
+
+### Color y movimiento de Usuario 3.7
+
+El premio mantiene un degradado tinta/océano con título blanco, saldo tabular y avance dorado. El arte de un premio canjeable pasa a dorado y conserva un estado textual; el color no sustituye la disponibilidad real. La próxima visita usa cielo y la recogida pendiente crema dorada. Los atajos distinguen premios, citas y explorar mediante tonos de la misma paleta; las promociones de descuento usan crema y las demás cielo, con sus condiciones reales. Estas variantes permanecen acotadas a Usuario y no cambian Empresa ni los tokens normativos.
+
+El bloque focal conserva esquinas de 16px, 14px en celular, y una sombra difusa local (`0 20px 42px -24px #061b3d88`). El título observado usa `clamp(1.6rem,2.1vw,1.95rem)`, con ajustes de 1.7rem hasta 1050px y 1.65rem hasta 600px; el premio usa 1.3rem, reducido a 1.1rem en celular. Son medidas de esta superficie, sin crear una escala de display global. La acción dorada mantiene todo el ancho en celular y una altura mínima de 49px.
+
+Entrar a Inicio o elegir negocio/meta descubre el bloque durante 360ms, responde el regalo durante 540ms y revela el avance real durante 620ms, con `cubic-bezier(.16,1,.3,1)`. Entrar a Premios o cambiar sus filtros revela como máximo tres resultados en 230ms con desfases de 35ms, hasta 300ms en total. El contenido está visible por defecto; ningún efecto demora una acción. Un solo frame pendiente coordina clip, opacidad y transformaciones; una nueva secuencia cancela la anterior, y se detiene por cambio de identidad, pestaña oculta o reducción de movimiento. La navegación responde durante 240ms y las acciones conservan feedback breve. No hay bucles ni conteos animados de saldo.
+
+### Metas y respuesta confirmada de Usuario 3.8
+
+El selector de meta aparece después de los tres accesos personales y antes de métricas y pases. Ofrece hasta tres premios del negocio elegido cuando hay al menos dos disponibles: activos, sin vencer, con existencias o sin límite de unidades y con coste y saldo conocidos. Cada opción comunica coste y puntos restantes o disponibilidad de canje; `aria-pressed` identifica la elegida. Elegir actualiza el premio, el avance y la acción del bloque focal, lleva el foco a su título y conserva la preferencia solo en memoria, sin escribir datos ni solicitar un canje.
+
+Las opciones conservan esquinas suaves de 12px y una cuadrícula adaptable; su altura mínima es de 104px, reducida a 94px en celular. La seleccionada combina océano profundo, texto blanco y regalo/confirmación dorados; las demás usan blanco y azul. El calendario identifica el día seleccionado con azul profundo y texto claro, las promociones y los avisos no leídos usan cielo, y el valor promocional destaca sobre crema dorada. El menú Más usa tinta con texto claro y una apertura finita de 200ms. Son variantes locales de Usuario. El foco conserva un contorno visible de 3px separado 4px, claro sobre el bloque oscuro; la pulsación responde con una contracción breve que se omite con movimiento reducido.
+
+La ganancia requiere un snapshot posterior con saldo mayor del mismo negocio y de la misma identidad. Descubre el aviso textual en 360ms, responde el regalo en 600ms y acompaña chispa y color del saldo durante 620ms; los efectos son simultáneos y el número real está completo desde el principio. La carga inicial y los refrescos sin incremento no celebran puntos. La navegación a otras secciones aplica el cambio inmediatamente y acompaña la entrada durante 230ms, sin esperar a una salida. Se conservan la secuencia focal de hasta 620ms y los tres resultados de Premios de hasta 300ms. Una secuencia nueva sustituye la anterior; identidad, pestaña oculta y reducción de movimiento cancelan los efectos. No hay bucles ni conteos ficticios.
 
 ### Preguntas frecuentes
 

@@ -11,3 +11,169 @@
 @media(max-width:760px){.customer-feature-grid{grid-template-columns:1fr}.customer-next{display:grid;grid-template-columns:34px 1fr;gap:8px 14px;padding:23px}.customer-next>.app-icon{grid-row:1/3;margin:0}.customer-next h2,.customer-next h3,.customer-next p,.customer-next small,.customer-next .button{grid-column:2;margin:0}.customer-next h3{margin:5px 0}.customer-next p{max-width:none;margin-bottom:12px}.customer-next .button{justify-self:start;margin-top:4px}.customer-next small{margin-top:10px}.customer-section-heading{align-items:flex-start}.customer-section-heading>span{display:none}.customer-reward-filters{align-items:stretch;flex-direction:column;gap:18px}.customer-reward-filters label{max-width:none}.customer-start ol{grid-template-columns:1fr;gap:22px}}
 @media(max-width:600px){.customer-places{padding-bottom:11px;margin-bottom:7px}.customer-places button{font-size:.76rem;max-width:265px}.customer-feature{padding:25px 22px;border-radius:14px}.customer-feature h2{font-size:1.45rem;max-width:17ch}.customer-feature-heading{gap:12px}.customer-feature-heading p{font-size:.75rem}.customer-emblem{width:40px;height:40px}.customer-reward-focus{margin:25px 0 20px;gap:14px}.customer-gift{width:52px;height:58px;border-radius:10px}.customer-gift .app-icon{width:29px;height:29px}.customer-reward-focus h3{font-size:1.03rem}.customer-reward-focus p{font-size:.74rem}.customer-balance{font-size:.76rem}.customer-balance strong{font-size:1.35rem}.customer-distance{font-size:.76rem;margin-bottom:22px}.customer-feature .button-primary{font-size:.79rem;width:100%;justify-content:center}.customer-feature-actions{display:block}.customer-shortcuts{gap:8px;margin-top:13px}.customer-shortcuts button{flex-direction:column;gap:7px;font-size:.73rem;min-height:74px;padding:11px 7px}.customer-shortcuts .app-icon{width:20px;height:20px}.is-customer #app-metrics{gap:20px 14px;padding:22px 0;margin:24px 0 30px}.is-customer #app-metrics dt{font-size:.72rem}.is-customer #app-metrics dd{font-size:1.35rem}.customer-section-heading{gap:12px;margin-top:32px}.customer-section-heading h2{font-size:1.1rem}.customer-section-heading .text-button{font-size:.71rem;white-space:nowrap}.customer-level,.customer-challenge{padding:23px}.customer-promo-rail{grid-auto-columns:85%;gap:12px}.customer-promo-rail article{padding:23px}.customer-timeline li{gap:12px;padding:20px 0}.customer-event-icon{width:36px;height:40px;border-radius:8px}.customer-timeline h3{font-size:.84rem}.customer-timeline p{font-size:.76rem}.customer-timeline .text-button{font-size:.72rem;padding-inline:4px}.customer-first{gap:12px}.customer-first p{font-size:.86rem}.customer-first h2{max-width:18ch}.customer-reward-filters button{padding:10px 12px;font-size:.75rem}.customer-reward-filters>div{gap:7px}}
 @media(prefers-reduced-motion:reduce){.is-customer :is(.customer-shortcuts button,.customer-reward-filters button,.customer-places button,.pass-actions button,.reward-body>.button,.reward-ticket){transition:none;transform:none!important}}
+
+/* 3.7: ink/ocean owns the goal; gold identifies progress and available rewards. */
+.is-customer{--customer-night:#071b34;--customer-blue:#134c83;--customer-sky:#dff1ff;--customer-gold:#f2c76e;background:#eaf3fc}
+.is-customer .app-sidebar{background:#091f3c}
+.is-customer .app-nav-item{transition:background-color 160ms ease,color 160ms ease}
+.is-customer .app-nav-item:hover{background:#173e67}
+.is-customer .app-nav-item[aria-current]{background:#f2c76e;color:#071b34}
+.is-customer .app-nav-item[aria-current] .app-icon{animation:customer-nav-confirm 240ms cubic-bezier(.16,1,.3,1)}
+.is-customer .workspace-intro h1{color:#092344}
+.customer-places button[aria-pressed=true]{background:#103c69;border-color:#103c69;color:white}
+.customer-feature{position:relative;isolation:isolate;background:linear-gradient(118deg,#071b34,#113963 68%,#195b91);padding:32px;box-shadow:0 20px 42px -24px #061b3d88}
+.customer-feature h2{font-size:clamp(1.6rem,2.1vw,1.95rem);line-height:1.19;letter-spacing:-.025em;text-wrap:balance;max-width:26ch}
+.customer-feature-heading p{color:#cfe7ff;font-size:.85rem;margin-top:12px}
+.customer-emblem{background:#234f77;color:#f2c76e;width:50px;height:50px}
+.customer-reward-focus{gap:22px;margin:30px 0 26px}
+.customer-gift{position:relative;width:80px;height:80px;border-radius:14px;background:linear-gradient(135deg,#ffe5a5,#edba56);color:#092344}
+.customer-gift>.app-icon:first-child{width:41px;height:41px;stroke-width:1.6}
+.customer-gift>.app-icon:last-child{position:absolute;right:-8px;top:-8px;width:19px;height:19px;color:#f7d489;stroke-width:1.8}
+.customer-reward-focus h3{font-size:1.3rem;line-height:1.35;max-width:34ch}
+.customer-reward-focus p{font-size:.79rem;color:#cfe7ff}
+.customer-goal-state{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.74rem;font-weight:650;line-height:1.5;color:#f7d489}
+.customer-goal-state>.app-icon{width:17px;height:17px}
+.customer-balance{font-size:.84rem;color:#d7ebfc}
+.customer-balance strong{font-size:1.8rem;font-weight:750;letter-spacing:-.025em}
+.customer-feature .customer-meter{height:11px;background:#416c91}
+.customer-feature .customer-meter>span{background:linear-gradient(90deg,#e7ad3e,#ffe3a0)}
+.customer-feature .customer-distance{color:#d7ebfc;font-size:.8rem}
+.customer-distance strong{color:#ffe1a0}
+.customer-feature .button-primary{background:#f2c76e;color:#071b34;min-height:50px;border-radius:10px;padding:13px 20px}
+.customer-feature .button-primary:hover{background:#ffe2a0}
+.customer-feature .button-primary .app-icon{transition:transform 160ms cubic-bezier(.16,1,.3,1)}
+.customer-feature .button-primary:hover .app-icon{transform:translateX(4px)}
+.customer-feature-actions>span{color:#d7ebfc}
+.customer-feature[data-reward-state=ready]{background:linear-gradient(118deg,#071b34,#103b67 65%,#1a598c)}
+.customer-feature[data-reward-state=near] .customer-goal-state{color:#ffe1a0}
+.customer-gain{background:#ffe1a0;color:#071b34}
+.customer-next{background:#d2eaff;padding:28px}
+.customer-next>.app-icon{width:31px;height:31px;color:#134c83}
+.customer-next h2{font-size:1.25rem;color:#092344}
+.customer-next h3{color:#123d68}
+.customer-next p,.customer-next small{color:#315775}
+.customer-next.is-pickup{background:#fff0ce}
+.customer-next .button{background:#fff;color:#123d68;border-color:#9dbed9;font-weight:650}
+.customer-shortcuts{gap:13px;margin-top:20px}
+.customer-shortcuts button{font-size:.82rem;border-color:#b6cee2;min-height:56px}
+.customer-shortcuts button[data-customer=open-rewards]{background:#fff3d9;border-color:#ddc28c}
+.customer-shortcuts button[data-customer=open-rewards] .app-icon{color:#7e581a}
+.customer-shortcuts button[data-go=calendar]{background:#deeeff}
+.customer-shortcuts button[data-go=explore]{background:#f5faff}
+.customer-shortcuts .app-icon{width:23px;height:23px;color:#134c83}
+.is-customer .club-pass{border-color:#afc9df}
+.is-customer .pass-balance strong{color:#134c83}
+.customer-level{background:linear-gradient(125deg,#092344,#174e7c)}
+.customer-level>.app-icon{width:34px;height:34px;color:#f2c76e}
+.customer-level .customer-meter>span{background:#f2c76e}
+.customer-challenge{border-color:#afc9df}
+.customer-challenge .customer-bonus{color:#795415}
+.customer-promo-rail article{background:#d9edff}
+.customer-promo-rail article[data-kind=discount]{background:#fff0ce}
+.customer-promo-rail article[data-kind=discount] h3{color:#173c50}
+.customer-event-icon{background:#cfe6fc;color:#134c83}
+.is-customer .reward-art{background:linear-gradient(145deg,#092344,#164d83);color:#f2c76e}
+.is-customer .reward-ticket:has(.customer-reward-detail[data-ready=true]) .reward-art{background:linear-gradient(145deg,#ffe3a0,#edbc65);color:#092344}
+.is-customer .reward-ticket:has(.customer-reward-detail[data-ready=true]) .reward-art>span{color:#193b55}
+.is-customer .reward-ticket:has(.customer-reward-detail[data-ready=true]){border-color:#c59743}
+.customer-reward-detail .customer-meter{height:10px}
+.customer-reward-detail .customer-meter>span{background:#2673ae}
+.customer-reward-detail[data-ready=true] .customer-meter>span{background:#ab791e}
+.customer-reward-filters button[aria-pressed=true]{background:#103c69;border-color:#103c69}
+.is-customer #studio-celebration>span{background:#092344;box-shadow:0 15px 38px -16px #071b3470}
+.customer-first p{color:#d7ebfc}
+@keyframes customer-nav-confirm{from{transform:scale(.88)}to{transform:scale(1)}}
+@media(hover:hover) and (pointer:fine){
+ .customer-shortcuts button:hover{background:#cbe4fa;border-color:#7da9cb}
+ .customer-shortcuts button[data-customer=open-rewards]:hover{background:#ffe7b3;border-color:#bd923e}
+ .is-customer .reward-ticket:hover{border-color:#477da8}
+}
+@media(max-width:1050px){.customer-feature{padding:27px}.customer-next{padding:24px}.customer-feature h2{font-size:1.7rem}.customer-reward-focus{gap:17px}.customer-gift{width:70px;height:74px}}
+@media(max-width:760px){.customer-next{padding:24px}.customer-next>.app-icon{width:28px;height:28px}.customer-next h2{font-size:1.15rem}}
+@media(max-width:600px){
+ .customer-feature{padding:25px 22px}
+ .customer-feature h2{font-size:1.65rem;max-width:19ch}
+ .customer-feature-heading p{font-size:.76rem}
+ .customer-emblem{width:40px;height:40px}
+ .customer-reward-focus{gap:16px;margin:27px 0 23px}
+ .customer-gift{width:62px;height:66px}
+ .customer-gift>.app-icon:first-child{width:34px;height:34px}
+ .customer-gift>.app-icon:last-child{width:16px;height:16px;right:-6px;top:-6px}
+ .customer-reward-focus h3{font-size:1.1rem}
+ .customer-reward-focus p{font-size:.75rem}
+ .customer-goal-state{font-size:.71rem;margin-top:8px}
+ .customer-balance{font-size:.77rem}
+ .customer-balance strong{font-size:1.6rem}
+ .customer-feature .customer-distance{font-size:.76rem}
+ .customer-feature .button-primary{min-height:49px;font-size:.79rem}
+ .customer-shortcuts{gap:8px;margin-top:14px}
+ .customer-shortcuts button{font-size:.73rem;min-height:76px}
+ .customer-first .customer-emblem{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .is-customer .app-nav-item,.customer-feature .button-primary .app-icon{transition:none}
+ .is-customer .app-nav-item[aria-current] .app-icon{animation:none}
+ .customer-feature .button-primary:hover .app-icon{transform:none}
+}
+
+/* 3.8: a real goal can be chosen at home; rich color carries selection and state. */
+.is-customer{--customer-ink:#071b34;--customer-ocean:#134c83;--customer-accent:#f2c76e;--customer-canvas:#eaf3fc}
+.is-customer ::selection{background:#f2c76e;color:#071b34}
+.is-customer :is(input,textarea){caret-color:#134c83}
+.is-customer :is(button,a,input,select,textarea):focus-visible{outline:3px solid #236aab;outline-offset:4px}
+.customer-feature :is(button,a):focus-visible{outline-color:#fff0cc}
+.customer-feature{scroll-margin-top:84px}
+.customer-goal-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.customer-goal-options button{display:flex;align-items:center;gap:15px;text-align:left;border:1px solid #a7c4df;border-radius:12px;padding:20px;background:#fff;color:#092344;min-height:104px;font:inherit;cursor:pointer;transition:background-color 150ms ease,border-color 150ms ease,transform 120ms ease}
+.customer-goal-options button>span:nth-child(2){flex:1;min-width:0}
+.customer-goal-options strong{display:block;font-size:.87rem;line-height:1.45;overflow-wrap:anywhere}
+.customer-goal-options small{display:block;margin-top:7px;font-size:.74rem;line-height:1.6;color:#315775}
+.customer-option-icon{display:grid;place-items:center;flex:none;width:44px;height:48px;background:#e0efff;color:#134c83;border-radius:9px}
+.customer-option-icon>.app-icon{width:26px;height:26px}
+.customer-option-state{display:grid;place-items:center;flex:none;width:25px;height:25px;color:#134c83}
+.customer-option-state>.app-icon{width:19px;height:19px}
+.customer-goal-options button[aria-pressed=true]{background:#103b67;color:#fff;border-color:#103b67}
+.customer-goal-options button[aria-pressed=true] small{color:#d7ebfc}
+.customer-goal-options button[aria-pressed=true] .customer-option-icon{background:#f2c76e;color:#071b34}
+.customer-goal-options button[aria-pressed=true] .customer-option-state{color:#f2c76e}
+.customer-section-heading h2{color:#092344}
+.is-customer .studio-promotion{background:#dcefff;border-color:#b3cee5}
+.is-customer .studio-promotion>strong{color:#735018;background:#ffe8b7;border-radius:8px;padding:9px 14px;align-self:flex-start;font-size:1.25rem}
+.is-customer .studio-promo-kind{background:#103b67;color:#fff}
+.is-customer .studio-stamps>.is-earned{background:#f2c76e;color:#071b34;border-color:#bc8a32}
+.is-customer .studio-challenge-icon{background:#103b67;color:#f2c76e}
+.is-customer .studio-month-grid button[aria-pressed=true]{background:#103b67;color:#fff;border-color:#103b67}
+.is-customer .studio-notice.is-unread{background:#dfeeff;border-color:#a7c4df}
+.is-customer .studio-notice>.app-icon{color:#134c83}
+.is-customer .studio-menu{background:#092344;color:#fff;border:0}
+.is-customer .studio-menu button{color:#e2f0ff}
+.is-customer .studio-menu button:hover{background:#194e7e}
+.is-customer .studio-menu:popover-open{animation:customer-menu-open 200ms cubic-bezier(.16,1,.3,1)}
+.is-customer .redeem-dialog{background:#f5faff;color:#092344}
+.is-customer .redeem-symbol{background:#f2c76e;color:#071b34}
+.is-customer .redeem-dialog .button-primary{background:#103b67;color:#fff}
+.customer-gain{display:inline-flex;align-items:center;gap:6px;line-height:1.4}
+.is-customer .customer-gift,.is-customer .reward-art>.app-icon{transition:transform 200ms cubic-bezier(.16,1,.3,1)}
+.is-customer :is(.customer-shortcuts button,.customer-places button,.customer-reward-filters button,.customer-goal-options button,.button):active:not(:disabled){transform:scale(.975)}
+.is-customer .reward-art>.app-icon{width:43px;height:43px}
+@keyframes customer-menu-open{from{clip-path:inset(15% 0 0);opacity:.8;transform:translateY(7px)}to{clip-path:inset(0);opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine){
+ .customer-goal-options button:not([aria-pressed=true]):hover{background:#dceeff;border-color:#5c8fbb}
+ .customer-goal-options button[aria-pressed=true]:hover{background:#174b7d}
+ .is-customer .reward-ticket:hover .reward-art>.app-icon{transform:rotate(-7deg) scale(1.08)}
+ .customer-feature .button-primary:hover{box-shadow:0 9px 18px -12px #000a}
+}
+@media(max-width:600px){
+ .customer-goal-options{gap:10px}
+ .customer-goal-options button{min-height:94px;padding:17px;gap:12px}
+ .customer-goal-options strong{font-size:.82rem}
+ .customer-goal-options small{font-size:.72rem}
+ .customer-goal-picker .customer-section-heading{gap:12px}
+ .customer-goal-picker .customer-section-heading h2{font-size:1.1rem;max-width:20ch}
+ .is-customer .studio-menu{bottom:90px}
+}
+@media(prefers-reduced-motion:reduce){
+ .customer-goal-options button,.is-customer .customer-gift,.is-customer .reward-art>.app-icon{transition:none}
+ .is-customer .studio-menu:popover-open{animation:none}
+ .is-customer :is(.customer-shortcuts button,.customer-places button,.customer-reward-filters button,.customer-goal-options button,.button):active:not(:disabled),.is-customer .reward-ticket:hover .reward-art>.app-icon{transform:none}
+}

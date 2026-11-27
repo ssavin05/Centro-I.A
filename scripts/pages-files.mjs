@@ -1,5 +1,5 @@
 export const pagesFiles = [
-  'customer-ui.js','customer-rules.js','customer.css',
+  'customer-ui.js','customer-rules.js','customer-motion.js','customer.css',
   'pwa.js','sw.js','offline.html',
   'growth-ui.js','growth-rules.js','growth.css',
   'index.html', 'auth.html', 'workspace.html',
