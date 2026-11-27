@@ -2,11 +2,15 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 27 de noviembre de 2026; se conserva el historial anterior.
 
+## Corrección de acceso 3.8.1 · 27 de noviembre de 2026
+
+Registro/login con respuesta bloqueada tienen límite de espera y recarga explícita; el timeout HTTP cubre el cuerpo Auth. Errores y confirmación reciben foco; sesión y perfil bloqueados también terminan con recuperación.124pruebas completas y prueba visual de bloqueo20segundos aprobadas. La prueba pública de credenciales inválidas devuelve error y libera el formulario; acceso válido del titular y correo entregado siguen por validar. Sin cambios de configuración/RLS ni cuentas de prueba de producción. Detalle en ACCESO-3.8.1.md. Publicación tras CI/Pages y control público.
+
 ## Experiencia dinámica 3.8 · 27 de noviembre de 2026
 
 Integra 3.7 y añade selector de metas reales junto al premio, ganancia confirmada animada, entrada entre secciones y colores reforzados en calendario/avisos/promociones. 115 pruebas completas y nueve afectadas tras la disposición final aprobadas; build y filtro correctos. Cinco capturas locales con datos sintéticos, sin errores de consola observados. Sin cambios a Supabase ni dependencias nuevas.
 
-El titular autorizó expresamente subir al repositorio público y actualizar la web. CI/Pages y el control público se registran al completar la entrega; el rechazo de 3.7 queda como historial. Guía GUIA-CENTRO-IA-3.8.md.
+El titular autorizó expresamente subir al repositorio público y actualizar la web. PR #2 integrado en main (c64fb729); CI, PostgreSQL, distribución, Pages y control público aprobados. Publicada en https://ssavin05.github.io/Centro-I.A/. Control de entrega:46/46 recursos coinciden por SHA256 y cinco rutas privadas responden404, registrado en PUBLICACION-3.8.json junto con los enlaces de Actions. El rechazo de3.7 queda como historial. Guía GUIA-CENTRO-IA-3.8.md.
 
 ## Extensión visual 3.7 · 26 de noviembre de 2026
 

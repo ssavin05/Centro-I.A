@@ -1,3 +1,5 @@
+import {timedFetch} from './auth-request.js';
+export {timedFetch} from './auth-request.js';
 // This publishable key is public by design. PostgreSQL RLS authorizes each request.
 export let supabase = null;
 let sdkTimer;
@@ -14,12 +16,3 @@ try {
   // Controllers render an actionable loading error when the SDK cannot load.
 } finally {clearTimeout(sdkTimer);}
 
-export async function timedFetch(input, options = {}) {
-  const controller = new AbortController();
-  const abort = () => controller.abort();
-  if (options.signal?.aborted) abort();
-  else options.signal?.addEventListener('abort', abort, {once:true});
-  const timer = setTimeout(abort, 15000);
-  try {return await fetch(input, {...options, signal:controller.signal});}
-  finally {clearTimeout(timer);options.signal?.removeEventListener('abort', abort);}
-}

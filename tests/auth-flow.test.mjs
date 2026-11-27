@@ -185,3 +185,18 @@ test('una sesión cacheada rechazada no redirige repetidamente al espacio', asyn
   assert.equal(page.element('submit-auth').disabled,false);
   assert.match(page.element('form-error').textContent,/sesión/);
 });
+
+test('registro bloqueado sale de Procesando y solo ofrece recargar sin duplicar la petición ni aceptar un éxito tardío',async()=>{
+ let calls=0,finish;const page=pageHarness('auth.js',{authTimeoutMs:15,client:{auth:{signUp:()=>{calls++;return new Promise(resolve=>finish=resolve);}}}});page.set(signupValues);await page.submit();
+ assert.equal(calls,1);assert.equal(page.element('submit-auth').disabled,false);assert.equal(page.element('submit-auth').textContent,'Recargar acceso');assert.match(page.element('form-error').textContent,/pudo haberse procesado/);assert.equal(page.element('auth-form').getAttribute('aria-busy'),'false');
+ await page.submit();assert.equal(calls,1);assert.deepEqual(page.navigations,['reload']);finish({data:{session:{}},error:null});await settle();assert.deepEqual(page.navigations,['reload']);assert.equal(page.element('availability').hidden,true);
+});
+test('inicio de sesión bloqueado termina con una acción de recuperación y conserva el correo sin navegar',async()=>{
+ const page=pageHarness('auth.js',{search:'?mode=login',authTimeoutMs:15,client:{auth:{signInWithPassword:()=>new Promise(()=>{})}}});page.set(signupValues);await page.submit();assert.equal(page.element('submit-auth').textContent,'Recargar acceso');assert.equal(page.element('email').value,signupValues.email);assert.deepEqual(page.navigations,[]);assert.equal(page.element('form-error').hidden,false);
+});
+test('inicialización bloqueada no deja el acceso deshabilitado para siempre',async()=>{
+ const page=pageHarness('auth.js',{search:'?mode=login',authTimeoutMs:15,client:{auth:{getSession:()=>new Promise(()=>{})}}});await new Promise(resolve=>setTimeout(resolve,30));assert.equal(page.element('submit-auth').disabled,false);assert.equal(page.element('submit-auth').textContent,'Recargar acceso');await page.submit();assert.deepEqual(page.navigations,['reload']);
+});
+test('registro aceptado sin sesión mantiene el paso de confirmar correo visible y enfocado',async()=>{
+ const page=pageHarness('auth.js',{client:{auth:{signUp:async()=>({data:{session:null},error:null})}}});page.set(signupValues);await page.submit();assert.equal(page.element('availability').hidden,false);assert.match(page.element('availability').textContent,/antes de iniciar sesión/);assert.match(page.element('availability').textContent,/spam/);assert.equal(page.element('password').value,'');assert.deepEqual(page.navigations,[]);
+});

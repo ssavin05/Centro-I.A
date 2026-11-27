@@ -13,6 +13,7 @@ export function validatePassword(password, confirmation) {
 }
 export function authErrorMessage(error) {
   const messages = {
+    auth_timeout: 'El servicio de acceso tardó demasiado. La solicitud pudo haberse procesado: revisa tu correo y pulsa Recargar acceso antes de volver a intentar.',
     invalid_credentials: 'El correo o la contraseña no son correctos. Revisa tus datos o recupera el acceso.',
     email_not_confirmed: 'Confirma tu correo antes de iniciar sesión. Revisa también spam.',
     email_address_not_authorized: 'El servicio de correo todavía no permite enviar a esta dirección. Inténtalo cuando esté habilitado.',

@@ -141,3 +141,10 @@ test('sesión ausente del SDK con status 400 dirige a login sin consultar datos 
  const page=pageHarness('workspace.js',{client:{auth:{getUser:async()=>({data:{user:null},error:{name:'AuthSessionMissingError',status:400,message:'Auth session missing!'}})},from(){assert.fail('Sin sesión no se consultan perfiles');}}});
  await settle();assert.deepEqual(page.navigations,['auth.html?mode=login']);assert.equal(page.element('retry-profile').hidden,true);
 });
+
+test('una verificación de sesión bloqueada termina sin datos privados y ofrece reintento',async()=>{
+ const page=pageHarness('workspace.js',{authTimeoutMs:15,client:{auth:{getUser:()=>new Promise(()=>{})},from(){assert.fail('No se debe consultar sin identidad verificada');}}});await new Promise(resolve=>setTimeout(resolve,30));assert.equal(page.element('profile-section').hidden,true);assert.equal(page.element('retry-profile').hidden,false);assert.match(page.element('workspace-message').textContent,/tardó demasiado/);assert.equal(page.element('workspace-content').getAttribute('aria-busy'),'false');
+});
+test('un perfil bloqueado después de autenticar no deja la entrada cargando indefinidamente',async()=>{
+ const page=pageHarness('workspace.js',{authTimeoutMs:15,client:{auth:{getUser:async()=>({data:{user:{id:'a'}},error:null})},from:()=>({select:()=>({eq:()=>({single:()=>new Promise(()=>{})})})})}});await new Promise(resolve=>setTimeout(resolve,30));assert.equal(page.element('profile-section').hidden,true);assert.equal(page.element('retry-profile').hidden,false);assert.equal(page.element('export-profile').disabled,true);assert.equal(page.element('workspace-content').getAttribute('aria-busy'),'false');
+});
