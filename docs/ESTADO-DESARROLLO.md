@@ -2,14 +2,16 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 26 de noviembre de 2026; se conserva el historial anterior.
 
-## Lanzamiento web3.6 — activación y preparación
+## Lanzamiento web3.6 — publicación para piloto
 
 Este corte prevalece sobre los históricos inferiores.
 
 - Growth aplicada:20261127030040_growth_34.sql, después de la instrucción del titular de realizar la lista de lanzamiento.22tablasRLS,6RPCgrowth autorizadas,2perfiles preservados y0programas; no se crearon fixtures de producción.
 - Registro Auth habilitado por correo; confirmación obligatoria, sin acceso anónimo de usuarios. No se ha acreditado entrega de correo ni usado credenciales del titular.
-- Publicación GitHub Pages en preparación: registrar aquí su resultado comprobado.
-- Se conservan106pruebas y la contención PostgreSQL nativa anterior. Tras alinear el nombre de migración se vuelve a verificar código.
+- PR1 integrado en main, mergece8a2836. Publicada en https://ssavin05.github.io/Centro-I.A/. Filtro de Pages derivado del manifiesto;45/45recursos coinciden por hash y cinco rutas fuera de distribución responden404 en el control sobre0635bb95.
+-108/108pruebas locales aprobadas, incluida restauración sintética y filtro de publicación. Contención PostgreSQL nativa preservada. Registro3.6-verificacion-final.txt.
+- Exportación real bloqueada por auto-review por payload personal/destino no autorizado específicamente; solicitud pendiente, sin datos exportados. Restauración de producción/Auth no acreditada.
+- Panel privado Supabase requiere inicio de sesión para URLs de correo/recuperación. UI pública sin sesión dirige al login y el SDK carga sin errores observados. Piloto físico y JWT reales pendientes.
 
 ## Entrega 3.5.1 — respaldo y contención real (26 de noviembre de2026)
 

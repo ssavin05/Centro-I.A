@@ -1,3 +1,7 @@
+# Centro I.A. ·3.6 publicada para piloto
+
+Aplicación:https://ssavin05.github.io/Centro-I.A/. Growth activado en Supabase como20261127030040. Guía:docs/GUIA-CENTRO-IA-3.6.md.108pruebas locales y contención PostgreSQL17.11; control del sitio45/45recursos y5rutas fuera de distribución404. Faltan URLs/correo privados, cuentas/JWT reales, piloto físico y autorización de respaldo real. La prueba local4178 sigue aislada y sintética. Los cortes inferiores son históricos.
+
 # Centro I.A. · entrega3.5.1
 
 Respaldo de fuente3.5 guardado en el PR1; CI y contención PostgreSQL17.11 comprobadas.106pruebas locales aprobadas. Guía:docs/GUIA-CENTRO-IA-3.5.1.md. Supabase Growth requiere autorización específica después del rechazo automático; sin publicación nueva. Inicio de Usuario:node scripts/review-35.mjs, puerto4178. Los cortes siguientes se conservan como historial.
