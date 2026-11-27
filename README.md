@@ -1,3 +1,7 @@
+# Centro I.A. · entrega3.5.1
+
+Respaldo de fuente3.5 guardado en el PR1; CI y contención PostgreSQL17.11 comprobadas.106pruebas locales aprobadas. Guía:docs/GUIA-CENTRO-IA-3.5.1.md. Supabase Growth requiere autorización específica después del rechazo automático; sin publicación nueva. Inicio de Usuario:node scripts/review-35.mjs, puerto4178. Los cortes siguientes se conservan como historial.
+
 # Centro I.A. · entrega 3.5
 
 Experiencia personal de Usuario con azul noche, cielo y dorado, premio destacado, progreso por negocio, filtros, retos y actividad. Inicio de revisión: node scripts/review-35.mjs, http://127.0.0.1:4178/workspace.html?as=user. Datos sintéticos separados, PRUEBA LOCAL.

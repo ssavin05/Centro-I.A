@@ -1,6 +1,6 @@
 {
   "name": "centro-ia-fidelidad-github",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -20,7 +20,8 @@
     "preview:32": "node scripts/start-32.mjs",
     "preview:33": "node scripts/start-33.mjs",
     "preview:34": "node scripts/start-34.mjs",
-    "preview:35": "node scripts/review-35.mjs"
+    "preview:35": "node scripts/review-35.mjs",
+    "test:postgres": "node scripts/verify-postgres.mjs"
   },
   "description": "Centro I.A.: cuentas Usuario y Empresa con Supabase Auth y frontend estático en GitHub Pages.",
   "devDependencies": {

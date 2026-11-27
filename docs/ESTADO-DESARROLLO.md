@@ -1,6 +1,17 @@
 # Estado del desarrollo de Centro I.A.
 
-Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 25 de noviembre de 2026; se conserva el historial anterior.
+Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 26 de noviembre de 2026; se conserva el historial anterior.
+
+## Entrega 3.5.1 — respaldo y contención real (26 de noviembre de2026)
+
+Este corte prevalece sobre los anteriores. Sin cambios visuales ni publicación.
+
+- Fuente3.4/3.5 guardada en GitHub: commits8f838f3,81f50c9. CI aprobada. Prueba PostgreSQL nativa guardada en60ef13c y aprobada en run45930596215; registro RESULTADOS-POSTGRES-3.5.1.txt.
+-106/106pruebas locales, build y comprobaciones correctos. CI conserva dist como artefacto revisable siete días.
+- PostgreSQL17.11 con conexiones independientes: sobreventa de última unidad, clave idempotente simultánea y cuatro carreras entrega/devolución. Sin fixtures en Supabase; no acredita carga ni toda la agenda.
+- Growth3.4 sigue sin aplicar: auto-review rechazó la migración persistente por requerir autorización específica de esta ampliación. Solicitud pendiente al titular; no hubo vía alternativa.
+- Preflight remoto:2perfiles,0programas/membresías/canjes;21tablas RLS. Main y rama de archivo intactos. PR1 sigue en borrador; no acredita publicación.
+- Guía GUIA-CENTRO-IA-3.5.1.md y ZIP Cia.IA.3.5.1.zip; se preservan anteriores. Puerto local4178.
 
 ## Entrega 3.5 — experiencia personal de Usuario
 

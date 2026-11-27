@@ -32,6 +32,7 @@ jobs:
         with:
           name: centro-ia-sitio-${{ github.sha }}
           path: dist
+          include-hidden-files: true
           retention-days: 7
   postgres:
     name: Comprobar contención PostgreSQL 17
@@ -45,7 +46,7 @@ jobs:
         ports:
           - 55432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U postgres -d postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
