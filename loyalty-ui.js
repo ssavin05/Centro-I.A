@@ -20,12 +20,12 @@ export function mountLoyalty({supabase}){
  const owned=()=>snapshot?.clubs[0];
  function notice(text,tone='success'){const node=$('loyalty-notice');node.dataset.tone=tone;node.setAttribute('role',tone==='error'?'alert':'status');node.textContent=text;}
  function show(next,{focus=false,immediate=false}={}){
-  if(focus&&next!==view&&!immediate){studio.animateNavigation(next,()=>show(next,{focus,immediate:true}));return;}
+  if(focus&&next!==view&&!immediate&&isCompany()){studio.animateNavigation(next,()=>show(next,{focus,immediate:true}));return;}
   if(!loyaltySections.includes(next))next='home';view=next;
   for(const panel of document.querySelectorAll('[data-panel]'))panel.hidden=panel.dataset.panel!==view;
   for(const button of document.querySelectorAll('[data-view]')){if(button.dataset.view===view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
   const titles={growth:'Actividad y datos',operations:'Operación y reservas',home:'Mi centro',rewards:'Premios',visits:isCompany()?'Visitas y clientes':'Mis visitas',explore:isCompany()?'Mi negocio':'Explorar',account:'Mi cuenta'};
-  $('app-section-name').textContent=titles[view]||studio.titleFor(view);
+  $('app-section-name').textContent=titles[view]||studio.titleFor(view);customer.onNavigate?.(view);
   if(focus){const heading=document.querySelector('[data-panel="'+view+'"] h2');heading?.setAttribute('tabindex','-1');heading?.focus();}
  }
  const clubName=id=>snapshot?.clubs.find(c=>c.id===id)?.name||'Negocio';

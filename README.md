@@ -1,3 +1,11 @@
+# Centro I.A. · 3.8 experiencia dinámica
+
+Integra 3.7 y añade metas interactivas en Inicio, respuesta a puntos confirmados y movimiento entre secciones. 115 pruebas completas aprobadas; guía docs/GUIA-CENTRO-IA-3.8.md. Prueba local aislada: node scripts/review-38.mjs, puerto 4180. Publicación autorizada por el titular; resultado de CI/Pages y control público se entrega con el ZIP. Los cortes inferiores son históricos.
+
+# Centro I.A. · 3.7 color y movimiento
+
+Experiencia de Usuario con tinta y océano intensos, premios dorados, avance real animado y respuesta de navegación/filtros. 111 pruebas locales aprobadas. Guía: docs/GUIA-CENTRO-IA-3.7.md. Revisión local aislada: node scripts/review-37.mjs, puerto 4179. 3.7 sin publicar: subida rechazada por revisión automática, pendiente de aprobación explícita. Detalle: docs/VERIFICACION-3.7.md. Los cortes inferiores se conservan como historial.
+
 # Centro I.A. ·3.6 publicada para piloto
 
 Aplicación:https://ssavin05.github.io/Centro-I.A/. Growth activado en Supabase como20261127030040. Guía:docs/GUIA-CENTRO-IA-3.6.md.108pruebas locales y contención PostgreSQL17.11; control del sitio45/45recursos y5rutas fuera de distribución404. Faltan URLs/correo privados, cuentas/JWT reales, piloto físico y autorización de respaldo real. La prueba local4178 sigue aislada y sintética. Los cortes inferiores son históricos.

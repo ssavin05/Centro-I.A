@@ -1,6 +1,16 @@
 # Estado del desarrollo de Centro I.A.
 
-Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 26 de noviembre de 2026; se conserva el historial anterior.
+Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 27 de noviembre de 2026; se conserva el historial anterior.
+
+## Experiencia dinámica 3.8 · 27 de noviembre de 2026
+
+Integra 3.7 y añade selector de metas reales junto al premio, ganancia confirmada animada, entrada entre secciones y colores reforzados en calendario/avisos/promociones. 115 pruebas completas y nueve afectadas tras la disposición final aprobadas; build y filtro correctos. Cinco capturas locales con datos sintéticos, sin errores de consola observados. Sin cambios a Supabase ni dependencias nuevas.
+
+El titular autorizó expresamente subir al repositorio público y actualizar la web. CI/Pages y el control público se registran al completar la entrega; el rechazo de 3.7 queda como historial. Guía GUIA-CENTRO-IA-3.8.md.
+
+## Extensión visual 3.7 · 26 de noviembre de 2026
+
+Azul tinta y océano más intensos; premios disponibles dorados, barra de avance y navegación con movimiento finito. 111 pruebas locales, build, cuatro capturas y revisión independiente aprobados. Cero dependencias o migraciones nuevas. Subida pública rechazada por auto-review por divulgación no autorizada específicamente; no se publicó 3.7. Entrega local y ZIP verificados; guía GUIA-CENTRO-IA-3.7.md.
 
 ## Lanzamiento web3.6 — publicación para piloto
 
