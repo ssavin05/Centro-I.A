@@ -1,21 +1,16 @@
-name: Publicar Centro I.A. en GitHub Pages
+name: Comprobar distribución de Centro I.A.
 on:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: github-pages
+  group: centro-distribucion
   cancel-in-progress: true
 jobs:
-  deploy:
+  verify-distribution:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Obtener proyecto
         uses: actions/checkout@v4
@@ -29,16 +24,12 @@ jobs:
           version: '11.25.0'
       - name: Instalar dependencias de prueba sin scripts
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - name: Revisar proyecto
-        run: npm run verify
-      - name: Crear sitio estático
-        run: npm run build:pages
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Subir sitio
-        uses: actions/upload-pages-artifact@v3
+      - name: Revisar proyecto y filtro de publicación
+        run: node scripts/verify.mjs
+      - name: Conservar distribución del manifiesto
+        uses: actions/upload-artifact@v4
         with:
+          name: centro-distribucion
           path: dist
-      - name: Publicar
-        id: deployment
-        uses: actions/deploy-pages@v4
+          include-hidden-files: true
+          retention-days: 7

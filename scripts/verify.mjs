@@ -3,7 +3,7 @@ import {fileURLToPath} from 'node:url';
 import {pagesFiles} from './pages-files.mjs';
 const root = fileURLToPath(new URL('../',import.meta.url));
 const commands = [
-  ['scripts/check-repo.mjs'], ['scripts/check-pages.mjs'],
+  ['scripts/check-repo.mjs'], ['scripts/check-pages.mjs'], ['scripts/pages-filter.mjs'],
   ...pagesFiles.filter(file=>file.endsWith('.js')).map(file=>['--check',file]),
   ['--check','server/index.mjs'], ['--check','server/db.mjs'], ['--check','app/app.js'],
   ['--test','tests/*.test.mjs'], ['scripts/build-pages.mjs'],
