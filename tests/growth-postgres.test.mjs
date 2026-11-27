@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {operationsDatabase,actors,key} from './helpers/operations.mjs';
-async function setup(t){const h=await operationsDatabase(t);await h.db.exec(await readFile(new URL('../supabase/migrations/20261125201344_growth_34.sql',import.meta.url),'utf8'));return h;}
+async function setup(t){const h=await operationsDatabase(t);await h.db.exec(await readFile(new URL('../supabase/migrations/20261127030040_growth_34.sql',import.meta.url),'utf8'));return h;}
 test('3.4: devolución pendiente, saldo/stock/historial exactos e idempotencia',async t=>{
  const h=await setup(t);await h.rpc('company','cia_studio_adjust_points',[h.club,actors.user,100,'Saldo prueba',key(101)]);
  const reward=await h.rpc('company','cia_save_reward',[h.club,'Premio prueba','',30,1,key(102)]);

@@ -77,3 +77,9 @@ La propuesta supabase/proposals/business_onboarding.sql solo está probada local
 - Mantener saldos por negocio, datos de sesión limpios, progreso real y ganancia solo tras nuevo snapshot de la misma identidad. .is-customer limita los cambios visuales; Empresa conserva su composición.
 - Prueba sintética separada scripts/review-35.mjs, puerto4178 y base .local-centro-35. No usar fixtures en producción.
 -104pruebas completas aprobadas; revisión visual limitada y publicación/guardado remoto aún pendientes.
+
+## Activación3.6
+
+- Growth3.4 fue aplicada después de que el titular pidió realizar la lista de lanzamiento. Historial remoto20261127030040; archivo20261127030040_growth_34.sql. No reaplicar la versión local anterior20261125201344.
+- Verificadas22tablasRLS y6RPCgrowth solo authenticated con search_path vacío; preferencias sin SELECT directo y snapshot privado no ejecutable.2perfiles y0programas preservados, sin fixtures de producción.
+- scripts/verify-live.mjs compara los46recursos públicos con el despliegue y comprueba404 en rutas privadas; solo lectura, sin sesiones ni mutaciones. Un despliegue no acredita todavía correo entregado, recorrido autenticado real ni prueba física.

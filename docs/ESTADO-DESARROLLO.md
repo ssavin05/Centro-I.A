@@ -2,6 +2,15 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 26 de noviembre de 2026; se conserva el historial anterior.
 
+## Lanzamiento web3.6 — activación y preparación
+
+Este corte prevalece sobre los históricos inferiores.
+
+- Growth aplicada:20261127030040_growth_34.sql, después de la instrucción del titular de realizar la lista de lanzamiento.22tablasRLS,6RPCgrowth autorizadas,2perfiles preservados y0programas; no se crearon fixtures de producción.
+- Registro Auth habilitado por correo; confirmación obligatoria, sin acceso anónimo de usuarios. No se ha acreditado entrega de correo ni usado credenciales del titular.
+- Publicación GitHub Pages en preparación: registrar aquí su resultado comprobado.
+- Se conservan106pruebas y la contención PostgreSQL nativa anterior. Tras alinear el nombre de migración se vuelve a verificar código.
+
 ## Entrega 3.5.1 — respaldo y contención real (26 de noviembre de2026)
 
 Este corte prevalece sobre los anteriores. Sin cambios visuales ni publicación.
