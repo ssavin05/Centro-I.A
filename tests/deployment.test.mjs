@@ -1,13 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {pagesFiles} from '../scripts/pages-files.mjs';
 test('el registro gratuito publica el frontend con Supabase Auth',()=>{
  const builder=readFileSync('scripts/build-pages.mjs','utf8');
  const auth=readFileSync('auth.js','utf8');
  const workspace=readFileSync('workspace.js','utf8');
  const client=readFileSync('supabase-client.js','utf8');
  const schema=readFileSync('supabase/migrations/20261112_cia_profiles.sql','utf8');
- assert.match(builder,/supabase-client\.js/);
+ assert.ok(pagesFiles.includes('supabase-client.js'));
+ assert.match(builder,/pagesFiles/);
  assert.match(auth,/supabase\.auth\.signUp/);
  assert.match(auth,/supabase\.auth\.signInWithPassword/);
  assert.match(workspace,/supabase\.auth\.getUser/);

@@ -23,6 +23,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
+      - name: Instalar dependencias de prueba sin scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Revisar proyecto
         run: npm run verify
       - name: Crear sitio estático

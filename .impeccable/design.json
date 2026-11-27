@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T04:14:30.495Z",
+  "title": "Design System: Centro I.A.",
+  "extensions": {
+    "colorMeta": {
+      "gold": {
+        "role": "primary",
+        "displayName": "Dorado de marca",
+        "tonalRamp": [
+          "oklch(15% 0.1111 78.91)",
+          "oklch(25% 0.1111 78.91)",
+          "oklch(35% 0.1111 78.91)",
+          "oklch(45% 0.1111 78.91)",
+          "oklch(55% 0.1111 78.91)",
+          "oklch(65% 0.1111 78.91)",
+          "oklch(80% 0.1111 78.91)",
+          "oklch(95% 0.1111 78.91)"
+        ]
+      },
+      "blue": {
+        "role": "secondary",
+        "displayName": "Azul claro",
+        "tonalRamp": [
+          "oklch(15% 0.0201 233.86)",
+          "oklch(25% 0.0201 233.86)",
+          "oklch(35% 0.0201 233.86)",
+          "oklch(45% 0.0201 233.86)",
+          "oklch(55% 0.0201 233.86)",
+          "oklch(65% 0.0201 233.86)",
+          "oklch(80% 0.0201 233.86)",
+          "oklch(95% 0.0201 233.86)"
+        ]
+      },
+      "deep": {
+        "role": "primary",
+        "displayName": "Azul profundo",
+        "tonalRamp": [
+          "oklch(15% 0.0547 235.26)",
+          "oklch(25% 0.0547 235.26)",
+          "oklch(35% 0.0547 235.26)",
+          "oklch(45% 0.0547 235.26)",
+          "oklch(55% 0.0547 235.26)",
+          "oklch(65% 0.0547 235.26)",
+          "oklch(80% 0.0547 235.26)",
+          "oklch(95% 0.0547 235.26)"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Crema",
+        "tonalRamp": [
+          "oklch(15% 0.0111 89.72)",
+          "oklch(25% 0.0111 89.72)",
+          "oklch(35% 0.0111 89.72)",
+          "oklch(45% 0.0111 89.72)",
+          "oklch(55% 0.0111 89.72)",
+          "oklch(65% 0.0111 89.72)",
+          "oklch(80% 0.0111 89.72)",
+          "oklch(95% 0.0111 89.72)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Blanco cálido",
+        "tonalRamp": [
+          "oklch(15% 0.0045 78.30)",
+          "oklch(25% 0.0045 78.30)",
+          "oklch(35% 0.0045 78.30)",
+          "oklch(45% 0.0045 78.30)",
+          "oklch(55% 0.0045 78.30)",
+          "oklch(65% 0.0045 78.30)",
+          "oklch(80% 0.0045 78.30)",
+          "oklch(95% 0.0045 78.30)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Azul de apoyo",
+        "tonalRamp": [
+          "oklch(15% 0.0482 235.17)",
+          "oklch(25% 0.0482 235.17)",
+          "oklch(35% 0.0482 235.17)",
+          "oklch(45% 0.0482 235.17)",
+          "oklch(55% 0.0482 235.17)",
+          "oklch(65% 0.0482 235.17)",
+          "oklch(80% 0.0482 235.17)",
+          "oklch(95% 0.0482 235.17)"
+        ]
+      },
+      "error": {
+        "role": "semantic",
+        "displayName": "Rojo de error",
+        "tonalRamp": [
+          "oklch(15% 0.1492 20.11)",
+          "oklch(25% 0.1492 20.11)",
+          "oklch(35% 0.1492 20.11)",
+          "oklch(45% 0.1492 20.11)",
+          "oklch(55% 0.1492 20.11)",
+          "oklch(65% 0.1492 20.11)",
+          "oklch(80% 0.1492 20.11)",
+          "oklch(95% 0.1492 20.11)"
+        ]
+      },
+      "success": {
+        "role": "semantic",
+        "displayName": "Verde de confirmación",
+        "tonalRamp": [
+          "oklch(15% 0.0792 160.79)",
+          "oklch(25% 0.0792 160.79)",
+          "oklch(35% 0.0792 160.79)",
+          "oklch(45% 0.0792 160.79)",
+          "oklch(55% 0.0792 160.79)",
+          "oklch(65% 0.0792 160.79)",
+          "oklch(80% 0.0792 160.79)",
+          "oklch(95% 0.0792 160.79)"
+        ]
+      },
+      "focus": {
+        "role": "semantic",
+        "displayName": "Azul de foco",
+        "tonalRamp": [
+          "oklch(15% 0.0899 232.42)",
+          "oklch(25% 0.0899 232.42)",
+          "oklch(35% 0.0899 232.42)",
+          "oklch(45% 0.0899 232.42)",
+          "oklch(55% 0.0899 232.42)",
+          "oklch(65% 0.0899 232.42)",
+          "oklch(80% 0.0899 232.42)",
+          "oklch(95% 0.0899 232.42)"
+        ]
+      },
+      "emphasis-gold": {
+        "role": "primary",
+        "displayName": "Dorado claro de énfasis",
+        "tonalRamp": [
+          "oklch(15% 0.0892 82.36)",
+          "oklch(25% 0.0892 82.36)",
+          "oklch(35% 0.0892 82.36)",
+          "oklch(45% 0.0892 82.36)",
+          "oklch(55% 0.0892 82.36)",
+          "oklch(65% 0.0892 82.36)",
+          "oklch(80% 0.0892 82.36)",
+          "oklch(95% 0.0892 82.36)"
+        ]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Negro azulado",
+        "tonalRamp": [
+          "oklch(15% 0.0172 241.18)",
+          "oklch(25% 0.0172 241.18)",
+          "oklch(35% 0.0172 241.18)",
+          "oklch(45% 0.0172 241.18)",
+          "oklch(55.00000000000001% 0.0172 241.18)",
+          "oklch(65% 0.0172 241.18)",
+          "oklch(80% 0.0172 241.18)",
+          "oklch(95% 0.0172 241.18)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Blanco",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(25% 0.0000 89.88)",
+          "oklch(35% 0.0000 89.88)",
+          "oklch(45% 0.0000 89.88)",
+          "oklch(55.00000000000001% 0.0000 89.88)",
+          "oklch(65% 0.0000 89.88)",
+          "oklch(80% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "gold-bright": {
+        "role": "primary",
+        "displayName": "Dorado luminoso",
+        "tonalRamp": [
+          "oklch(15% 0.1021 83.18)",
+          "oklch(25% 0.1021 83.18)",
+          "oklch(35% 0.1021 83.18)",
+          "oklch(45% 0.1021 83.18)",
+          "oklch(55.00000000000001% 0.1021 83.18)",
+          "oklch(65% 0.1021 83.18)",
+          "oklch(80% 0.1021 83.18)",
+          "oklch(95% 0.1021 83.18)"
+        ]
+      },
+      "blue-mid": {
+        "role": "secondary",
+        "displayName": "Azul medio",
+        "tonalRamp": [
+          "oklch(15% 0.0643 231.26)",
+          "oklch(25% 0.0643 231.26)",
+          "oklch(35% 0.0643 231.26)",
+          "oklch(45% 0.0643 231.26)",
+          "oklch(55.00000000000001% 0.0643 231.26)",
+          "oklch(65% 0.0643 231.26)",
+          "oklch(80% 0.0643 231.26)",
+          "oklch(95% 0.0643 231.26)"
+        ]
+      },
+      "workspace-bg": {
+        "role": "neutral",
+        "displayName": "Base operativa"
+      },
+      "workspace-border": {
+        "role": "neutral",
+        "displayName": "Borde operativo"
+      },
+      "error-surface": {
+        "role": "semantic",
+        "displayName": "Superficie de error"
+      },
+      "error-text": {
+        "role": "semantic",
+        "displayName": "Texto de error"
+      },
+      "confirmed-surface": {
+        "role": "semantic",
+        "displayName": "Superficie confirmada"
+      },
+      "studio-deep": {
+        "role": "primary",
+        "displayName": "Azul noche",
+        "tonalRamp": [
+          "oklch(15% 0.0564 249.75)",
+          "oklch(25% 0.0564 249.75)",
+          "oklch(35% 0.0564 249.75)",
+          "oklch(45% 0.0564 249.75)",
+          "oklch(55% 0.0564 249.75)",
+          "oklch(65% 0.0564 249.75)",
+          "oklch(80% 0.0564 249.75)",
+          "oklch(95% 0.0564 249.75)"
+        ]
+      },
+      "studio-accent": {
+        "role": "primary",
+        "displayName": "Acento luminoso de estudio",
+        "tonalRamp": [
+          "oklch(15% 0.1021 83.18)",
+          "oklch(25% 0.1021 83.18)",
+          "oklch(35% 0.1021 83.18)",
+          "oklch(45% 0.1021 83.18)",
+          "oklch(55% 0.1021 83.18)",
+          "oklch(65% 0.1021 83.18)",
+          "oklch(80% 0.1021 83.18)",
+          "oklch(95% 0.1021 83.18)"
+        ]
+      },
+      "studio-soft": {
+        "role": "secondary",
+        "displayName": "Azul suave de estudio",
+        "tonalRamp": [
+          "oklch(15% 0.0185 237.77)",
+          "oklch(25% 0.0185 237.77)",
+          "oklch(35% 0.0185 237.77)",
+          "oklch(45% 0.0185 237.77)",
+          "oklch(55% 0.0185 237.77)",
+          "oklch(65% 0.0185 237.77)",
+          "oklch(80% 0.0185 237.77)",
+          "oklch(95% 0.0185 237.77)"
+        ]
+      },
+      "studio-bg": {
+        "role": "neutral",
+        "displayName": "Base de estudio",
+        "tonalRamp": [
+          "oklch(15% 0.0093 242.84)",
+          "oklch(25% 0.0093 242.84)",
+          "oklch(35% 0.0093 242.84)",
+          "oklch(45% 0.0093 242.84)",
+          "oklch(55% 0.0093 242.84)",
+          "oklch(65% 0.0093 242.84)",
+          "oklch(80% 0.0093 242.84)",
+          "oklch(95% 0.0093 242.84)"
+        ]
+      },
+      "studio-border": {
+        "role": "neutral",
+        "displayName": "Borde de estudio",
+        "tonalRamp": [
+          "oklch(15% 0.0256 240.69)",
+          "oklch(25% 0.0256 240.69)",
+          "oklch(35% 0.0256 240.69)",
+          "oklch(45% 0.0256 240.69)",
+          "oklch(55% 0.0256 240.69)",
+          "oklch(65% 0.0256 240.69)",
+          "oklch(80% 0.0256 240.69)",
+          "oklch(95% 0.0256 240.69)"
+        ]
+      },
+      "ocean-deep": {
+        "role": "primary",
+        "displayName": "Azul océano",
+        "tonalRamp": [
+          "oklch(15% 0.0692 241.86)",
+          "oklch(25% 0.0692 241.86)",
+          "oklch(35% 0.0692 241.86)",
+          "oklch(45% 0.0692 241.86)",
+          "oklch(55% 0.0692 241.86)",
+          "oklch(65% 0.0692 241.86)",
+          "oklch(80% 0.0692 241.86)",
+          "oklch(95% 0.0692 241.86)"
+        ]
+      },
+      "ocean-accent": {
+        "role": "primary",
+        "displayName": "Dorado de océano",
+        "tonalRamp": [
+          "oklch(15% 0.0892 82.36)",
+          "oklch(25% 0.0892 82.36)",
+          "oklch(35% 0.0892 82.36)",
+          "oklch(45% 0.0892 82.36)",
+          "oklch(55% 0.0892 82.36)",
+          "oklch(65% 0.0892 82.36)",
+          "oklch(80% 0.0892 82.36)",
+          "oklch(95% 0.0892 82.36)"
+        ]
+      },
+      "ocean-soft": {
+        "role": "secondary",
+        "displayName": "Azul suave de océano",
+        "tonalRamp": [
+          "oklch(15% 0.0251 236.83)",
+          "oklch(25% 0.0251 236.83)",
+          "oklch(35% 0.0251 236.83)",
+          "oklch(45% 0.0251 236.83)",
+          "oklch(55% 0.0251 236.83)",
+          "oklch(65% 0.0251 236.83)",
+          "oklch(80% 0.0251 236.83)",
+          "oklch(95% 0.0251 236.83)"
+        ]
+      },
+      "sky-deep": {
+        "role": "primary",
+        "displayName": "Azul claro profundo",
+        "tonalRamp": [
+          "oklch(15% 0.0672 241.84)",
+          "oklch(25% 0.0672 241.84)",
+          "oklch(35% 0.0672 241.84)",
+          "oklch(45% 0.0672 241.84)",
+          "oklch(55% 0.0672 241.84)",
+          "oklch(65% 0.0672 241.84)",
+          "oklch(80% 0.0672 241.84)",
+          "oklch(95% 0.0672 241.84)"
+        ]
+      },
+      "sky-soft": {
+        "role": "secondary",
+        "displayName": "Cielo suave",
+        "tonalRamp": [
+          "oklch(15% 0.0125 236.62)",
+          "oklch(25% 0.0125 236.62)",
+          "oklch(35% 0.0125 236.62)",
+          "oklch(45% 0.0125 236.62)",
+          "oklch(55% 0.0125 236.62)",
+          "oklch(65% 0.0125 236.62)",
+          "oklch(80% 0.0125 236.62)",
+          "oklch(95% 0.0125 236.62)"
+        ]
+      },
+      "gold-deep": {
+        "role": "primary",
+        "displayName": "Azul del dorado profundo",
+        "tonalRamp": [
+          "oklch(15% 0.0535 246.58)",
+          "oklch(25% 0.0535 246.58)",
+          "oklch(35% 0.0535 246.58)",
+          "oklch(45% 0.0535 246.58)",
+          "oklch(55% 0.0535 246.58)",
+          "oklch(65% 0.0535 246.58)",
+          "oklch(80% 0.0535 246.58)",
+          "oklch(95% 0.0535 246.58)"
+        ]
+      },
+      "gold-accent": {
+        "role": "primary",
+        "displayName": "Dorado profundo",
+        "tonalRamp": [
+          "oklch(15% 0.1065 80.98)",
+          "oklch(25% 0.1065 80.98)",
+          "oklch(35% 0.1065 80.98)",
+          "oklch(45% 0.1065 80.98)",
+          "oklch(55% 0.1065 80.98)",
+          "oklch(65% 0.1065 80.98)",
+          "oklch(80% 0.1065 80.98)",
+          "oklch(95% 0.1065 80.98)"
+        ]
+      },
+      "gold-soft": {
+        "role": "secondary",
+        "displayName": "Dorado suave",
+        "tonalRamp": [
+          "oklch(15% 0.0176 81.33)",
+          "oklch(25% 0.0176 81.33)",
+          "oklch(35% 0.0176 81.33)",
+          "oklch(45% 0.0176 81.33)",
+          "oklch(55% 0.0176 81.33)",
+          "oklch(65% 0.0176 81.33)",
+          "oklch(80% 0.0176 81.33)",
+          "oklch(95% 0.0176 81.33)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "Cuerpo",
+        "purpose": "Texto del sitio y del espacio personal."
+      },
+      "body-auth": {
+        "displayName": "Cuerpo de acceso",
+        "purpose": "Texto de formularios con interlineado de 1.5."
+      },
+      "label": {
+        "displayName": "Etiqueta",
+        "purpose": "Etiquetas de controles y selección de cuenta."
+      },
+      "action-auth": {
+        "displayName": "Acción de acceso",
+        "purpose": "Texto del envío de autenticación."
+      },
+      "body-workspace": {
+        "displayName": "Cuerpo del interior",
+        "purpose": "Base de 15px en Operate, 14px en celular; párrafos con interlineado 1.6."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shell-auth",
+        "value": "0 20px 60px rgba(23,60,80,.09)",
+        "purpose": "Separación del conjunto de acceso respecto al fondo crema."
+      },
+      {
+        "name": "navigation-auth-active",
+        "value": "0 3px 10px rgba(23,60,80,.08)",
+        "purpose": "Selección del enlace activo en acceso."
+      },
+      {
+        "name": "button-site",
+        "value": "0 11px 26px rgba(23,60,80,.17)",
+        "purpose": "Acción principal base del sitio; el hero cambia sus colores."
+      },
+      {
+        "name": "button-site-hover",
+        "value": "0 14px 30px rgba(23,60,80,.23)",
+        "purpose": "Hover de la acción principal base y su variante del hero."
+      },
+      {
+        "name": "art-card",
+        "value": "0 25px 65px rgba(24,52,65,.18)",
+        "purpose": "Tarjetas ilustradas de portada; no es un patrón de datos del perfil."
+      },
+      {
+        "name": "redeem-dialog",
+        "value": "0 24px 70px #0d151b40",
+        "purpose": "Confirmación modal sobre velo #0d151b99; tarjetas y botones del interior sin sombra."
+      },
+      {
+        "name": "studio-more",
+        "value": "0 14px 40px #102a4330",
+        "purpose": "Popover móvil Más con velo #102a431f; no es una sombra de tarjeta."
+      },
+      {
+        "name": "studio-celebration",
+        "value": "0 12px 32px #102a4330",
+        "purpose": "Celebración decorativa finita tras una operación confirmada."
+      }
+    ],
+    "motion": [
+      {
+        "name": "duration-shared",
+        "value": "180ms",
+        "purpose": "Transiciones de controles de acceso; 0s cuando se reduce movimiento."
+      },
+      {
+        "name": "ease-shared",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Curva compartida y de la base del sitio."
+      },
+      {
+        "name": "welcome-tide",
+        "value": "12s ease-in-out 1 alternate",
+        "purpose": "Entrada decorativa de ondas; sin animación con reducción de movimiento."
+      },
+      {
+        "name": "ambient-home",
+        "value": "20s ease-in-out infinite alternate",
+        "purpose": "Ambiente de portada; se detiene al reducir movimiento."
+      },
+      {
+        "name": "welcome-color-reduced",
+        "value": "100ms",
+        "purpose": "Único cambio de color que conserva la bienvenida con movimiento reducido."
+      },
+      {
+        "name": "press-feedback",
+        "value": "translate: 0 1px",
+        "purpose": "Respuesta de pulsación de botones; sin desplazamiento con reducción de movimiento."
+      },
+      {
+        "name": "busy-feedback",
+        "value": "700ms linear infinite",
+        "purpose": "Indicador circular de envío; queda estático con reducción de movimiento y nunca retrasa la acción."
+      },
+      {
+        "name": "error-feedback",
+        "value": "220ms ease-out",
+        "purpose": "Cambio breve de fondo de error; se omite con reducción de movimiento."
+      },
+      {
+        "name": "success-feedback",
+        "value": "350ms ease-out",
+        "purpose": "Cambio breve de fondo de confirmación del perfil; se omite con reducción de movimiento."
+      },
+      {
+        "name": "connection-entry",
+        "value": "1100ms var(--cia-ease) both",
+        "purpose": "Entrada única del arco narrativo de auth.css; se omite con reducción de movimiento."
+      },
+      {
+        "name": "visibility-pause",
+        "value": "animation-play-state: paused",
+        "purpose": "ui-feedback.js pausa al ocultar la pestaña y las regiones decorativas fuera de vista, con margen de observación de 60px."
+      },
+      {
+        "name": "workspace-notice",
+        "value": "220ms var(--cia-ease)",
+        "purpose": "Entrada de avisos; se omite con movimiento reducido."
+      },
+      {
+        "name": "workspace-dialog",
+        "value": "180ms var(--cia-ease)",
+        "purpose": "Entrada de confirmación; se omite con movimiento reducido."
+      },
+      {
+        "name": "workspace-ticket-art",
+        "value": "240ms var(--cia-ease)",
+        "purpose": "Giro de regalo en hover; sin transición con movimiento reducido."
+      },
+      {
+        "name": "studio-panel-exit",
+        "value": "90ms ease-out",
+        "purpose": "Salida breve del panel; se omite con reducción de movimiento."
+      },
+      {
+        "name": "studio-panel-entry",
+        "value": "190ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Entrada breve del panel; se omite con reducción de movimiento."
+      },
+      {
+        "name": "studio-celebration",
+        "value": "1500ms 1 both",
+        "purpose": "Una iteración tras visita/canje/reto/cita confirmados; se omite con reducción de movimiento."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "welcome-phone-tablet",
+        "value": "(max-width: 1024px)"
+      },
+      {
+        "name": "welcome-touch-wide",
+        "value": "(max-width: 1366px) and (hover: none) and (pointer: coarse)"
+      },
+      {
+        "name": "welcome-tablet-spacing",
+        "value": "(min-width: 600px) and (max-width: 1024px)"
+      },
+      {
+        "name": "welcome-short",
+        "value": "(max-height: 540px)"
+      },
+      {
+        "name": "auth-stacked",
+        "value": "(max-width: 940px)"
+      },
+      {
+        "name": "auth-fields-stacked",
+        "value": "(max-width: 550px)"
+      },
+      {
+        "name": "profile-fields-stacked",
+        "value": "(max-width: 600px)"
+      },
+      {
+        "name": "workspace-compact",
+        "value": "1200px"
+      },
+      {
+        "name": "workspace-icons",
+        "value": "850px"
+      },
+      {
+        "name": "workspace-bottom-nav",
+        "value": "600px"
+      },
+      {
+        "name": "workspace-wide",
+        "value": "1700px"
+      },
+      {
+        "name": "studio-calendar-day-picker",
+        "value": "(max-width: 420px)"
+      },
+      {
+        "name": "studio-short-sidebar",
+        "value": "(max-height: 800px) and (min-width: 601px)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón de autenticación",
+      "kind": "button",
+      "refersTo": "button-auth",
+      "description": "Envío del formulario, con estado deshabilitado mientras se procesa.",
+      "html": "<button class=\"ds-control ds-auth\" type=\"button\">Crear mi cuenta</button>",
+      "css": ".ds-auth{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border:0;border-radius:var(--cia-radius,12px);background:var(--cia-deep,#173c50);color:var(--cia-paper,#fffdfa);font-size:15px;font-weight:700;cursor:pointer;transition:background var(--cia-duration,180ms)}.ds-auth:hover:not(:disabled){background:#295b73}.ds-auth:disabled{opacity:.6;cursor:wait}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-auth{transition:none}}.ds-auth:active:not(:disabled){translate:0 1px}.ds-auth-form[aria-busy=\"true\"] .ds-auth::after{content:\"\";display:inline-block;width:14px;height:14px;margin-left:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:ds-working 700ms linear infinite}@keyframes ds-working{to{rotate:360deg}}@media(prefers-reduced-motion:reduce){.ds-auth:active:not(:disabled){translate:none}.ds-auth-form[aria-busy=\"true\"] .ds-auth::after{animation:none;border-right-color:currentColor;opacity:.65}}"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Campo etiquetado compartido en acceso y perfil.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-name\">Nombre completo</label><input class=\"ds-control ds-field\" id=\"ds-name\" name=\"name\" autocomplete=\"name\" placeholder=\"Tu nombre\">",
+      "css": ".ds-field-label{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:block;margin-bottom:6px;font-size:14px;font-weight:650;color:var(--cia-deep,#173c50)}.ds-field{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:block;width:100%;min-width:0;height:46px;padding:10px 12px;border:1px solid #b7ccd6;border-radius:9px;background:var(--cia-paper,#fffdfa);color:var(--cia-deep,#173c50);font-size:16px;transition:border-color var(--cia-duration,180ms)}.ds-field::placeholder{color:#5d7583;font-size:14px}.ds-field:focus{border-color:var(--cia-focus,#347da0)}.ds-field[aria-invalid=\"true\"]{border-color:var(--cia-error,#a02e38)}.ds-field[readonly]{background:#eef3f5}.ds-control:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-field{transition:none}}"
+    },
+    {
+      "name": "Navegación del interior",
+      "kind": "nav",
+      "refersTo": "navigation-workspace",
+      "description": "Destino activo dorado; conserva nombre accesible al ocultar el texto en tablet.",
+      "html": "<nav class=\"ds-work-nav\" aria-label=\"Mi centro\"><button class=\"ds-work-action ds-work-nav-item\" aria-label=\"Inicio\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m3 10 9-7 9 7v10H3ZM9 20v-7h6v7\"/></svg><span>Inicio</span></button><button class=\"ds-work-action ds-work-nav-item\" aria-label=\"Premios\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg><span>Premios</span></button></nav>",
+      "css": ".ds-work-nav{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;flex-direction:column;gap:8px;padding:20px;background:var(--cia-deep,#173c50);max-width:238px}.ds-work-nav-item{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:flex;align-items:center;gap:14px;min-height:48px;border:0;border-radius:10px;background:transparent;color:var(--cia-blue,#dcebf4);text-align:left;padding:12px 16px;font-weight:600;cursor:pointer;transition:background 180ms}.ds-work-nav-item svg{width:21px;height:21px;flex-shrink:0}.ds-work-nav-item:hover{background:#254e63}.ds-work-nav-item[aria-current]{background:var(--cia-gold-bright,#edc77d);color:var(--cia-black,#0d151b)}@media(max-width:850px) and (min-width:601px){.ds-work-nav{width:82px;padding:12px}.ds-work-nav-item{padding:12px;justify-content:center}.ds-work-nav-item span{display:none}}@media(max-width:600px){.ds-work-nav{flex-direction:row;max-width:none}.ds-work-nav-item{flex-direction:column;font-size:12px}}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Ticket de regreso",
+      "kind": "custom",
+      "refersTo": "return-ticket",
+      "description": "Firma del interior: azul profundo, acción dorada, arte SVG y perforación.",
+      "html": "<section class=\"ds-return-ticket\"><div class=\"ds-ticket-copy\"><h2>Cada visita<br>cuenta.</h2><p>Encuentra tus lugares y elige tu próxima recompensa.</p><button class=\"ds-work-action ds-ticket-button\">Encontrar mi próximo lugar</button></div><div class=\"ds-ticket-art\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg><span>VOLVER<br>TIENE PREMIO</span></div></section>",
+      "css": ".ds-return-ticket{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 120px;min-height:245px;border-radius:14px;overflow:hidden;background:var(--cia-deep,#173c50);color:var(--cia-white,#fff)}.ds-ticket-copy{padding:24px}.ds-ticket-copy h2{margin:0;font-size:32px;line-height:1.08;letter-spacing:-.025em}.ds-ticket-copy p{font-size:14px;line-height:1.6;color:var(--cia-blue,#dcebf4);max-width:39ch;margin:15px 0 22px}.ds-ticket-button{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;min-height:44px;padding:11px 16px;border:0;border-radius:9px;background:var(--cia-gold-bright,#edc77d);color:var(--cia-black,#0d151b);cursor:pointer}.ds-ticket-button:hover{background:#f7dba8}.ds-ticket-art{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#234d63;color:var(--cia-gold-bright,#edc77d);border-left:1px dashed #7394a5}.ds-ticket-art svg{width:64px;height:64px;stroke-width:1;transform:rotate(-8deg);transition:transform 240ms var(--cia-ease,cubic-bezier(.16,1,.3,1))}.ds-return-ticket:hover .ds-ticket-art svg{transform:rotate(0)}.ds-ticket-art span{font-size:10px;line-height:1.7;letter-spacing:.14em;text-align:center;font-weight:700}@media(prefers-reduced-motion:reduce){.ds-ticket-art svg{transition:none}}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Pase del negocio",
+      "kind": "card",
+      "refersTo": "club-pass",
+      "description": "Datos del negocio y acciones de presencia; el ejemplo evita saldos ficticios.",
+      "html": "<article class=\"ds-club-pass\"><h3>Tu negocio</h3><p>Tu saldo y próximas recompensas aparecen al unirte.</p><button class=\"ds-work-action ds-club-button\" disabled>Únete para registrar visitas</button></article>",
+      "css": ".ds-club-pass{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;padding:24px;background:var(--cia-white,#fff);color:var(--cia-deep,#173c50);border:1px solid #dbe6ed;border-radius:12px}.ds-club-pass h3{margin:0;font-size:19px;letter-spacing:-.025em}.ds-club-pass p{font-size:13px;line-height:1.6;color:var(--cia-muted,#446477)}.ds-club-button{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;min-height:44px;padding:10px 14px;border:0;border-radius:9px;background:var(--cia-deep,#173c50);color:#fff;cursor:pointer}.ds-club-button:hover:not(:disabled){background:#28566f}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Ticket de premio",
+      "kind": "card",
+      "refersTo": "reward-ticket",
+      "description": "Franja SVG, coste/stock del entorno y acción deshabilitada según disponibilidad.",
+      "html": "<article class=\"ds-reward\"><div class=\"ds-reward-art\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg></div><div class=\"ds-reward-copy\"><h3>Tu próxima recompensa</h3><p>Los premios de tu negocio aparecerán cuando estén disponibles.</p><button class=\"ds-work-action ds-reward-button\" disabled>Sin premios disponibles</button></div></article>",
+      "css": ".ds-reward{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:grid;grid-template-columns:80px minmax(0,1fr);border:1px solid #dbe6ed;border-radius:12px;overflow:hidden;background:var(--cia-white,#fff);color:var(--cia-deep,#173c50)}.ds-reward-art{display:grid;place-items:center;background:var(--cia-blue,#dcebf4)}.ds-reward-art svg{width:46px;height:46px;stroke-width:1.2}.ds-reward-copy{padding:22px}.ds-reward-copy h3{margin:0;font-size:17px;letter-spacing:-.025em}.ds-reward-copy p{font-size:13px;line-height:1.6;color:var(--cia-muted,#446477)}.ds-reward-button{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;width:100%;min-height:44px;border:1px solid #b7ccd8;border-radius:9px;padding:11px 16px;background:#fff;color:var(--cia-deep,#173c50)}.ds-reward-button:hover:not(:disabled){background:#e8f1f6}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Confirmación de canje",
+      "kind": "custom",
+      "refersTo": "redeem-dialog",
+      "description": "Vista del contenido del diálogo; la aplicación usa dialog nativo y respuesta RPC confirmada.",
+      "html": "<section class=\"ds-redeem\" role=\"dialog\" aria-labelledby=\"ds-redeem-title\"><h2 id=\"ds-redeem-title\">¿Canjear este premio?</h2><p>Los puntos se descontarán y el premio quedará pendiente de entrega en el negocio.</p><button class=\"ds-work-action ds-redeem-primary\">Confirmar canje</button><button class=\"ds-work-action ds-redeem-cancel\">Ahora no</button></section>",
+      "css": ".ds-redeem{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;max-width:460px;padding:30px;border-radius:14px;background:#fff;color:var(--cia-deep,#173c50);box-shadow:0 24px 70px #0d151b40}.ds-redeem h2{font-size:22px;line-height:1.2;letter-spacing:-.025em;margin:0}.ds-redeem p{color:var(--cia-muted,#446477);font-size:14px;line-height:1.6}.ds-redeem-primary,.ds-redeem-cancel{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;min-height:44px;padding:11px 16px;border:0;border-radius:9px;cursor:pointer}.ds-redeem-primary{background:var(--cia-deep,#173c50);color:#fff}.ds-redeem-primary:hover{background:#28566f}.ds-redeem-cancel{background:transparent;color:var(--cia-deep,#173c50);text-decoration:underline}.ds-redeem-cancel:hover{color:#76551e}.ds-work-action:focus-visible{outline:3px solid var(--cia-focus,#347da0);outline-offset:3px}.ds-work-action:active:not(:disabled){translate:0 1px}.ds-work-action:disabled{opacity:.58;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-work-action{transition:none;translate:none}}"
+    },
+    {
+      "name": "Estado confirmado",
+      "kind": "chip",
+      "refersTo": "state-confirmed",
+      "description": "Etiqueta informativa para visita o entrega confirmada; mantiene significado textual.",
+      "html": "<span class=\"ds-state-confirmed\">Confirmada</span>",
+      "css": ".ds-state-confirmed{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:inline-block;padding:5px 8px;border-radius:5px;background:#e3efe9;color:#286044;font-size:11px;font-weight:650;white-space:nowrap}"
+    },
+    {
+      "name": "Navegación móvil de estudio",
+      "kind": "nav",
+      "refersTo": "navigation-studio",
+      "description": "Cinco posiciones móviles de 3.2; Más abre los destinos restantes en un popover nativo.",
+      "html": "<nav class=\"ds-studio-nav\" aria-label=\"Mi centro\"><button class=\"ds-studio-destination\" type=\"button\" aria-label=\"Inicio\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m3 10 9-7 9 7v10H3Z\"/><path d=\"M9 20v-7h6v7\"/></svg><span>Inicio</span></button><button class=\"ds-studio-destination\" type=\"button\" aria-label=\"Premios\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10h18v4H3zM5 14v7h14v-7M12 10v11\"/><path d=\"M12 10C3 10 5 2 8 3c3 0 4 7 4 7Zm0 0c9 0 7-8 4-7-3 0-4 7-4 7Z\"/></svg><span>Premios</span></button><button class=\"ds-studio-destination\" type=\"button\" aria-label=\"Calendario\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M7 3v4m10-4v4M3 10h18M7 14h2m3 0h2m3 0h1M7 18h2m3 0h2\"/></svg><span>Calendario</span></button><button class=\"ds-studio-destination\" type=\"button\" aria-label=\"Notificaciones\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M9 21h6\"/></svg><span>Notificaciones</span></button><button class=\"ds-studio-destination\" type=\"button\" aria-label=\"Más opciones\" popovertarget=\"ds-studio-menu\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"5\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"19\" cy=\"12\" r=\"1\"/></svg><span>Más</span></button></nav><nav id=\"ds-studio-menu\" class=\"ds-studio-menu\" popover aria-label=\"Más opciones\"><button type=\"button\">Catálogo</button><button type=\"button\">Mi cuenta</button><button type=\"button\">Cerrar sesión</button></nav>",
+      "css": ".ds-studio-nav{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;padding:5px;background:var(--studio-deep,#102a43)}.ds-studio-destination{font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:59px;padding:8px 2px;border:0;border-radius:10px;background:transparent;color:#dcebf4;cursor:pointer}.ds-studio-destination span{font-size:.56rem}.ds-studio-destination svg{width:21px;height:21px}.ds-studio-destination:hover{background:#254e63}.ds-studio-destination[aria-current]{background:var(--studio-accent,#edc77d);color:#0d151b}.ds-studio-destination:focus-visible,.ds-studio-menu button:focus-visible{outline:3px solid #347da0;outline-offset:3px}.ds-studio-destination:active{translate:0 1px}.ds-studio-menu{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;inset:auto 12px 88px auto;width:min(320px,calc(100% - 24px));padding:10px;border:1px solid #bfd0df;border-radius:12px;background:white;color:#102a43;box-shadow:0 14px 40px #102a4330}.ds-studio-menu::backdrop{background:#102a431f}.ds-studio-menu button{display:block;width:100%;min-height:46px;padding:10px 14px;text-align:left;border:0;border-radius:8px;background:none;color:#163d5c;cursor:pointer}.ds-studio-menu button:hover{background:#e5f0f9}@media(prefers-reduced-motion:reduce){.ds-studio-destination:active{translate:none}}"
+    },
+    {
+      "name": "Catálogo de estudio",
+      "kind": "card",
+      "refersTo": "catalog-studio",
+      "description": "Tarjeta de producto/servicio con categoría, precio y disponibilidad del entorno; ejemplo vacío sin cifras inventadas.",
+      "html": "<article class=\"ds-studio-catalog\"><div class=\"ds-studio-catalog-heading\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 4h7a2 2 0 0 1 2 2v15a3 3 0 0 0-3-2H3ZM21 4h-7a2 2 0 0 0-2 2v15a3 3 0 0 1 3-2h6Z\"/><path d=\"M6 8h3m6 0h3M6 12h3m6 0h3\"/></svg><span>Tu negocio · Catálogo</span></div><div class=\"ds-studio-catalog-title\"><h3>Tu producto o servicio</h3></div><p>Nombre, precio y duración aparecen cuando guardes tu catálogo.</p><div class=\"ds-studio-catalog-meta\"><span>Sin elementos publicados</span></div><button type=\"button\" class=\"ds-studio-catalog-edit\">Añadir elemento</button></article>",
+      "css": ".ds-studio-catalog{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;padding:24px;background:#fff;color:#173c50;border:1px solid #cbdce9;border-radius:12px}.ds-studio-catalog-heading{display:flex;gap:10px;align-items:center;margin-bottom:20px;font-size:.71rem;color:#446477}.ds-studio-catalog-heading svg{width:22px;height:22px;color:#8b6b35}.ds-studio-catalog-title{display:flex;justify-content:space-between;gap:18px}.ds-studio-catalog-title h3{margin:0;font-size:1.1rem}.ds-studio-catalog>p{margin:12px 0 18px;font-size:.8rem;line-height:1.6;max-width:65ch;color:#446477}.ds-studio-catalog-meta{font-size:.73rem;color:#446477}.ds-studio-catalog-edit{font-family:inherit;min-height:44px;margin-top:12px;padding:10px 0;border:0;background:none;color:#173c50;text-decoration:underline;cursor:pointer}.ds-studio-catalog-edit:hover{color:#76551e}.ds-studio-catalog-edit:focus-visible{outline:3px solid #347da0;outline-offset:3px}.ds-studio-catalog-edit:active{translate:0 1px}@media(max-width:600px){.ds-studio-catalog{padding:22px 18px}}@media(prefers-reduced-motion:reduce){.ds-studio-catalog-edit:active{translate:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Un motivo para volver",
+    "overview": "La identidad combina negro azulado, azul profundo, azul claro, blancos y dorados. La portada abre con un degradado oscuro, título blanco cálido y énfasis dorado; después alterna superficies claras con una tarjeta de Empresa profunda. Las ondas y órbitas trazan conexiones sin ocupar el lugar de las acciones. El acceso concentra la atención en una tarea. El interior conserva esa identidad con navegación profunda, superficies claras de operación y un ticket de regreso como firma visual; los datos y sus acciones tienen prioridad sobre la decoración.\n\nEste documento registra el código de las rutas oficiales. La autoridad visual es `design-tokens.css`, con `site.css` como base del inicio y el espacio personal, y `mobile-welcome.css`, `auth.css` y `workspace.css` para cada superficie. El acceso carga `auth.css`: las reglas antiguas de autenticación en `site.css` no definen ese formulario. Las capturas de `.impeccable/review/hour/` registran inicio/acceso; `.impeccable/review/interior/` registra el nuevo workspace. El contrato del interior está en `.impeccable/surfaces/workspace.md`. Las hojas históricas no añaden reglas al sistema. Los valores del frontmatter son normativos para los patrones registrados; los fragmentos del sidecar muestran sus estados y variantes.\n\nLa extensión local 3.2 añade `studio.css`, `studio-ui.js` y `studio-rules.js` sobre el interior existente. Sus tokens de estudio y variantes de negocio se aplican a esta extensión; conservan la identidad y no reemplazan las rutas de inicio/acceso. Las capturas de `.impeccable/review/v32/` muestran Usuario, Empresa, catálogo y agenda en PRUEBA LOCAL. Este registro describe la implementación local; no acredita activación de esos módulos en producción ni un dictamen final de publicación.",
+    "keyCharacteristics": [
+      "Superficies oscuras con texto claro y dorado; azul profundo para lectura sobre superficies claras.",
+      "Alternancia de azul claro, blancos y crema, con curvas suaves y profundidad difusa.",
+      "Ondas decorativas detrás del contenido.",
+      "Controles explícitos, foco visible y estados legibles.",
+      "Movimiento sutil que respeta la reducción de movimiento.",
+      "Interior Operate con navegación estable, datos tabulares y SVG de la misma familia.",
+      "Estudio 3.2 con azul noche, variantes acotadas de negocio y navegación móvil de cinco destinos con Más."
+    ],
+    "rules": [
+      {
+        "name": "The Acento legible Rule",
+        "body": "El dorado conserva su función de énfasis y acción sobre fondos profundos; el texto y las acciones mantienen combinaciones de contraste comprobables en su contexto.",
+        "section": "colors"
+      },
+      {
+        "name": "The Movimiento prescindible Rule",
+        "body": "Las ondas y los efectos no bloquean acciones ni comunican información necesaria. Con `prefers-reduced-motion: reduce`, se detienen las animaciones decorativas, de error y de confirmación; el indicador de envío queda estático y se elimina el desplazamiento de pulsación. La bienvenida conserva solo un cambio de color de 100ms.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** conservar la paleta y ajustar texto, acción y foco a la superficie clara u oscura donde aparecen.",
+      "**Do** mantener ondas detrás del contenido y respetar la reducción de movimiento.",
+      "**Do** mantener foco visible, controles táctiles y mensajes de carga, error, vacío y resultado.",
+      "**Do** conservar la bienvenida del inicio en celulares/tablets y la portada completa en escritorio.",
+      "Do conservar nombres accesibles en navegación de iconos y usar rojo/alert para errores, verde/status para confirmaciones."
+    ],
+    "donts": [
+      "**Don't** presentar negocios, saldos, reservas, estadísticas ni notificaciones ficticias como datos reales.",
+      "**Don't** convertir el tipo de cuenta en un selector editable del perfil.",
+      "**Don't** imponer una espera artificial antes de crear cuenta o iniciar sesión.",
+      "**Don't** importar componentes o estilos históricos como si formaran parte de estas rutas oficiales.",
+      "Don't trasladar el selector de roles de PRUEBA LOCAL a la cuenta oficial ni presentar su actividad como producción."
+    ]
+  }
+}

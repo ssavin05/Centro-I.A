@@ -1,35 +1,63 @@
-# Centro I.A. — Un motivo para volver
+# Centro I.A. · entrega3.5.1
 
-Centro I.A. comienza con una página pública, registro de cuentas **Usuario / Empresa**, inicio de sesión y paneles vacíos. Se conservó el producto anterior en la rama `archivo/version-fidelidad-2026-11-11`.
+Respaldo de fuente3.5 guardado en el PR1; CI y contención PostgreSQL17.11 comprobadas.106pruebas locales aprobadas. Guía:docs/GUIA-CENTRO-IA-3.5.1.md. Supabase Growth requiere autorización específica después del rechazo automático; sin publicación nueva. Inicio de Usuario:node scripts/review-35.mjs, puerto4178. Los cortes siguientes se conservan como historial.
 
-## Autenticación gratuita (Supabase)
+# Centro I.A. · entrega 3.5
 
-- **Frontend:** GitHub Pages, `index.html`, `auth.html` y `workspace.html`.
-- **Cuentas:** Supabase Auth con correo y contraseña.
-- **Perfiles:** tabla `public.cia_profiles` con RLS; cada persona consulta únicamente su perfil.
-- **Tipo de cuenta:** `user` o `company`, fijado al crear la cuenta y no editable desde el navegador.
-- **Implementación:** `supabase-client.js` (clave publishable pública), `auth.js` y `workspace.js`.
-- **Esquema:** `supabase/migrations/20261112_cia_profiles.sql` aplicado al proyecto Supabase.
-- **Confirmación:** el registro puede pedir verificar el correo antes de permitir iniciar sesión.
+Experiencia personal de Usuario con azul noche, cielo y dorado, premio destacado, progreso por negocio, filtros, retos y actividad. Inicio de revisión: node scripts/review-35.mjs, http://127.0.0.1:4178/workspace.html?as=user. Datos sintéticos separados, PRUEBA LOCAL.
 
-## Ajuste necesario en Supabase
+Guía: docs/GUIA-CENTRO-IA-3.5.md. Verificación: docs/VERIFICACION-3.5.md.104/104pruebas completas; ajuste final de foco verificado con8pruebas afectadas, sintaxis y build. Sin migraciones nuevas ni publicación3.5. Growth3.4 sigue pendiente de activación remota. ESTADO-DESARROLLO.md registra los límites; los cortes inferiores se conservan como historial.
 
-En [Authentication → URL Configuration](https://supabase.com/dashboard/project/huqspupbhhqilxeizklr/auth/url-configuration), establece:
+# Centro I.A. · entrega 3.4
 
-- **Site URL:** `https://ssavin05.github.io/Centro-I.A/`
-- **Redirect URL adicional:** `https://ssavin05.github.io/Centro-I.A/**`
+Inicio local: node scripts/start-34.mjs (puerto4177). Guía y cuadro: docs/AMPLIACION-3.4.md. Pendientes técnicos separados; tareas del titular al final en docs/TAREAS-DEL-TITULAR-3.4.md.98pruebas aprobadas. Operations activado en Supabase; Growth local. Publicación se registra en ESTADO-DESARROLLO.md. Los cortes inferiores son históricos.
 
-Sin estas direcciones permitidas, el enlace de confirmación del correo podría llevar al destino incorrecto.
+## Entrega actual 3.3 · 25 de noviembre
 
-**Limitación del correo gratis:** el SMTP predeterminado de Supabase solo envía a correos de miembros del equipo y tiene límites muy reducidos. Para registrar a cualquier persona es necesario configurar un proveedor SMTP o un Email Hook. No desactives la confirmación de correo para ocultar esta limitación.\n\nEl proyecto está en plan Free; respeta sus límites y ten presente que puede pausarse después de un período de inactividad. La confirmación de correo y entrega de mensajes dependen de la configuración y límites de Supabase Auth.
+Guía: docs/GUIA-CENTRO-IA-3.3.md. Verificación: docs/VERIFICACION-3.3.md (89/89). Inicio local: node scripts/start-33.mjs, puerto4176. Studio está activado en Supabase; sedes/equipo/agenda avanzada siguen locales por confirmación vencida del conector. Nueva interfaz sin publicar. El historial inferior conserva estados anteriores.
 
-## Desarrollo
+# Centro I.A. 3.2
 
-```sh
-npm run verify
-npm run build:pages
-```
+Aplicación de fidelidad con cuentas Usuario y Empresa, negocios por giro, catálogo importable, premios, promociones, retos, puntos, citas y avisos internos. Esta entrega incluye una prueba local persistente y el frontend conectado a Supabase.
 
-GitHub Pages publica solamente la web oficial. El backend histórico Node/SQLite todavía existe para preservar la funcionalidad anterior, pero **no autentica el nuevo panel público**. Sus tablas y sesiones no se migran automáticamente a Supabase.
+Los módulos 3.2 funcionan en la prueba local. Su migración nueva no está aplicada a producción. No se publicó ni se integró esta entrega automáticamente en el servicio público.
 
-No insertes claves secretas de servicio en código cliente ni cometas archivos `.env` con credenciales.
+## Abrir la prueba
+
+Requiere Node.js >=22.13. En esta revisión se usó Node 24.22.1 y pnpm 11.25.0.
+
+1. Instala: `npx --yes pnpm@11.25.0 install --frozen-lockfile --ignore-scripts`.
+2. Inicia: `node scripts/start-32.mjs`.
+3. Abre [Empresa](http://127.0.0.1:4175/workspace.html?as=company) o [Usuario](http://127.0.0.1:4175/workspace.html?as=user).
+4. Comprueba la franja PRUEBA LOCAL. Crea el programa como Empresa y únete como Usuario usando su código.
+
+Las identidades de prueba y la base se quedan en este equipo. La prueba no usa correos reales ni Supabase. Un programa nuevo comienza en privado.
+
+## Guía y estado
+
+- [Guía de funciones, cuadro Usuario/Empresa y procedimientos](docs/GUIA-CENTRO-IA-3.2.md).
+- [Guía HTML legible e imprimible](docs/GUIA-CENTRO-IA-3.2.html).
+- [Validación y límites de la entrega](docs/VERIFICACION-3.2.md).
+- [Estado e historial](docs/ESTADO-DESARROLLO.md).
+- [Núcleo de fidelidad](docs/FIDELIDAD.md).
+- [Sistema de diseño](DESIGN.md).
+
+La personalización de Organización no implementa todavía empleados multirrol ni sucursales con permisos. Los avisos son internos; no hay push ni SMTP operativo validado. Los PDF escaneados necesitan captura manual. Catálogo y promociones no procesan cobros.
+
+## Comprobar y construir
+
+`node scripts/verify.mjs` comprueba archivos, referencias, sintaxis, pruebas y construcción. La entrega pasó 80 pruebas.
+
+`node scripts/build-pages.mjs` genera dist con la lista explícita scripts/pages-files.mjs. No publiques la carpeta completa del repositorio ni el adaptador de prueba local.
+
+`node scripts/render-guide.mjs` actualiza la versión HTML de la guía Markdown.
+
+`npm start` conserva la vista estática oficial del puerto4173; requiere Auth real para usar el espacio privado. La bienvenida del inicio es exclusiva de móviles y tablets. El script histórico server/index.mjs permanece separado.
+
+## Base de datos
+
+Perfiles y loyalty_core ya constan aplicados después de la autorización anterior del titular. La migración **20261117023910_studio_32.sql** está probada localmente y pendiente de revisión/activación remota. No ejecutes todos los SQL indiscriminadamente ni uses la propuesta antigua de onboarding para crear el núcleo.
+
+La prueba usa PostgreSQL17.5/PGlite. Las pruebas en una conexión no certifican concurrencia nativa entre conexiones independientes.
+
+El presupuesto autorizado permanece en $0MXN. No se activa Render ni se crea infraestructura de pago. La revisión adicional de correo y seguridad se reserva para la fase final solicitada; se mantienen las protecciones básicas existentes.

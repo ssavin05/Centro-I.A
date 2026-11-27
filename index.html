@@ -6,16 +6,33 @@
   <meta name="theme-color" content="#f8f6f0">
   <meta name="description" content="Centro I.A. conecta personas y negocios. Crea tu cuenta personal o de empresa para comenzar.">
   <title>Centro I.A. — Un motivo para volver</title>
-  <link rel="icon" type="image/svg+xml" href="assets/icons/nexo-club.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg">
   <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="design-tokens.css">
+  <link rel="stylesheet" href="mobile-welcome.css">
   <script defer src="start.js"></script>
+  <script type="module" src="ui-feedback.js"></script>
 </head>
 <body class="site-home">
+  <main class="mobile-welcome" aria-labelledby="mobile-welcome-title">
+    <a class="mobile-welcome-brand" href="./" aria-label="Centro I.A., inicio"><img src="assets/icons/centro-ia.svg" width="44" height="44" alt=""><span>Centro <b>I.A.</b></span></a>
+    <div class="mobile-welcome-copy">
+      <h1 id="mobile-welcome-title">Siempre hay<br>un motivo<br>para <em>volver.</em></h1>
+      <p>Personas, lugares y conexiones<br>que vale la pena encontrar.</p>
+    </div>
+    <div class="welcome-waves" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="mobile-welcome-actions">
+      <a class="welcome-create" href="auth.html?mode=register">Crear cuenta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a class="welcome-login" href="auth.html?mode=login">Iniciar sesión</a>
+      <span class="welcome-signature">Centro I.A. · Un motivo para volver.</span>
+    </div>
+  </main>
+  <div class="desktop-site">
   <a href="#principal" class="skip-link">Saltar al contenido</a>
   <header class="header">
     <div class="container header-inner">
       <a href="./" class="brand" aria-label="Centro I.A. - inicio"><span class="brand-mark" aria-hidden="true">✧</span><span class="brand-text"><strong>Centro <span>I.A.</span></strong><small>UN MOTIVO PARA VOLVER</small></span></a>
-      <nav class="desktop-links" aria-label="Navegación principal"><a href="#concepto">Qué es Centro I.A.</a><a href="#para-quien">Para quién es</a></nav>
+      <nav class="desktop-links" aria-label="Navegación principal"><a href="#concepto">Qué es Centro I.A.</a><a href="#para-quien">Para quién es</a><a href="#preguntas">Preguntas frecuentes</a></nav>
       <div class="header-actions"><a class="button button-primary button-small" href="auth.html?mode=register">Crear cuenta <span aria-hidden="true">↗</span></a><a class="button button-outline button-small" href="auth.html?mode=login">Iniciar sesión</a></div>
     </div>
   </header>
@@ -24,7 +41,6 @@
       <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="small-mark"><span class="small-mark-line"></span> Una nueva forma de conectar</div>
           <h1>Los mejores lugares son aquellos a los que <em>quieres volver.</em></h1>
           <p>Un espacio donde personas y negocios construyen relaciones que duran. Descubre, conecta y crea nuevas razones para regresar.</p>
           <div class="hero-buttons"><a href="auth.html?mode=register" class="button button-primary button-large">Comenzar ahora <span aria-hidden="true">↗</span></a><a href="auth.html?mode=login" class="button button-outline button-large">Ya tengo una cuenta</a></div>
@@ -40,10 +56,21 @@
       </div>
       <a class="scroll-hint" href="#concepto">Conoce Centro I.A. <span aria-hidden="true">↓</span></a>
     </section>
-    <section class="section intro" id="concepto"><div class="container intro-grid"><div class="section-number">01 / LA IDEA</div><div><h2>Tu siguiente lugar favorito está más cerca de lo que imaginas.</h2><p>Centro I.A. nace para hacer más fácil el encuentro entre quienes ofrecen experiencias y quienes disfrutan descubrirlas. Hoy comenzamos con lo esencial: tu cuenta y tu espacio personal.</p></div></div></section>
-    <section class="section audience" id="para-quien"><div class="container"><div class="audience-head"><h2>¿Cómo quieres comenzar?</h2><p>Elige tu camino. Cada tipo de cuenta tendrá una experiencia diseñada para sus necesidades.</p></div><div class="audience-grid"><article class="audience-card"><div class="audience-symbol" aria-hidden="true">✧</div><p class="audience-type">PERSONAS</p><h3>Tu lugar para descubrir.</h3><p>Un espacio personal para explorar negocios, experiencias y futuros beneficios.</p><a href="auth.html?mode=register&type=user" class="inline-link">Crear cuenta Usuario <span aria-hidden="true">↗</span></a></article><article class="audience-card business-card"><div class="audience-symbol" aria-hidden="true">✦</div><p class="audience-type">NEGOCIOS</p><h3>Un espacio para crecer.</h3><p>Construye tu presencia y prepara nuevas formas de conectar con tus clientes.</p><a href="auth.html?mode=register&type=company" class="inline-link">Crear cuenta Empresa <span aria-hidden="true">↗</span></a></article></div></div></section>
+    <section class="section intro" id="concepto"><div class="container intro-grid"><div class="intro-symbol" aria-hidden="true"><img src="assets/icons/centro-ia.svg" width="64" height="64" alt=""></div><div><h2>Tu siguiente lugar favorito está más cerca de lo que imaginas.</h2><p>Centro I.A. nace para hacer más fácil el encuentro entre quienes ofrecen experiencias y quienes disfrutan descubrirlas. Hoy comenzamos con lo esencial: tu cuenta y tu espacio personal.</p></div></div></section>
+    <section class="section audience" id="para-quien"><div class="container"><div class="audience-head"><h2>¿Cómo quieres comenzar?</h2><p>Elige tu camino. Cada tipo de cuenta tendrá una experiencia diseñada para sus necesidades.</p></div><div class="audience-grid"><article class="audience-card"><div class="audience-symbol" aria-hidden="true">✧</div><h3>Tu lugar para descubrir.</h3><p>Un espacio personal para explorar negocios, experiencias y futuros beneficios.</p><a href="auth.html?mode=register&type=user" class="inline-link">Crear cuenta Usuario <span aria-hidden="true">↗</span></a></article><article class="audience-card business-card"><div class="audience-symbol" aria-hidden="true">✦</div><h3>Un espacio para crecer.</h3><p>Construye tu presencia y prepara nuevas formas de conectar con tus clientes.</p><a href="auth.html?mode=register&type=company" class="inline-link">Crear cuenta Empresa <span aria-hidden="true">↗</span></a></article></div></div></section>
+    <section class="section faq" id="preguntas" aria-labelledby="faq-title"><div class="container faq-layout">
+      <div><h2 id="faq-title">Antes de comenzar.</h2><p>Respuestas claras para encontrar tu lugar en Centro I.A.</p></div>
+      <div class="faq-answers">
+        <details><summary>¿Qué puedo hacer en esta versión?</summary><p>Acceder a tu cuenta, actualizar tu nombre y descargar los datos de tu perfil. Los módulos comerciales se incorporan por etapas.</p></details>
+        <details><summary>¿Elijo Usuario o Empresa?</summary><p>Elige Usuario para tu espacio personal o Empresa si vas a configurar un negocio. El tipo inicial se conserva después del registro.</p><a href="auth.html?mode=register">Elegir mi tipo de cuenta</a></details>
+        <details><summary>¿Cómo recupero mi contraseña?</summary><p>Solicita un enlace con el correo de tu cuenta. Revisa también spam y utiliza el enlace antes de que venza.</p><a href="auth.html?mode=recover">Recuperar mi acceso</a></details>
+        <details><summary>¿Ya puedo acumular puntos o reservar?</summary><p>Estas funciones todavía no están disponibles en esta versión. No se muestran saldos, recompensas ni reservaciones de prueba como si fueran reales.</p></details>
+      </div>
+    </div></section>
     <section class="section closing"><div class="container closing-inner"><div class="closing-flare" aria-hidden="true">✶</div><h2>Todo empieza con <em>un primer paso.</em></h2><p>Elige cómo formarás parte de Centro I.A.</p><a class="button button-primary button-large" href="auth.html?mode=register">Crear mi cuenta <span aria-hidden="true">↗</span></a></div></section>
   </main>
   <footer class="footer"><div class="container footer-inner"><span>© <span id="year">2026</span> Centro I.A.</span><span>Un motivo para volver.</span><a href="auth.html?mode=login">Iniciar sesión</a></div></footer>
+  </div>
+<script type="module" src="pwa.js"></script>
 </body>
 </html>

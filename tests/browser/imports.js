@@ -1,0 +1,16 @@
+import {importCatalogFile} from '../../catalog-import.js';
+const from64=text=>Uint8Array.from(atob(text),c=>c.charCodeAt(0));
+const tests=[
+ ['CSV',new File(['nombre;precio\nCorte;150'],'ejemplo.csv'),'Corte'],
+ ['TSV',new File(['nombre\tprecio\nColor\t300'],'ejemplo.tsv'),'Color'],
+ ['JSON',new File([JSON.stringify([{nombre:'Consulta',precio:200}])],'ejemplo.json'),'Consulta'],
+ ['HTML',new File(['<html><body><script>throw Error("No ejecutar")<\/script><table><tr><th>Nombre</th><th>Precio</th></tr><tr><td>Café</td><td>45</td></tr></table></body></html>'],'ejemplo.html'),'Café'],
+ ['TXT',new File(['Peinado especial $180.00'],'ejemplo.txt'),'Peinado especial'],
+ ['DOCX',new File([from64('UEsDBBQAAAAIAISZcF0QhRAf3QAAAAkCAAARAAAAd29yZC9kb2N1bWVudC54bWyVUUtOxDAMvUqVPZOCAKGq7SyQ2IFYDAdwU9PJqIkrJ1A4FKfgYtitWKER6uY9f96zLLvef4SxeEdOnmJjLnelKTA66n0cGvNyeLi4M/u2nque3FvAmAvRx1TNjTnmPFXWJnfEAGlHE0bpvRIHyJLyYGfifmJymJKMC6O9KstbG8BHoyM76j+VczcuxAs6xUlhzdsnCh1jbTVWlLKgKLSyqP96nhmdp22ee8g4EH9/wXmf0io/s+wjJDhhwTjCCWLeuPb1TbnNcGDIELz8hdK/WyvpqYXX00vw+9b2B1BLAwQUAAAACACEmXBdBvKZ0IAAAAChAAAAEwAAAFtDb250ZW50X1R5cGVzXS54bWwljksOwiAQhq9C2NtBFy4M0IV6Ay8wIdNH5BUYTb290C5nvv+lxy148aVS1xSNPA9Kjla/fpmqaCRWIxfmfAOobqGAdUiZYiNTKgG5nWWGjO6NM8FFqSu4FJkin7hnSKsfNOHHs3hu7X20NLsU90PXq4zEnP3qkBuGTsFq2EfYP1BLAQIUABQAAAAIAISZcF0QhRAf3QAAAAkCAAARAAAAAAAAAAAAAAAAAAAAAAB3b3JkL2RvY3VtZW50LnhtbFBLAQIUABQAAAAIAISZcF0G8pnQgAAAAKEAAAATAAAAAAAAAAAAAAAAAAwBAABbQ29udGVudF9UeXBlc10ueG1sUEsFBgAAAAACAAIAgAAAAL0BAAAAAA==')],'ejemplo.docx'),'Masaje relajante'],
+ ['PDF',new File([from64('JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA1OTUgODQyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggNTUgPj4Kc3RyZWFtCkJUIC9GMSAxNiBUZiA1MCA3ODAgVGQgKFBlaW5hZG8gZXNwZWNpYWwgJDE4MC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQxNgolJUVPRg==')],'ejemplo.pdf'),'Peinado especial']
+];
+document.getElementById('run').addEventListener('click',async event=>{
+ event.target.disabled=true;const list=document.getElementById('results');list.replaceChildren();let passed=0;
+ for(const [name,file,title]of tests){const item=document.createElement('li');try{const result=await importCatalogFile(file,'service');if(result.rows[0]?.title!==title||result.errors.length)throw Error('El contenido extraído no coincide');item.textContent=name+': correcto · '+result.rows[0].title+' · '+result.rows[0].price;passed++;}catch(error){item.textContent=name+': ERROR · '+error.message;}list.append(item);}
+ const total=document.createElement('li');total.textContent=passed+'/'+tests.length+' formatos comprobados';list.append(total);event.target.disabled=false;
+});

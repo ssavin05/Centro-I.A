@@ -1,0 +1,12 @@
+Evidencia CI https://github.com/ssavin05/Centro-I.A/actions/runs/45930596215
+Commit:60ef13ceb355f81ccddb79d6bffbecf95c4678a2
+Job140282067251:success
+
+2026-11-27T02:50:00.3213689Z [command]/usr/bin/git log -1 --format=%H
+2026-11-27T02:50:00.3240742Z 60ef13ceb355f81ccddb79d6bffbecf95c4678a2
+2026-11-27T02:50:02.0685042Z PASS: dos clientes compiten por una unidad sin saldo negativo ni sobreventa.
+2026-11-27T02:50:02.5305151Z PASS: solicitudes simultáneas con la misma clave devuelven un solo canje.
+2026-11-27T02:50:04.6362357Z PASS: cuatro carreras de entrega/devolución conservan un solo resultado y ledger exacto.
+2026-11-27T02:50:04.6364919Z PostgreSQL17: contención comprobada con conexiones independientes.
+2026-11-27T02:50:05.1279981Z  2026-11-27 02:49:45.971 UTC [1] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-11-27T02:50:05.1310232Z  waiting for server to start....2026-11-27 02:49:45.731 UTC [48] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit

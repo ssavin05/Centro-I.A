@@ -1,14 +1,97 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f6f0"><title>Mi espacio · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/nexo-club.svg"><link rel="stylesheet" href="site.css"><script type="module" src="workspace.js"></script></head>
-<body class="workspace-layout">
-  <a href="#workspace-content" class="skip-link">Ir a mi espacio</a>
-  <header class="workspace-header"><a href="./" class="brand"><span class="brand-mark" aria-hidden="true">✧</span><span class="brand-text"><strong>Centro <span>I.A.</span></strong><small>UN MOTIVO PARA VOLVER</small></span></a><div class="workspace-user"><span id="account-pill" class="workspace-pill">Mi cuenta</span><button class="button button-outline button-small" type="button" id="logout">Cerrar sesión</button></div></header>
-  <main id="workspace-content" class="workspace-main">
-    <div class="workspace-wave" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="workspace-intro"><span class="small-mark"><span class="small-mark-line"></span> TU ESPACIO EN CENTRO I.A.</span><h1 id="welcome-title">Bienvenido a tu espacio.</h1><p id="workspace-description">Este será tu punto de partida. Estamos construyendo desde una base limpia, sin datos ficticios.</p></div>
-    <div class="workspace-blank" aria-label="Espacio de trabajo vacío"><div class="workspace-blank-mark" aria-hidden="true">✧</div><h2>Tu espacio está listo.</h2><p id="blank-description">Aún no hay contenido aquí. Las funciones se incorporarán progresivamente.</p><div class="blank-divider" aria-hidden="true"></div><span>Un motivo para volver.</span></div>
-    <p id="workspace-message" class="workspace-message" role="status" aria-live="polite"></p>
-  </main>
-</body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173c50"><title>Mi centro · Centro I.A.</title><link rel="icon" type="image/svg+xml" href="assets/icons/centro-ia.svg"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="studio.css">
+<link rel="stylesheet" href="operations.css"><script type="module" src="workspace.js"></script><script type="module" src="ui-feedback.js"></script><link rel="stylesheet" href="growth.css"><link rel="stylesheet" href="customer.css">
+</head>
+<body class="workspace-layout app-layout">
+<a href="#workspace-content" class="skip-link">Ir a mi centro</a>
+<aside class="app-sidebar">
+ <a href="./" class="app-brand" aria-label="Centro I.A., inicio"><img src="assets/icons/centro-ia.svg" alt="" width="42" height="42"><span>Centro <b>I.A.</b><small>Un motivo para volver</small></span></a>
+ <nav class="app-nav" aria-label="Mi centro">
+  <button type="button" class="app-nav-item" data-view="home" aria-label="Inicio" aria-current="page"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#home"></use></svg><span>Inicio</span></button>
+  <button type="button" class="app-nav-item" data-view="rewards" aria-label="Premios"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#gift"></use></svg><span>Premios</span></button>
+  <button type="button" class="app-nav-item" data-view="visits" aria-label="Mis visitas"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#visit"></use></svg><span id="nav-visits-label">Mis visitas</span></button>
+  <button type="button" class="app-nav-item" data-view="explore" aria-label="Explorar"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#compass"></use></svg><span id="nav-explore-label">Explorar</span></button>
+  <button type="button" class="app-nav-item" data-view="account" aria-label="Mi cuenta"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#user"></use></svg><span>Mi cuenta</span></button>
+ </nav>
+ <div class="sidebar-note"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#ticket"></use></svg><p>Los buenos momentos<br>merecen repetirse.</p></div>
+ <div class="sidebar-account"><span id="account-pill" class="workspace-pill">Mi cuenta</span><button id="logout" aria-label="Cerrar sesión" type="button" class="logout-button"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#logout"></use></svg><span>Cerrar sesión</span></button></div>
+</aside>
+<div class="app-stage">
+ <header class="app-topbar"><span id="app-section-name">Mi centro</span><div><span class="connection-dot" aria-hidden="true"></span><span id="app-connection">Comprobando sesión</span><button id="refresh-loyalty" type="button" class="text-button" disabled>Actualizar</button></div></header>
+ <main id="workspace-content" class="workspace-main" aria-busy="true">
+  <div class="workspace-intro"><div><h1 id="welcome-title">Tu próximo motivo para volver.</h1><p id="workspace-description">Estamos comprobando tu sesión…</p></div><span id="app-date" class="app-date"></span></div>
+  <p id="workspace-message" class="workspace-message" role="status" aria-live="polite"></p>
+  <button id="retry-profile" class="button button-outline retry-profile" type="button" hidden>Volver a cargar mi perfil</button>
+  <section id="loyalty-loading" class="app-loading" aria-label="Cargando tu centro"><div></div><div></div><div></div></section>
+  <p id="loyalty-error" class="app-alert" role="alert" hidden></p>
+  <div id="loyalty-notice" class="app-notice" role="status" aria-live="polite"></div>
+  <div id="loyalty-content" hidden>
+   <section data-panel="home" aria-label="Inicio">
+    <div class="home-grid">
+     <section class="return-ticket"><div class="ticket-copy"><h2 id="ticket-title">Cada visita<br>cuenta.</h2><p id="ticket-description">Encuentra tus lugares, suma puntos y elige tu próxima recompensa.</p><button class="button ticket-button" type="button" data-go="explore"><span id="ticket-action">Encontrar mi próximo lugar</span><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#arrow"></use></svg></button></div><div class="ticket-art" aria-hidden="true"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#gift"></use></svg><span>VOLVER<br>TIENE PREMIO</span><div class="ticket-perforation"></div></div></section>
+     <section class="next-step"><h2 id="next-step-title">Tu siguiente paso</h2><div id="next-step-body"></div></section>
+    </div>
+    <dl class="app-metrics" id="app-metrics"></dl>
+    <div class="section-heading"><h2 id="clubs-title">Tus lugares, tus beneficios.</h2><button class="text-button" type="button" data-go="explore" id="clubs-action">Añadir un negocio <svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#plus"></use></svg></button></div>
+    <div id="club-list"></div>
+    <div class="section-heading"><h2 id="recent-title">Tu actividad reciente</h2><button type="button" class="text-button" data-go="visits">Ver actividad <svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#arrow"></use></svg></button></div>
+    <div id="recent-list"></div>
+   </section>
+   <section data-panel="rewards" aria-labelledby="rewards-title" hidden>
+    <div class="section-heading"><div><h2 id="rewards-title">Premios para volver.</h2><p id="rewards-description">Tus puntos pertenecen a cada negocio. Elige cómo disfrutarlos.</p></div><button id="show-reward-form" class="button button-primary" type="button" hidden><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#plus"></use></svg>Crear premio</button></div>
+    <form id="reward-form" class="app-form inline-form" hidden>
+     <h3>Un nuevo motivo para regresar</h3><div class="form-columns">
+     <label>Nombre del premio<input name="title" required minlength="2" maxlength="100" placeholder="Lo que recibirá tu cliente"></label>
+     <label>Puntos necesarios<input name="cost" type="number" required min="1" max="1000000" value="100"></label>
+     <label class="field-wide">Descripción<textarea name="description" maxlength="500" rows="2" placeholder="Qué incluye y cómo se entrega"></textarea></label>
+     <label>Unidades disponibles<input name="stock" type="number" min="0" max="1000000" placeholder="En blanco: sin límite"></label></div>
+     <p>Define un premio que puedas entregar. El canje descuenta puntos y aparta una unidad; después confirmas la entrega.</p>
+     <div class="form-actions"><button class="button button-primary" type="submit">Guardar premio</button><button id="cancel-reward-form" class="text-button" type="button">Cancelar</button></div>
+     <p class="form-result" role="alert"></p>
+    </form>
+    <label class="app-search"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#search"></use></svg><input id="reward-search" type="search" placeholder="Buscar un premio o negocio" aria-label="Buscar premios"></label>
+    <div id="reward-list" class="reward-grid"></div>
+    <div class="section-heading"><h2 id="redemptions-title">Tus canjes</h2></div><div id="redemption-list"></div>
+   </section>
+   <section data-panel="visits" aria-labelledby="visits-title" hidden>
+    <div class="section-heading"><div><h2 id="visits-title">Momentos que suman.</h2><p id="visits-description">Registra tu llegada y tu salida. El negocio confirma la visita y los puntos.</p></div></div>
+    <div class="activity-filters" role="group" aria-label="Filtrar visitas"><button type="button" data-filter="all" aria-pressed="true">Todas</button><button type="button" data-filter="active" aria-pressed="false">En el lugar</button><button type="button" data-filter="pending" aria-pressed="false">Por confirmar</button><button type="button" data-filter="confirmed" aria-pressed="false">Confirmadas</button></div>
+    <div id="visit-list"></div><p class="app-footnote">Las horas corresponden a registros voluntarios, no a seguimiento de ubicación. Puedes registrar una visita por negocio cada 18 horas.</p>
+   </section>
+   <section data-panel="explore" aria-labelledby="explore-title" hidden>
+    <div class="section-heading"><div><h2 id="explore-title">Tu próximo lugar favorito.</h2><p id="explore-description">Únete a negocios y empieza a construir tu próxima recompensa.</p></div></div>
+    <form id="join-form" class="join-strip app-form"><div><h3>¿Tienes un código del negocio?</h3><p>Al unirte, el negocio verá tu nombre y tus visitas dentro de su programa.</p></div><label>Código del negocio<input name="code" required minlength="12" maxlength="12" autocomplete="off" placeholder="12 letras y números" autocapitalize="characters"></label><button type="submit" class="button button-primary">Unirme <svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#arrow"></use></svg></button><p class="form-result" role="alert"></p></form>
+    <label id="explore-search-label" class="app-search"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#search"></use></svg><input id="explore-search" type="search" placeholder="Buscar por nombre, categoría o ciudad" aria-label="Buscar negocios"></label>
+    <div id="explore-list"></div>
+    <section id="business-setup" hidden>
+     <form id="club-form" class="app-form business-form"><h3>Crea tu programa de fidelidad.</h3><p>Un negocio por cuenta Empresa. Empieza en privado y decide después si aparece en Explorar.</p><div class="form-columns">
+      <label>Nombre del negocio<input name="name" required minlength="2" maxlength="100" autocomplete="organization"></label>
+      <label>Categoría<select name="category" required><option value="">Selecciona una categoría</option><option>Cafetería</option><option>Restaurante</option><option>Belleza</option><option>Bienestar</option><option>Comercio</option><option>Servicios</option><option>Experiencias</option><option>Otro</option></select></label>
+      <label>Ciudad<input name="city" required minlength="2" maxlength="80" autocomplete="address-level2"></label>
+      <label>Puntos por visita confirmada<input name="points" type="number" required min="1" max="1000" value="10"></label>
+      <label class="field-wide">¿Qué hace especial a tu negocio?<textarea name="description" maxlength="500" rows="3"></textarea></label></div>
+      <button class="button button-primary" type="submit">Crear mi programa <svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#arrow"></use></svg></button><p class="form-result" role="alert"></p></form>
+     <div id="business-settings"></div>
+    </section>
+   </section>
+  </div>
+  <section data-panel="account" id="account-panel" aria-label="Mi cuenta" hidden>
+   <section id="profile-section" class="profile-section" aria-labelledby="profile-title" hidden>
+    <div><h2 id="profile-title">Tu cuenta</h2><p>Actualiza tu nombre. Tu tipo de cuenta se conserva desde el registro.</p></div>
+    <form id="profile-form" novalidate>
+     <div class="profile-field"><label for="profile-name">Nombre completo</label><input id="profile-name" name="name" autocomplete="name" maxlength="90" aria-describedby="profile-error" required></div>
+     <div class="profile-field"><label for="profile-email">Correo de tu cuenta</label><input id="profile-email" type="email" readonly aria-describedby="email-note"><small id="email-note">El correo se muestra como referencia de tu cuenta.</small></div>
+     <p id="profile-error" role="alert" class="profile-error" hidden></p>
+     <div class="profile-actions"><button id="save-profile" class="button button-primary" type="submit" disabled>Guardar cambios</button><button id="export-profile" class="button button-outline" type="button" disabled>Descargar mis datos</button><button id="account-logout" class="button button-outline" type="button">Cerrar sesión</button><a class="profile-security-link" href="auth.html?mode=recover">Recuperar o cambiar contraseña</a></div>
+     <p id="profile-status" role="status" aria-live="polite"></p>
+    </form>
+   </section>
+  </section>
+  <noscript><p>Activa JavaScript para consultar tu cuenta de forma segura.</p></noscript>
+ </main>
+ <footer class="app-footer"><span>Centro I.A. · Un motivo para volver.</span><span>Tus puntos, siempre en su negocio.</span></footer>
+</div>
+<dialog id="redeem-dialog" class="redeem-dialog" aria-labelledby="redeem-dialog-title"><form method="dialog"><button class="dialog-close" aria-label="Cerrar confirmación" value="cancel">Cerrar</button><div class="redeem-symbol"><svg class="app-icon" aria-hidden="true"><use href="assets/icons/workspace.svg#gift"></use></svg></div><h2 id="redeem-dialog-title">¿Canjear este premio?</h2><p id="redeem-dialog-description"></p><p>Los puntos se descontarán y el premio quedará pendiente de entrega en el negocio.</p><div class="form-actions"><button id="confirm-redeem" class="button button-primary" type="button">Confirmar canje</button><button class="text-button" value="cancel">Ahora no</button></div><p id="redeem-dialog-error" role="alert"></p></form></dialog>
+<script type="module" src="pwa.js"></script>
+</body></html>
