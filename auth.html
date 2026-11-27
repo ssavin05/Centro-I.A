@@ -40,11 +40,11 @@
           <div class="field" id="field-password"><div class="field-row"><label for="password">Contraseña</label><span id="password-guidance">De 10 a 128 caracteres</span></div><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="new-password" maxlength="128" placeholder="Tu contraseña" aria-describedby="password-guidance form-error" required><button class="reveal-password" type="button" data-reveal="password" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button></div></div>
           <div class="field" id="field-confirm"><label for="password-confirm">Confirmar contraseña</label><div class="password-wrap"><input id="password-confirm" name="confirm" type="password" autocomplete="new-password" maxlength="128" placeholder="Repite la contraseña" aria-describedby="form-error" required><button class="reveal-password" type="button" data-reveal="password-confirm" aria-pressed="false" aria-label="Mostrar confirmación de contraseña">Mostrar</button></div></div>
           <a id="recover-link" class="recover-link" href="auth.html?mode=recover" hidden>Olvidé mi contraseña</a>
-          <p id="form-error" role="alert" class="form-error" hidden></p>
+          <p id="form-error" role="alert" tabindex="-1" class="form-error" hidden></p>
           <button type="submit" id="submit-auth" class="auth-submit" disabled>Preparando acceso…</button>
           <p id="auth-alternate" class="auth-alternate">¿Ya tienes una cuenta? <a href="auth.html?mode=login">Inicia sesión</a></p>
         </form>
-        <div id="availability" class="availability" role="status" aria-live="polite" hidden></div>
+        <div id="availability" tabindex="-1" class="availability" role="status" aria-live="polite" hidden></div>
         <noscript><p class="form-error">Activa JavaScript para usar el acceso seguro de Centro I.A.</p></noscript>
       </section>
     </div>

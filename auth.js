@@ -1,4 +1,5 @@
 import {supabase} from './supabase-client.js';
+import {authDeadline} from './auth-request.js';
 import {validateName, validateEmail, validatePassword, authErrorMessage} from './account-rules.js';
 
 const $ = id => document.getElementById(id);
@@ -7,7 +8,7 @@ const query = new URLSearchParams(location.search);
 const fragment = new URLSearchParams(location.hash.slice(1));
 const recoveryIntent = query.get('mode') === 'reset' || fragment.get('type') === 'recovery';
 let mode = recoveryIntent ? 'reset' : ['login', 'recover'].includes(query.get('mode')) ? query.get('mode') : 'register';
-let busy = false, ready = false, recoverySession = false;
+let busy = false, ready = false, recoverySession = false, needsReload = false;
 let sessionVersion = 0, recoveryUserId = null;
 const modes = {
   register: ['Crea tu cuenta', 'Elige cómo quieres comenzar en Centro I.A.', 'Crear mi cuenta'],
@@ -20,10 +21,12 @@ function setError(message, field) {
   $('form-error').textContent = message;
   $('form-error').hidden = !message;
   if (field) {$(field).setAttribute('aria-invalid', 'true');$(field).focus();}
+  else if(message) $('form-error').focus();
 }
 function setNotice(message) {
   $('availability').textContent = message;
   $('availability').hidden = !message;
+  if(message) $('availability').focus();
 }
 function invalidateRecovery() {
   sessionVersion++;
@@ -49,12 +52,13 @@ function renderMode() {
     const visible = id === 'name' ? mode === 'register' : id === 'email' ? mode !== 'reset'
       : id === 'password' ? mode !== 'recover' : mode === 'register' || mode === 'reset';
     $(id).required = visible;
-    $(id).disabled = !visible || busy;
+    $(id).disabled = !visible || busy || needsReload;
   }
   $('password').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
   $('password-guidance').textContent = mode === 'login' ? '' : 'De 10 a 128 caracteres';
-  submit.textContent = busy ? 'Procesando…' : action;
-  submit.disabled = busy || !ready || (mode === 'reset' && !recoverySession);
+  $('account-type').disabled=busy||needsReload;
+  submit.textContent = busy ? 'Procesando…' : needsReload ? 'Recargar acceso' : action;
+  submit.disabled = busy || !ready || (mode === 'reset' && !recoverySession && !needsReload);
   form.setAttribute('aria-busy', String(busy));
   for (const tab of ['login', 'register']) {
     $('tab-' + tab).classList.toggle('active', mode === tab);
@@ -80,7 +84,8 @@ for (const id of ['name', 'email', 'password', 'password-confirm']) {
 if (query.get('type') === 'company') form.querySelector('input[name="accountType"][value="company"]').checked = true;
 renderMode();
 if (!supabase) {
-  setError('No pudimos cargar el servicio de acceso. Revisa tu conexión y recarga la página.');
+  needsReload=true;ready=true;
+  setError('No pudimos cargar el servicio de acceso. Revisa tu conexión y pulsa Recargar acceso.');renderMode();
 } else {
   // Keep synchronous: awaiting Auth in this callback can lock the SDK.
   supabase.auth.onAuthStateChange((event, session) => {
@@ -97,7 +102,7 @@ if (!supabase) {
 async function initialize() {
   const version = sessionVersion;
   try {
-    const {data, error} = await supabase.auth.getSession();
+    const {data, error} = await authDeadline(()=>supabase.auth.getSession());
     if (version !== sessionVersion) return;
     if (error) throw error;
     if (fragment.has('error') || fragment.has('error_code')) {
@@ -106,7 +111,7 @@ async function initialize() {
       mode = 'recover';
     } else if (mode === 'reset') {
       if (data.session && (recoverySession || fragment.get('type') === 'recovery')) {
-        const {data: verified, error: verifyError} = await supabase.auth.getUser();
+        const {data: verified, error: verifyError} = await authDeadline(()=>supabase.auth.getUser());
         if (version !== sessionVersion) return;
         if (verifyError || !verified.user) throw verifyError || {code: 'session_not_found'};
         if (verified.user.id !== data.session.user?.id) throw {code: 'session_not_found'};
@@ -114,7 +119,7 @@ async function initialize() {
         recoverySession = true;
       } else setError('Abre el enlace de recuperación de tu correo. Si venció, solicita uno nuevo.');
     } else if (data.session && mode !== 'recover') {
-      const {data: verified, error: verifyError} = await supabase.auth.getUser();
+      const {data: verified, error: verifyError} = await authDeadline(()=>supabase.auth.getUser());
       if (version !== sessionVersion) return;
       if (verifyError || !verified.user) throw verifyError || {code:'session_not_found'};
       location.replace('workspace.html');
@@ -124,12 +129,13 @@ async function initialize() {
   } catch (error) {
     if (version !== sessionVersion) return;
     setError(authErrorMessage(error));
-    ready = mode !== 'reset';
+    if(error?.code==='auth_timeout'){needsReload=true;ready=true;}else ready = mode !== 'reset';
   }
   renderMode();
 }
 form.addEventListener('submit', async event => {
   event.preventDefault();
+  if(needsReload&&!busy){location.reload();return;}
   if (busy || !ready || !supabase || (mode === 'reset' && !recoverySession)) return;
   setError('');setNotice('');
   for (const id of ['name', 'email', 'password', 'password-confirm']) $(id).removeAttribute('aria-invalid');
@@ -146,37 +152,37 @@ form.addEventListener('submit', async event => {
   const version = sessionVersion;
   try {
     if (mode === 'register') {
-      const {data, error} = await supabase.auth.signUp({email, password, options: {
+      const {data, error} = await authDeadline(()=>supabase.auth.signUp({email, password, options: {
         data: {name, account_type:accountType},
         emailRedirectTo: new URL('auth.html?mode=login', location.href).href,
-      }});
+      }}));
       if (error) throw error;
       if (data.session) {location.assign('workspace.html');return;}
       $('password').value = '';$('password-confirm').value = '';
-      setNotice('Revisa tu correo para confirmar tu cuenta si el registro fue aceptado. Si ya tienes una cuenta, inicia sesión o recupera el acceso.');
+      setNotice('Revisa tu correo para confirmar tu cuenta antes de iniciar sesión si el registro fue aceptado. Revisa también spam. Si ya tienes una cuenta, inicia sesión o recupera el acceso.');
     } else if (mode === 'login') {
-      const {error} = await supabase.auth.signInWithPassword({email, password});
+      const {error} = await authDeadline(()=>supabase.auth.signInWithPassword({email, password}));
       if (error) throw error;
       location.assign('workspace.html');
     } else if (mode === 'recover') {
-      const {error} = await supabase.auth.resetPasswordForEmail(email, {
+      const {error} = await authDeadline(()=>supabase.auth.resetPasswordForEmail(email, {
         redirectTo: new URL('auth.html?mode=reset', location.href).href,
-      });
+      }));
       if (error) throw error;
       setNotice('Solicitud aceptada. Si existe una cuenta con este correo, podrás recibir un enlace de recuperación. Revisa también spam.');
     } else {
-      const {data, error: verifyError} = await supabase.auth.getUser();
+      const {data, error: verifyError} = await authDeadline(()=>supabase.auth.getUser());
       if (version !== sessionVersion) return;
       if (verifyError || !data.user) throw verifyError || {code: 'session_not_found'};
       if (data.user.id !== recoveryUserId) {invalidateRecovery();return;}
-      const {error} = await supabase.auth.updateUser({password});
+      const {error} = await authDeadline(()=>supabase.auth.updateUser({password}));
       if (version !== sessionVersion) return;
       if (error) throw error;
       recoverySession = false;$('password').value = '';$('password-confirm').value = '';
-      const {error: signOutError} = await supabase.auth.signOut({scope: 'global'});
+      const {error: signOutError} = await authDeadline(()=>supabase.auth.signOut({scope: 'global'}));
       if (signOutError) setNotice('Contraseña actualizada. No se pudo cerrar la sesión; entra a tu espacio para volver a comprobar el acceso.');
       else location.replace('auth.html?mode=login&notice=password-updated');
     }
-  } catch (error) {if (version === sessionVersion) setError(authErrorMessage(error));}
+  } catch (error) {if (version === sessionVersion){if(error?.code==='auth_timeout'){needsReload=true;ready=true;sessionVersion++;}setError(authErrorMessage(error));}} 
   finally {busy = false;renderMode();}
 });

@@ -1,5 +1,6 @@
 import {mountLoyalty} from './loyalty-ui.js';
 import {supabase} from './supabase-client.js';
+import {authDeadline} from './auth-request.js';
 import {validateName, authErrorMessage} from './account-rules.js';
 import {profileExport,downloadProfile} from './profile-export.js';
 const $ = id => document.getElementById(id);
@@ -33,15 +34,15 @@ async function bootstrap() {
   $('retry-profile').hidden = true;
   $('workspace-content').setAttribute('aria-busy','true');
   try {
-    const {data:{user},error} = await supabase.auth.getUser();
+    const {data:{user},error} = await authDeadline(()=>supabase.auth.getUser());
     if (version !== loadVersion) return;
     if (error) {
       if (error.name !== 'AuthSessionMissingError' && ![401,403].includes(error.status) && !['session_not_found','refresh_token_not_found','refresh_token_already_used','bad_jwt','user_not_found'].includes(error.code)) throw error;
       clearPrivateView();location.replace('auth.html?mode=login');return;
     }
     if (!user) {clearPrivateView();location.replace('auth.html?mode=login');return;}
-    const {data:profile,error:profileError} = await supabase.from('cia_profiles')
-      .select('name,account_type,created_at').eq('id',user.id).single();
+    const {data:profile,error:profileError} = await authDeadline(()=>supabase.from('cia_profiles')
+      .select('name,account_type,created_at').eq('id',user.id).single());
     if (version !== loadVersion) return;
     if (profileError || !profile || !['user','company'].includes(profile.account_type)) {
       throw Error('PROFILE_UNAVAILABLE');
@@ -64,7 +65,7 @@ async function bootstrap() {
     clearPrivateView();
     message(error.message === 'PROFILE_UNAVAILABLE'
       ? 'No pudimos recuperar tu perfil. Vuelve a intentar; si continúa, inicia sesión de nuevo.'
-      : authErrorMessage(error));
+      : error?.code==='auth_timeout' ? 'El acceso tardó demasiado. Recarga esta página para volver a comprobar tu sesión.' : authErrorMessage(error));
     $('retry-profile').hidden = false;
   } finally {
     if (version === loadVersion) {
@@ -128,7 +129,7 @@ $('logout').addEventListener('click', async () => {
       !window.confirm('Tienes cambios sin guardar. ¿Quieres cerrar sesión y descartarlos?')) return;
   busy=true;$('logout').disabled=true;message('Cerrando sesión…');
   try {
-    const {error} = await supabase.auth.signOut();
+    const {error} = await authDeadline(()=>supabase.auth.signOut());
     if (error) throw error;
     clearPrivateView();location.replace('auth.html?mode=login');
   } catch {message('No se pudo cerrar la sesión. Revisa tu conexión.');}

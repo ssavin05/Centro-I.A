@@ -1,12 +1,13 @@
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 import * as accountRules from '../../account-rules.js';
+import {authDeadline} from '../../auth-request.js';
 import {profileExport} from '../../profile-export.js';
 
 export const settle = () => new Promise(resolve => setImmediate(resolve));
 
 // Import seam: run the real page controller with an isolated DOM and Auth adapter.
-export function pageHarness(file, {search = '', hash = '', client = {}} = {}) {
+export function pageHarness(file, {search = '', hash = '', client = {}, authTimeoutMs} = {}) {
   const nodes = new Map();
   function element(id) {
     if (!nodes.has(id)) {
@@ -37,7 +38,7 @@ export function pageHarness(file, {search = '', hash = '', client = {}} = {}) {
   const navigations = [];
   const location = {
     search, hash, href: 'https://example.test/Centro-I.A/auth.html' + search + hash,
-    replace: url => navigations.push(url), assign: url => navigations.push(url),
+    replace: url => navigations.push(url), assign: url => navigations.push(url), reload: () => navigations.push('reload'),
   };
   let authCallback;
   const supabase = {
@@ -51,7 +52,7 @@ export function pageHarness(file, {search = '', hash = '', client = {}} = {}) {
   const code = readFileSync(file, 'utf8').replace(/^import .* from ['"].*['"];?\r?\n/gm, '');
   const window = {addEventListener() {}, removeEventListener() {}, confirm: () => true};
   const downloads=[];
-  runInNewContext(code, {...accountRules,profileExport,mountLoyalty:()=>({load(){},clear(){}}),downloadProfile:data=>downloads.push(data), supabase, document, location, window, URL, URLSearchParams,
+  runInNewContext(code, {...accountRules,authDeadline:operation=>authDeadline(operation,authTimeoutMs),profileExport,mountLoyalty:()=>({load(){},clear(){}}),downloadProfile:data=>downloads.push(data), supabase, document, location, window, URL, URLSearchParams,
     history: {replaceState() {}}, setTimeout, clearTimeout, console}, {filename: file});
   return {
     element, nodes, navigations, supabase, downloads,
