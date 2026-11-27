@@ -1,3 +1,9 @@
+# Centro I.A. · entrega 3.5
+
+Experiencia personal de Usuario con azul noche, cielo y dorado, premio destacado, progreso por negocio, filtros, retos y actividad. Inicio de revisión: node scripts/review-35.mjs, http://127.0.0.1:4178/workspace.html?as=user. Datos sintéticos separados, PRUEBA LOCAL.
+
+Guía: docs/GUIA-CENTRO-IA-3.5.md. Verificación: docs/VERIFICACION-3.5.md.104/104pruebas completas; ajuste final de foco verificado con8pruebas afectadas, sintaxis y build. Sin migraciones nuevas ni publicación3.5. Growth3.4 sigue pendiente de activación remota. ESTADO-DESARROLLO.md registra los límites; los cortes inferiores se conservan como historial.
+
 # Centro I.A. · entrega 3.4
 
 Inicio local: node scripts/start-34.mjs (puerto4177). Guía y cuadro: docs/AMPLIACION-3.4.md. Pendientes técnicos separados; tareas del titular al final en docs/TAREAS-DEL-TITULAR-3.4.md.98pruebas aprobadas. Operations activado en Supabase; Growth local. Publicación se registra en ESTADO-DESARROLLO.md. Los cortes inferiores son históricos.

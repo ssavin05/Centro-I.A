@@ -234,6 +234,8 @@ Operations 3.3 extiende ese mismo mundo en modo Operate con `operations.css`, `o
 
 Growth 3.4 prolonga el interior con `growth.css`, `growth-ui.js` y `growth-rules.js`: Actividad y datos, historial completo por páginas, exportación, participación reversible y preferencias. `pwa.js`, `sw.js` y `offline.html` preparan instalación y una salida sin conexión sin copiar datos privados. Reutiliza la paleta y los patrones existentes, sin añadir tokens. Growth 3.4 permanece SOLO LOCAL, sin aplicar su migración al remoto. Las tres capturas revisadas y las verificaciones funcionales tienen alcance acotado, detallado en el contrato del workspace; no certifican instalación PWA ni accesibilidad integral.
 
+Experiencia personal 3.5 extiende el modo Usuario mediante `customer.css`, `customer-ui.js` y `customer-rules.js`, integrados en el interior y Studio existentes. Reutiliza azul noche, océano, cielo y dorado: el contraste tonal distingue una meta real, el siguiente paso y el reconocimiento de visitas. La composición personal y su evidencia pertenecen a `.impeccable/surfaces/customer.md`; no sustituyen el sistema general ni añaden tokens. Esta entrega de frontend permanece local y no acredita publicación.
+
 **Key Characteristics:**
 
 - Superficies oscuras con texto claro y dorado; azul profundo para lectura sobre superficies claras.
@@ -318,6 +320,7 @@ La base de espaciado compartida sigue los pasos del frontmatter. La implementaci
 - **Operación 3.3:** selector de sede junto a función y zona horaria, seguido de botones de sección que envuelven según el espacio disponible. Hasta 600px, el contexto y la barra de fecha/acción pasan a una columna; las citas presentan hora, contenido y acciones en filas sucesivas. Las tablas conservan desplazamiento horizontal propio.
 - **Disponibilidad 3.3:** horas seleccionables en cuadrícula adaptable, con dos columnas hasta 600px. La edición semanal de horarios conserva una tabla de ancho mínimo de 710px dentro de su contenedor desplazable. No comprimir sus campos para hacerlos caber en celular.
 - **Actividad y datos 3.4:** búsqueda en cuatro columnas para registro, negocio, texto y acción; hasta 1000px pasa a dos, y hasta 600px a una. Las tablas desplazan dentro de su contenedor y permiten cortar textos largos. Paginación flexible y descarga apilada en celular. Las seis métricas de retorno usan tres columnas, reducidas a dos hasta 1000px. El editor ocupa como máximo 780px y las preferencias 700px; no imponen altura fija.
+- **Usuario 3.5:** meta y siguiente paso en columnas `minmax(0,1fr) minmax(230px,.44fr)` con separación de 22px; hasta 1050px la segunda mide 240px y hasta 760px se apilan. Hasta 600px la acción dorada ocupa el ancho del bloque principal. Los tres accesos personales permanecen en fila y apilan icono/texto en celular. Los selectores de negocio y promociones desplazan dentro de su región; conservan barras visibles finas en azul sobre azul claro. Los filtros de premios envuelven y pasan a columna hasta 760px.
 - **Entorno local:** franja PRUEBA LOCAL siempre visible. El selector Usuario/Empresa pertenece exclusivamente a la prueba; no es navegación de producción.
 
 No fijar una altura de formulario para forzar una sola pantalla: contenido, errores y crecimiento del texto deben seguir siendo alcanzables.
@@ -436,6 +439,14 @@ Retorno de clientes presenta seis métricas de los últimos 30 días y una tabla
 Cuenta contiene instrucciones nativas para añadir la aplicación y muestra Instalar Centro I.A. solo cuando el navegador ofrece el evento correspondiente. La instalación depende del navegador. El aviso de desconexión usa estado textual y explica que visitas, puntos, canjes y citas necesitan Internet; no encola envíos. La pantalla offline reutiliza marca, azul profundo, superficie clara y acción dorada, explica que no contiene copia de la cuenta y pide revisar un envío sin confirmar al reconectar.
 
 El service worker se omite en PRUEBA LOCAL y limita la caché a una lista explícita de estilos, iconos y pantalla offline públicos. Autenticación, RPC y páginas privadas permanecen en red. La preparación del código y la revisión visual no equivalen a una instalación PWA comprobada.
+
+### Experiencia personal de Usuario 3.5
+
+El bloque focal conserva el azul noche y océano con texto blanco, avance dorado, premio concreto y acción dorada. Usa esquinas suaves de 16px, reducidas a 14px en celular, y una sombra difusa local (`0 16px 36px -22px #102a4380`); esta excepción pertenece a la meta, no a todas las tarjetas de datos. El siguiente paso usa azul cielo y pasa a crema dorada cuando hay un premio por recoger. Nivel y retos combinan panel profundo y tarjetas blancas; promociones usan azul claro y la actividad separadores finos con iconos SVG. Estas variantes locales no amplían los tokens aprobados.
+
+El negocio seleccionado determina saldo, premio, nivel, retos, promociones y cuatro movimientos recientes. El siguiente paso prioriza canje pendiente, cita próxima y llegada/salida voluntaria. Sin programas se ofrece una entrada a Explorar con explicación; sin premio disponible se conserva el saldo y se explica el estado. Premios añade filtros Todos, Puedo canjear y Por alcanzar, selector de negocio, progreso accesible y acceso a elegir una meta. El nivel reconoce visitas confirmadas y no concede beneficios por sí mismo.
+
+Elegir negocio o meta descubre el bloque mediante clip durante 280ms y su avance durante 440ms, con `cubic-bezier(.16,1,.3,1)`. No simula ganar puntos: el aviso de incremento requiere un saldo posterior mayor del mismo negocio y de la misma identidad. Se cancelan animaciones previas, se omiten al ocultarse la pestaña o con movimiento reducido y se restaura el foco del control al redibujar. Los controles conservan feedback breve de color y pulsación, sin bucles.
 
 ### Preguntas frecuentes
 

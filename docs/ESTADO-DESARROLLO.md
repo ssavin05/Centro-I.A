@@ -2,6 +2,17 @@
 
 Este seguimiento permite continuar el trabajo sin confundir pantallas implementadas con funciones validadas en producción. Corte actual: 25 de noviembre de 2026; se conserva el historial anterior.
 
+## Entrega 3.5 — experiencia personal de Usuario
+
+Este corte prevalece sobre los anteriores. Frontend local terminado; no acredita publicación.
+
+- Inicio con negocio elegido, premio concreto, progreso real y próxima cita/canje/llegada. Accesos a premios/citas/explorar.
+- Filtros de premios por disponibilidad de puntos y negocio, objetivo elegido en memoria, niveles/retos, promociones vigentes e historia sin duplicados.
+- Azul noche/océano/cielo y dorado; transición finita de meta y barra, respuestas de botones, navegación existente y reduced-motion. Ganancia de saldo solo después de un snapshot actualizado de la misma identidad.
+-104/104pruebas completas y build correctos. Navegador1440/768/390; revisión independiente y único fix de scrollbar puntuado resolved, disposition ship limitada a ese arreglo. Ver VERIFICACION-3.5.md.
+- Puerto4178, scripts/review-35.mjs, base separada con datos sintéticos. Sin producción ni migraciones nuevas. Growth3.4 permanece local, rama remota y publicación pendientes.
+- GUIA-CENTRO-IA-3.5.md explica el uso. Paquete Cia.IA.3.5.zip incluye fuente y sitio publicable;3.4 y anteriores preservados.
+
 ## Entrega 3.4 — ampliación de operación
 
 Esta sección prevalece sobre los cortes históricos inferiores.

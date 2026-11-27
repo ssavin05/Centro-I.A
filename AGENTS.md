@@ -70,3 +70,10 @@ La propuesta supabase/proposals/business_onboarding.sql solo está probada local
 -98pruebas aprobadas. Lee docs/AMPLIACION-3.4.md y docs/ESTADO-DESARROLLO.md. Mantener devolución de canjes solo pendientes, stock histórico desconocido sin reconstrucción inventada y participación reversible sin borrar saldos.
 - El worker solo cachea recursos públicos enumerados, nunca API, perfiles ni páginas privadas. No permitir colas automáticas de escrituras.
 - scripts/backup.mjs es SQLite histórico; no presentarlo como respaldo de Supabase.
+
+## Experiencia Usuario 3.5
+
+- Lee docs/GUIA-CENTRO-IA-3.5.md y VERIFICACION-3.5.md. customer-ui.js y customer-rules.js usan snapshots existentes; no añaden permisos ni migraciones.
+- Mantener saldos por negocio, datos de sesión limpios, progreso real y ganancia solo tras nuevo snapshot de la misma identidad. .is-customer limita los cambios visuales; Empresa conserva su composición.
+- Prueba sintética separada scripts/review-35.mjs, puerto4178 y base .local-centro-35. No usar fixtures en producción.
+-104pruebas completas aprobadas; revisión visual limitada y publicación/guardado remoto aún pendientes.

@@ -13,7 +13,7 @@ const select=(label,name,items,value='',extra='')=>'<label>'+label+'<select aria
 const action=(text,kind,id='',extra='')=>'<button type="button" class="text-button" data-studio-action="'+kind+'" data-id="'+e(id)+'" '+extra+'>'+text+'</button>';
 const empty=(title,text)=>'<div class="studio-empty">'+icon('spark')+'<div><h3>'+e(title)+'</h3><p>'+e(text)+'</p></div></div>';
 const section=(id,title,description,content)=>'<section data-panel="'+id+'" hidden><div class="section-heading"><div><h2>'+title+'</h2><p>'+description+'</p></div></div>'+content+'</section>';
-export function mountStudio({supabase,refreshCore,navigate}){
+export function mountStudio({supabase,refreshCore,navigate,onUpdate}){
  let context=null,state=null,epoch=0,requestVersion=0,saving=false,step=0,logo='',importRows=[],importRequest=null,importVersion=0,viewMonth=new Date(),selectedDay=dayKey(new Date()),navigation=null,navigationTimer,activeTrigger=null,importReturn=null;
  const editorReturns=new Map();
  const isCompany=()=>context?.identity.profile.account_type==='company';
@@ -88,7 +88,7 @@ export function mountStudio({supabase,refreshCore,navigate}){
   if(version!==requestVersion||identityEpoch!==epoch)return;
   if(error){document.body.classList.remove('has-studio');state=null;for(const id of ['studio-catalog-list','studio-promotions','studio-calendar','studio-inbox','studio-people'])$(id).innerHTML=empty('Versión 3.2 pendiente en este entorno.','La base de fidelidad sigue disponible. Los módulos nuevos se habilitan con su migración.');return;}
   if(!data||!['settings','catalog','promotions','appointments','notices','movements','challenges','claims'].every(key=>Array.isArray(data[key])))return;
-  state=data;document.body.classList.add('has-studio');render();
+  state=data;document.body.classList.add('has-studio');render();onUpdate?.({userId:context.identity.user.id,state});
  }
  async function save(name,args,formNode,success,{core=true}={}){
   if(saving||!context||!state)return false;const identityEpoch=epoch,returnFocus=focusInfo(document.activeElement);saving=true;

@@ -17,7 +17,7 @@ function harness(client){
  for(const form of forms)for(const key of ['code','name','category','city','description','points','title','cost','stock'])form.elements[key]=node(form.id+'-'+key);
  const document={getElementById:node,querySelector:selector=>node(selector),querySelectorAll:selector=>selector==='[data-panel]'?panels:selector==='[data-view]'?navs:selector==='.app-form'?forms:[],addEventListener(k,v){events[k]=v;}};
  let exported;const code=readFileSync('loyalty-ui.js','utf8').replace(/^import .*\r?\n/gm,'').replace('export function mountLoyalty','function mountLoyalty')+'\nexpose(mountLoyalty);';
- runInNewContext(code,{...rules,e:rules.escapeHTML,document,Intl,Date,Map,Number,String,mountGrowth:()=>({update(){},clear(){}}),mountOperations:()=>({update(){},clear(){}}),mountStudio:()=>({update(){},clear(){},titleFor(){return 'Mi centro';},animateNavigation(next,apply){apply();},acknowledge(){}}),crypto:{randomUUID:()=> '11111111-1111-4111-8111-111111111111'},expose:value=>exported=value});
+ runInNewContext(code,{...rules,e:rules.escapeHTML,document,Intl,Date,Map,Number,String,mountCustomer:()=>({update(){},updateStudio(){},clear(){},filterRewards:list=>list,rewardDetails:()=>'',hasFilter:()=>false}),mountGrowth:()=>({update(){},clear(){}}),mountOperations:()=>({update(){},clear(){}}),mountStudio:()=>({update(){},clear(){},titleFor(){return 'Mi centro';},animateNavigation(next,apply){apply();},acknowledge(){}}),crypto:{randomUUID:()=> '11111111-1111-4111-8111-111111111111'},expose:value=>exported=value});
  return {ui:exported({supabase:client}),node,events,forms};
 }
 test('panel de fidelidad descarta una respuesta privada después de limpiar identidad',async()=>{

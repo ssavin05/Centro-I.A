@@ -1,5 +1,6 @@
 import {mountOperations} from './operations-ui.js';
 import {mountGrowth} from './growth-ui.js';
+import {mountCustomer} from './customer-ui.js';
 import {mountStudio} from './studio-ui.js';
 import {rewardKinds} from './studio-rules.js';
 import {escapeHTML as e,loyaltyError,rewardState,loyaltySections,arrivalState} from './loyalty-rules.js';
@@ -9,7 +10,8 @@ const date=value=>value?new Intl.DateTimeFormat('es-MX',{day:'numeric',month:'sh
 const empty=(title,text,action='',target='explore')=>'<div class="app-empty">'+icon('ticket')+'<div><h3>'+e(title)+'</h3><p>'+e(text)+'</p>'+(action?'<button type="button" class="text-button" data-go="'+target+'">'+e(action)+' '+icon('arrow')+'</button>':'')+'</div></div>';
 export function mountLoyalty({supabase}){
  const $=id=>document.getElementById(id);
- const studio=mountStudio({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true})});
+ const customer=mountCustomer({navigate:section=>show(section,{focus:true}),onFilter:()=>renderRewards()});
+ const studio=mountStudio({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true}),onUpdate:payload=>customer.updateStudio(payload)});
  const operations=mountOperations({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true})});
  const growth=mountGrowth({supabase,refreshCore:()=>refresh(),navigate:section=>show(section,{focus:true})});
  let identity=null,snapshot=null,epoch=0,view='home',filter='all',operating=false,pendingReward=null;
@@ -57,11 +59,11 @@ export function mountLoyalty({supabase}){
  }
  function renderRewards(){
   const query=$('reward-search').value.trim().toLocaleLowerCase('es');
-  const rewards=snapshot.rewards.filter(r=>(r.title+' '+r.description+' '+clubName(r.club_id)).toLocaleLowerCase('es').includes(query));
+  const rewards=customer.filterRewards(snapshot.rewards.filter(r=>(r.title+' '+r.description+' '+clubName(r.club_id)).toLocaleLowerCase('es').includes(query)));
   $('reward-list').innerHTML=rewards.length?rewards.map(r=>{
    const club=snapshot.clubs.find(c=>c.id===r.club_id),state=rewardState(r,club);
-   return '<article class="reward-ticket"><div class="reward-art">'+icon('gift')+'<span>'+e(clubName(r.club_id))+'</span></div><div class="reward-body"><div class="reward-heading"><h3>'+e(r.title)+'</h3><span class="reward-price">'+number(r.points_cost)+' <small>pts</small></span></div><p>'+e(r.description||'Pregunta en el negocio por los detalles de entrega.')+'</p><p class="reward-stock">'+(r.stock===null?'Sin límite de unidades':number(r.stock)+' unidades disponibles')+'</p>'+(r.reward_kind?'<p class="studio-reward-details">'+e(rewardKinds[r.reward_kind]||r.reward_kind)+(r.valid_until?' · Hasta '+date(r.valid_until):'')+'</p>':'')+(r.terms?'<details class="studio-reward-terms"><summary>Condiciones del premio</summary><p>'+e(r.terms)+'</p></details>':'')+(isCompany()?'<button type="button" class="text-button" data-studio-action="edit-reward" data-id="'+e(r.id)+'">Editar recompensa</button><button type="button" class="text-button" data-action="reward-toggle" data-id="'+e(r.id)+'" data-active="'+String(!r.active)+'">'+(r.active?'Pausar premio':'Activar premio')+'</button>':'<button type="button" class="button '+(state.canRedeem?'button-primary':'button-outline')+'" data-action="redeem" data-id="'+e(r.id)+'" '+(!state.canRedeem?'disabled':'')+'>'+(!state.available?(state.expired?'Vencido':r.stock===0?'Agotado':'No disponible'):state.canRedeem?'Canjear premio':'Te faltan '+number(state.remaining)+' puntos')+'</button>')+'</div></article>';
-  }).join(''):empty(query?'No encontramos ese premio.':isCompany()?'Crea algo que valga el regreso.':'Los buenos premios se están preparando.',query?'Prueba con otro nombre o negocio.':isCompany()?'Ofrece algo concreto y alcanzable: tú eliges los puntos y las unidades.':'Los premios de tus negocios aparecerán aquí en cuanto estén disponibles.');
+   return '<article class="reward-ticket"><div class="reward-art">'+icon('gift')+'<span>'+e(clubName(r.club_id))+'</span></div><div class="reward-body"><div class="reward-heading"><h3>'+e(r.title)+'</h3><span class="reward-price">'+number(r.points_cost)+' <small>pts</small></span></div><p>'+e(r.description||'Pregunta en el negocio por los detalles de entrega.')+'</p><p class="reward-stock">'+(r.stock===null?'Sin límite de unidades':number(r.stock)+' unidades disponibles')+'</p>'+(r.reward_kind?'<p class="studio-reward-details">'+e(rewardKinds[r.reward_kind]||r.reward_kind)+(r.valid_until?' · Hasta '+date(r.valid_until):'')+'</p>':'')+(r.terms?'<details class="studio-reward-terms"><summary>Condiciones del premio</summary><p>'+e(r.terms)+'</p></details>':'')+customer.rewardDetails(r,club,snapshot.server_time)+(isCompany()?'<button type="button" class="text-button" data-studio-action="edit-reward" data-id="'+e(r.id)+'">Editar recompensa</button><button type="button" class="text-button" data-action="reward-toggle" data-id="'+e(r.id)+'" data-active="'+String(!r.active)+'">'+(r.active?'Pausar premio':'Activar premio')+'</button>':'<button type="button" class="button '+(state.canRedeem?'button-primary':'button-outline')+'" data-action="redeem" data-id="'+e(r.id)+'" '+(!state.canRedeem?'disabled':'')+'>'+(!state.available?(state.expired?'Vencido':r.stock===0?'Agotado':'No disponible'):state.canRedeem?'Canjear premio':'Te faltan '+number(state.remaining)+' puntos')+'</button>')+'</div></article>';
+  }).join(''):empty(query?'No encontramos ese premio.':customer.hasFilter()?'No hay premios en este filtro.':isCompany()?'Crea algo que valga el regreso.':'Los buenos premios se están preparando.',query?'Prueba con otro nombre o negocio.':customer.hasFilter()?'Prueba Todos o elige otro negocio para ver sus recompensas.':isCompany()?'Ofrece algo concreto y alcanzable: tú eliges los puntos y las unidades.':'Los premios de tus negocios aparecerán aquí en cuanto estén disponibles.');
   $('redemption-list').innerHTML=snapshot.redemptions.length?'<div class="redemption-list">'+snapshot.redemptions.map(r=>'<article class="redemption-row">'+icon('ticket')+'<div><h3>'+e(r.reward_title)+'</h3><p>'+e(isCompany()?r.customer_name:r.club_name)+' · '+number(r.points_cost)+' puntos · '+date(r.created_at)+'</p><details><summary>Ver comprobante</summary><code>'+e(r.id)+'</code></details></div><span class="state-label '+(r.state==='delivered'?'state-confirmed':'')+'">'+(r.state==='delivered'?'Entregado':r.state==='cancelled'?'Cancelado · puntos devueltos':'Por recoger')+'</span>'+(isCompany()&&r.state==='requested'?'<button type="button" class="text-button" data-action="deliver" data-id="'+e(r.id)+'">Confirmar entrega</button>':'')+'</article>').join('')+'</div>':empty(isCompany()?'Aquí confirmarás cada entrega.':'Tu próximo premio te espera.','Los canjes confirmados aparecerán aquí con su comprobante.');
  }
  function renderExplore(){
@@ -83,7 +85,7 @@ export function mountLoyalty({supabase}){
    $('next-step-body').innerHTML=pending?'<p>Tienes un premio por recoger.</p><h3>'+e(pending.reward_title)+'</h3><button type="button" class="text-button" data-go="rewards">Ver mi comprobante '+icon('arrow')+'</button>':'<p>¿Ya estás en uno de tus negocios? Registra tu llegada. La confirmación del negocio suma tus puntos.</p><button type="button" class="text-button" data-go="'+(snapshot.clubs.length?'home':'explore')+'">'+(snapshot.clubs.length?'Ver mis negocios':'Encontrar mi primer negocio')+' '+icon('arrow')+'</button>';
   }
  }
- function render(){$('show-reward-form').hidden=!isCompany();metrics();clubCards();renderVisits();renderRewards();renderExplore();renderNext();show(view);studio.update({identity,snapshot});operations.update({identity,snapshot});growth.update({identity,snapshot});}
+ function render(){$('show-reward-form').hidden=!isCompany();customer.update({identity,snapshot});metrics();clubCards();renderVisits();renderRewards();renderExplore();renderNext();show(view);studio.update({identity,snapshot});operations.update({identity,snapshot});growth.update({identity,snapshot});}
  async function refresh(){
   if(!identity||!supabase)return;const version=epoch;$('refresh-loyalty').disabled=true;$('loyalty-error').hidden=true;
   try{
@@ -107,7 +109,7 @@ export function mountLoyalty({supabase}){
   finally{if(version===epoch){operating=false;if(button){button.disabled=false;button.textContent=oldText;}}}
  }
  function clear(){
-  epoch++;studio.clear();operations.clear();growth.clear();identity=null;snapshot=null;operating=false;pendingReward=null;requests.clear();
+  epoch++;customer.clear();studio.clear();operations.clear();growth.clear();identity=null;snapshot=null;operating=false;pendingReward=null;requests.clear();
   $('loyalty-content').hidden=true;$('account-panel').hidden=true;$('loyalty-loading').hidden=true;$('loyalty-error').hidden=true;notice('');$('refresh-loyalty').disabled=true;
   for(const id of ['club-list','reward-list','visit-list','redemption-list','recent-list','explore-list','business-settings','next-step-body','app-metrics'])$(id).textContent='';
   for(const form of document.querySelectorAll('.app-form')){form.reset();delete form.dataset.request;const button=form.querySelector('[type="submit"]');if(button){button.disabled=false;button.textContent=form.id==='join-form'?'Unirme':form.id==='club-form'?'Crear mi programa':'Guardar premio';}}
