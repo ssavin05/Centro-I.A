@@ -2,7 +2,7 @@ name: Comprobar aplicación publicada
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: [pages build and deployment]
+    workflows: [Comprobar distribución de Centro I.A.]
     types: [completed]
 permissions:
   contents: read
@@ -18,9 +18,9 @@ jobs:
           node-version: '22'
       - name: Comparar recursos y rutas fuera del sitio
         run: |
-          for attempt in 1 2 3; do
+          for attempt in 1 2 3 4 5 6; do
             if node scripts/verify-live.mjs https://ssavin05.github.io/Centro-I.A/ public-health.json; then exit 0; fi
-            if [ "$attempt" -lt 3 ]; then sleep 10; fi
+            if [ "$attempt" -lt 6 ]; then sleep 10; fi
           done
           exit 1
       - name: Conservar resultado sin datos privados
